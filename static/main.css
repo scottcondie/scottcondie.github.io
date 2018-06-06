@@ -25,6 +25,8 @@ h1 {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    -webkit-padding-start: 0;
+    -webkit-margin-before: 1em;
 }
 
 li {
