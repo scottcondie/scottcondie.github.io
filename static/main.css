@@ -1,3 +1,12 @@
 body {
-    font-family: 'Song Myung', serif;
+    font-family: 'Source Code Pro', monospace;
+}
+
+h1 {
+    padding-left: 100px;
+}
+
+nav {
+    width: 100%;
+    padding-left: 100px;
 }
