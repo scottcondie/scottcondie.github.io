@@ -30,6 +30,7 @@ h1 {
 li {
     display: inline;
     margin: 0;
+    padding-left: 0;
     padding-right: 10px;
 }
 
