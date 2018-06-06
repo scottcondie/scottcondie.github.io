@@ -1,15 +1,15 @@
 body {
     font-family: 'Source Code Pro', monospace;
-    background-color: darkgoldenrod;
-    color: white;
+    background-color: lightgray;
+    color: #033d53;
 }
 
 a {
-    color: #00ff00;
+    color: #44dcf4;
 }
 
 a:visited {
-    color: yellow;
+    color: #d29504;
 }
 
 #content {
