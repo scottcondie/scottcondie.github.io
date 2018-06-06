@@ -1,8 +1,7 @@
 body {
-    font-family: 'Source Code Pro', monospace;
     font-family: 'Helvetica', sans-serif;
-    background-color: #fff;
-    color: #033d53;
+    background-color: orangered;
+    color: white;
 }
 
 a {
@@ -10,7 +9,7 @@ a {
 }
 
 a:visited {
-    color: #d29504;
+    color:#44dcf4;
 }
 
 #content {
