@@ -21,6 +21,10 @@ h1 {
     font-weight: bold;
 }
 
+h2 {
+    text-align: center;
+}
+
 #nav-ul {
     list-style-type: none;
     margin: 0;
@@ -41,6 +45,7 @@ nav {
 }
 
 h3 {
+    text-align: center;
     margin: 0;
     padding: 0;
 }
