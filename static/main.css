@@ -10,18 +10,23 @@ a:visited {
     color: yellow;
 }
 
+#content {
+    padding-left: 100px;
+}
 
 h1 {
-    padding-left: 100px;
     font-weight: bold;
 }
 
 #nav-ul {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 li {
     display: inline;
+    margin: 0;
     padding-right: 10px;
 }
 
