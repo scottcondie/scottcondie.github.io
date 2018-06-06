@@ -15,7 +15,7 @@ a:visited {
 }
 
 h1 {
-    margin-top: 200px;
+    margin-top: 50px;
     font-weight: bold;
 }
 
@@ -33,6 +33,11 @@ li {
 
 nav {
     width: 100%;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
 }
 
 #contact {
