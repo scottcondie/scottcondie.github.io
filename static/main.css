@@ -2,6 +2,15 @@ body {
     font-family: 'Source Code Pro', monospace;
 }
 
+a {
+    color: #00ff00;
+}
+
+a:visited {
+    color: yellow;
+}
+
+
 h1 {
     padding-left: 100px;
     font-weight: bold;
