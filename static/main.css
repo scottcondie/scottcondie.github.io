@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Helvetica', sans-serif;
-    background-color:darkgoldenrod;
+    background-color: darkgoldenrod;
     color: white;
 }
 
@@ -48,6 +48,7 @@ h2 {
 
 li {
     display: inline;
+    list-style: none;
     margin: 0;
     padding-left: 0;
     padding-right: 10px;
