@@ -58,7 +58,7 @@ h2 {
 
 }
 
-li {
+.nav-item {
     display: inline;
     list-style: none;
     margin: 0;
