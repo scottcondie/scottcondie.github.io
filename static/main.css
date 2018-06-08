@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Ariel', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     background-color: white;
     color:#777777;
 }
@@ -24,7 +24,7 @@ a:visited {
 }
 
 h1 {
-    font-family: 'Titillium Web', serif;
+    font-family: 'Source Code Pro', serif;
     margin-top: 40px;
     font-weight: 400;
     font-size: 4em;
