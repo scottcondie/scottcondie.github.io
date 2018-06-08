@@ -54,8 +54,11 @@ h2 {
 
 .work-item {
     display: block;
-    list-style: outside none;
     margin-left: 0;
+    margin-bottom: 5px;
+    padding-left: 1em;
+    text-indent: -1em;
+    list-style: none;
 
 
 }
