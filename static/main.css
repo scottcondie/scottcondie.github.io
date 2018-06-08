@@ -37,9 +37,10 @@ h1 {
 }
 
 h2 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: 'Source Code Pro', sans-serif;
     text-align: center;
+    margin-top: 2em;
 }
 
 #nav-ul {
