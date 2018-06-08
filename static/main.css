@@ -4,11 +4,9 @@
     padding: 0;
 }
 
-
-
 body {
     font-family: 'Ariel', sans-serif;
-    background-color: darkgoldenrod;
+    background-color: goldenrod;
     color: white;
 }
 
@@ -26,9 +24,9 @@ a:visited {
 }
 
 h1 {
-    font-family: 'Song Myung', serif;
+    font-family: 'Titillium Web', serif;
     margin-top: 40px;
-    font-weight: bold;
+    font-weight: 900;
     font-size: 4em;
     padding-bottom: 1em;
 }
