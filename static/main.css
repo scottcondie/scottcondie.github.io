@@ -43,7 +43,7 @@ h2 {
     margin-top: 2em;
 }
 
-#nav-ul {
+.nav-ul {
     list-style-type: outside none;
     margin: 0;
     margin-top: 3em;
