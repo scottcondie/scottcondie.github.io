@@ -48,6 +48,16 @@ h2 {
     -webkit-margin-before: 1em;
 }
 
+.work-list {
+    list-style-position: outside none;
+}
+
+.work-item {
+    display: block;
+    list-style: none;
+
+}
+
 li {
     display: inline;
     list-style: none;
