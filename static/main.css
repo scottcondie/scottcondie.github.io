@@ -26,7 +26,7 @@ a:visited {
 h1 {
     font-family: 'Source Code Pro', serif;
     margin-top: 40px;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 4em;
     padding-bottom: 1em;
 }
@@ -35,7 +35,7 @@ h2 {
     font-size: 3em;
     font-family: 'Source Code Pro', sans-serif;
     text-align: center;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 #nav-ul {
