@@ -26,14 +26,14 @@ a:visited {
 h1 {
     font-family: 'Titillium Web', serif;
     margin-top: 40px;
-    font-weight: 900;
+    font-weight: 400;
     font-size: 4em;
     padding-bottom: 1em;
 }
 
 h2 {
     font-size: 3em;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Source Code Pro', sans-serif;
     text-align: center;
     font-weight: 600;
 }
