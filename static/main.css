@@ -19,10 +19,12 @@ img {
 
 a {
     color: #31a0cb;
+    font-weight: bold;
 }
 
 a:visited {
     color: #31a0cb;
+    font-weight: bold;
 }
 
 #content {
@@ -63,7 +65,7 @@ h2 {
 .work-item {
     display: block;
     margin-left: 0;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     padding-left: 1em;
     text-indent: -1em;
     list-style: none;
