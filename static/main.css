@@ -94,3 +94,18 @@ h3 {
     left: 50px;
     bottom: 50px;
 }
+
+
+
+
+@media all and (max-width: 800px) {
+    #content {
+        margin: 0 auto;
+        width: 500px;
+    }
+
+    #contact {
+        margin: 0 auto;
+        width: 200px; 
+    }
+}
