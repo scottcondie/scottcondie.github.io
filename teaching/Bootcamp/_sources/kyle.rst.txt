@@ -1,0 +1,186 @@
+.. default-role:: math
+
+====================================
+Orderbooks and Asset Pricing
+====================================
+
+
+The Kyle model of orderbook shape
+-------------------------------------
+
+This model of the orderbook is given in Kyle (1985).  We have uninformed traders, informed traders (or insiders in Kyle's language) and market makers.  Uninformed traders have random demand that has mean 0 and a known variance.  Let the demand for uninformed traders be given by
+
+.. math::
+  u \sim N(0, \sigma^{2}_{u}).
+
+Informed traders observe the future value of the asset `v` and select their demand `x` as a function of this observed `v` and the price set by the market makers.  Assume that
+
+.. math::
+  v \sim N(p_{0}, \Sigma_{0}).
+
+A competitive set of market makers establish an order book parameterized as a price that is a function of the number of orders that they observe `y = x + u`.  Since these market makers are competitive, they will in expectation earn zero profit.  It is assumed that market makers cannot distinguish between informed and uninformed liquidity requests.
+
+The expected profit to a market maker given the demand for liquidity `y` is
+
+.. math::
+  E[\pi|y] = E[(v - p)(-y)|y] = -yE[v-p|y]
+
+(recall that the market maker must take the opposite position of the liquidity demanders, who have position `y`).  If expected profits are to be zero for every `y`, then in equilibrium `p = E[v|y]`.   In order to find an equilibrium in this model, we proceed by making an assumption about the behavior of market makers, which at the end we verify to be true.    Let us assume that market makers set the price according to a linear function of the demand that they observe.  Specifically, assume that the equilibrium price is given by a function of the formula
+
+.. math::
+
+  P(y) = \mu + \lambda y
+
+Now, we consider the problem of informed traders.  The expected profit to informed traders is
+
+.. math::
+
+  E\pi = E[(v-p(y))x|v].
+
+In order to maximize this profit, informed traders solve (given the price function of market makers)
+
+.. math::
+
+  \max_{x} E[\pi] = \max_{x} E[(v-\mu - \lambda(x + u))x|v]
+
+We start by passing the expectation into this equation to get (we note that `v`, `\mu` and `\lambda` are assumed to be known in equilibrium)
+
+.. math::
+
+  \max_{x} vx - \mu x - \lambda x^{2}
+
+(Recall that `Eu = 0`).  The first order condition for this problem (which can be verified to be strictly concave) is
+
+.. math::
+
+  v - \mu - 2\lambda x = 0
+
+This has the solution `x = -\frac{\mu}{2\lambda} + \frac{1}{2\lambda}v`.  Notice if the market makers use a linear pricing rule, then the informed traders will set their demand as a linear function of the signal that they receive.
+
+Now we go back to the problem of market makers.  Given that the demand that they observe is `y = x + u`, they need to calculate `E[v|x + u]`.  Note that `v` and `y` are related since `v` determines `x` which is a part of `y`.  In fact, since `y` is a linear function of `v`, `y` and `v` are jointly normally distributed.  The demand `y` is `y \sim N(-\frac{\mu}{2\lambda} + \frac{1}{\lambda}p_{0}, \frac{1}{\lambda^2}\Sigma_{0})`.  The covariance between `y` and `v` is
+
+	.. math::
+
+		  E(y - Ey)(v - Ev) & = E(-\frac{\mu}{2\lambda} + \frac{1}{2\lambda}v + u +\frac{\mu}{2\lambda} + \frac{1}{2\lambda}p_{0} )(v- p_{0}) \\
+		  & = E(\frac{1}{2\lambda}(v-p_{0}))(v-p_{0}) \\
+		  & = \frac{1}{2\lambda}\Sigma_{0}
+
+For two jointly normal random variables `(a,b)`, `E[a|b] = Ea + \frac{cov(a,b)}{\sigma^{2}_{b}}(b - Eb)`.  Applying this formula to `y` and `v` gives
+
+	.. math::
+		E[v|y] = p_{0} + \frac{\frac{1}{2\lambda}\Sigma_{0}}{\frac{1}{4\lambda^2}\Sigma_{0} + \sigma^{2}_{u}}(y + \frac{\mu}{2\lambda} - \frac{1}{2\lambda}p_{0}).
+
+Now, recall our original assumption that `P(y) = \mu + \lambda y`.  Since `P(y) = E[v|y]`, we can compare coefficients and we notice that the coefficient on `y` implies that
+
+	.. math::
+
+		\lambda = \frac{\frac{1}{2\lambda}\Sigma_{0}}{\frac{1}{4\lambda^2}\Sigma_{0} + \sigma^{2}_{u}}
+
+Solving this, for `\lambda` produces the result that
+
+.. math::
+
+  \lambda = \frac{\sqrt{\Sigma_{0}}}{2\sigma_{u}}
+
+Furthermore, it can be seen by inspection that `\mu = p_{0}` is a solution to that equation.
+
+Therefore, an equilibrium price function of this game is
+
+.. math::
+
+  P(y) = p_{0} + \frac{\sqrt{\Sigma_{0}}}{2\sigma_{u}}y.
+
+Interpreting the model
+--------------------------
+
+Traditionally, orderbooks are drawn on a two-dimensional graph with the price on the horizontal axis and the number of units available (to buy or sell) on the vertical axis.
+
+To place the equilibrium above in a manner similar to the usual picture, we solve to `y` to get
+
+.. math::
+  :label: ob
+
+  y(P) = \frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}(P - p_{0})
+
+Notice, that for prices greater than the market makers' prior mean about the value of the asset (`p_{0}`), the market maker's position will be positive (i.e. when the market maker sells `y>0`) and when the market maker buys `y<0`.  As such, the common picture of the orderbook is
+
+.. math::
+
+  OB(P) = \left | \frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}(P - p_{0}) \right |
+
+However, we will work with the easier to deal with version given in :eq:`ob`.
+Let's make a few observations about this orderbook.
+
+Properties of the Kyle Orderbook
+  #.  The BBO (sometimes just called the spread, or price) will occur at `P = p_{0}`.
+  #.  Relatively \`\`flat\'\'  or \`\`thin\'\' orderbooks arise when the standard deviation of noise trader demand is small relative to the standard deviation of informed trader demand.  This makes sense, since on average large swings in demand will be caused by informed traders in this scenario. Market makers are concerned about trading with informed traders, so they offer relatively small amounts of shares near the BBO (best bid and offer).  Similarly, \`\`steep\'\' of \`\`thick\'\' orderbooks arise when there is a lot of noise and relatively little variance in informed trader demand.
+  #. In this model, all changes in orderbooks can be thought of as changes in beliefs in the fundamental value of the asset (changes in `p_{0}`) and changes in beliefs about the properties of traders (changes in `\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}`.)
+
+Estimating the parameters of the model
+-----------------------------------------
+
+Equation :eq:`ob`, can be estimated by way of linear regression.  If we transform equation :eq:`ob` into slope intercept form we get
+
+.. math::
+  :label: orderbook-eqn
+
+  y = -p_{0}\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}} + \frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}P
+
+So, estimating the equation
+
+.. math::
+  :label: orderbook-estimation-eqn
+
+  y = \gamma + \beta P
+
+using the price and quantity amounts from the orderbook, we can back out the parameters `p_{0}` and `\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}` by solving
+
+.. math::
+
+  \hat{\gamma} = -p_{0}\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}} \\
+  \hat{\beta} = \frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}
+
+for `p_{0}` and `\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}` which yields
+
+.. math::
+
+  p_{0} & = -\frac{\hat{\gamma}}{\hat{\beta}} \\
+  \frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}} & = \hat{\beta}
+
+Note.
+  For hypothesis testing, care must be taken here since *if* `\hat{\gamma}` and `\hat{\beta}` have a `t`-distribution then the distribution of the estimate of `\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}` is the ratio of two `t`-distributions which is non-trivial. [#]_
+
+.. [#] See Press (1969) (https://www.jstor.org/stable/2283732?seq=1#page_scan_tab_contents) for details.
+
+Implications of the model
+-----------------------------
+
+By looking at comparative statics on equation :eq:`orderbook-eqn` we see that changes in the midpoint represent changes in the beliefs of market makers about `p_{0}`.  Changes in the slope of the orderbook relate to changes in market maker beliefs about the ratio `\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}`.  Thus, changes in the BBO reflect (according to this model) changes in the value of the asset directly, whereas changes in the slope reflect changes in the relative volatility of trade between informed and uninformed traders.  
+
+Consider a simple model of market maker learning about the true value of the asset.  Market makers have prior beliefs that the asset is distributed `v \sim N(p_{0},\Sigma_{0})`.  Suppose that they receive a public signal about the asset of the form `s = v + \epsilon` where `\epsilon` is independent of `v` and distributed `\epsilon \sum N(0, 1/\rho_{\epsilon})`.  Let `\rho = 1/\Sigma_{0}`.  Then, 
+
+.. math::
+  :label: bayes-update-eqn
+
+  v|s \sim N\left ( \frac{\rho p_{0} + \rho_{\epsilon} s}{\rho + \rho_{\epsilon}}, \rho + \rho_{\epsilon} \right )
+
+If a sequence `s_{1}, s_{2}, \ldots, s_{t}` have been received, each i.i.d., then the updated beliefs of the market makers are
+
+.. math::
+  :label: bayes-update-multiple-eqn
+
+  v|s_{1},\ldots,s_{t} \sim N\left ( \frac{\rho p_{0} + \rho_{\epsilon}\left (\sum_{i=1}^{t}s_{i}   \right )}{\rho + t\rho_{\epsilon}}, \rho + \rho_{\epsilon} \right )
+
+Here, as additional signals are received *for the same prior belief*, the precision of the beliefs goes up and the variance of the market makers' beliefs about the asset's worth goes down.  Because of this, the slope of the orderbook and the liquidity of the market go up. Likewise, this model implies that if one observes the market become less liquid, that must mean that the signals now being received by market makers convey information about a different distribution that what was originally believed to be true about `v`.  
+
+
+
+Exercises
+-----------------
+
+These exercises are intended to help you use the Kyle model to understand the orderbooks of 5 tickers on a particular day (July 11, 2017).  The data have been compiled from the NASDAQ ITCH data files for those days.  The data are Python pickle files where each file contains a list of the following form :code:`[(timestamp1,{P1: Q1, P2: Q2, P3:Q3, ...}), (timestamp2, {P1: Q1, P2, Q2, ...})... ]`.  That is, the data comes as a list of tuples, where each tuple contains a timestamp, and an orderbook, where the orderbook is a dictionary where the keys are prices and the values are the quantities available at each price.  These data have been compiled in such a way that we have the orderbook every 60 seconds throughtout the trading day.  
+
+1. Write a Python class that represents a single orderbook, where the data for that single orderbook is an instance property.  Write a method for that orderbook that will use the data to the parameters `\gamma` and `\beta` from equation :eq:`orderbook-estimation-eqn`.  Plot the orderbook and the estimated equation.  Where does the model fit well and where does it not?  Might one want to estimate the model using only a subset of the orderbook?  If so, where?
+2. For each ticker, plot the estimated values of `\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}` throughout the day.
+3. Compare the estimates of `p_{0}` to the actual midpoint of the BBO over time.  What do these differences say about the nature of the orderbook and the estimation procedure you're using?
+4. Compare/contrast the results for each ticker. Are the noise/signal ratios that you calculate consistent with what you would have expected? What about the movements in `p_{0}`?

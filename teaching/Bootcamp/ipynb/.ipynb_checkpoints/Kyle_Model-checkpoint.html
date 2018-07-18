@@ -1,0 +1,2648 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Estimating the parameters of the Kyle Model using OLS &#8212; Notes on the Lucas (1978) and Kyle (1985) asset pricing models</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2018',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+</style>
+<div class="section" id="Estimating-the-parameters-of-the-Kyle-Model-using-OLS">
+<h1>Estimating the parameters of the Kyle Model using OLS<a class="headerlink" href="#Estimating-the-parameters-of-the-Kyle-Model-using-OLS" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">patsy</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">man</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">data_folder</span> <span class="o">=</span> <span class="s2">&quot;./Kyle_Data/&quot;</span>
+<span class="n">file_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;AAPL&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;GBX&quot;</span><span class="p">,</span> <span class="s2">&quot;SPY&quot;</span><span class="p">,</span> <span class="s2">&quot;THO&quot;</span><span class="p">]</span>
+
+
+<span class="n">file_objects</span> <span class="o">=</span> <span class="p">[</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">ii</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">ii</span><span class="p">:</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="n">jj</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">file_list</span><span class="p">,</span> <span class="n">file_objects</span><span class="p">)}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+dict_keys([&#39;AAPL&#39;, &#39;C&#39;, &#39;GBX&#39;, &#39;SPY&#39;, &#39;THO&#39;])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">OrderBook</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob_data</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;This class represents an order book at any point in time.  The time stamp of the orderbok is saved as an instance property&#39;&#39;&#39;</span>
+        <span class="n">data_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">ob_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">data_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ii</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ii</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">ii</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">,</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span><span class="s2">&quot;S&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">ob_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Now make the orderbook cumulative.</span>
+        <span class="c1">#Bid side first</span>
+        <span class="n">df_bids</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span><span class="p">]</span>
+
+        <span class="n">df_bids</span> <span class="o">=</span> <span class="n">df_bids</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Note that when y is negative, the buy side of the orderbook will be used (since liq. demanders want to sell)</span>
+        <span class="n">df_bids</span><span class="p">[</span><span class="s1">&#39;tot_y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">df_bids</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+        <span class="c1">#print(df_bids)</span>
+
+        <span class="c1"># Now ask side</span>
+        <span class="n">df_asks</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;S&#39;</span><span class="p">]</span>
+        <span class="n">df_asks</span> <span class="o">=</span> <span class="n">df_asks</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">df_asks</span><span class="p">[</span><span class="s1">&#39;tot_y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_asks</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_bids</span><span class="p">,</span> <span class="n">df_asks</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tot_y&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;tot_y&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">percentile</span> <span class="o">=</span> <span class="mf">0.99</span>
+
+    <span class="k">def</span> <span class="nf">get_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Finds a reasonable range of prices for estimating the orderbook&#39;&#39;&#39;</span>
+        <span class="n">bb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;B&#39;</span><span class="p">][</span><span class="s1">&#39;P&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">ba</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;S&#39;</span><span class="p">][</span><span class="s1">&#39;P&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">midpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span> <span class="o">+</span> <span class="n">ba</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">bid_cutoff</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;B&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">percentile</span>
+        <span class="n">ask_cutoff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;S&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">percentile</span>
+        <span class="c1">#print(-bid_cutoff, ask_cutoff)</span>
+        <span class="n">bids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;B&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">bid_cutoff</span><span class="p">)]</span>
+        <span class="n">asks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;S&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ask_cutoff</span><span class="p">)]</span>
+        <span class="n">df_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">bids</span><span class="p">,</span> <span class="n">asks</span><span class="p">])</span>
+        <span class="n">df_temp</span> <span class="o">=</span> <span class="n">df_temp</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+        <span class="n">lower</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">upper</span> <span class="o">=</span> <span class="n">df_temp</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_bbo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns the best bid and best offer in a tuple (best_bid, best_offer)&#39;&#39;&#39;</span>
+        <span class="n">bb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;B&#39;</span><span class="p">][</span><span class="s1">&#39;P&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">ba</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;S&#39;</span><span class="p">][</span><span class="s1">&#39;P&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">bb</span><span class="p">,</span> <span class="n">ba</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_midpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns the midpoint of the best bid and best offer&#39;&#39;&#39;</span>
+        <span class="n">bb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;B&#39;</span><span class="p">][</span><span class="s1">&#39;P&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">ba</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;S&#39;</span><span class="p">][</span><span class="s1">&#39;P&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">mp</span> <span class="o">=</span> <span class="p">(</span><span class="n">bb</span> <span class="o">+</span> <span class="n">ba</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">mp</span>
+
+    <span class="k">def</span> <span class="nf">estimate_ols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Estimate the slope of the orderbook using prices between lower and upper.&#39;&#39;&#39;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">lower</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">)]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;P&quot;</span><span class="p">])</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;y ~ P&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="c1">#print(model.summary())</span>
+        <span class="k">return</span> <span class="n">model</span>
+
+
+    <span class="k">def</span> <span class="nf">parameter_estimates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Estimates the parameters p_{0}, and 2\sigma_{u}/\sqrt{\Sigma_{0}} using OLS&#39;&#39;&#39;</span>
+        <span class="n">est</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimate_ols</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span><span class="n">upper</span><span class="p">)</span>
+        <span class="c1">#pprint(est.params)</span>
+        <span class="n">p_0</span> <span class="o">=</span> <span class="o">-</span><span class="n">est</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">est</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span>
+        <span class="c1">#pprint(p_0)</span>
+        <span class="n">noise_to_signal</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">est</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="n">p_0</span><span class="p">,</span> <span class="s1">&#39;ratio&#39;</span><span class="p">:</span> <span class="n">noise_to_signal</span><span class="p">}</span>
+
+
+
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Plot the orderbook between prices lower and upper.&#39;&#39;&#39;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">lower</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">)]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;P&quot;</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">plot_estimates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Plots the orderbook between lower and upper as well as the estimates of the orderbook&#39;&#39;&#39;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">lower</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">)]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;P&quot;</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimate_ols</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span>
+        <span class="n">pvec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">yvec</span> <span class="o">=</span> <span class="p">[</span> <span class="n">params</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">params</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">pvec</span> <span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pvec</span><span class="p">,</span> <span class="n">yvec</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+
+<span class="n">ob1</span> <span class="o">=</span> <span class="n">OrderBook</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">est</span> <span class="o">=</span> <span class="n">ob1</span><span class="o">.</span><span class="n">get_range</span><span class="p">()</span>
+<span class="n">ob1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">est</span><span class="p">)</span>
+
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_3_0.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_3_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># Use this to deal with an entire day&#39;s orderbooks</span>
+
+<span class="k">class</span> <span class="nc">OrderBookSet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob_list</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ob_list</span> <span class="o">=</span> <span class="p">[</span> <span class="n">OrderBook</span><span class="p">(</span><span class="n">ob</span><span class="p">)</span> <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="n">ob_list</span> <span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">plot_noise_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Plots the noise ratio over time for each OrderBook in the OrderBookSet&#39;&#39;&#39;</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">rat</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ob_list</span><span class="p">:</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
+            <span class="n">ra</span> <span class="o">=</span> <span class="n">ob</span><span class="o">.</span><span class="n">get_range</span><span class="p">()</span>
+            <span class="n">rat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob</span><span class="o">.</span><span class="n">parameter_estimates</span><span class="p">(</span><span class="o">*</span><span class="n">ra</span><span class="p">)[</span><span class="s1">&#39;ratio&#39;</span><span class="p">])</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">rat</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Seconds since midnight&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$\sigma_</span><span class="si">{u}</span><span class="s2">/\sqrt{\Sigma_</span><span class="si">{0}</span><span class="s2">}$&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">price_slope_correlation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns the between the midpoint of the price and the slope of the orderbook&#39;&#39;&#39;</span>
+        <span class="n">mp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">rat</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ob_list</span><span class="p">:</span>
+            <span class="n">ra</span> <span class="o">=</span> <span class="n">ob</span><span class="o">.</span><span class="n">get_range</span><span class="p">()</span>
+            <span class="n">rat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob</span><span class="o">.</span><span class="n">parameter_estimates</span><span class="p">(</span><span class="o">*</span><span class="n">ra</span><span class="p">)[</span><span class="s1">&#39;ratio&#39;</span><span class="p">])</span>
+            <span class="n">mp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob</span><span class="o">.</span><span class="n">get_midpoint</span><span class="p">())</span>
+
+        <span class="n">mpa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mp</span><span class="p">)</span>
+        <span class="n">rata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rat</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mpa</span><span class="p">,</span> <span class="n">rata</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_noise_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns the noise ratio for each orderbook as a timeseries of the form (timestamps, noise_ratios)&#39;&#39;&#39;</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">rat</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ob_list</span><span class="p">:</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
+            <span class="n">ra</span> <span class="o">=</span> <span class="n">ob</span><span class="o">.</span><span class="n">get_range</span><span class="p">()</span>
+            <span class="n">rat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob</span><span class="o">.</span><span class="n">parameter_estimates</span><span class="p">(</span><span class="o">*</span><span class="n">ra</span><span class="p">)[</span><span class="s1">&#39;ratio&#39;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">rat</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_imputed_p0</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns the imputed p0 as a timeseries of the form (timestamps, imputed_p0s)&#39;&#39;&#39;</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ob_list</span><span class="p">:</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
+            <span class="n">ra</span> <span class="o">=</span> <span class="n">ob</span><span class="o">.</span><span class="n">get_range</span><span class="p">()</span>
+            <span class="n">params</span>  <span class="o">=</span> <span class="n">ob</span><span class="o">.</span><span class="n">parameter_estimates</span><span class="p">(</span><span class="o">*</span><span class="n">ra</span><span class="p">)</span>
+            <span class="c1">#pprint(params)</span>
+            <span class="n">gamma</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;ratio&#39;</span><span class="p">]</span>
+            <span class="n">i_p0</span> <span class="o">=</span> <span class="o">-</span><span class="n">gamma</span><span class="o">/</span><span class="n">beta</span>
+            <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i_p0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">p0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_p0</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Returns the midpoint of the BBO as a timeseries of the form (timestamps, p0)&#39;&#39;&#39;</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ob_list</span><span class="p">:</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
+            <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ob</span><span class="o">.</span><span class="n">get_midpoint</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">p0</span><span class="p">)</span>
+
+
+
+
+<span class="n">obs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">jj</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">this_obs</span> <span class="o">=</span> <span class="n">OrderBookSet</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span>
+    <span class="c1">#ra = this_obs.ob_list[0].get_range()</span>
+    <span class="n">this_obs</span><span class="o">.</span><span class="n">plot_noise_ratio</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">this_obs</span><span class="o">.</span><span class="n">price_slope_correlation</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_0.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[1.         0.66662457]
+ [0.66662457 1.        ]]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_2.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[ 1.         -0.23301564]
+ [-0.23301564  1.        ]]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_4.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[ 1.         -0.81785204]
+ [-0.81785204  1.        ]]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_6.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_6.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[1.         0.43270316]
+ [0.43270316 1.        ]]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_8.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_4_8.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[ 1.         -0.30880308]
+ [-0.30880308  1.        ]]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">jj</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">this_obs</span> <span class="o">=</span> <span class="n">OrderBookSet</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">this_obs</span><span class="o">.</span><span class="n">get_p0</span><span class="p">()</span>
+    <span class="n">p0_i</span> <span class="o">=</span> <span class="n">this_obs</span><span class="o">.</span><span class="n">get_imputed_p0</span><span class="p">()</span>
+    <span class="c1">#plt.plot(p0[0],p0[1])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p0_i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p0_i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;p&#39;: 142.40926684633712, &#39;ratio&#39;: 15931.83886856935}
+{&#39;p&#39;: 142.85414464556368, &#39;ratio&#39;: 16111.03148797381}
+{&#39;p&#39;: 145.90944386979746, &#39;ratio&#39;: 16117.663125213947}
+{&#39;p&#39;: 144.46667402063667, &#39;ratio&#39;: 16271.245279665694}
+{&#39;p&#39;: 142.4359019133771, &#39;ratio&#39;: 16444.6694804514}
+{&#39;p&#39;: 141.4452202080109, &#39;ratio&#39;: 15603.714233998193}
+{&#39;p&#39;: 140.58489367194036, &#39;ratio&#39;: 15707.254925189429}
+{&#39;p&#39;: 139.34896091410542, &#39;ratio&#39;: 15826.940872828598}
+{&#39;p&#39;: 137.91924816422772, &#39;ratio&#39;: 15976.624364849044}
+{&#39;p&#39;: 139.8840584774724, &#39;ratio&#39;: 16067.081987284218}
+{&#39;p&#39;: 142.61093870875538, &#39;ratio&#39;: 16197.84762906346}
+{&#39;p&#39;: 140.85347613037328, &#39;ratio&#39;: 16279.235098970963}
+{&#39;p&#39;: 136.20514056767612, &#39;ratio&#39;: 14855.69319783488}
+{&#39;p&#39;: 136.43240160206759, &#39;ratio&#39;: 14835.30189494332}
+{&#39;p&#39;: 144.03088680743969, &#39;ratio&#39;: 15008.590453323344}
+{&#39;p&#39;: 142.0560449386003, &#39;ratio&#39;: 15131.36927322072}
+{&#39;p&#39;: 139.2871450214281, &#39;ratio&#39;: 15235.079032995187}
+{&#39;p&#39;: 142.2189137244995, &#39;ratio&#39;: 15339.619974477544}
+{&#39;p&#39;: 143.67696697708539, &#39;ratio&#39;: 15434.778241464006}
+{&#39;p&#39;: 145.96209198349854, &#39;ratio&#39;: 15559.633402317715}
+{&#39;p&#39;: 148.00986781041553, &#39;ratio&#39;: 15749.49051379818}
+{&#39;p&#39;: 146.3107683225159, &#39;ratio&#39;: 15839.995739298334}
+{&#39;p&#39;: 143.40527185863763, &#39;ratio&#39;: 15904.18624828032}
+{&#39;p&#39;: 144.2018281002378, &#39;ratio&#39;: 15977.159284795634}
+{&#39;p&#39;: 147.4369256250596, &#39;ratio&#39;: 16101.955051966817}
+{&#39;p&#39;: 151.71860199083395, &#39;ratio&#39;: 16111.391577809532}
+{&#39;p&#39;: 152.05107610323356, &#39;ratio&#39;: 16226.041113427027}
+{&#39;p&#39;: 151.61751151469653, &#39;ratio&#39;: 16348.672760350291}
+{&#39;p&#39;: 147.33243948396498, &#39;ratio&#39;: 16472.58205244567}
+{&#39;p&#39;: 146.3881123235814, &#39;ratio&#39;: 16543.031291020834}
+{&#39;p&#39;: 143.19852928706342, &#39;ratio&#39;: 16702.182467187366}
+{&#39;p&#39;: 141.9778858003444, &#39;ratio&#39;: 16785.286930736886}
+{&#39;p&#39;: 139.1067565116065, &#39;ratio&#39;: 16895.358268237345}
+{&#39;p&#39;: 144.31345932311285, &#39;ratio&#39;: 16990.986199186606}
+{&#39;p&#39;: 141.76490013566396, &#39;ratio&#39;: 17059.76646326519}
+{&#39;p&#39;: 141.1059218340259, &#39;ratio&#39;: 17209.563285357755}
+{&#39;p&#39;: 147.574785403164, &#39;ratio&#39;: 17279.902879925234}
+{&#39;p&#39;: 154.32360653251973, &#39;ratio&#39;: 17265.594811979907}
+{&#39;p&#39;: 155.29946810009457, &#39;ratio&#39;: 17341.409337339308}
+{&#39;p&#39;: 155.8006330749451, &#39;ratio&#39;: 17420.07332931933}
+{&#39;p&#39;: 155.18783527633113, &#39;ratio&#39;: 17513.80530955045}
+{&#39;p&#39;: 154.48187721988916, &#39;ratio&#39;: 17517.32516487451}
+{&#39;p&#39;: 156.10415145724966, &#39;ratio&#39;: 17527.214020694468}
+{&#39;p&#39;: 156.31377750409436, &#39;ratio&#39;: 17587.24810594993}
+{&#39;p&#39;: 156.37711153558902, &#39;ratio&#39;: 17650.661184586348}
+{&#39;p&#39;: 155.38579655278608, &#39;ratio&#39;: 17713.549945574476}
+{&#39;p&#39;: 156.74432288819798, &#39;ratio&#39;: 17895.618638659726}
+{&#39;p&#39;: 157.6959814385118, &#39;ratio&#39;: 18018.947864182705}
+{&#39;p&#39;: 158.3480430400811, &#39;ratio&#39;: 18135.776728527904}
+{&#39;p&#39;: 158.56406299567504, &#39;ratio&#39;: 18182.93837557344}
+{&#39;p&#39;: 159.00439236318346, &#39;ratio&#39;: 18227.297295000222}
+{&#39;p&#39;: 158.47442918677504, &#39;ratio&#39;: 18330.434362978544}
+{&#39;p&#39;: 158.84410782809195, &#39;ratio&#39;: 18407.74010913084}
+{&#39;p&#39;: 156.83483442960824, &#39;ratio&#39;: 18478.653595781925}
+{&#39;p&#39;: 157.88932055275265, &#39;ratio&#39;: 18574.568994567868}
+{&#39;p&#39;: 157.95418011132566, &#39;ratio&#39;: 18648.785056721295}
+{&#39;p&#39;: 157.64343263751562, &#39;ratio&#39;: 18683.31367582665}
+{&#39;p&#39;: 158.19228203869002, &#39;ratio&#39;: 18720.907522323752}
+{&#39;p&#39;: 159.83225702993568, &#39;ratio&#39;: 18729.910465140565}
+{&#39;p&#39;: 159.08410124026742, &#39;ratio&#39;: 18784.842064244684}
+{&#39;p&#39;: 160.39536478631192, &#39;ratio&#39;: 18894.49571434913}
+{&#39;p&#39;: 160.40196429918623, &#39;ratio&#39;: 18935.046284748445}
+{&#39;p&#39;: 160.7760623775103, &#39;ratio&#39;: 19006.023873392838}
+{&#39;p&#39;: 159.8803429947942, &#39;ratio&#39;: 19079.6293181834}
+{&#39;p&#39;: 158.5093538211456, &#39;ratio&#39;: 19138.987502023992}
+{&#39;p&#39;: 158.46858884167872, &#39;ratio&#39;: 19187.28939967145}
+{&#39;p&#39;: 158.4991207823436, &#39;ratio&#39;: 19243.366851744657}
+{&#39;p&#39;: 157.99995156930987, &#39;ratio&#39;: 19270.869501844893}
+{&#39;p&#39;: 157.29401126883553, &#39;ratio&#39;: 19307.674141213578}
+{&#39;p&#39;: 156.1363711497106, &#39;ratio&#39;: 19440.486722060337}
+{&#39;p&#39;: 154.20192355464744, &#39;ratio&#39;: 19661.56467562636}
+{&#39;p&#39;: 154.15708269681178, &#39;ratio&#39;: 19700.96503584552}
+{&#39;p&#39;: 154.4150702357227, &#39;ratio&#39;: 19751.790727028467}
+{&#39;p&#39;: 156.4689666856129, &#39;ratio&#39;: 19661.885563097738}
+{&#39;p&#39;: 157.55970289629047, &#39;ratio&#39;: 19624.136253267123}
+{&#39;p&#39;: 155.79295404459617, &#39;ratio&#39;: 19781.63106226128}
+{&#39;p&#39;: 156.32650392168875, &#39;ratio&#39;: 19765.91882092207}
+{&#39;p&#39;: 154.85312781708953, &#39;ratio&#39;: 19926.450976315064}
+{&#39;p&#39;: 153.80877370574467, &#39;ratio&#39;: 19954.579318152657}
+{&#39;p&#39;: 154.45422411167692, &#39;ratio&#39;: 19984.717836244836}
+{&#39;p&#39;: 153.83115434586392, &#39;ratio&#39;: 20048.181281967678}
+{&#39;p&#39;: 153.02469887000788, &#39;ratio&#39;: 20121.294320177352}
+{&#39;p&#39;: 152.80029458491924, &#39;ratio&#39;: 20149.371991209468}
+{&#39;p&#39;: 152.20181489725178, &#39;ratio&#39;: 20200.250614941615}
+{&#39;p&#39;: 151.76609416262713, &#39;ratio&#39;: 20264.227905433574}
+{&#39;p&#39;: 151.8520778519228, &#39;ratio&#39;: 20316.29818054918}
+{&#39;p&#39;: 152.81176550539226, &#39;ratio&#39;: 20426.78732530604}
+{&#39;p&#39;: 151.40829804680217, &#39;ratio&#39;: 20520.74342676353}
+{&#39;p&#39;: 153.32462191281974, &#39;ratio&#39;: 20580.196170331175}
+{&#39;p&#39;: 152.91044780143707, &#39;ratio&#39;: 20618.853779937566}
+{&#39;p&#39;: 152.89651022520343, &#39;ratio&#39;: 20640.539740668166}
+{&#39;p&#39;: 151.31925280342614, &#39;ratio&#39;: 20665.477929898807}
+{&#39;p&#39;: 150.7539353625187, &#39;ratio&#39;: 20708.24169757652}
+{&#39;p&#39;: 150.70906993164286, &#39;ratio&#39;: 20735.11441730372}
+{&#39;p&#39;: 151.82142468914287, &#39;ratio&#39;: 20765.14900991691}
+{&#39;p&#39;: 151.85265270839605, &#39;ratio&#39;: 20821.86778711683}
+{&#39;p&#39;: 153.18195874162606, &#39;ratio&#39;: 20860.790318352356}
+{&#39;p&#39;: 153.81252974689514, &#39;ratio&#39;: 20903.873683879152}
+{&#39;p&#39;: 153.47574512347694, &#39;ratio&#39;: 20925.830890328853}
+{&#39;p&#39;: 151.87222330373282, &#39;ratio&#39;: 20951.972832068463}
+{&#39;p&#39;: 152.60827211538037, &#39;ratio&#39;: 20974.539396944765}
+{&#39;p&#39;: 150.48879856191613, &#39;ratio&#39;: 21038.592982015954}
+{&#39;p&#39;: 149.3638338109316, &#39;ratio&#39;: 21151.187798340747}
+{&#39;p&#39;: 148.6920816642262, &#39;ratio&#39;: 21366.204704330183}
+{&#39;p&#39;: 147.88860470478224, &#39;ratio&#39;: 21460.77734176043}
+{&#39;p&#39;: 145.55090817101376, &#39;ratio&#39;: 21572.58916762042}
+{&#39;p&#39;: 145.3909540664162, &#39;ratio&#39;: 21714.756437700977}
+{&#39;p&#39;: 145.1032297577233, &#39;ratio&#39;: 21792.802125550435}
+{&#39;p&#39;: 145.75442967262754, &#39;ratio&#39;: 21847.50168047091}
+{&#39;p&#39;: 145.92380476109398, &#39;ratio&#39;: 21948.028615232954}
+{&#39;p&#39;: 139.20264172481504, &#39;ratio&#39;: 22225.77305966981}
+{&#39;p&#39;: 141.40248107847898, &#39;ratio&#39;: 22290.372411220025}
+{&#39;p&#39;: 131.4059680638797, &#39;ratio&#39;: 22615.39324619788}
+{&#39;p&#39;: 127.32187550161775, &#39;ratio&#39;: 22851.29909049425}
+{&#39;p&#39;: 126.16258047102576, &#39;ratio&#39;: 23007.54171392903}
+{&#39;p&#39;: 123.4728363816991, &#39;ratio&#39;: 23381.51451745531}
+{&#39;p&#39;: 130.1951304805923, &#39;ratio&#39;: 23795.461535541923}
+{&#39;p&#39;: 138.24804192117355, &#39;ratio&#39;: 23987.18876706792}
+{&#39;p&#39;: 135.1205997056891, &#39;ratio&#39;: 24142.730732948992}
+{&#39;p&#39;: 139.09638242796433, &#39;ratio&#39;: 24237.514507866603}
+{&#39;p&#39;: 141.63580233018203, &#39;ratio&#39;: 24382.187835772038}
+{&#39;p&#39;: 140.29112994681427, &#39;ratio&#39;: 24610.735552186015}
+{&#39;p&#39;: 143.11556693690815, &#39;ratio&#39;: 24732.30436259879}
+{&#39;p&#39;: 143.80442052341056, &#39;ratio&#39;: 24842.737091743693}
+{&#39;p&#39;: 144.31810228487217, &#39;ratio&#39;: 24955.0499153497}
+{&#39;p&#39;: 139.3015560689068, &#39;ratio&#39;: 25201.26914851641}
+{&#39;p&#39;: 146.35909215133884, &#39;ratio&#39;: 25218.37925704299}
+{&#39;p&#39;: 145.5711299757499, &#39;ratio&#39;: 25365.639601645365}
+{&#39;p&#39;: 144.24581563879937, &#39;ratio&#39;: 25506.347890365432}
+{&#39;p&#39;: 144.69649934874468, &#39;ratio&#39;: 25652.967976679094}
+{&#39;p&#39;: 146.5777509613946, &#39;ratio&#39;: 25708.249499449965}
+{&#39;p&#39;: 144.38773116780288, &#39;ratio&#39;: 25871.30738021109}
+{&#39;p&#39;: 146.64868381002125, &#39;ratio&#39;: 25912.821873649023}
+{&#39;p&#39;: 147.00916405446168, &#39;ratio&#39;: 25989.487625872687}
+{&#39;p&#39;: 149.26157609539896, &#39;ratio&#39;: 26001.63282215532}
+{&#39;p&#39;: 147.12135690177058, &#39;ratio&#39;: 26144.40872107032}
+{&#39;p&#39;: 143.13289006502114, &#39;ratio&#39;: 26379.02530142997}
+{&#39;p&#39;: 143.83841196564708, &#39;ratio&#39;: 26438.703123881165}
+{&#39;p&#39;: 145.71950880743276, &#39;ratio&#39;: 26455.086857515147}
+{&#39;p&#39;: 141.52014323495612, &#39;ratio&#39;: 26645.353415744867}
+{&#39;p&#39;: 143.76639895250145, &#39;ratio&#39;: 26706.631225429344}
+{&#39;p&#39;: 151.01860024380298, &#39;ratio&#39;: 26625.36038586816}
+{&#39;p&#39;: 153.01733532496922, &#39;ratio&#39;: 26652.273137298667}
+{&#39;p&#39;: 154.7579862521865, &#39;ratio&#39;: 26691.17734435}
+{&#39;p&#39;: 157.20677673767, &#39;ratio&#39;: 26792.443167747904}
+{&#39;p&#39;: 156.79799203785913, &#39;ratio&#39;: 26872.692737077203}
+{&#39;p&#39;: 156.12674032034147, &#39;ratio&#39;: 26948.79891397015}
+{&#39;p&#39;: 155.8204223961107, &#39;ratio&#39;: 26967.669877278495}
+{&#39;p&#39;: 155.0989904857645, &#39;ratio&#39;: 27042.83392508225}
+{&#39;p&#39;: 153.65288877808126, &#39;ratio&#39;: 27131.820300706073}
+{&#39;p&#39;: 155.17455733833611, &#39;ratio&#39;: 27159.649655489076}
+{&#39;p&#39;: 155.81558200478406, &#39;ratio&#39;: 27211.595556955355}
+{&#39;p&#39;: 154.58064707995888, &#39;ratio&#39;: 27293.843182998375}
+{&#39;p&#39;: 156.3586029127165, &#39;ratio&#39;: 27296.010092562356}
+{&#39;p&#39;: 155.86339244368685, &#39;ratio&#39;: 27354.74258865494}
+{&#39;p&#39;: 153.49605502615006, &#39;ratio&#39;: 27448.708254062614}
+{&#39;p&#39;: 151.52183548936384, &#39;ratio&#39;: 27516.6874950729}
+{&#39;p&#39;: 147.60439231398615, &#39;ratio&#39;: 27774.03108350339}
+{&#39;p&#39;: 147.51131467692898, &#39;ratio&#39;: 27871.183838910212}
+{&#39;p&#39;: 149.68986530438, &#39;ratio&#39;: 27802.543879626093}
+{&#39;p&#39;: 149.77988322630785, &#39;ratio&#39;: 27943.59610263056}
+{&#39;p&#39;: 149.36426277535992, &#39;ratio&#39;: 28030.538303549652}
+{&#39;p&#39;: 149.78022450459218, &#39;ratio&#39;: 28031.11633194125}
+{&#39;p&#39;: 150.64506000672512, &#39;ratio&#39;: 28006.219724115737}
+{&#39;p&#39;: 148.4200702428502, &#39;ratio&#39;: 28149.32746334828}
+{&#39;p&#39;: 144.02174855747768, &#39;ratio&#39;: 28357.869612525727}
+{&#39;p&#39;: 137.21650051813367, &#39;ratio&#39;: 28514.107606044356}
+{&#39;p&#39;: 136.69101682728092, &#39;ratio&#39;: 28553.581272239735}
+{&#39;p&#39;: 136.36859448679064, &#39;ratio&#39;: 28582.12025708943}
+{&#39;p&#39;: 136.0954464832476, &#39;ratio&#39;: 28664.46526408173}
+{&#39;p&#39;: 139.98756157573033, &#39;ratio&#39;: 28695.93460249529}
+{&#39;p&#39;: 142.43823909652835, &#39;ratio&#39;: 28732.04264039434}
+{&#39;p&#39;: 141.48233965231023, &#39;ratio&#39;: 28807.10169974726}
+{&#39;p&#39;: 138.53783910773038, &#39;ratio&#39;: 28896.914406054675}
+{&#39;p&#39;: 137.23512721205617, &#39;ratio&#39;: 28956.83232467108}
+{&#39;p&#39;: 134.0406667121372, &#39;ratio&#39;: 29010.36582989953}
+{&#39;p&#39;: 134.82603471877925, &#39;ratio&#39;: 29045.176315073964}
+{&#39;p&#39;: 135.46925603941418, &#39;ratio&#39;: 29089.539221481296}
+{&#39;p&#39;: 139.48926980946126, &#39;ratio&#39;: 29134.51049890347}
+{&#39;p&#39;: 144.95997408620892, &#39;ratio&#39;: 29160.76445306056}
+{&#39;p&#39;: 142.90790537811677, &#39;ratio&#39;: 29238.638298846046}
+{&#39;p&#39;: 139.29655102967524, &#39;ratio&#39;: 29295.882641574917}
+{&#39;p&#39;: 141.1480641816666, &#39;ratio&#39;: 29364.315637578526}
+{&#39;p&#39;: 138.13441491822073, &#39;ratio&#39;: 29399.98867888287}
+{&#39;p&#39;: 137.30727435143308, &#39;ratio&#39;: 29429.454602141537}
+{&#39;p&#39;: 137.27639951329337, &#39;ratio&#39;: 29472.516649702622}
+{&#39;p&#39;: 141.3540069579492, &#39;ratio&#39;: 29511.836953979975}
+{&#39;p&#39;: 147.20829481812032, &#39;ratio&#39;: 29458.14716069084}
+{&#39;p&#39;: 147.58261638393347, &#39;ratio&#39;: 29470.77527263728}
+{&#39;p&#39;: 144.2215521128808, &#39;ratio&#39;: 29548.685758968622}
+{&#39;p&#39;: 146.14502128407224, &#39;ratio&#39;: 29585.140090343797}
+{&#39;p&#39;: 147.27366922125103, &#39;ratio&#39;: 29571.99293593225}
+{&#39;p&#39;: 148.4580988648771, &#39;ratio&#39;: 29583.996097002295}
+{&#39;p&#39;: 149.6155840491564, &#39;ratio&#39;: 29572.91685847058}
+{&#39;p&#39;: 152.7941319557441, &#39;ratio&#39;: 29470.330669462284}
+{&#39;p&#39;: 152.98432198967186, &#39;ratio&#39;: 29565.29389408681}
+{&#39;p&#39;: 152.9551507641451, &#39;ratio&#39;: 29593.2327031771}
+{&#39;p&#39;: 152.95400282414204, &#39;ratio&#39;: 29608.780815849954}
+{&#39;p&#39;: 153.82047230504566, &#39;ratio&#39;: 29628.230135957645}
+{&#39;p&#39;: 154.9967889295632, &#39;ratio&#39;: 29650.25012670001}
+{&#39;p&#39;: 156.7145205037149, &#39;ratio&#39;: 29642.245568593098}
+{&#39;p&#39;: 156.70050692281052, &#39;ratio&#39;: 29677.502848510107}
+{&#39;p&#39;: 156.0869678927941, &#39;ratio&#39;: 29726.929583497367}
+{&#39;p&#39;: 156.69975572077644, &#39;ratio&#39;: 29724.129774853587}
+{&#39;p&#39;: 156.7222053681731, &#39;ratio&#39;: 29761.499327516744}
+{&#39;p&#39;: 155.45814360896637, &#39;ratio&#39;: 29842.95473577537}
+{&#39;p&#39;: 152.85400094059818, &#39;ratio&#39;: 29924.642942036095}
+{&#39;p&#39;: 154.7521478125657, &#39;ratio&#39;: 29957.77244546624}
+{&#39;p&#39;: 154.69900482485028, &#39;ratio&#39;: 29994.046298055106}
+{&#39;p&#39;: 155.10834496924772, &#39;ratio&#39;: 30018.906722456275}
+{&#39;p&#39;: 157.6899775913472, &#39;ratio&#39;: 29955.96792988418}
+{&#39;p&#39;: 157.97765299706725, &#39;ratio&#39;: 29984.9520406355}
+{&#39;p&#39;: 156.74985990207432, &#39;ratio&#39;: 30073.48860185551}
+{&#39;p&#39;: 156.72683885665626, &#39;ratio&#39;: 30085.41618908701}
+{&#39;p&#39;: 156.76828706780228, &#39;ratio&#39;: 30112.457770092275}
+{&#39;p&#39;: 157.3139416299929, &#39;ratio&#39;: 30151.463082500704}
+{&#39;p&#39;: 158.91417152421621, &#39;ratio&#39;: 30187.645845069168}
+{&#39;p&#39;: 157.23811515961654, &#39;ratio&#39;: 30203.014166764384}
+{&#39;p&#39;: 153.12053767798807, &#39;ratio&#39;: 30341.153761884154}
+{&#39;p&#39;: 150.6204766330156, &#39;ratio&#39;: 30553.371406651604}
+{&#39;p&#39;: 149.78272107280588, &#39;ratio&#39;: 30600.134717168406}
+{&#39;p&#39;: 158.58787946001158, &#39;ratio&#39;: 30437.854300019615}
+{&#39;p&#39;: 157.6856019522149, &#39;ratio&#39;: 30425.148662383355}
+{&#39;p&#39;: 159.30716810362966, &#39;ratio&#39;: 30721.138256453327}
+{&#39;p&#39;: 159.2256858400051, &#39;ratio&#39;: 31677.19232441194}
+{&#39;p&#39;: 159.56397187802904, &#39;ratio&#39;: 31657.833584295626}
+{&#39;p&#39;: 159.8216712831568, &#39;ratio&#39;: 31677.953725054762}
+{&#39;p&#39;: 159.98642758204, &#39;ratio&#39;: 31698.719701477923}
+{&#39;p&#39;: 162.43384394166534, &#39;ratio&#39;: 31508.72802108884}
+{&#39;p&#39;: 162.73172044416967, &#39;ratio&#39;: 34765.357395007275}
+{&#39;p&#39;: 162.76059096378395, &#39;ratio&#39;: 34046.42263562317}
+{&#39;p&#39;: 162.97912914841285, &#39;ratio&#39;: 34831.46836266271}
+{&#39;p&#39;: 163.1861458256054, &#39;ratio&#39;: 31777.36553501355}
+{&#39;p&#39;: 163.49245673370817, &#39;ratio&#39;: 31808.554862196077}
+{&#39;p&#39;: 162.62563008994013, &#39;ratio&#39;: 31850.192527268613}
+{&#39;p&#39;: 160.68520179236586, &#39;ratio&#39;: 32126.58735900085}
+{&#39;p&#39;: 161.75463053194684, &#39;ratio&#39;: 31925.167248065307}
+{&#39;p&#39;: 162.33194980784148, &#39;ratio&#39;: 35041.32048338677}
+{&#39;p&#39;: 162.56889827773426, &#39;ratio&#39;: 32041.547282044507}
+{&#39;p&#39;: 160.11974248994753, &#39;ratio&#39;: 32389.5949986814}
+{&#39;p&#39;: 161.22905736886779, &#39;ratio&#39;: 32235.839686007715}
+{&#39;p&#39;: 161.20476539538103, &#39;ratio&#39;: 32244.208738262387}
+{&#39;p&#39;: 162.13009638124998, &#39;ratio&#39;: 32170.704875382726}
+{&#39;p&#39;: 162.14282979152395, &#39;ratio&#39;: 32205.49935051753}
+{&#39;p&#39;: 160.66322012701573, &#39;ratio&#39;: 32670.483071258765}
+{&#39;p&#39;: 161.69334489075453, &#39;ratio&#39;: 35540.6595415955}
+{&#39;p&#39;: 162.76251022092282, &#39;ratio&#39;: 35569.480893493535}
+{&#39;p&#39;: 163.10374928620635, &#39;ratio&#39;: 35578.78577774929}
+{&#39;p&#39;: 162.19654344452024, &#39;ratio&#39;: 35629.093428390224}
+{&#39;p&#39;: 163.8520643737045, &#39;ratio&#39;: 35645.974927562645}
+{&#39;p&#39;: 163.94881253372728, &#39;ratio&#39;: 35710.9414671811}
+{&#39;p&#39;: 163.95998468821648, &#39;ratio&#39;: 35831.0831771695}
+{&#39;p&#39;: 165.42611499192822, &#39;ratio&#39;: 35727.21617583509}
+{&#39;p&#39;: 169.42882431645955, &#39;ratio&#39;: 35259.542759596516}
+{&#39;p&#39;: 169.04571697037483, &#39;ratio&#39;: 35291.463986021394}
+{&#39;p&#39;: 168.16734951795783, &#39;ratio&#39;: 35527.58949613221}
+{&#39;p&#39;: 167.45063691675136, &#39;ratio&#39;: 35725.92785205638}
+{&#39;p&#39;: 167.09296712029553, &#39;ratio&#39;: 35939.14861880189}
+{&#39;p&#39;: 169.21066145801055, &#39;ratio&#39;: 35588.87437125954}
+{&#39;p&#39;: 169.61543655699862, &#39;ratio&#39;: 35635.32267791739}
+{&#39;p&#39;: 168.58092226648148, &#39;ratio&#39;: 35676.45741230038}
+{&#39;p&#39;: 168.00637469926684, &#39;ratio&#39;: 35917.15308712503}
+{&#39;p&#39;: 166.83714385260873, &#39;ratio&#39;: 36303.394156853814}
+{&#39;p&#39;: 167.0264905493157, &#39;ratio&#39;: 36339.31135928648}
+{&#39;p&#39;: 167.8056146021526, &#39;ratio&#39;: 35998.79612243982}
+{&#39;p&#39;: 167.56000587775108, &#39;ratio&#39;: 36193.22320723464}
+{&#39;p&#39;: 168.8421189349233, &#39;ratio&#39;: 35922.466295339094}
+{&#39;p&#39;: 168.26181280714937, &#39;ratio&#39;: 36174.48924995733}
+{&#39;p&#39;: 168.24153029731497, &#39;ratio&#39;: 36209.78294118944}
+{&#39;p&#39;: 169.26465591346224, &#39;ratio&#39;: 35999.85492801937}
+{&#39;p&#39;: 170.15187586522632, &#39;ratio&#39;: 36089.88283502267}
+{&#39;p&#39;: 170.49788071499478, &#39;ratio&#39;: 36182.4198108526}
+{&#39;p&#39;: 170.72556658064352, &#39;ratio&#39;: 36222.035667861055}
+{&#39;p&#39;: 170.4329662787519, &#39;ratio&#39;: 36257.99951606481}
+{&#39;p&#39;: 170.21992600433583, &#39;ratio&#39;: 36288.76934227579}
+{&#39;p&#39;: 169.89725245364497, &#39;ratio&#39;: 36351.3035089587}
+{&#39;p&#39;: 169.45699784650722, &#39;ratio&#39;: 36424.336219619414}
+{&#39;p&#39;: 169.72895179833583, &#39;ratio&#39;: 36456.07306726551}
+{&#39;p&#39;: 168.52933247375282, &#39;ratio&#39;: 36709.97318450854}
+{&#39;p&#39;: 169.05077367764963, &#39;ratio&#39;: 36522.921908920216}
+{&#39;p&#39;: 169.29158964680235, &#39;ratio&#39;: 36573.408772618}
+{&#39;p&#39;: 169.47160567456027, &#39;ratio&#39;: 36594.67344158791}
+{&#39;p&#39;: 169.73350067176318, &#39;ratio&#39;: 36608.48984040245}
+{&#39;p&#39;: 169.38805450725158, &#39;ratio&#39;: 36664.48866259773}
+{&#39;p&#39;: 169.37421075810505, &#39;ratio&#39;: 36696.189913065646}
+{&#39;p&#39;: 169.3476747378035, &#39;ratio&#39;: 36710.29325354585}
+{&#39;p&#39;: 168.66767359843007, &#39;ratio&#39;: 37029.5413688509}
+{&#39;p&#39;: 168.02971921251248, &#39;ratio&#39;: 37159.74281355166}
+{&#39;p&#39;: 167.51722443268525, &#39;ratio&#39;: 37383.73434011973}
+{&#39;p&#39;: 164.98321673522304, &#39;ratio&#39;: 37590.646538161534}
+{&#39;p&#39;: 167.07541689169486, &#39;ratio&#39;: 37497.95695667161}
+{&#39;p&#39;: 168.0978500091295, &#39;ratio&#39;: 37303.32767773473}
+{&#39;p&#39;: 167.80813998209786, &#39;ratio&#39;: 37578.883375237856}
+{&#39;p&#39;: 167.45416967420533, &#39;ratio&#39;: 37620.47273715994}
+{&#39;p&#39;: 167.44424181700325, &#39;ratio&#39;: 37649.95026988635}
+{&#39;p&#39;: 166.4531594464865, &#39;ratio&#39;: 37688.54167602482}
+{&#39;p&#39;: 165.92284923478286, &#39;ratio&#39;: 37763.11392256301}
+{&#39;p&#39;: 166.48607823085004, &#39;ratio&#39;: 37713.54929195669}
+{&#39;p&#39;: 168.6612474134163, &#39;ratio&#39;: 37342.969531229726}
+{&#39;p&#39;: 167.39601771658198, &#39;ratio&#39;: 37765.53175571653}
+{&#39;p&#39;: 168.6804208095534, &#39;ratio&#39;: 37414.29588474985}
+{&#39;p&#39;: 169.25429237035473, &#39;ratio&#39;: 37360.07757301931}
+{&#39;p&#39;: 168.5724273397135, &#39;ratio&#39;: 37500.218839271416}
+{&#39;p&#39;: 166.2365488511152, &#39;ratio&#39;: 37884.91652403437}
+{&#39;p&#39;: 167.76383607151615, &#39;ratio&#39;: 37902.63716546289}
+{&#39;p&#39;: 166.19668347308507, &#39;ratio&#39;: 37911.59957240508}
+{&#39;p&#39;: 166.69851483845832, &#39;ratio&#39;: 37923.112210712054}
+{&#39;p&#39;: 166.09691668015336, &#39;ratio&#39;: 38029.15096226118}
+{&#39;p&#39;: 163.88811975855194, &#39;ratio&#39;: 38117.990993525935}
+{&#39;p&#39;: 163.63387613852902, &#39;ratio&#39;: 38137.45784321724}
+{&#39;p&#39;: 162.89663069905316, &#39;ratio&#39;: 38150.89586669924}
+{&#39;p&#39;: 163.27622286668168, &#39;ratio&#39;: 38230.0456588515}
+{&#39;p&#39;: 163.62923008338026, &#39;ratio&#39;: 38279.20898480399}
+{&#39;p&#39;: 163.32393999299012, &#39;ratio&#39;: 38334.95260878837}
+{&#39;p&#39;: 163.02456569378413, &#39;ratio&#39;: 38336.916059745316}
+{&#39;p&#39;: 162.7923719802799, &#39;ratio&#39;: 38355.10833892215}
+{&#39;p&#39;: 162.97615804468387, &#39;ratio&#39;: 38405.39391593578}
+{&#39;p&#39;: 162.2437338513297, &#39;ratio&#39;: 38565.91677390973}
+{&#39;p&#39;: 161.6077205252097, &#39;ratio&#39;: 38975.70956945737}
+{&#39;p&#39;: 161.14116738963747, &#39;ratio&#39;: 39058.48061793561}
+{&#39;p&#39;: 161.0784029178878, &#39;ratio&#39;: 39127.601895201275}
+{&#39;p&#39;: 162.74483547002055, &#39;ratio&#39;: 38635.32489917478}
+{&#39;p&#39;: 161.54775560811822, &#39;ratio&#39;: 39152.826819578564}
+{&#39;p&#39;: 161.93215610427077, &#39;ratio&#39;: 39094.40830034894}
+{&#39;p&#39;: 163.39054549605243, &#39;ratio&#39;: 38757.73518693033}
+{&#39;p&#39;: 159.74450037463103, &#39;ratio&#39;: 39411.3157443262}
+{&#39;p&#39;: 159.75304906304046, &#39;ratio&#39;: 39455.35313062713}
+{&#39;p&#39;: 159.33576347749167, &#39;ratio&#39;: 39586.95958307191}
+{&#39;p&#39;: 158.83683584139894, &#39;ratio&#39;: 39641.081281470964}
+{&#39;p&#39;: 159.79469549806817, &#39;ratio&#39;: 39539.216004474685}
+{&#39;p&#39;: 159.26880312035863, &#39;ratio&#39;: 39711.487238715854}
+{&#39;p&#39;: 159.6155497220203, &#39;ratio&#39;: 39731.100144027776}
+{&#39;p&#39;: 160.03504298270357, &#39;ratio&#39;: 39687.96270289364}
+{&#39;p&#39;: 163.60491389477306, &#39;ratio&#39;: 39014.69760859644}
+{&#39;p&#39;: 164.42098990297745, &#39;ratio&#39;: 39033.58072081173}
+{&#39;p&#39;: 165.36731772742363, &#39;ratio&#39;: 39085.310023013095}
+{&#39;p&#39;: 168.86718130438499, &#39;ratio&#39;: 38812.90701848705}
+{&#39;p&#39;: 168.69837042050514, &#39;ratio&#39;: 38938.106840536115}
+{&#39;p&#39;: 168.7118676764138, &#39;ratio&#39;: 38964.269747099774}
+{&#39;p&#39;: 169.167957255172, &#39;ratio&#39;: 39025.244143111886}
+{&#39;p&#39;: 166.28105467593576, &#39;ratio&#39;: 39283.901573708354}
+{&#39;p&#39;: 164.67274544563418, &#39;ratio&#39;: 39307.85050274823}
+{&#39;p&#39;: 165.75600820857687, &#39;ratio&#39;: 39359.61910233961}
+{&#39;p&#39;: 168.00038394316283, &#39;ratio&#39;: 39380.72707277484}
+{&#39;p&#39;: 169.51484333377536, &#39;ratio&#39;: 39697.207547823265}
+{&#39;p&#39;: 169.777360229198, &#39;ratio&#39;: 40452.90553709052}
+{&#39;p&#39;: 168.5916615189288, &#39;ratio&#39;: 39792.398289636076}
+{&#39;p&#39;: 167.6559125425968, &#39;ratio&#39;: 39745.29860907819}
+{&#39;p&#39;: 168.31665732447016, &#39;ratio&#39;: 40374.76829710966}
+{&#39;p&#39;: 168.28725601529786, &#39;ratio&#39;: 40389.45135851039}
+{&#39;p&#39;: 167.58648217038836, &#39;ratio&#39;: 39946.85521634558}
+{&#39;p&#39;: 168.13086352148937, &#39;ratio&#39;: 39957.40890284155}
+{&#39;p&#39;: 168.40101923483243, &#39;ratio&#39;: 42795.72549562201}
+{&#39;p&#39;: 165.42114423682253, &#39;ratio&#39;: 41563.6334216061}
+{&#39;p&#39;: 166.4777112618231, &#39;ratio&#39;: 43046.59977268704}
+{&#39;p&#39;: 165.44396387970295, &#39;ratio&#39;: 41580.335042365725}
+{&#39;p&#39;: 161.46190940465124, &#39;ratio&#39;: 41818.00908517453}
+{&#39;p&#39;: 159.0719313574739, &#39;ratio&#39;: 42032.185490846874}
+{&#39;p&#39;: 159.89604994074733, &#39;ratio&#39;: 42078.24653989379}
+{&#39;p&#39;: 160.5629575435985, &#39;ratio&#39;: 42130.435292057795}
+{&#39;p&#39;: 163.43749095859565, &#39;ratio&#39;: 41891.81259323354}
+{&#39;p&#39;: 168.6032389623156, &#39;ratio&#39;: 43583.5862363004}
+{&#39;p&#39;: 168.73370852048743, &#39;ratio&#39;: 43668.946654879954}
+{&#39;p&#39;: 166.88471963392794, &#39;ratio&#39;: 43555.19560110409}
+{&#39;p&#39;: 165.79325492128166, &#39;ratio&#39;: 43668.58784092094}
+{&#39;p&#39;: 166.82257104721788, &#39;ratio&#39;: 43739.10079258717}
+{&#39;p&#39;: 169.01181931386097, &#39;ratio&#39;: 43832.21218486929}
+{&#39;p&#39;: 168.41683810234193, &#39;ratio&#39;: 44186.8217375121}
+{&#39;p&#39;: 168.55355425641895, &#39;ratio&#39;: 44221.261549154435}
+{&#39;p&#39;: 166.08838051929757, &#39;ratio&#39;: 43932.29477599012}
+{&#39;p&#39;: 163.27609960301044, &#39;ratio&#39;: 42735.81611189024}
+{&#39;p&#39;: 166.65914404615484, &#39;ratio&#39;: 44012.69199217853}
+{&#39;p&#39;: 166.11512321858027, &#39;ratio&#39;: 44058.447620390136}
+{&#39;p&#39;: 164.35900771965956, &#39;ratio&#39;: 43291.66622220383}
+{&#39;p&#39;: 167.4996630183239, &#39;ratio&#39;: 44266.57492258359}
+{&#39;p&#39;: 161.61525945144766, &#39;ratio&#39;: 44982.80078950439}
+{&#39;p&#39;: 162.2835996942775, &#39;ratio&#39;: 45395.58361175889}
+{&#39;p&#39;: 162.25437645447718, &#39;ratio&#39;: 45443.83750940695}
+{&#39;p&#39;: 163.1765664933839, &#39;ratio&#39;: 45157.24380258866}
+{&#39;p&#39;: 163.15783493158983, &#39;ratio&#39;: 45166.94454992167}
+{&#39;p&#39;: 165.40862257740164, &#39;ratio&#39;: 45494.0353441095}
+{&#39;p&#39;: 161.18692244336353, &#39;ratio&#39;: 45686.89004768097}
+{&#39;p&#39;: 161.1856964692239, &#39;ratio&#39;: 45690.62089420445}
+{&#39;p&#39;: 164.8445861242825, &#39;ratio&#39;: 45275.284916317025}
+{&#39;p&#39;: 161.0429716367476, &#39;ratio&#39;: 46124.30004722584}
+{&#39;p&#39;: 161.1519242767299, &#39;ratio&#39;: 42395.249618303365}
+{&#39;p&#39;: 163.26641991885552, &#39;ratio&#39;: 42125.22955459822}
+{&#39;p&#39;: 160.63972054136264, &#39;ratio&#39;: 43847.456206830124}
+{&#39;p&#39;: 161.0459667677045, &#39;ratio&#39;: 43995.79788682287}
+{&#39;p&#39;: 157.89665026517198, &#39;ratio&#39;: 46469.47791560293}
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_1.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;p&#39;: 68.85770508126384, &#39;ratio&#39;: 34894.49082533061}
+{&#39;p&#39;: 68.73945290314641, &#39;ratio&#39;: 34551.071873182926}
+{&#39;p&#39;: 68.97473059905629, &#39;ratio&#39;: 34862.49055697531}
+{&#39;p&#39;: 68.9028314968503, &#39;ratio&#39;: 35085.26324105889}
+{&#39;p&#39;: 68.56793713830201, &#39;ratio&#39;: 35105.84738773689}
+{&#39;p&#39;: 68.28714577944862, &#39;ratio&#39;: 35329.77797462919}
+{&#39;p&#39;: 68.29592301571864, &#39;ratio&#39;: 35542.33743531106}
+{&#39;p&#39;: 68.06174801218646, &#39;ratio&#39;: 35743.081396884576}
+{&#39;p&#39;: 67.77047737004946, &#39;ratio&#39;: 36292.67898342332}
+{&#39;p&#39;: 66.50868328298118, &#39;ratio&#39;: 36514.07903153007}
+{&#39;p&#39;: 66.1100859769062, &#39;ratio&#39;: 36882.067616999695}
+{&#39;p&#39;: 62.16338828082176, &#39;ratio&#39;: 35811.079309978}
+{&#39;p&#39;: 61.06399306943146, &#39;ratio&#39;: 35257.89045062592}
+{&#39;p&#39;: 58.17744992401441, &#39;ratio&#39;: 35243.0914273751}
+{&#39;p&#39;: 57.3052360123237, &#39;ratio&#39;: 34875.2594519899}
+{&#39;p&#39;: 56.57072443992051, &#39;ratio&#39;: 35534.02371058433}
+{&#39;p&#39;: 59.21856942286358, &#39;ratio&#39;: 36479.47105408}
+{&#39;p&#39;: 58.644030709468716, &#39;ratio&#39;: 36082.18884859106}
+{&#39;p&#39;: 58.90869127052311, &#39;ratio&#39;: 36494.894577993415}
+{&#39;p&#39;: 60.39935015784806, &#39;ratio&#39;: 36892.21042992272}
+{&#39;p&#39;: 60.95690204984271, &#39;ratio&#39;: 36950.17730915841}
+{&#39;p&#39;: 61.5023067184601, &#39;ratio&#39;: 37137.92946757733}
+{&#39;p&#39;: 62.009401415931535, &#39;ratio&#39;: 37245.278197810825}
+{&#39;p&#39;: 66.18995161937536, &#39;ratio&#39;: 37527.08541439647}
+{&#39;p&#39;: 61.38695369985196, &#39;ratio&#39;: 37646.21871668144}
+{&#39;p&#39;: 59.77506796772499, &#39;ratio&#39;: 37929.61849986049}
+{&#39;p&#39;: 58.73840396281419, &#39;ratio&#39;: 37514.36166555212}
+{&#39;p&#39;: 56.49862604691061, &#39;ratio&#39;: 37642.4618264803}
+{&#39;p&#39;: 60.49820957082498, &#39;ratio&#39;: 38423.8464285897}
+{&#39;p&#39;: 59.978352432686876, &#39;ratio&#39;: 38477.73269978778}
+{&#39;p&#39;: 63.708067842152786, &#39;ratio&#39;: 38709.82166067608}
+{&#39;p&#39;: 61.71368020115285, &#39;ratio&#39;: 38762.70695286962}
+{&#39;p&#39;: 59.9459321422439, &#39;ratio&#39;: 38657.65087592874}
+{&#39;p&#39;: 61.86895557272284, &#39;ratio&#39;: 39055.20115467589}
+{&#39;p&#39;: 62.83178107017251, &#39;ratio&#39;: 39199.537212328}
+{&#39;p&#39;: 62.864151249501674, &#39;ratio&#39;: 39258.49770026169}
+{&#39;p&#39;: 61.0726863542752, &#39;ratio&#39;: 39473.287776916506}
+{&#39;p&#39;: 59.95572968019064, &#39;ratio&#39;: 38963.69146782438}
+{&#39;p&#39;: 59.95998437066234, &#39;ratio&#39;: 38989.6626027347}
+{&#39;p&#39;: 59.989638182086594, &#39;ratio&#39;: 39104.25087739846}
+{&#39;p&#39;: 61.607137696510996, &#39;ratio&#39;: 39976.21949443822}
+{&#39;p&#39;: 62.64956870263303, &#39;ratio&#39;: 40109.57745282284}
+{&#39;p&#39;: 64.18175058000136, &#39;ratio&#39;: 40253.32807490638}
+{&#39;p&#39;: 64.1877890599151, &#39;ratio&#39;: 40317.65170174076}
+{&#39;p&#39;: 63.124938242144935, &#39;ratio&#39;: 40137.46344848852}
+{&#39;p&#39;: 67.2899683212159, &#39;ratio&#39;: 40290.254693131894}
+{&#39;p&#39;: 67.5510979831759, &#39;ratio&#39;: 40818.23344162107}
+{&#39;p&#39;: 65.1820051058749, &#39;ratio&#39;: 40542.12572654285}
+{&#39;p&#39;: 63.03177124456784, &#39;ratio&#39;: 40531.06817525995}
+{&#39;p&#39;: 63.90067224139026, &#39;ratio&#39;: 40733.34453980849}
+{&#39;p&#39;: 65.40700393311492, &#39;ratio&#39;: 40820.18375342827}
+{&#39;p&#39;: 64.14915628934318, &#39;ratio&#39;: 40927.30335743661}
+{&#39;p&#39;: 64.14106014417472, &#39;ratio&#39;: 40945.77325929235}
+{&#39;p&#39;: 61.94737645704106, &#39;ratio&#39;: 40953.24971672318}
+{&#39;p&#39;: 63.54863945406728, &#39;ratio&#39;: 40974.10600912835}
+{&#39;p&#39;: 63.56822562916025, &#39;ratio&#39;: 41001.19616694443}
+{&#39;p&#39;: 63.58205360603927, &#39;ratio&#39;: 41096.97847014349}
+{&#39;p&#39;: 61.033298075564616, &#39;ratio&#39;: 41141.88837188136}
+{&#39;p&#39;: 61.07644825683956, &#39;ratio&#39;: 40923.16082767336}
+{&#39;p&#39;: 59.41113371719374, &#39;ratio&#39;: 40582.45661786649}
+{&#39;p&#39;: 60.419785839151736, &#39;ratio&#39;: 40750.6827980938}
+{&#39;p&#39;: 60.463916982918676, &#39;ratio&#39;: 40825.60771866632}
+{&#39;p&#39;: 59.82871019826777, &#39;ratio&#39;: 40874.438093739656}
+{&#39;p&#39;: 60.48678986502393, &#39;ratio&#39;: 40918.15658394074}
+{&#39;p&#39;: 61.26580921895479, &#39;ratio&#39;: 41465.384455117346}
+{&#39;p&#39;: 63.757580645438026, &#39;ratio&#39;: 41768.23001382881}
+{&#39;p&#39;: 64.44522153965139, &#39;ratio&#39;: 42051.93840109169}
+{&#39;p&#39;: 62.06560370824402, &#39;ratio&#39;: 41862.65729203234}
+{&#39;p&#39;: 62.083416334273196, &#39;ratio&#39;: 41903.981952134396}
+{&#39;p&#39;: 62.0757703080785, &#39;ratio&#39;: 41986.19657314457}
+{&#39;p&#39;: 62.09486669678009, &#39;ratio&#39;: 42006.11149658835}
+{&#39;p&#39;: 62.087816908966865, &#39;ratio&#39;: 42006.0047537971}
+{&#39;p&#39;: 59.40214091905864, &#39;ratio&#39;: 41326.03517172759}
+{&#39;p&#39;: 58.4418414731681, &#39;ratio&#39;: 41431.72393248828}
+{&#39;p&#39;: 58.622276285768635, &#39;ratio&#39;: 41497.77741319993}
+{&#39;p&#39;: 58.610700482102935, &#39;ratio&#39;: 41521.540171830624}
+{&#39;p&#39;: 59.50134809027728, &#39;ratio&#39;: 41618.32546746183}
+{&#39;p&#39;: 60.565871685295086, &#39;ratio&#39;: 41632.54906797507}
+{&#39;p&#39;: 61.1605674527498, &#39;ratio&#39;: 41633.58065024769}
+{&#39;p&#39;: 61.340121447407356, &#39;ratio&#39;: 41785.121312692056}
+{&#39;p&#39;: 61.35240178067709, &#39;ratio&#39;: 41876.915264324576}
+{&#39;p&#39;: 62.31300029169859, &#39;ratio&#39;: 42539.784805921}
+{&#39;p&#39;: 64.6421337580028, &#39;ratio&#39;: 42684.37328189297}
+{&#39;p&#39;: 64.62775845332877, &#39;ratio&#39;: 42728.50617249041}
+{&#39;p&#39;: 65.70557765195484, &#39;ratio&#39;: 42766.803634021824}
+{&#39;p&#39;: 66.53463411843221, &#39;ratio&#39;: 42838.153984768054}
+{&#39;p&#39;: 68.11949816168516, &#39;ratio&#39;: 44682.3464242674}
+{&#39;p&#39;: 67.71362385908942, &#39;ratio&#39;: 42989.54799837293}
+{&#39;p&#39;: 68.05272576510338, &#39;ratio&#39;: 43030.20104721479}
+{&#39;p&#39;: 68.47082626504397, &#39;ratio&#39;: 44025.036886791364}
+{&#39;p&#39;: 68.6289785228973, &#39;ratio&#39;: 44141.16253343925}
+{&#39;p&#39;: 68.61085897731803, &#39;ratio&#39;: 44148.36487595023}
+{&#39;p&#39;: 68.60297931132828, &#39;ratio&#39;: 44174.818381445366}
+{&#39;p&#39;: 68.74977809366092, &#39;ratio&#39;: 44225.83610580262}
+{&#39;p&#39;: 69.0810779858908, &#39;ratio&#39;: 44396.87973254407}
+{&#39;p&#39;: 68.91394872200222, &#39;ratio&#39;: 44462.98022632097}
+{&#39;p&#39;: 69.2649912680216, &#39;ratio&#39;: 44406.01571076607}
+{&#39;p&#39;: 68.91565482520302, &#39;ratio&#39;: 44372.91188850751}
+{&#39;p&#39;: 69.2379495916664, &#39;ratio&#39;: 44514.47779542292}
+{&#39;p&#39;: 69.2565611276012, &#39;ratio&#39;: 44550.47188057584}
+{&#39;p&#39;: 69.65174138157522, &#39;ratio&#39;: 44506.64839855542}
+{&#39;p&#39;: 68.96670393286371, &#39;ratio&#39;: 44628.10015312914}
+{&#39;p&#39;: 68.51031629330222, &#39;ratio&#39;: 44549.49926596322}
+{&#39;p&#39;: 68.37138985597923, &#39;ratio&#39;: 44535.12007105416}
+{&#39;p&#39;: 68.46289841059038, &#39;ratio&#39;: 44144.34972019916}
+{&#39;p&#39;: 68.36431613632672, &#39;ratio&#39;: 44167.59840967517}
+{&#39;p&#39;: 68.3643302665279, &#39;ratio&#39;: 43889.98614629404}
+{&#39;p&#39;: 68.58353968077947, &#39;ratio&#39;: 44747.53655985096}
+{&#39;p&#39;: 68.36818819712138, &#39;ratio&#39;: 43990.0874590853}
+{&#39;p&#39;: 68.38556610739951, &#39;ratio&#39;: 43918.75836452493}
+{&#39;p&#39;: 65.30335543524657, &#39;ratio&#39;: 44040.83446781565}
+{&#39;p&#39;: 63.538660527674395, &#39;ratio&#39;: 44108.38073911961}
+{&#39;p&#39;: 62.5122750528926, &#39;ratio&#39;: 44159.62744946981}
+{&#39;p&#39;: 58.79854977683641, &#39;ratio&#39;: 43703.03392653422}
+{&#39;p&#39;: 57.810864307212, &#39;ratio&#39;: 44002.57118585153}
+{&#39;p&#39;: 55.76755020845554, &#39;ratio&#39;: 43222.63929849105}
+{&#39;p&#39;: 54.557914705692305, &#39;ratio&#39;: 43168.214443484656}
+{&#39;p&#39;: 56.955213847512496, &#39;ratio&#39;: 44291.265468282465}
+{&#39;p&#39;: 55.83561638430439, &#39;ratio&#39;: 43820.53866103565}
+{&#39;p&#39;: 57.13298811988564, &#39;ratio&#39;: 44822.40583521761}
+{&#39;p&#39;: 56.923438800944574, &#39;ratio&#39;: 45040.16575028749}
+{&#39;p&#39;: 58.3219897293903, &#39;ratio&#39;: 45718.50588149919}
+{&#39;p&#39;: 59.57872905362613, &#39;ratio&#39;: 45838.91278648456}
+{&#39;p&#39;: 61.30798113983314, &#39;ratio&#39;: 45997.08690653455}
+{&#39;p&#39;: 63.34726495008168, &#39;ratio&#39;: 46844.320747733975}
+{&#39;p&#39;: 61.995154708269034, &#39;ratio&#39;: 47082.776199183914}
+{&#39;p&#39;: 65.82384919803145, &#39;ratio&#39;: 47433.030272054646}
+{&#39;p&#39;: 63.3477542803298, &#39;ratio&#39;: 47267.14149178516}
+{&#39;p&#39;: 60.18402633122645, &#39;ratio&#39;: 46936.306171827724}
+{&#39;p&#39;: 59.76033518471231, &#39;ratio&#39;: 47057.6351847968}
+{&#39;p&#39;: 59.383975769243655, &#39;ratio&#39;: 47179.063420680126}
+{&#39;p&#39;: 58.24853633564148, &#39;ratio&#39;: 46836.519408174456}
+{&#39;p&#39;: 58.91624495593194, &#39;ratio&#39;: 47320.056407189004}
+{&#39;p&#39;: 60.94521981224426, &#39;ratio&#39;: 47545.344551636656}
+{&#39;p&#39;: 62.217859747355746, &#39;ratio&#39;: 47454.70741826078}
+{&#39;p&#39;: 61.89726576636245, &#39;ratio&#39;: 47590.58080973082}
+{&#39;p&#39;: 62.484615893247636, &#39;ratio&#39;: 47589.74873699347}
+{&#39;p&#39;: 62.475560825684695, &#39;ratio&#39;: 47653.52676712693}
+{&#39;p&#39;: 63.063788097433594, &#39;ratio&#39;: 47717.22992660457}
+{&#39;p&#39;: 66.07198461483921, &#39;ratio&#39;: 48622.49275849309}
+{&#39;p&#39;: 67.93345175778597, &#39;ratio&#39;: 48684.95887664909}
+{&#39;p&#39;: 68.25713709736013, &#39;ratio&#39;: 48788.57598086427}
+{&#39;p&#39;: 66.30505005478807, &#39;ratio&#39;: 48835.0345264325}
+{&#39;p&#39;: 67.94221898186842, &#39;ratio&#39;: 48866.992463281254}
+{&#39;p&#39;: 66.46298388389464, &#39;ratio&#39;: 48949.596779363936}
+{&#39;p&#39;: 66.47692495268026, &#39;ratio&#39;: 48992.48869540427}
+{&#39;p&#39;: 65.95604750224084, &#39;ratio&#39;: 48922.7258266948}
+{&#39;p&#39;: 65.16773707474145, &#39;ratio&#39;: 48940.893034207904}
+{&#39;p&#39;: 66.28006946861409, &#39;ratio&#39;: 49111.602891707924}
+{&#39;p&#39;: 66.4873208191303, &#39;ratio&#39;: 49107.33337999941}
+{&#39;p&#39;: 67.13820167782055, &#39;ratio&#39;: 49156.468155499824}
+{&#39;p&#39;: 68.32356297301199, &#39;ratio&#39;: 49190.61317118401}
+{&#39;p&#39;: 66.45089081055868, &#39;ratio&#39;: 49229.22302041881}
+{&#39;p&#39;: 63.47954431840597, &#39;ratio&#39;: 48376.4912548305}
+{&#39;p&#39;: 63.87896263301596, &#39;ratio&#39;: 49187.198826534484}
+{&#39;p&#39;: 64.84184047262603, &#39;ratio&#39;: 49183.27403688973}
+{&#39;p&#39;: 64.83200711528464, &#39;ratio&#39;: 49221.735627664595}
+{&#39;p&#39;: 62.84220707919447, &#39;ratio&#39;: 48561.27527036707}
+{&#39;p&#39;: 65.99013092718035, &#39;ratio&#39;: 49322.88458277187}
+{&#39;p&#39;: 66.29682524508989, &#39;ratio&#39;: 49534.34534124259}
+{&#39;p&#39;: 66.29558390121822, &#39;ratio&#39;: 49553.367817630206}
+{&#39;p&#39;: 64.42363944332732, &#39;ratio&#39;: 49381.429362850926}
+{&#39;p&#39;: 65.22564514626823, &#39;ratio&#39;: 49415.11516664286}
+{&#39;p&#39;: 66.35148197533535, &#39;ratio&#39;: 49620.31282969348}
+{&#39;p&#39;: 66.00704404317717, &#39;ratio&#39;: 49478.919607934666}
+{&#39;p&#39;: 65.19614323182282, &#39;ratio&#39;: 49537.04669729295}
+{&#39;p&#39;: 62.236869907494444, &#39;ratio&#39;: 48855.69132190145}
+{&#39;p&#39;: 63.92001425138694, &#39;ratio&#39;: 49387.55685121007}
+{&#39;p&#39;: 63.45475579058869, &#39;ratio&#39;: 48977.02226181133}
+{&#39;p&#39;: 62.81071646398779, &#39;ratio&#39;: 49018.314483532056}
+{&#39;p&#39;: 64.47798049164066, &#39;ratio&#39;: 49789.06545287512}
+{&#39;p&#39;: 63.44842396541747, &#39;ratio&#39;: 49142.26709219658}
+{&#39;p&#39;: 61.33029594425959, &#39;ratio&#39;: 49157.87403410721}
+{&#39;p&#39;: 61.66870588784724, &#39;ratio&#39;: 49212.80975105784}
+{&#39;p&#39;: 60.74403393066175, &#39;ratio&#39;: 49423.07248510534}
+{&#39;p&#39;: 60.100973401633766, &#39;ratio&#39;: 49476.91081050913}
+{&#39;p&#39;: 58.51224400727717, &#39;ratio&#39;: 48896.5499654589}
+{&#39;p&#39;: 58.7333306854235, &#39;ratio&#39;: 48996.61360185972}
+{&#39;p&#39;: 58.99806521443955, &#39;ratio&#39;: 49017.233846971605}
+{&#39;p&#39;: 60.147783794211506, &#39;ratio&#39;: 49517.50236102807}
+{&#39;p&#39;: 58.540712994643435, &#39;ratio&#39;: 48831.28419911563}
+{&#39;p&#39;: 60.190198504793294, &#39;ratio&#39;: 49646.39948541482}
+{&#39;p&#39;: 58.71250146093955, &#39;ratio&#39;: 49252.15653680237}
+{&#39;p&#39;: 58.72137762151363, &#39;ratio&#39;: 49275.66953278771}
+{&#39;p&#39;: 59.30143026639078, &#39;ratio&#39;: 49808.43105631647}
+{&#39;p&#39;: 58.71898192505925, &#39;ratio&#39;: 49374.34729823941}
+{&#39;p&#39;: 58.528630857252296, &#39;ratio&#39;: 48936.290705740816}
+{&#39;p&#39;: 58.296641289427576, &#39;ratio&#39;: 48792.17856822661}
+{&#39;p&#39;: 56.927789209316515, &#39;ratio&#39;: 48540.39310042077}
+{&#39;p&#39;: 55.98661302215604, &#39;ratio&#39;: 48241.200684632866}
+{&#39;p&#39;: 55.469696259313444, &#39;ratio&#39;: 47990.22027960616}
+{&#39;p&#39;: 55.51822188997802, &#39;ratio&#39;: 48737.13353526326}
+{&#39;p&#39;: 55.84135237956379, &#39;ratio&#39;: 48970.19353714701}
+{&#39;p&#39;: 56.82646553891948, &#39;ratio&#39;: 48718.781094800586}
+{&#39;p&#39;: 58.28536994640169, &#39;ratio&#39;: 48932.45955690135}
+{&#39;p&#39;: 56.79517888521323, &#39;ratio&#39;: 48925.339310238676}
+{&#39;p&#39;: 57.104991262273266, &#39;ratio&#39;: 48966.6240250663}
+{&#39;p&#39;: 58.23495322651434, &#39;ratio&#39;: 50452.411532962244}
+{&#39;p&#39;: 58.29737540849818, &#39;ratio&#39;: 49052.22411628579}
+{&#39;p&#39;: 56.51113304056134, &#39;ratio&#39;: 48941.57835044487}
+{&#39;p&#39;: 57.12971787218971, &#39;ratio&#39;: 49096.300387186435}
+{&#39;p&#39;: 56.81931760207097, &#39;ratio&#39;: 49201.300140480496}
+{&#39;p&#39;: 57.653566416314945, &#39;ratio&#39;: 49209.75758531132}
+{&#39;p&#39;: 56.09802598347718, &#39;ratio&#39;: 48927.160889433435}
+{&#39;p&#39;: 57.20940160118585, &#39;ratio&#39;: 49267.28657422129}
+{&#39;p&#39;: 59.71631409732035, &#39;ratio&#39;: 50743.462102094505}
+{&#39;p&#39;: 58.63778161676614, &#39;ratio&#39;: 49631.98583932807}
+{&#39;p&#39;: 59.44180559929083, &#39;ratio&#39;: 50373.53676389297}
+{&#39;p&#39;: 59.40823341479231, &#39;ratio&#39;: 50605.72551547141}
+{&#39;p&#39;: 60.116884648699966, &#39;ratio&#39;: 51090.25453380696}
+{&#39;p&#39;: 62.226403861499826, &#39;ratio&#39;: 51109.97223726665}
+{&#39;p&#39;: 62.21437366720082, &#39;ratio&#39;: 51130.389496211516}
+{&#39;p&#39;: 63.372685356295925, &#39;ratio&#39;: 51256.84667558972}
+{&#39;p&#39;: 64.51434342275313, &#39;ratio&#39;: 51301.968202752374}
+{&#39;p&#39;: 62.44480888245877, &#39;ratio&#39;: 51366.61898070244}
+{&#39;p&#39;: 64.00709307184574, &#39;ratio&#39;: 51379.43540556012}
+{&#39;p&#39;: 62.439803041354935, &#39;ratio&#39;: 51418.70447560386}
+{&#39;p&#39;: 62.14262291913885, &#39;ratio&#39;: 51459.89205849899}
+{&#39;p&#39;: 61.50226997842771, &#39;ratio&#39;: 51456.749679398745}
+{&#39;p&#39;: 61.127107809640954, &#39;ratio&#39;: 51553.31216309759}
+{&#39;p&#39;: 60.483548078600094, &#39;ratio&#39;: 51575.66338993009}
+{&#39;p&#39;: 61.829886136146975, &#39;ratio&#39;: 51579.95906495749}
+{&#39;p&#39;: 60.48431482964381, &#39;ratio&#39;: 51637.168442240116}
+{&#39;p&#39;: 61.14833476164869, &#39;ratio&#39;: 51652.587966695275}
+{&#39;p&#39;: 61.859722186619194, &#39;ratio&#39;: 51659.95528437487}
+{&#39;p&#39;: 61.82975400301742, &#39;ratio&#39;: 51706.85256914843}
+{&#39;p&#39;: 60.473900148075515, &#39;ratio&#39;: 51738.1744689718}
+{&#39;p&#39;: 61.548977195749615, &#39;ratio&#39;: 51762.56554658538}
+{&#39;p&#39;: 62.54457285502868, &#39;ratio&#39;: 51738.09873559417}
+{&#39;p&#39;: 62.54725351766171, &#39;ratio&#39;: 51743.54976862973}
+{&#39;p&#39;: 62.86612544364026, &#39;ratio&#39;: 51724.00942785143}
+{&#39;p&#39;: 64.62722761932628, &#39;ratio&#39;: 51721.290543021976}
+{&#39;p&#39;: 64.61918112931096, &#39;ratio&#39;: 51713.79269277243}
+{&#39;p&#39;: 64.61764975990712, &#39;ratio&#39;: 51734.91720383614}
+{&#39;p&#39;: 64.61342732714661, &#39;ratio&#39;: 51747.01360130776}
+{&#39;p&#39;: 61.48855196677863, &#39;ratio&#39;: 51832.74499490757}
+{&#39;p&#39;: 61.50671905302275, &#39;ratio&#39;: 51842.16058325566}
+{&#39;p&#39;: 61.83673622949906, &#39;ratio&#39;: 51920.26261404151}
+{&#39;p&#39;: 61.83649076691987, &#39;ratio&#39;: 51947.229663273014}
+{&#39;p&#39;: 59.99161681736461, &#39;ratio&#39;: 51471.468483406585}
+{&#39;p&#39;: 61.12215984331567, &#39;ratio&#39;: 51978.00632554761}
+{&#39;p&#39;: 59.99552046537652, &#39;ratio&#39;: 51543.1439721742}
+{&#39;p&#39;: 59.56370095463858, &#39;ratio&#39;: 52049.75643672388}
+{&#39;p&#39;: 59.01529144117191, &#39;ratio&#39;: 50766.865001135964}
+{&#39;p&#39;: 58.22634286471176, &#39;ratio&#39;: 50693.97294785308}
+{&#39;p&#39;: 57.50039264136899, &#39;ratio&#39;: 50747.25762411645}
+{&#39;p&#39;: 58.53437090575406, &#39;ratio&#39;: 50752.937278937745}
+{&#39;p&#39;: 57.509826238371396, &#39;ratio&#39;: 50794.81030959137}
+{&#39;p&#39;: 56.75294200576384, &#39;ratio&#39;: 50580.15593642184}
+{&#39;p&#39;: 57.066178356389464, &#39;ratio&#39;: 50648.349417926}
+{&#39;p&#39;: 58.30377031292833, &#39;ratio&#39;: 50850.4536760653}
+{&#39;p&#39;: 58.60709362931832, &#39;ratio&#39;: 50854.19915533807}
+{&#39;p&#39;: 60.14877471234319, &#39;ratio&#39;: 51865.967929067156}
+{&#39;p&#39;: 61.67987126837357, &#39;ratio&#39;: 52435.83447454576}
+{&#39;p&#39;: 63.03037954921832, &#39;ratio&#39;: 52594.18872379046}
+{&#39;p&#39;: 62.379091645224314, &#39;ratio&#39;: 52671.04963112241}
+{&#39;p&#39;: 62.39304855026581, &#39;ratio&#39;: 52707.28908123093}
+{&#39;p&#39;: 63.64924699134018, &#39;ratio&#39;: 52698.46099690121}
+{&#39;p&#39;: 64.31241565200112, &#39;ratio&#39;: 52771.008171573776}
+{&#39;p&#39;: 64.87174394296609, &#39;ratio&#39;: 52798.120576829264}
+{&#39;p&#39;: 63.6402542410897, &#39;ratio&#39;: 52877.55353111969}
+{&#39;p&#39;: 65.73367990858716, &#39;ratio&#39;: 53701.67676573615}
+{&#39;p&#39;: 64.86656482011527, &#39;ratio&#39;: 52917.880225832676}
+{&#39;p&#39;: 66.06856567492302, &#39;ratio&#39;: 53753.793077460454}
+{&#39;p&#39;: 66.07329886977095, &#39;ratio&#39;: 53761.739966315276}
+{&#39;p&#39;: 66.80473890772686, &#39;ratio&#39;: 53793.73427326592}
+{&#39;p&#39;: 66.05005399226285, &#39;ratio&#39;: 53818.88017887064}
+{&#39;p&#39;: 66.05513624795996, &#39;ratio&#39;: 53871.7348003601}
+{&#39;p&#39;: 65.24662167789992, &#39;ratio&#39;: 53865.52389722173}
+{&#39;p&#39;: 65.2465851975946, &#39;ratio&#39;: 53876.28487469326}
+{&#39;p&#39;: 63.550321700782156, &#39;ratio&#39;: 53155.10448818715}
+{&#39;p&#39;: 62.59102406192209, &#39;ratio&#39;: 53198.72550130959}
+{&#39;p&#39;: 63.569508648528725, &#39;ratio&#39;: 53198.06697812634}
+{&#39;p&#39;: 62.960592737060445, &#39;ratio&#39;: 53225.22804662199}
+{&#39;p&#39;: 62.962710931204136, &#39;ratio&#39;: 53217.958084872414}
+{&#39;p&#39;: 62.280151877171214, &#39;ratio&#39;: 53294.524407298115}
+{&#39;p&#39;: 62.9776510275249, &#39;ratio&#39;: 53303.7464315682}
+{&#39;p&#39;: 63.596334297370014, &#39;ratio&#39;: 53296.68420885387}
+{&#39;p&#39;: 61.88234634251166, &#39;ratio&#39;: 53371.186580398105}
+{&#39;p&#39;: 61.8873491173597, &#39;ratio&#39;: 53421.415899396954}
+{&#39;p&#39;: 61.534833895073845, &#39;ratio&#39;: 53443.46560267872}
+{&#39;p&#39;: 61.535811374041494, &#39;ratio&#39;: 53452.63173192662}
+{&#39;p&#39;: 62.29042439813748, &#39;ratio&#39;: 53466.50572799114}
+{&#39;p&#39;: 61.52692489447255, &#39;ratio&#39;: 53532.35221060248}
+{&#39;p&#39;: 61.53159262686984, &#39;ratio&#39;: 53539.3340781532}
+{&#39;p&#39;: 61.531423877236776, &#39;ratio&#39;: 53540.24079923559}
+{&#39;p&#39;: 62.319842798548784, &#39;ratio&#39;: 53546.11999318208}
+{&#39;p&#39;: 61.5296061446583, &#39;ratio&#39;: 53575.70837030014}
+{&#39;p&#39;: 61.91184531926934, &#39;ratio&#39;: 53546.43510752944}
+{&#39;p&#39;: 59.63591909054098, &#39;ratio&#39;: 52349.760041593305}
+{&#39;p&#39;: 60.48698722438915, &#39;ratio&#39;: 53226.483564792194}
+{&#39;p&#39;: 61.139454725988756, &#39;ratio&#39;: 53747.326823627}
+{&#39;p&#39;: 60.021090919097354, &#39;ratio&#39;: 52771.69788612223}
+{&#39;p&#39;: 60.02442444696067, &#39;ratio&#39;: 52776.84254319969}
+{&#39;p&#39;: 60.019330744730034, &#39;ratio&#39;: 52820.516590058}
+{&#39;p&#39;: 60.0159603235914, &#39;ratio&#39;: 52831.90967969635}
+{&#39;p&#39;: 60.0135981649696, &#39;ratio&#39;: 52820.94253933459}
+{&#39;p&#39;: 60.515443042586995, &#39;ratio&#39;: 53305.72465130231}
+{&#39;p&#39;: 60.02159302176848, &#39;ratio&#39;: 52845.485570788136}
+{&#39;p&#39;: 59.301461318946984, &#39;ratio&#39;: 52361.51164773182}
+{&#39;p&#39;: 58.99602773613908, &#39;ratio&#39;: 52407.64231867647}
+{&#39;p&#39;: 58.45600147163229, &#39;ratio&#39;: 52508.978284651734}
+{&#39;p&#39;: 58.191162356303415, &#39;ratio&#39;: 52530.29139287604}
+{&#39;p&#39;: 57.48093682430715, &#39;ratio&#39;: 52254.055460939664}
+{&#39;p&#39;: 58.813053196482095, &#39;ratio&#39;: 52591.91825487555}
+{&#39;p&#39;: 58.21658911849899, &#39;ratio&#39;: 52621.00750345504}
+{&#39;p&#39;: 58.5159320087617, &#39;ratio&#39;: 52632.39355827132}
+{&#39;p&#39;: 59.405696264016896, &#39;ratio&#39;: 52660.19529009721}
+{&#39;p&#39;: 59.40461282943026, &#39;ratio&#39;: 52688.854297671816}
+{&#39;p&#39;: 59.060822902481306, &#39;ratio&#39;: 52717.24166902097}
+{&#39;p&#39;: 59.072703712414835, &#39;ratio&#39;: 52747.924603827225}
+{&#39;p&#39;: 60.16524444085984, &#39;ratio&#39;: 53269.165086033594}
+{&#39;p&#39;: 60.67322885700189, &#39;ratio&#39;: 53791.9045095461}
+{&#39;p&#39;: 61.304744661251426, &#39;ratio&#39;: 54298.084239258}
+{&#39;p&#39;: 61.277721162514766, &#39;ratio&#39;: 54342.78369796698}
+{&#39;p&#39;: 61.27516053527822, &#39;ratio&#39;: 54320.999758180384}
+{&#39;p&#39;: 60.138060521720824, &#39;ratio&#39;: 53225.13371639355}
+{&#39;p&#39;: 62.129973392488715, &#39;ratio&#39;: 54354.65553293915}
+{&#39;p&#39;: 62.844975377600534, &#39;ratio&#39;: 54451.94957424983}
+{&#39;p&#39;: 61.698654340456216, &#39;ratio&#39;: 54440.11752955858}
+{&#39;p&#39;: 61.25371108479393, &#39;ratio&#39;: 54498.457996357305}
+{&#39;p&#39;: 62.88131004507296, &#39;ratio&#39;: 54437.97517866958}
+{&#39;p&#39;: 63.83645204762574, &#39;ratio&#39;: 54450.335792395854}
+{&#39;p&#39;: 63.205598377061875, &#39;ratio&#39;: 54465.008893196435}
+{&#39;p&#39;: 65.91745732772763, &#39;ratio&#39;: 55267.232458569575}
+{&#39;p&#39;: 65.01094854963286, &#39;ratio&#39;: 54523.88857999451}
+{&#39;p&#39;: 65.53348754631521, &#39;ratio&#39;: 55019.84705894777}
+{&#39;p&#39;: 65.48947557601797, &#39;ratio&#39;: 55109.81617162932}
+{&#39;p&#39;: 65.49127579059828, &#39;ratio&#39;: 55097.01314386685}
+{&#39;p&#39;: 66.27878203012807, &#39;ratio&#39;: 55411.4429210043}
+{&#39;p&#39;: 67.02761679174286, &#39;ratio&#39;: 55406.07300665291}
+{&#39;p&#39;: 65.46983171297347, &#39;ratio&#39;: 55158.54368491607}
+{&#39;p&#39;: 63.123649199604834, &#39;ratio&#39;: 54759.90378596203}
+{&#39;p&#39;: 63.1111875506262, &#39;ratio&#39;: 54765.157581715015}
+{&#39;p&#39;: 64.44731191495345, &#39;ratio&#39;: 54727.48856091715}
+{&#39;p&#39;: 63.76161078828602, &#39;ratio&#39;: 54759.43893604707}
+{&#39;p&#39;: 65.03383373029706, &#39;ratio&#39;: 54785.64431303743}
+{&#39;p&#39;: 65.91621906050719, &#39;ratio&#39;: 55629.50028875953}
+{&#39;p&#39;: 65.51650587703573, &#39;ratio&#39;: 55325.97097572914}
+{&#39;p&#39;: 65.911552294691, &#39;ratio&#39;: 55647.531092334844}
+{&#39;p&#39;: 66.28343754284899, &#39;ratio&#39;: 55735.067890593804}
+{&#39;p&#39;: 67.02494719798172, &#39;ratio&#39;: 55883.917513777116}
+{&#39;p&#39;: 65.86261902968874, &#39;ratio&#39;: 55755.36213392693}
+{&#39;p&#39;: 66.28363810534313, &#39;ratio&#39;: 55751.68738082299}
+{&#39;p&#39;: 67.03909390487723, &#39;ratio&#39;: 55769.68565765122}
+{&#39;p&#39;: 67.39602356812637, &#39;ratio&#39;: 55902.21851262753}
+{&#39;p&#39;: 67.40255122724581, &#39;ratio&#39;: 55902.879449627166}
+{&#39;p&#39;: 68.19537002363853, &#39;ratio&#39;: 56102.40016207482}
+{&#39;p&#39;: 67.60842603027243, &#39;ratio&#39;: 56074.58302574352}
+{&#39;p&#39;: 68.19529254963143, &#39;ratio&#39;: 56096.980152056334}
+{&#39;p&#39;: 68.19234539081138, &#39;ratio&#39;: 56100.90484258188}
+{&#39;p&#39;: 67.58009561271011, &#39;ratio&#39;: 56147.52619191544}
+{&#39;p&#39;: 67.36590596995453, &#39;ratio&#39;: 55955.17552317159}
+{&#39;p&#39;: 66.98018480622886, &#39;ratio&#39;: 55988.878858083095}
+{&#39;p&#39;: 68.2120217594092, &#39;ratio&#39;: 56106.815524021615}
+{&#39;p&#39;: 68.20418829017665, &#39;ratio&#39;: 56135.86936651061}
+{&#39;p&#39;: 66.19627287318315, &#39;ratio&#39;: 56048.71202271582}
+{&#39;p&#39;: 64.91927087438171, &#39;ratio&#39;: 55319.46605351643}
+{&#39;p&#39;: 65.52695678661985, &#39;ratio&#39;: 55295.57518587835}
+{&#39;p&#39;: 65.51211602496016, &#39;ratio&#39;: 55244.61549320641}
+{&#39;p&#39;: 67.6757800997088, &#39;ratio&#39;: 56127.58984800099}
+{&#39;p&#39;: 69.1760496968401, &#39;ratio&#39;: 58095.99490778484}
+{&#39;p&#39;: 69.37660979823892, &#39;ratio&#39;: 59748.74548917422}
+{&#39;p&#39;: 69.16383870536285, &#39;ratio&#39;: 58149.52953519967}
+{&#39;p&#39;: 67.26661929718608, &#39;ratio&#39;: 56712.45705166552}
+{&#39;p&#39;: 67.31608050764082, &#39;ratio&#39;: 56681.41237825413}
+{&#39;p&#39;: 68.22768852533844, &#39;ratio&#39;: 56727.10980221027}
+{&#39;p&#39;: 67.3481442291565, &#39;ratio&#39;: 56528.20203561292}
+{&#39;p&#39;: 67.35353384975376, &#39;ratio&#39;: 56541.12166642898}
+{&#39;p&#39;: 65.91881429474647, &#39;ratio&#39;: 55777.499967565716}
+{&#39;p&#39;: 65.91619537868192, &#39;ratio&#39;: 55782.511902765225}
+{&#39;p&#39;: 65.45890766610775, &#39;ratio&#39;: 55809.73656015591}
+{&#39;p&#39;: 65.94519534905616, &#39;ratio&#39;: 55848.94663831222}
+{&#39;p&#39;: 65.93652961998669, &#39;ratio&#39;: 55851.192861228425}
+{&#39;p&#39;: 66.23413768730472, &#39;ratio&#39;: 56705.91245138325}
+{&#39;p&#39;: 63.60721755319494, &#39;ratio&#39;: 55911.998688742635}
+{&#39;p&#39;: 61.93912806039283, &#39;ratio&#39;: 56022.632314756236}
+{&#39;p&#39;: 61.94181087660475, &#39;ratio&#39;: 56077.34307645533}
+{&#39;p&#39;: 61.58915076791587, &#39;ratio&#39;: 55970.75419364324}
+{&#39;p&#39;: 59.58852996076252, &#39;ratio&#39;: 54992.30312156707}
+{&#39;p&#39;: 61.67903301666803, &#39;ratio&#39;: 56230.66202761953}
+{&#39;p&#39;: 60.04771898021039, &#39;ratio&#39;: 55306.97065714888}
+{&#39;p&#39;: 58.91224413555024, &#39;ratio&#39;: 54919.394561548776}
+{&#39;p&#39;: 58.95536767456369, &#39;ratio&#39;: 54956.51210586327}
+{&#39;p&#39;: 56.93106053983616, &#39;ratio&#39;: 54257.65226744127}
+{&#39;p&#39;: 58.76158351614672, &#39;ratio&#39;: 54875.711844816}
+{&#39;p&#39;: 59.03120309176806, &#39;ratio&#39;: 55141.83538476677}
+{&#39;p&#39;: 59.047796265951966, &#39;ratio&#39;: 54424.74623647956}
+{&#39;p&#39;: 58.6665995171608, &#39;ratio&#39;: 50164.74992391483}
+{&#39;p&#39;: 58.62781922971114, &#39;ratio&#39;: 49480.78516483464}
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_3.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;p&#39;: 43.15632874404652, &#39;ratio&#39;: 378.39994423269803}
+{&#39;p&#39;: 43.487385435386486, &#39;ratio&#39;: 506.0865411924282}
+{&#39;p&#39;: 43.11196163595801, &#39;ratio&#39;: 534.0015347162612}
+{&#39;p&#39;: 43.227600848488734, &#39;ratio&#39;: 542.0372622770824}
+{&#39;p&#39;: 43.25125598221076, &#39;ratio&#39;: 550.359419113003}
+{&#39;p&#39;: 43.464143904021896, &#39;ratio&#39;: 659.0613498184924}
+{&#39;p&#39;: 43.72549549821362, &#39;ratio&#39;: 687.779467184282}
+{&#39;p&#39;: 43.38868415642085, &#39;ratio&#39;: 709.2322762195461}
+{&#39;p&#39;: 43.38868415642085, &#39;ratio&#39;: 709.2322762195461}
+{&#39;p&#39;: 43.879565159201604, &#39;ratio&#39;: 712.9455913426877}
+{&#39;p&#39;: 44.33415856705063, &#39;ratio&#39;: 861.7244626451152}
+{&#39;p&#39;: 44.28975586171213, &#39;ratio&#39;: 888.751601185196}
+{&#39;p&#39;: 44.42070220964202, &#39;ratio&#39;: 897.7794073997574}
+{&#39;p&#39;: 44.39369751480069, &#39;ratio&#39;: 900.944220044663}
+{&#39;p&#39;: 45.146944074231634, &#39;ratio&#39;: 944.3788406083869}
+{&#39;p&#39;: 45.106843775154246, &#39;ratio&#39;: 1003.2216343523072}
+{&#39;p&#39;: 45.19287200806854, &#39;ratio&#39;: 1040.6333773430745}
+{&#39;p&#39;: 45.19287200806854, &#39;ratio&#39;: 1040.6333773430745}
+{&#39;p&#39;: 45.0996025653725, &#39;ratio&#39;: 1053.8151946954747}
+{&#39;p&#39;: 45.121201825830134, &#39;ratio&#39;: 1056.9754889390842}
+{&#39;p&#39;: 44.95501994916293, &#39;ratio&#39;: 1129.8907530758877}
+{&#39;p&#39;: 45.00545402279604, &#39;ratio&#39;: 1151.712646345225}
+{&#39;p&#39;: 45.00545402279604, &#39;ratio&#39;: 1151.712646345225}
+{&#39;p&#39;: 44.563514714035136, &#39;ratio&#39;: 1204.5194228292644}
+{&#39;p&#39;: 44.57779165797879, &#39;ratio&#39;: 1194.707755934687}
+{&#39;p&#39;: 44.05333910375677, &#39;ratio&#39;: 1266.2433291726138}
+{&#39;p&#39;: 44.13241403107106, &#39;ratio&#39;: 1309.7664024346916}
+{&#39;p&#39;: 44.14964254700848, &#39;ratio&#39;: 1348.8526643000519}
+{&#39;p&#39;: 44.08193514504536, &#39;ratio&#39;: 1363.1910034569914}
+{&#39;p&#39;: 42.919063004702764, &#39;ratio&#39;: 1373.3644338710876}
+{&#39;p&#39;: 43.06205036193399, &#39;ratio&#39;: 1409.972457902758}
+{&#39;p&#39;: 43.06223353102804, &#39;ratio&#39;: 1410.0032757787521}
+{&#39;p&#39;: 43.26232263883571, &#39;ratio&#39;: 1439.7148910861645}
+{&#39;p&#39;: 43.23383280421752, &#39;ratio&#39;: 1434.0972790127125}
+{&#39;p&#39;: 43.846199298820046, &#39;ratio&#39;: 1479.7440943052559}
+{&#39;p&#39;: 43.21526398585376, &#39;ratio&#39;: 1517.3334231655635}
+{&#39;p&#39;: 43.262178169510754, &#39;ratio&#39;: 1521.9102204297078}
+{&#39;p&#39;: 43.251769142736734, &#39;ratio&#39;: 1567.369433499368}
+{&#39;p&#39;: 43.03455306578237, &#39;ratio&#39;: 1598.0711471266075}
+{&#39;p&#39;: 43.05285916691775, &#39;ratio&#39;: 1613.4673072634}
+{&#39;p&#39;: 43.06909614413673, &#39;ratio&#39;: 1616.410861645974}
+{&#39;p&#39;: 43.11148386099932, &#39;ratio&#39;: 1629.6185227864094}
+{&#39;p&#39;: 43.17654454398978, &#39;ratio&#39;: 1640.1997528064821}
+{&#39;p&#39;: 43.17654454398978, &#39;ratio&#39;: 1640.1997528064821}
+{&#39;p&#39;: 43.17654454398978, &#39;ratio&#39;: 1640.1997528064821}
+{&#39;p&#39;: 42.985263217269065, &#39;ratio&#39;: 1686.2465151289862}
+{&#39;p&#39;: 43.02724602372909, &#39;ratio&#39;: 1701.218682625827}
+{&#39;p&#39;: 43.0481340537564, &#39;ratio&#39;: 1704.8383019849823}
+{&#39;p&#39;: 43.08235928250709, &#39;ratio&#39;: 1705.347093152925}
+{&#39;p&#39;: 43.04010648750625, &#39;ratio&#39;: 1708.5311036354174}
+{&#39;p&#39;: 43.068804297107334, &#39;ratio&#39;: 1744.877913352167}
+{&#39;p&#39;: 43.31647142299454, &#39;ratio&#39;: 1788.6633312578988}
+{&#39;p&#39;: 43.414889669488204, &#39;ratio&#39;: 1836.7208641550808}
+{&#39;p&#39;: 43.43109767376349, &#39;ratio&#39;: 1841.7588260166526}
+{&#39;p&#39;: 42.93565045986867, &#39;ratio&#39;: 1895.4347957400933}
+{&#39;p&#39;: 42.996430360665364, &#39;ratio&#39;: 1902.3232241097312}
+{&#39;p&#39;: 43.81984435690534, &#39;ratio&#39;: 1912.4890691212545}
+{&#39;p&#39;: 43.56733354308882, &#39;ratio&#39;: 1973.961032172329}
+{&#39;p&#39;: 43.93049832924043, &#39;ratio&#39;: 2010.5968770909221}
+{&#39;p&#39;: 43.9207353649172, &#39;ratio&#39;: 2014.058515630808}
+{&#39;p&#39;: 43.89156034378728, &#39;ratio&#39;: 2000.9414611367179}
+{&#39;p&#39;: 43.84219269966749, &#39;ratio&#39;: 2016.6036330941934}
+{&#39;p&#39;: 43.78672227245565, &#39;ratio&#39;: 2017.3958604378854}
+{&#39;p&#39;: 43.83150175729668, &#39;ratio&#39;: 2023.2074636644115}
+{&#39;p&#39;: 43.79953515544806, &#39;ratio&#39;: 2037.3583632257819}
+{&#39;p&#39;: 43.813132962957084, &#39;ratio&#39;: 2057.495806538547}
+{&#39;p&#39;: 44.92126561735113, &#39;ratio&#39;: 2086.4155662218423}
+{&#39;p&#39;: 43.64308878555206, &#39;ratio&#39;: 2098.203514143929}
+{&#39;p&#39;: 43.1124412242651, &#39;ratio&#39;: 2101.3138893019104}
+{&#39;p&#39;: 43.255052197909144, &#39;ratio&#39;: 2115.3079696676823}
+{&#39;p&#39;: 43.286761774258096, &#39;ratio&#39;: 2129.8821648948033}
+{&#39;p&#39;: 43.84528286811491, &#39;ratio&#39;: 2151.2525091071293}
+{&#39;p&#39;: 43.84939726482019, &#39;ratio&#39;: 2166.2020597910932}
+{&#39;p&#39;: 43.9402873948763, &#39;ratio&#39;: 2193.231880993978}
+{&#39;p&#39;: 43.89968499532714, &#39;ratio&#39;: 2198.743982789383}
+{&#39;p&#39;: 43.922140560288476, &#39;ratio&#39;: 2198.742821165712}
+{&#39;p&#39;: 43.922140560288476, &#39;ratio&#39;: 2198.742821165712}
+{&#39;p&#39;: 43.95540972643915, &#39;ratio&#39;: 2208.213538956211}
+{&#39;p&#39;: 43.42726641758893, &#39;ratio&#39;: 2238.432621180581}
+{&#39;p&#39;: 43.40215904059366, &#39;ratio&#39;: 2238.005143669615}
+{&#39;p&#39;: 43.41402978880918, &#39;ratio&#39;: 2234.967497769682}
+{&#39;p&#39;: 43.55797094701766, &#39;ratio&#39;: 2222.0384426528362}
+{&#39;p&#39;: 43.520590712511556, &#39;ratio&#39;: 2229.0333618540217}
+{&#39;p&#39;: 43.520590712511556, &#39;ratio&#39;: 2229.0333618540217}
+{&#39;p&#39;: 45.38746536889751, &#39;ratio&#39;: 2253.671792304707}
+{&#39;p&#39;: 45.22947822227625, &#39;ratio&#39;: 2299.686393720745}
+{&#39;p&#39;: 45.21980007772777, &#39;ratio&#39;: 2309.6406907887003}
+{&#39;p&#39;: 45.15950774931115, &#39;ratio&#39;: 2304.1633874124373}
+{&#39;p&#39;: 46.58014722076917, &#39;ratio&#39;: 2354.0045918342084}
+{&#39;p&#39;: 46.53354340349578, &#39;ratio&#39;: 2377.1273133395416}
+{&#39;p&#39;: 46.53453322542045, &#39;ratio&#39;: 2370.0610656466706}
+{&#39;p&#39;: 46.54206990956455, &#39;ratio&#39;: 2373.24412901466}
+{&#39;p&#39;: 45.78521632841216, &#39;ratio&#39;: 2394.750498045136}
+{&#39;p&#39;: 45.77281878499593, &#39;ratio&#39;: 2397.933561413125}
+{&#39;p&#39;: 44.97716698470762, &#39;ratio&#39;: 2420.1760333065376}
+{&#39;p&#39;: 44.996007424505756, &#39;ratio&#39;: 2420.5301201696543}
+{&#39;p&#39;: 45.02583977268896, &#39;ratio&#39;: 2438.025445417542}
+{&#39;p&#39;: 43.71371819679305, &#39;ratio&#39;: 2528.1137621239186}
+{&#39;p&#39;: 43.58419737624041, &#39;ratio&#39;: 2573.4335485613883}
+{&#39;p&#39;: 42.93320911456136, &#39;ratio&#39;: 2582.7530402155026}
+{&#39;p&#39;: 43.72646748105912, &#39;ratio&#39;: 2647.3269174845336}
+{&#39;p&#39;: 43.81059188546425, &#39;ratio&#39;: 2681.864840271728}
+{&#39;p&#39;: 43.81166843726247, &#39;ratio&#39;: 2758.012474842319}
+{&#39;p&#39;: 43.7777080221724, &#39;ratio&#39;: 2774.9106000373804}
+{&#39;p&#39;: 45.41612774071059, &#39;ratio&#39;: 2806.6648860647792}
+{&#39;p&#39;: 45.437727923571536, &#39;ratio&#39;: 2815.947389183073}
+{&#39;p&#39;: 43.76272447718915, &#39;ratio&#39;: 2847.994772784514}
+{&#39;p&#39;: 43.77594344237726, &#39;ratio&#39;: 2859.0980180470633}
+{&#39;p&#39;: 43.739864101600276, &#39;ratio&#39;: 2871.3663990960094}
+{&#39;p&#39;: 43.71768525747556, &#39;ratio&#39;: 2881.149716659527}
+{&#39;p&#39;: 43.74620049075051, &#39;ratio&#39;: 2873.981378048198}
+{&#39;p&#39;: 43.730690917406285, &#39;ratio&#39;: 2880.32486636882}
+{&#39;p&#39;: 42.93143231906226, &#39;ratio&#39;: 2914.0162549199554}
+{&#39;p&#39;: 42.992733424345474, &#39;ratio&#39;: 2936.3458121190033}
+{&#39;p&#39;: 43.025781323320345, &#39;ratio&#39;: 2976.321717800804}
+{&#39;p&#39;: 43.052559070735875, &#39;ratio&#39;: 2992.606818099201}
+{&#39;p&#39;: 41.12523654888389, &#39;ratio&#39;: 3031.6467877002724}
+{&#39;p&#39;: 42.08961591048802, &#39;ratio&#39;: 3064.6963750250825}
+{&#39;p&#39;: 42.08956981411863, &#39;ratio&#39;: 3070.338529539742}
+{&#39;p&#39;: 42.11350301275648, &#39;ratio&#39;: 3082.8195288649986}
+{&#39;p&#39;: 42.124581942952105, &#39;ratio&#39;: 3086.148612700697}
+{&#39;p&#39;: 43.17204916537406, &#39;ratio&#39;: 3112.238510977317}
+{&#39;p&#39;: 43.09347966761045, &#39;ratio&#39;: 3160.8487811391115}
+{&#39;p&#39;: 45.76013523432978, &#39;ratio&#39;: 3179.4167276810467}
+{&#39;p&#39;: 45.69251919469651, &#39;ratio&#39;: 3196.9809653945176}
+{&#39;p&#39;: 45.635562427608065, &#39;ratio&#39;: 3204.6930023851514}
+{&#39;p&#39;: 46.43349705528273, &#39;ratio&#39;: 3235.846608442738}
+{&#39;p&#39;: 43.83019820170155, &#39;ratio&#39;: 3274.4011832631854}
+{&#39;p&#39;: 45.53730913436679, &#39;ratio&#39;: 3322.9702574240528}
+{&#39;p&#39;: 43.80505654054534, &#39;ratio&#39;: 3343.2831628049407}
+{&#39;p&#39;: 43.820431395220616, &#39;ratio&#39;: 3337.3242640579156}
+{&#39;p&#39;: 43.849777235278815, &#39;ratio&#39;: 3338.4823442944826}
+{&#39;p&#39;: 43.78192004006666, &#39;ratio&#39;: 3387.6796011423066}
+{&#39;p&#39;: 43.80890852690652, &#39;ratio&#39;: 3394.9375617985697}
+{&#39;p&#39;: 43.80103356153784, &#39;ratio&#39;: 3414.91965298374}
+{&#39;p&#39;: 43.86926642253249, &#39;ratio&#39;: 3402.001677931382}
+{&#39;p&#39;: 43.859327279630044, &#39;ratio&#39;: 3423.7693480480493}
+{&#39;p&#39;: 43.88667440405144, &#39;ratio&#39;: 3429.6671660919747}
+{&#39;p&#39;: 43.87672509656713, &#39;ratio&#39;: 3431.4448449693327}
+{&#39;p&#39;: 43.89951383503868, &#39;ratio&#39;: 3440.9802691960285}
+{&#39;p&#39;: 43.82073642156023, &#39;ratio&#39;: 3443.626518467674}
+{&#39;p&#39;: 43.87696446678181, &#39;ratio&#39;: 3458.647231273403}
+{&#39;p&#39;: 43.8689270035552, &#39;ratio&#39;: 3449.1928160080784}
+{&#39;p&#39;: 43.861938564750304, &#39;ratio&#39;: 3458.5089272251817}
+{&#39;p&#39;: 43.87643333844296, &#39;ratio&#39;: 3476.6885692887126}
+{&#39;p&#39;: 43.908909445673295, &#39;ratio&#39;: 3485.278545536121}
+{&#39;p&#39;: 43.864943496540675, &#39;ratio&#39;: 3483.283326812464}
+{&#39;p&#39;: 43.85127787737498, &#39;ratio&#39;: 3531.1430256903504}
+{&#39;p&#39;: 43.8439999707434, &#39;ratio&#39;: 3522.061160233303}
+{&#39;p&#39;: 43.8623050842678, &#39;ratio&#39;: 3537.203549950881}
+{&#39;p&#39;: 45.62776407586066, &#39;ratio&#39;: 3597.151752611265}
+{&#39;p&#39;: 45.63135549069727, &#39;ratio&#39;: 3597.726144057321}
+{&#39;p&#39;: 45.62792583325108, &#39;ratio&#39;: 3588.206717285658}
+{&#39;p&#39;: 45.61565899764607, &#39;ratio&#39;: 3597.4082652155403}
+{&#39;p&#39;: 45.628348031129214, &#39;ratio&#39;: 3609.869240028932}
+{&#39;p&#39;: 45.63104946907322, &#39;ratio&#39;: 3603.8309723957573}
+{&#39;p&#39;: 45.58123323496645, &#39;ratio&#39;: 3620.4869907620177}
+{&#39;p&#39;: 43.86065799984104, &#39;ratio&#39;: 3634.522773062842}
+{&#39;p&#39;: 43.87268157558772, &#39;ratio&#39;: 3641.8261076100102}
+{&#39;p&#39;: 43.87232457811635, &#39;ratio&#39;: 3641.7456632646995}
+{&#39;p&#39;: 43.89919355983769, &#39;ratio&#39;: 3664.8767045221093}
+{&#39;p&#39;: 43.866737860307126, &#39;ratio&#39;: 3649.7052021250183}
+{&#39;p&#39;: 43.906726844310256, &#39;ratio&#39;: 3668.3916061918026}
+{&#39;p&#39;: 43.85035496318769, &#39;ratio&#39;: 3672.474936424229}
+{&#39;p&#39;: 43.82929097907901, &#39;ratio&#39;: 3675.4706816926923}
+{&#39;p&#39;: 43.83489635139543, &#39;ratio&#39;: 3689.2894995178685}
+{&#39;p&#39;: 43.7848780959254, &#39;ratio&#39;: 3720.836292638457}
+{&#39;p&#39;: 43.7903060490948, &#39;ratio&#39;: 3742.278636089783}
+{&#39;p&#39;: 43.81310122987542, &#39;ratio&#39;: 3736.7065496215755}
+{&#39;p&#39;: 42.70520206775769, &#39;ratio&#39;: 3739.9233732658467}
+{&#39;p&#39;: 42.769454493312075, &#39;ratio&#39;: 3778.6768308670516}
+{&#39;p&#39;: 42.745891381143515, &#39;ratio&#39;: 3801.01556952983}
+{&#39;p&#39;: 42.745536600895335, &#39;ratio&#39;: 3800.9549674060563}
+{&#39;p&#39;: 42.745536600895335, &#39;ratio&#39;: 3800.9549674060563}
+{&#39;p&#39;: 42.74902796299615, &#39;ratio&#39;: 3803.2110064856615}
+{&#39;p&#39;: 41.780501969575475, &#39;ratio&#39;: 3966.0521818288444}
+{&#39;p&#39;: 41.79191294887608, &#39;ratio&#39;: 3981.5078490306623}
+{&#39;p&#39;: 41.76946292344931, &#39;ratio&#39;: 3966.372427530846}
+{&#39;p&#39;: 42.87741140217224, &#39;ratio&#39;: 3831.6905107613643}
+{&#39;p&#39;: 42.83161079613897, &#39;ratio&#39;: 3860.701156086333}
+{&#39;p&#39;: 42.79955464994628, &#39;ratio&#39;: 3868.0143746409285}
+{&#39;p&#39;: 42.81898910258329, &#39;ratio&#39;: 3840.814561910631}
+{&#39;p&#39;: 41.754647704878074, &#39;ratio&#39;: 4002.216277355101}
+{&#39;p&#39;: 41.741906769229686, &#39;ratio&#39;: 4018.0582456758702}
+{&#39;p&#39;: 41.720899724445864, &#39;ratio&#39;: 4014.4418207355993}
+{&#39;p&#39;: 41.709261985551656, &#39;ratio&#39;: 4014.78997040061}
+{&#39;p&#39;: 41.72247622584178, &#39;ratio&#39;: 4004.9647232802818}
+{&#39;p&#39;: 42.85720963138369, &#39;ratio&#39;: 3851.1733391200178}
+{&#39;p&#39;: 42.82461599007969, &#39;ratio&#39;: 3865.05679230969}
+{&#39;p&#39;: 41.698112475036034, &#39;ratio&#39;: 4036.9487394483945}
+{&#39;p&#39;: 41.70817178912428, &#39;ratio&#39;: 4046.4568493569295}
+{&#39;p&#39;: 42.873650733072154, &#39;ratio&#39;: 3907.23210903779}
+{&#39;p&#39;: 42.85711794978846, &#39;ratio&#39;: 3916.5903836313364}
+{&#39;p&#39;: 42.84875712778501, &#39;ratio&#39;: 3907.3480757992193}
+{&#39;p&#39;: 41.692554813513354, &#39;ratio&#39;: 4073.4445693963944}
+{&#39;p&#39;: 41.644839649104505, &#39;ratio&#39;: 4087.624052754175}
+{&#39;p&#39;: 41.64704229251013, &#39;ratio&#39;: 4085.2389345334004}
+{&#39;p&#39;: 40.73649128160143, &#39;ratio&#39;: 4104.225637316348}
+{&#39;p&#39;: 40.7463009181481, &#39;ratio&#39;: 4128.365725824105}
+{&#39;p&#39;: 40.737590504689685, &#39;ratio&#39;: 4125.041653768807}
+{&#39;p&#39;: 40.72568216886256, &#39;ratio&#39;: 4134.627754582098}
+{&#39;p&#39;: 40.73927554195001, &#39;ratio&#39;: 4134.93959435689}
+{&#39;p&#39;: 40.74572050742087, &#39;ratio&#39;: 4137.800860519259}
+{&#39;p&#39;: 40.74572050742087, &#39;ratio&#39;: 4137.800860519259}
+{&#39;p&#39;: 40.7412557327254, &#39;ratio&#39;: 4154.236569046659}
+{&#39;p&#39;: 40.04573936081231, &#39;ratio&#39;: 4182.234718017237}
+{&#39;p&#39;: 40.14418348827934, &#39;ratio&#39;: 4225.743510017749}
+{&#39;p&#39;: 40.135464748693515, &#39;ratio&#39;: 4211.867748863805}
+{&#39;p&#39;: 40.13895630058615, &#39;ratio&#39;: 4217.87079688443}
+{&#39;p&#39;: 40.03599808915968, &#39;ratio&#39;: 4246.024262952389}
+{&#39;p&#39;: 40.051396964211484, &#39;ratio&#39;: 4252.167672458999}
+{&#39;p&#39;: 40.051568493127085, &#39;ratio&#39;: 4252.205425422239}
+{&#39;p&#39;: 40.05923764779172, &#39;ratio&#39;: 4255.271423648994}
+{&#39;p&#39;: 40.173172394289416, &#39;ratio&#39;: 4288.681956696619}
+{&#39;p&#39;: 40.176109288257145, &#39;ratio&#39;: 4294.662145986109}
+{&#39;p&#39;: 40.15659076125445, &#39;ratio&#39;: 4286.14166631318}
+{&#39;p&#39;: 40.156975398087766, &#39;ratio&#39;: 4286.224011274142}
+{&#39;p&#39;: 40.22327628526091, &#39;ratio&#39;: 4428.4190398471055}
+{&#39;p&#39;: 40.24825629816117, &#39;ratio&#39;: 4453.9452716589885}
+{&#39;p&#39;: 40.24825629816117, &#39;ratio&#39;: 4453.9452716589885}
+{&#39;p&#39;: 40.2373649314076, &#39;ratio&#39;: 4477.111042081007}
+{&#39;p&#39;: 40.23666932902537, &#39;ratio&#39;: 4476.799364851959}
+{&#39;p&#39;: 40.24337498183785, &#39;ratio&#39;: 4460.869201289369}
+{&#39;p&#39;: 40.26406612910144, &#39;ratio&#39;: 4475.716181700292}
+{&#39;p&#39;: 40.05640137358424, &#39;ratio&#39;: 4578.796645910517}
+{&#39;p&#39;: 40.07535663147696, &#39;ratio&#39;: 4625.307863730752}
+{&#39;p&#39;: 40.144800918975854, &#39;ratio&#39;: 4659.356813440131}
+{&#39;p&#39;: 39.3694366038833, &#39;ratio&#39;: 4661.312085369313}
+{&#39;p&#39;: 39.40202876934088, &#39;ratio&#39;: 4676.488948558794}
+{&#39;p&#39;: 39.428943060286734, &#39;ratio&#39;: 4689.0428807651515}
+{&#39;p&#39;: 39.43904897149772, &#39;ratio&#39;: 4699.031937168693}
+{&#39;p&#39;: 39.37067316356045, &#39;ratio&#39;: 4724.713085271112}
+{&#39;p&#39;: 39.386906757662196, &#39;ratio&#39;: 4727.6015189401205}
+{&#39;p&#39;: 39.390166015116456, &#39;ratio&#39;: 4733.9361564708115}
+{&#39;p&#39;: 39.39399458622405, &#39;ratio&#39;: 4717.187391620937}
+{&#39;p&#39;: 38.621608144505856, &#39;ratio&#39;: 4617.802124821714}
+{&#39;p&#39;: 38.646563751956315, &#39;ratio&#39;: 4637.537932657709}
+{&#39;p&#39;: 38.651051358994515, &#39;ratio&#39;: 4643.8765658504235}
+{&#39;p&#39;: 38.6464953411148, &#39;ratio&#39;: 4637.6402749658755}
+{&#39;p&#39;: 38.63965333830142, &#39;ratio&#39;: 4634.714720031852}
+{&#39;p&#39;: 38.593155514237026, &#39;ratio&#39;: 4601.875235771973}
+{&#39;p&#39;: 38.59718040102554, &#39;ratio&#39;: 4644.400832165997}
+{&#39;p&#39;: 38.59423181278193, &#39;ratio&#39;: 4647.562945216263}
+{&#39;p&#39;: 38.637521753865286, &#39;ratio&#39;: 4660.998830495404}
+{&#39;p&#39;: 38.64803029131596, &#39;ratio&#39;: 4657.010176277536}
+{&#39;p&#39;: 38.66005459099035, &#39;ratio&#39;: 4644.651208512475}
+{&#39;p&#39;: 38.64874984745669, &#39;ratio&#39;: 4644.535125019926}
+{&#39;p&#39;: 38.65916803795177, &#39;ratio&#39;: 4644.457208981924}
+{&#39;p&#39;: 38.66555317447593, &#39;ratio&#39;: 4673.129348134651}
+{&#39;p&#39;: 38.67123673929421, &#39;ratio&#39;: 4649.933003080594}
+{&#39;p&#39;: 38.683060229617396, &#39;ratio&#39;: 4688.740227742718}
+{&#39;p&#39;: 38.669765527143, &#39;ratio&#39;: 4691.9674196084}
+{&#39;p&#39;: 38.689382819883036, &#39;ratio&#39;: 4695.708750200596}
+{&#39;p&#39;: 39.45849200512836, &#39;ratio&#39;: 4670.937810983164}
+{&#39;p&#39;: 40.00374893726441, &#39;ratio&#39;: 4708.392276119344}
+{&#39;p&#39;: 39.99600759588537, &#39;ratio&#39;: 4708.966114927739}
+{&#39;p&#39;: 40.00898218365448, &#39;ratio&#39;: 4715.125456466525}
+{&#39;p&#39;: 40.0070266039786, &#39;ratio&#39;: 4718.650344505148}
+{&#39;p&#39;: 40.01004721867758, &#39;ratio&#39;: 4724.971498422352}
+{&#39;p&#39;: 40.00969079183672, &#39;ratio&#39;: 4724.704099445833}
+{&#39;p&#39;: 40.01673836701087, &#39;ratio&#39;: 4728.076985182537}
+{&#39;p&#39;: 40.02344133107243, &#39;ratio&#39;: 4731.2179950677455}
+{&#39;p&#39;: 40.01397503219394, &#39;ratio&#39;: 4746.872544877158}
+{&#39;p&#39;: 40.01866739011006, &#39;ratio&#39;: 4749.075297106265}
+{&#39;p&#39;: 40.03328895837994, &#39;ratio&#39;: 4735.410648209932}
+{&#39;p&#39;: 40.01386267816046, &#39;ratio&#39;: 4770.202579125247}
+{&#39;p&#39;: 39.99215100927499, &#39;ratio&#39;: 4764.877580973784}
+{&#39;p&#39;: 39.43584051186645, &#39;ratio&#39;: 4745.599004895692}
+{&#39;p&#39;: 39.45751453159595, &#39;ratio&#39;: 4751.153533262552}
+{&#39;p&#39;: 39.42304929561954, &#39;ratio&#39;: 4730.362444125469}
+{&#39;p&#39;: 39.43675977460512, &#39;ratio&#39;: 4745.859304072625}
+{&#39;p&#39;: 39.44050326894733, &#39;ratio&#39;: 4734.645621320848}
+{&#39;p&#39;: 39.424870154046545, &#39;ratio&#39;: 4741.348884071225}
+{&#39;p&#39;: 39.44556950312356, &#39;ratio&#39;: 4732.629030533624}
+{&#39;p&#39;: 39.451679016008654, &#39;ratio&#39;: 4735.408765170652}
+{&#39;p&#39;: 39.4294895052083, &#39;ratio&#39;: 4747.513854943631}
+{&#39;p&#39;: 39.446805441826136, &#39;ratio&#39;: 4755.966460701169}
+{&#39;p&#39;: 39.46296279251946, &#39;ratio&#39;: 4758.762742664481}
+{&#39;p&#39;: 39.47963911608185, &#39;ratio&#39;: 4771.2345105462655}
+{&#39;p&#39;: 39.48313161133988, &#39;ratio&#39;: 4768.104052243587}
+{&#39;p&#39;: 39.476814573327694, &#39;ratio&#39;: 4765.132768423694}
+{&#39;p&#39;: 39.476814573327694, &#39;ratio&#39;: 4765.132768423694}
+{&#39;p&#39;: 39.43731818562276, &#39;ratio&#39;: 4742.967284512758}
+{&#39;p&#39;: 38.71435243221011, &#39;ratio&#39;: 4762.757589342347}
+{&#39;p&#39;: 38.723343558656744, &#39;ratio&#39;: 4793.374469760861}
+{&#39;p&#39;: 39.51575754549164, &#39;ratio&#39;: 4821.017562932187}
+{&#39;p&#39;: 39.50457694073202, &#39;ratio&#39;: 4796.597839251432}
+{&#39;p&#39;: 39.52597292914825, &#39;ratio&#39;: 4820.988980367927}
+{&#39;p&#39;: 39.54567160964406, &#39;ratio&#39;: 4801.454281030366}
+{&#39;p&#39;: 39.53355027120225, &#39;ratio&#39;: 4829.7238731275775}
+{&#39;p&#39;: 39.534719685723076, &#39;ratio&#39;: 4863.923059243483}
+{&#39;p&#39;: 39.54305791902574, &#39;ratio&#39;: 4848.558780895888}
+{&#39;p&#39;: 39.55791251952256, &#39;ratio&#39;: 4850.685338474741}
+{&#39;p&#39;: 39.561342755844535, &#39;ratio&#39;: 4842.173363980747}
+{&#39;p&#39;: 39.54293546376594, &#39;ratio&#39;: 4833.265672972453}
+{&#39;p&#39;: 40.218230921938925, &#39;ratio&#39;: 4860.292739181013}
+{&#39;p&#39;: 40.23509846867503, &#39;ratio&#39;: 4878.871904576248}
+{&#39;p&#39;: 40.74158495870349, &#39;ratio&#39;: 4928.701718970211}
+{&#39;p&#39;: 40.71021411882092, &#39;ratio&#39;: 4936.834436453568}
+{&#39;p&#39;: 40.7296187314761, &#39;ratio&#39;: 4952.445390212239}
+{&#39;p&#39;: 40.73458345555628, &#39;ratio&#39;: 4965.347128648191}
+{&#39;p&#39;: 40.725043495267194, &#39;ratio&#39;: 4965.3981494100535}
+{&#39;p&#39;: 40.73111566824116, &#39;ratio&#39;: 4968.574511922154}
+{&#39;p&#39;: 40.49300679414139, &#39;ratio&#39;: 4947.27084878104}
+{&#39;p&#39;: 40.52642400203862, &#39;ratio&#39;: 4975.181586060162}
+{&#39;p&#39;: 40.53138040850646, &#39;ratio&#39;: 4982.500961504915}
+{&#39;p&#39;: 40.54692541985796, &#39;ratio&#39;: 4976.029965464959}
+{&#39;p&#39;: 40.55096956347314, &#39;ratio&#39;: 4963.005983085073}
+{&#39;p&#39;: 40.545348681822844, &#39;ratio&#39;: 4985.185583276281}
+{&#39;p&#39;: 40.51604986898787, &#39;ratio&#39;: 4989.406103694807}
+{&#39;p&#39;: 40.53382477087278, &#39;ratio&#39;: 4988.857340979648}
+{&#39;p&#39;: 40.51826270075084, &#39;ratio&#39;: 4995.727257612012}
+{&#39;p&#39;: 40.508855369941514, &#39;ratio&#39;: 4995.869285773189}
+{&#39;p&#39;: 40.47677428096057, &#39;ratio&#39;: 4984.204919839417}
+{&#39;p&#39;: 40.18885630613246, &#39;ratio&#39;: 4993.680740059688}
+{&#39;p&#39;: 40.16768051514653, &#39;ratio&#39;: 4969.798014079574}
+{&#39;p&#39;: 40.17667457595111, &#39;ratio&#39;: 4994.617427202806}
+{&#39;p&#39;: 39.516677921820026, &#39;ratio&#39;: 4985.626553211847}
+{&#39;p&#39;: 39.507145033971156, &#39;ratio&#39;: 4985.755826182558}
+{&#39;p&#39;: 39.495624439278686, &#39;ratio&#39;: 5009.018192617175}
+{&#39;p&#39;: 38.681104316077686, &#39;ratio&#39;: 4987.9166937761365}
+{&#39;p&#39;: 39.51954224161023, &#39;ratio&#39;: 4998.021899487843}
+{&#39;p&#39;: 39.51885840532743, &#39;ratio&#39;: 5007.281797817233}
+{&#39;p&#39;: 39.511863841694165, &#39;ratio&#39;: 5013.482911398441}
+{&#39;p&#39;: 39.50305701464655, &#39;ratio&#39;: 4995.104977228124}
+{&#39;p&#39;: 38.703638081118044, &#39;ratio&#39;: 5006.567364157904}
+{&#39;p&#39;: 38.68646159104859, &#39;ratio&#39;: 5034.746817431194}
+{&#39;p&#39;: 38.68496596392455, &#39;ratio&#39;: 5034.394610110097}
+{&#39;p&#39;: 38.688445871343596, &#39;ratio&#39;: 5040.469088616226}
+{&#39;p&#39;: 38.69002471703262, &#39;ratio&#39;: 5040.884957688073}
+{&#39;p&#39;: 38.67269287139904, &#39;ratio&#39;: 5032.460500207098}
+{&#39;p&#39;: 38.70060173651756, &#39;ratio&#39;: 5031.9057169777}
+{&#39;p&#39;: 38.68288318786562, &#39;ratio&#39;: 5028.623997879131}
+{&#39;p&#39;: 38.69149222972271, &#39;ratio&#39;: 5037.333198017865}
+{&#39;p&#39;: 37.67068306202504, &#39;ratio&#39;: 5027.289799648448}
+{&#39;p&#39;: 37.67068306202504, &#39;ratio&#39;: 5027.289799648448}
+{&#39;p&#39;: 38.69070430682305, &#39;ratio&#39;: 5016.158037710615}
+{&#39;p&#39;: 38.691687125318936, &#39;ratio&#39;: 5043.539362204125}
+{&#39;p&#39;: 38.66738626290665, &#39;ratio&#39;: 5059.091906680452}
+{&#39;p&#39;: 38.69588033305315, &#39;ratio&#39;: 5040.766821301501}
+{&#39;p&#39;: 39.59811602392922, &#39;ratio&#39;: 5057.269877424227}
+{&#39;p&#39;: 39.598610246122306, &#39;ratio&#39;: 5057.4070640818345}
+{&#39;p&#39;: 39.60593774868252, &#39;ratio&#39;: 5060.754296283514}
+{&#39;p&#39;: 39.620843734217615, &#39;ratio&#39;: 5063.47715145682}
+{&#39;p&#39;: 39.61232948620195, &#39;ratio&#39;: 5063.9962309296825}
+{&#39;p&#39;: 39.62881497144122, &#39;ratio&#39;: 5110.428422077262}
+{&#39;p&#39;: 38.68831899158611, &#39;ratio&#39;: 5086.001919326427}
+{&#39;p&#39;: 38.69085170586859, &#39;ratio&#39;: 5096.378282050845}
+{&#39;p&#39;: 38.700318577376486, &#39;ratio&#39;: 5096.291264468675}
+{&#39;p&#39;: 38.69737940300274, &#39;ratio&#39;: 5099.393140207096}
+{&#39;p&#39;: 38.70212609552265, &#39;ratio&#39;: 5105.7894411761245}
+{&#39;p&#39;: 38.70198632027405, &#39;ratio&#39;: 5100.277753038569}
+{&#39;p&#39;: 38.82242967556637, &#39;ratio&#39;: 5161.644821202263}
+{&#39;p&#39;: 38.80848942285513, &#39;ratio&#39;: 5155.240674109083}
+{&#39;p&#39;: 38.82623825035412, &#39;ratio&#39;: 5159.050586267053}
+{&#39;p&#39;: 38.82853249341437, &#39;ratio&#39;: 5155.467866442227}
+{&#39;p&#39;: 38.83111310169506, &#39;ratio&#39;: 5152.264415158306}
+{&#39;p&#39;: 38.84430311585575, &#39;ratio&#39;: 5158.444984923581}
+{&#39;p&#39;: 38.829203967369, &#39;ratio&#39;: 5164.729369118501}
+{&#39;p&#39;: 38.836924113946026, &#39;ratio&#39;: 5155.101913413648}
+{&#39;p&#39;: 39.76541881184616, &#39;ratio&#39;: 5155.9795816236865}
+{&#39;p&#39;: 39.75563359180442, &#39;ratio&#39;: 5170.796885174034}
+{&#39;p&#39;: 39.778331724101896, &#39;ratio&#39;: 5192.279063315495}
+{&#39;p&#39;: 39.767704890181406, &#39;ratio&#39;: 5199.5154705835575}
+{&#39;p&#39;: 39.768522350685984, &#39;ratio&#39;: 5199.813027294587}
+{&#39;p&#39;: 39.74973643377067, &#39;ratio&#39;: 5180.900198752376}
+{&#39;p&#39;: 38.81630280135377, &#39;ratio&#39;: 5170.536573255888}
+{&#39;p&#39;: 37.80405379675426, &#39;ratio&#39;: 5188.143220427604}
+{&#39;p&#39;: 37.83474239545922, &#39;ratio&#39;: 5202.271253046592}
+{&#39;p&#39;: 37.81854789995409, &#39;ratio&#39;: 5186.6846605951}
+{&#39;p&#39;: 37.76800420504856, &#39;ratio&#39;: 5110.892764914437}
+{&#39;p&#39;: 37.76521862607596, &#39;ratio&#39;: 5113.896699862222}
+{&#39;p&#39;: 37.78123301842958, &#39;ratio&#39;: 5120.389460389459}
+{&#39;p&#39;: 37.531550424608966, &#39;ratio&#39;: 5254.644757204011}
+{&#39;p&#39;: 37.870154444427044, &#39;ratio&#39;: 5285.521829642161}
+{&#39;p&#39;: 37.89494057459425, &#39;ratio&#39;: 5294.149717993322}
+{&#39;p&#39;: 37.90731638602619, &#39;ratio&#39;: 5299.872765533183}
+{&#39;p&#39;: 37.92028690681018, &#39;ratio&#39;: 5306.477434402692}
+{&#39;p&#39;: 37.913924917883065, &#39;ratio&#39;: 5301.351019858883}
+{&#39;p&#39;: 37.913924917883065, &#39;ratio&#39;: 5301.351019858883}
+{&#39;p&#39;: 37.93861654342562, &#39;ratio&#39;: 5304.026949470632}
+{&#39;p&#39;: 37.917999694429064, &#39;ratio&#39;: 5298.688985109585}
+{&#39;p&#39;: 37.92879264555982, &#39;ratio&#39;: 5307.688635082139}
+{&#39;p&#39;: 37.92798327535951, &#39;ratio&#39;: 5307.407785613121}
+{&#39;p&#39;: 37.92345229992522, &#39;ratio&#39;: 5301.325494832758}
+{&#39;p&#39;: 37.38631560610932, &#39;ratio&#39;: 5349.094573711112}
+{&#39;p&#39;: 37.30888106584557, &#39;ratio&#39;: 5388.920841107125}
+{&#39;p&#39;: 37.554051562541844, &#39;ratio&#39;: 5398.346373157542}
+{&#39;p&#39;: 37.53700058781151, &#39;ratio&#39;: 5368.303290910901}
+{&#39;p&#39;: 37.462108229732195, &#39;ratio&#39;: 5439.53357756751}
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_5.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;p&#39;: 252.5436128968487, &#39;ratio&#39;: 58021.15028585776}
+{&#39;p&#39;: 254.16444499636836, &#39;ratio&#39;: 59384.69434458754}
+{&#39;p&#39;: 257.55336084878803, &#39;ratio&#39;: 50089.12335190935}
+{&#39;p&#39;: 250.40062235107646, &#39;ratio&#39;: 61496.951664261396}
+{&#39;p&#39;: 249.3718995907984, &#39;ratio&#39;: 46780.68373934562}
+{&#39;p&#39;: 239.7277097103158, &#39;ratio&#39;: 24469.117740205216}
+{&#39;p&#39;: 234.89155318172322, &#39;ratio&#39;: 22290.135592013336}
+{&#39;p&#39;: 219.66301321273897, &#39;ratio&#39;: 11230.567612592085}
+{&#39;p&#39;: 211.12282762238902, &#39;ratio&#39;: 10114.743569498696}
+{&#39;p&#39;: 213.6003773166296, &#39;ratio&#39;: 10198.634809978452}
+{&#39;p&#39;: 211.69085069436034, &#39;ratio&#39;: 10193.157687498468}
+{&#39;p&#39;: 215.41001916426143, &#39;ratio&#39;: 10426.115311421205}
+{&#39;p&#39;: 216.8958925909878, &#39;ratio&#39;: 10822.079012092936}
+{&#39;p&#39;: 216.32313984822778, &#39;ratio&#39;: 10797.109439576643}
+{&#39;p&#39;: 241.50827918318902, &#39;ratio&#39;: 27290.757203179575}
+{&#39;p&#39;: 235.67371298169368, &#39;ratio&#39;: 22582.019483967866}
+{&#39;p&#39;: 235.76072611186362, &#39;ratio&#39;: 22590.856527392305}
+{&#39;p&#39;: 231.3100936485167, &#39;ratio&#39;: 18765.7289411104}
+{&#39;p&#39;: 226.10450159547793, &#39;ratio&#39;: 14119.64263808174}
+{&#39;p&#39;: 218.32837210028313, &#39;ratio&#39;: 11191.02943332036}
+{&#39;p&#39;: 232.44876378659526, &#39;ratio&#39;: 21162.886987981612}
+{&#39;p&#39;: 234.7974669962179, &#39;ratio&#39;: 22255.561299918467}
+{&#39;p&#39;: 232.58000149298962, &#39;ratio&#39;: 20738.776837643312}
+{&#39;p&#39;: 243.91260656036388, &#39;ratio&#39;: 45277.27540234003}
+{&#39;p&#39;: 241.06471050479084, &#39;ratio&#39;: 36745.04278374576}
+{&#39;p&#39;: 245.02244694038663, &#39;ratio&#39;: 56279.03304293002}
+{&#39;p&#39;: 240.9117069759797, &#39;ratio&#39;: 37299.5823756253}
+{&#39;p&#39;: 243.58654088601924, &#39;ratio&#39;: 46968.244871517265}
+{&#39;p&#39;: 239.9854335399324, &#39;ratio&#39;: 33709.95626795473}
+{&#39;p&#39;: 235.94561080222476, &#39;ratio&#39;: 23449.777585641437}
+{&#39;p&#39;: 241.21521598922806, &#39;ratio&#39;: 38065.89965806605}
+{&#39;p&#39;: 240.2398590225242, &#39;ratio&#39;: 36140.03829753708}
+{&#39;p&#39;: 225.42409148819704, &#39;ratio&#39;: 15550.972333226078}
+{&#39;p&#39;: 241.4329281806601, &#39;ratio&#39;: 39925.1375194635}
+{&#39;p&#39;: 241.3946183732463, &#39;ratio&#39;: 39505.25360616541}
+{&#39;p&#39;: 236.88451573962357, &#39;ratio&#39;: 26734.299767755518}
+{&#39;p&#39;: 243.7640318550018, &#39;ratio&#39;: 53886.194523289334}
+{&#39;p&#39;: 247.39508720867016, &#39;ratio&#39;: 92628.13193972669}
+{&#39;p&#39;: 242.72408757663928, &#39;ratio&#39;: 50708.96760577848}
+{&#39;p&#39;: 241.45380168348902, &#39;ratio&#39;: 41148.202657237736}
+{&#39;p&#39;: 240.62340398101813, &#39;ratio&#39;: 38918.89699258026}
+{&#39;p&#39;: 245.0628124920722, &#39;ratio&#39;: 65072.927900772105}
+{&#39;p&#39;: 246.60778275522352, &#39;ratio&#39;: 89423.70676201777}
+{&#39;p&#39;: 246.97112785747848, &#39;ratio&#39;: 106511.48973582948}
+{&#39;p&#39;: 246.91622525620141, &#39;ratio&#39;: 107569.40779134665}
+{&#39;p&#39;: 246.86880304478288, &#39;ratio&#39;: 103288.70561346704}
+{&#39;p&#39;: 249.05758037607825, &#39;ratio&#39;: 117528.99603381271}
+{&#39;p&#39;: 250.4340619527225, &#39;ratio&#39;: 113677.31507205228}
+{&#39;p&#39;: 250.326758655729, &#39;ratio&#39;: 115375.78665224428}
+{&#39;p&#39;: 250.29940200631083, &#39;ratio&#39;: 116565.96057560663}
+{&#39;p&#39;: 250.24217489969183, &#39;ratio&#39;: 115578.45123149024}
+{&#39;p&#39;: 250.21728268667695, &#39;ratio&#39;: 116436.21584709774}
+{&#39;p&#39;: 250.34287145786047, &#39;ratio&#39;: 119060.35140897865}
+{&#39;p&#39;: 248.85922949141113, &#39;ratio&#39;: 123042.67578321898}
+{&#39;p&#39;: 247.62709576031887, &#39;ratio&#39;: 132496.31845734964}
+{&#39;p&#39;: 249.22194294990948, &#39;ratio&#39;: 120902.39425322166}
+{&#39;p&#39;: 250.00636962761047, &#39;ratio&#39;: 115616.54106013227}
+{&#39;p&#39;: 249.1735119766051, &#39;ratio&#39;: 121193.57297696148}
+{&#39;p&#39;: 250.28970143672112, &#39;ratio&#39;: 121495.83956066555}
+{&#39;p&#39;: 250.0938533472838, &#39;ratio&#39;: 118232.0265184911}
+{&#39;p&#39;: 250.2735526018846, &#39;ratio&#39;: 122201.81652456615}
+{&#39;p&#39;: 250.20005162827192, &#39;ratio&#39;: 122206.65438549034}
+{&#39;p&#39;: 250.19011928538694, &#39;ratio&#39;: 122923.65802250846}
+{&#39;p&#39;: 250.0239071148437, &#39;ratio&#39;: 122734.9764925163}
+{&#39;p&#39;: 250.09860226145307, &#39;ratio&#39;: 123020.01031714585}
+{&#39;p&#39;: 250.22922290401343, &#39;ratio&#39;: 125665.27943018795}
+{&#39;p&#39;: 250.2376183356359, &#39;ratio&#39;: 125800.96647270558}
+{&#39;p&#39;: 250.42454207865666, &#39;ratio&#39;: 126573.81001664771}
+{&#39;p&#39;: 250.0719434783369, &#39;ratio&#39;: 126384.41744643201}
+{&#39;p&#39;: 249.98566560451246, &#39;ratio&#39;: 126202.75152764907}
+{&#39;p&#39;: 249.93586527950396, &#39;ratio&#39;: 126874.7510535441}
+{&#39;p&#39;: 249.88635394501878, &#39;ratio&#39;: 127280.33335151113}
+{&#39;p&#39;: 249.58808545313312, &#39;ratio&#39;: 126269.8040879796}
+{&#39;p&#39;: 249.63751983274923, &#39;ratio&#39;: 126766.54841500116}
+{&#39;p&#39;: 249.71758613108838, &#39;ratio&#39;: 128253.30547025698}
+{&#39;p&#39;: 249.61676941950049, &#39;ratio&#39;: 128455.29810643026}
+{&#39;p&#39;: 249.47112200037017, &#39;ratio&#39;: 127377.60015566048}
+{&#39;p&#39;: 248.49046047389137, &#39;ratio&#39;: 135988.3114686761}
+{&#39;p&#39;: 249.31834877974515, &#39;ratio&#39;: 127124.52946280729}
+{&#39;p&#39;: 249.51038080840374, &#39;ratio&#39;: 128475.54170374195}
+{&#39;p&#39;: 249.39899686195784, &#39;ratio&#39;: 128092.2761720218}
+{&#39;p&#39;: 248.13382693489314, &#39;ratio&#39;: 140214.9528946722}
+{&#39;p&#39;: 249.4015284073501, &#39;ratio&#39;: 128139.47269634237}
+{&#39;p&#39;: 248.6767014920296, &#39;ratio&#39;: 136925.15824695633}
+{&#39;p&#39;: 249.4709296327518, &#39;ratio&#39;: 129530.98285119688}
+{&#39;p&#39;: 249.451817974547, &#39;ratio&#39;: 129982.29405059922}
+{&#39;p&#39;: 249.7340852044175, &#39;ratio&#39;: 131188.4442062756}
+{&#39;p&#39;: 249.6018921198756, &#39;ratio&#39;: 131109.0689426201}
+{&#39;p&#39;: 249.77941476221847, &#39;ratio&#39;: 130728.38821107389}
+{&#39;p&#39;: 249.8642580267779, &#39;ratio&#39;: 131834.89658806403}
+{&#39;p&#39;: 249.72276066069062, &#39;ratio&#39;: 131457.75170856772}
+{&#39;p&#39;: 249.70018888702003, &#39;ratio&#39;: 131552.21437307776}
+{&#39;p&#39;: 249.73272183923103, &#39;ratio&#39;: 131755.64692012093}
+{&#39;p&#39;: 249.6359379749234, &#39;ratio&#39;: 131871.55304618992}
+{&#39;p&#39;: 249.88427855833626, &#39;ratio&#39;: 132728.47939304292}
+{&#39;p&#39;: 249.86933580105864, &#39;ratio&#39;: 133042.78434270428}
+{&#39;p&#39;: 249.86298929401673, &#39;ratio&#39;: 133252.7266496463}
+{&#39;p&#39;: 249.83359648319168, &#39;ratio&#39;: 133414.89585025908}
+{&#39;p&#39;: 249.54194171944013, &#39;ratio&#39;: 132584.59708996027}
+{&#39;p&#39;: 249.3525913783205, &#39;ratio&#39;: 132410.69302937464}
+{&#39;p&#39;: 247.88895498403818, &#39;ratio&#39;: 153331.32501868735}
+{&#39;p&#39;: 246.36029489799725, &#39;ratio&#39;: 158077.31564146385}
+{&#39;p&#39;: 245.17002723816807, &#39;ratio&#39;: 117239.04785560966}
+{&#39;p&#39;: 245.15063680957184, &#39;ratio&#39;: 127632.61264851426}
+{&#39;p&#39;: 241.50411785423964, &#39;ratio&#39;: 71152.97896873238}
+{&#39;p&#39;: 232.15918522914194, &#39;ratio&#39;: 23185.134680876512}
+{&#39;p&#39;: 221.5128832371645, &#39;ratio&#39;: 11948.119901190517}
+{&#39;p&#39;: 225.42485612545832, &#39;ratio&#39;: 13700.670534066312}
+{&#39;p&#39;: 230.05658687164976, &#39;ratio&#39;: 15418.740558760503}
+{&#39;p&#39;: 219.13562746253928, &#39;ratio&#39;: 11028.575731063422}
+{&#39;p&#39;: 205.21016831652256, &#39;ratio&#39;: 9663.254653656317}
+{&#39;p&#39;: 207.781861835703, &#39;ratio&#39;: 9943.089702753696}
+{&#39;p&#39;: 202.34513960725616, &#39;ratio&#39;: 8919.227847081936}
+{&#39;p&#39;: 204.50837173591307, &#39;ratio&#39;: 9001.097993680296}
+{&#39;p&#39;: 206.6036471125306, &#39;ratio&#39;: 9417.583078315189}
+{&#39;p&#39;: 204.7714168039481, &#39;ratio&#39;: 9099.86910527727}
+{&#39;p&#39;: 211.2592902328968, &#39;ratio&#39;: 9942.972867018056}
+{&#39;p&#39;: 219.84087941423428, &#39;ratio&#39;: 11018.362661747658}
+{&#39;p&#39;: 215.0330017988312, &#39;ratio&#39;: 10798.292858073075}
+{&#39;p&#39;: 225.19733268907723, &#39;ratio&#39;: 13311.693385350147}
+{&#39;p&#39;: 229.87863015741732, &#39;ratio&#39;: 15147.78137630392}
+{&#39;p&#39;: 228.30473182972756, &#39;ratio&#39;: 15158.797981328215}
+{&#39;p&#39;: 233.12347797118093, &#39;ratio&#39;: 18305.856459579485}
+{&#39;p&#39;: 234.79018047848882, &#39;ratio&#39;: 20293.915932968834}
+{&#39;p&#39;: 234.61026113089451, &#39;ratio&#39;: 20459.294017046843}
+{&#39;p&#39;: 234.177378226305, &#39;ratio&#39;: 20431.39698862694}
+{&#39;p&#39;: 237.3169006798376, &#39;ratio&#39;: 22084.089175149842}
+{&#39;p&#39;: 236.3235420960914, &#39;ratio&#39;: 22315.244766310287}
+{&#39;p&#39;: 236.13787468834016, &#39;ratio&#39;: 22200.92752427579}
+{&#39;p&#39;: 235.4710556981368, &#39;ratio&#39;: 22032.04529115559}
+{&#39;p&#39;: 234.1224942704616, &#39;ratio&#39;: 21682.261070436354}
+{&#39;p&#39;: 232.7633773379887, &#39;ratio&#39;: 19661.75629242808}
+{&#39;p&#39;: 236.25272431923233, &#39;ratio&#39;: 23236.983075512497}
+{&#39;p&#39;: 238.49423377257185, &#39;ratio&#39;: 23573.962348136265}
+{&#39;p&#39;: 239.6066460814908, &#39;ratio&#39;: 27412.905086050312}
+{&#39;p&#39;: 238.57038650749226, &#39;ratio&#39;: 27151.16892498157}
+{&#39;p&#39;: 238.35641756494215, &#39;ratio&#39;: 23740.549386723396}
+{&#39;p&#39;: 238.7364082784908, &#39;ratio&#39;: 27317.3528272733}
+{&#39;p&#39;: 239.8227472735964, &#39;ratio&#39;: 27422.74244770864}
+{&#39;p&#39;: 239.53911414119074, &#39;ratio&#39;: 27840.9525794833}
+{&#39;p&#39;: 240.53495892892693, &#39;ratio&#39;: 28995.444849484895}
+{&#39;p&#39;: 241.00686967514136, &#39;ratio&#39;: 33131.447067346395}
+{&#39;p&#39;: 241.12034596194846, &#39;ratio&#39;: 33186.02550773193}
+{&#39;p&#39;: 241.9075668374192, &#39;ratio&#39;: 33284.72000420978}
+{&#39;p&#39;: 241.9836101675106, &#39;ratio&#39;: 37065.95038881814}
+{&#39;p&#39;: 243.2691351413452, &#39;ratio&#39;: 38426.13943649059}
+{&#39;p&#39;: 242.10736216151912, &#39;ratio&#39;: 35562.689215908635}
+{&#39;p&#39;: 242.01369577887766, &#39;ratio&#39;: 34080.422476660446}
+{&#39;p&#39;: 241.97246767429564, &#39;ratio&#39;: 34679.85644114038}
+{&#39;p&#39;: 241.89370377203358, &#39;ratio&#39;: 35322.08228373066}
+{&#39;p&#39;: 242.1931072652841, &#39;ratio&#39;: 37650.58266211947}
+{&#39;p&#39;: 242.42393126071536, &#39;ratio&#39;: 49251.142576756174}
+{&#39;p&#39;: 242.40451128319214, &#39;ratio&#39;: 37777.607106674914}
+{&#39;p&#39;: 242.15465911858092, &#39;ratio&#39;: 37875.12728244844}
+{&#39;p&#39;: 242.54333853972972, &#39;ratio&#39;: 37865.642386758875}
+{&#39;p&#39;: 241.87386569959733, &#39;ratio&#39;: 37466.87561651331}
+{&#39;p&#39;: 241.97317667799643, &#39;ratio&#39;: 34298.750297917475}
+{&#39;p&#39;: 240.64175531543972, &#39;ratio&#39;: 33808.87458714399}
+{&#39;p&#39;: 240.43510985526711, &#39;ratio&#39;: 33748.750309759125}
+{&#39;p&#39;: 241.72585267996092, &#39;ratio&#39;: 35850.40563902777}
+{&#39;p&#39;: 241.84184504507573, &#39;ratio&#39;: 35426.02186566282}
+{&#39;p&#39;: 241.8218299041802, &#39;ratio&#39;: 35448.91231716352}
+{&#39;p&#39;: 241.65732676257133, &#39;ratio&#39;: 38104.672044690284}
+{&#39;p&#39;: 242.13845498558632, &#39;ratio&#39;: 38076.90049712767}
+{&#39;p&#39;: 242.120710560246, &#39;ratio&#39;: 38100.34905698597}
+{&#39;p&#39;: 240.85386540567754, &#39;ratio&#39;: 33069.41954837149}
+{&#39;p&#39;: 238.4774766290782, &#39;ratio&#39;: 28553.160937552955}
+{&#39;p&#39;: 239.31783880272283, &#39;ratio&#39;: 28610.628261910217}
+{&#39;p&#39;: 238.02170560628727, &#39;ratio&#39;: 28722.267200830698}
+{&#39;p&#39;: 237.16326679057727, &#39;ratio&#39;: 27679.733734614492}
+{&#39;p&#39;: 240.02079043694212, &#39;ratio&#39;: 29037.41312187901}
+{&#39;p&#39;: 240.48118473441806, &#39;ratio&#39;: 33164.08027088135}
+{&#39;p&#39;: 238.9702382251312, &#39;ratio&#39;: 28767.3221559302}
+{&#39;p&#39;: 238.54009948529605, &#39;ratio&#39;: 28823.941290037117}
+{&#39;p&#39;: 236.13499261839547, &#39;ratio&#39;: 25982.645768934184}
+{&#39;p&#39;: 234.14847631296504, &#39;ratio&#39;: 25812.889995332625}
+{&#39;p&#39;: 235.49559667711952, &#39;ratio&#39;: 26204.71370776144}
+{&#39;p&#39;: 235.869396489444, &#39;ratio&#39;: 26188.91455145739}
+{&#39;p&#39;: 238.29385250895953, &#39;ratio&#39;: 29197.107281049597}
+{&#39;p&#39;: 241.3322478155132, &#39;ratio&#39;: 34173.9765705387}
+{&#39;p&#39;: 241.00058234624836, &#39;ratio&#39;: 34239.25967586112}
+{&#39;p&#39;: 241.31928019525975, &#39;ratio&#39;: 34338.30989996203}
+{&#39;p&#39;: 241.30947631485785, &#39;ratio&#39;: 34950.80544398393}
+{&#39;p&#39;: 239.9026561006671, &#39;ratio&#39;: 33541.05491571579}
+{&#39;p&#39;: 238.17213221331605, &#39;ratio&#39;: 29599.294899880253}
+{&#39;p&#39;: 238.91123622754785, &#39;ratio&#39;: 29504.749833589874}
+{&#39;p&#39;: 239.78246837983752, &#39;ratio&#39;: 33231.21628862877}
+{&#39;p&#39;: 241.28601506201332, &#39;ratio&#39;: 34576.952693048705}
+{&#39;p&#39;: 241.2423317580767, &#39;ratio&#39;: 34592.51647639056}
+{&#39;p&#39;: 237.66510751584525, &#39;ratio&#39;: 29668.997857564984}
+{&#39;p&#39;: 239.1075206963311, &#39;ratio&#39;: 29710.741288041692}
+{&#39;p&#39;: 239.14094468954892, &#39;ratio&#39;: 29727.496924243747}
+{&#39;p&#39;: 239.9167960806538, &#39;ratio&#39;: 34908.471223398745}
+{&#39;p&#39;: 242.09196004746173, &#39;ratio&#39;: 38792.73678358212}
+{&#39;p&#39;: 242.73760330249684, &#39;ratio&#39;: 44577.24840952721}
+{&#39;p&#39;: 243.0642276145095, &#39;ratio&#39;: 40619.500070088696}
+{&#39;p&#39;: 243.01132213831454, &#39;ratio&#39;: 40628.59611457383}
+{&#39;p&#39;: 242.90353675741537, &#39;ratio&#39;: 42652.8221167347}
+{&#39;p&#39;: 242.77307578786576, &#39;ratio&#39;: 48741.0532060664}
+{&#39;p&#39;: 242.7992743126134, &#39;ratio&#39;: 48764.50370474291}
+{&#39;p&#39;: 243.5032277910737, &#39;ratio&#39;: 54706.76992653431}
+{&#39;p&#39;: 244.02428301637718, &#39;ratio&#39;: 56267.57215826442}
+{&#39;p&#39;: 243.72938835332627, &#39;ratio&#39;: 60367.592423456044}
+{&#39;p&#39;: 244.02596688086615, &#39;ratio&#39;: 56414.68884128453}
+{&#39;p&#39;: 243.4910788815192, &#39;ratio&#39;: 68089.30290061576}
+{&#39;p&#39;: 243.19103891915356, &#39;ratio&#39;: 72853.42543725099}
+{&#39;p&#39;: 243.71276259515272, &#39;ratio&#39;: 61600.544428316876}
+{&#39;p&#39;: 243.66457347136765, &#39;ratio&#39;: 68583.98242548706}
+{&#39;p&#39;: 243.600276089468, &#39;ratio&#39;: 54754.91513708943}
+{&#39;p&#39;: 243.35037866269184, &#39;ratio&#39;: 54036.616799728465}
+{&#39;p&#39;: 243.67261001232586, &#39;ratio&#39;: 69522.83431837478}
+{&#39;p&#39;: 243.76724662708298, &#39;ratio&#39;: 57005.59475415105}
+{&#39;p&#39;: 243.68561041412102, &#39;ratio&#39;: 54970.79345415172}
+{&#39;p&#39;: 243.32930591416684, &#39;ratio&#39;: 54253.470159905504}
+{&#39;p&#39;: 242.8623175434938, &#39;ratio&#39;: 51358.4973868128}
+{&#39;p&#39;: 243.49347296496896, &#39;ratio&#39;: 54655.72695708594}
+{&#39;p&#39;: 243.54926273223742, &#39;ratio&#39;: 65195.65467368329}
+{&#39;p&#39;: 243.32021421147167, &#39;ratio&#39;: 53193.1230086058}
+{&#39;p&#39;: 243.0325071198864, &#39;ratio&#39;: 43000.68991433909}
+{&#39;p&#39;: 242.88199581771352, &#39;ratio&#39;: 47670.02988283029}
+{&#39;p&#39;: 242.8304481828956, &#39;ratio&#39;: 44596.351375298735}
+{&#39;p&#39;: 243.55680193622504, &#39;ratio&#39;: 57386.50975964926}
+{&#39;p&#39;: 242.68984367189734, &#39;ratio&#39;: 41937.96811604487}
+{&#39;p&#39;: 242.451490591685, &#39;ratio&#39;: 42041.552529422625}
+{&#39;p&#39;: 242.5736137335861, &#39;ratio&#39;: 42080.24344419969}
+{&#39;p&#39;: 242.91986017389442, &#39;ratio&#39;: 42041.18105212337}
+{&#39;p&#39;: 243.64011533896306, &#39;ratio&#39;: 52305.41048638699}
+{&#39;p&#39;: 243.38427213203792, &#39;ratio&#39;: 50676.16814276726}
+{&#39;p&#39;: 243.37967689616195, &#39;ratio&#39;: 55590.776097506154}
+{&#39;p&#39;: 243.54075518986147, &#39;ratio&#39;: 60313.46541010728}
+{&#39;p&#39;: 243.32020211881772, &#39;ratio&#39;: 55690.18211033517}
+{&#39;p&#39;: 243.55041972151503, &#39;ratio&#39;: 69358.70949925332}
+{&#39;p&#39;: 243.5077200068831, &#39;ratio&#39;: 57250.79971798241}
+{&#39;p&#39;: 243.48047192132134, &#39;ratio&#39;: 65789.59936794646}
+{&#39;p&#39;: 243.43407437364414, &#39;ratio&#39;: 57333.924723347845}
+{&#39;p&#39;: 242.53280765884946, &#39;ratio&#39;: 47523.74774508765}
+{&#39;p&#39;: 242.4395724860123, &#39;ratio&#39;: 42392.11042683515}
+{&#39;p&#39;: 243.20779389368403, &#39;ratio&#39;: 51081.42010375518}
+{&#39;p&#39;: 242.77759293509038, &#39;ratio&#39;: 42483.95928346643}
+{&#39;p&#39;: 242.14272506236657, &#39;ratio&#39;: 41249.13464645374}
+{&#39;p&#39;: 242.67621493189654, &#39;ratio&#39;: 45450.3874514381}
+{&#39;p&#39;: 242.67773376075172, &#39;ratio&#39;: 49560.116403593944}
+{&#39;p&#39;: 242.59260228372705, &#39;ratio&#39;: 45567.653634727176}
+{&#39;p&#39;: 242.31338798457844, &#39;ratio&#39;: 42687.56944368874}
+{&#39;p&#39;: 240.30961065036564, &#39;ratio&#39;: 36816.4849786679}
+{&#39;p&#39;: 241.51912276421214, &#39;ratio&#39;: 40972.32563816852}
+{&#39;p&#39;: 241.73031688363082, &#39;ratio&#39;: 41110.40629284866}
+{&#39;p&#39;: 242.10096194378875, &#39;ratio&#39;: 42374.8718636756}
+{&#39;p&#39;: 241.278481576291, &#39;ratio&#39;: 41178.05807027487}
+{&#39;p&#39;: 243.4342769705268, &#39;ratio&#39;: 55312.74082933891}
+{&#39;p&#39;: 243.3675050313383, &#39;ratio&#39;: 55244.74236684643}
+{&#39;p&#39;: 243.35970205263288, &#39;ratio&#39;: 55295.758954952464}
+{&#39;p&#39;: 244.40860973244838, &#39;ratio&#39;: 73068.53544169365}
+{&#39;p&#39;: 243.55441117695872, &#39;ratio&#39;: 278135.6409774304}
+{&#39;p&#39;: 246.6715790188293, &#39;ratio&#39;: 319396.21905716945}
+{&#39;p&#39;: 246.567357801512, &#39;ratio&#39;: 325537.3640702075}
+{&#39;p&#39;: 245.39564003013234, &#39;ratio&#39;: 396233.4110328983}
+{&#39;p&#39;: 245.40888809565638, &#39;ratio&#39;: 396464.9307566755}
+{&#39;p&#39;: 246.6470393136042, &#39;ratio&#39;: 321536.1771448684}
+{&#39;p&#39;: 246.6912391302771, &#39;ratio&#39;: 322067.54707846843}
+{&#39;p&#39;: 246.65878077447192, &#39;ratio&#39;: 320709.8058643003}
+{&#39;p&#39;: 247.076602052608, &#39;ratio&#39;: 298746.7866346216}
+{&#39;p&#39;: 245.7061478001368, &#39;ratio&#39;: 379704.33426918613}
+{&#39;p&#39;: 246.6728843124548, &#39;ratio&#39;: 321324.76340772485}
+{&#39;p&#39;: 247.2655234073653, &#39;ratio&#39;: 290501.29257127753}
+{&#39;p&#39;: 247.220969432914, &#39;ratio&#39;: 292022.0890169694}
+{&#39;p&#39;: 247.24206239934875, &#39;ratio&#39;: 292027.20490776765}
+{&#39;p&#39;: 247.8003056745463, &#39;ratio&#39;: 264152.00577564863}
+{&#39;p&#39;: 247.15034227298435, &#39;ratio&#39;: 296257.87664077565}
+{&#39;p&#39;: 247.3005262033424, &#39;ratio&#39;: 289769.9993952778}
+{&#39;p&#39;: 248.19074913941697, &#39;ratio&#39;: 253768.34374301753}
+{&#39;p&#39;: 249.9464408112143, &#39;ratio&#39;: 201436.40644308328}
+{&#39;p&#39;: 249.4606022430405, &#39;ratio&#39;: 216717.22646073787}
+{&#39;p&#39;: 248.8864047767308, &#39;ratio&#39;: 234198.31170516938}
+{&#39;p&#39;: 248.18790627203404, &#39;ratio&#39;: 255389.26604910195}
+{&#39;p&#39;: 247.22442236242023, &#39;ratio&#39;: 292455.0288461207}
+{&#39;p&#39;: 247.2977330908195, &#39;ratio&#39;: 292544.7696247817}
+{&#39;p&#39;: 247.85454900029256, &#39;ratio&#39;: 262328.699208107}
+{&#39;p&#39;: 246.50840747139787, &#39;ratio&#39;: 331298.9637947121}
+{&#39;p&#39;: 246.53225121198207, &#39;ratio&#39;: 331050.2135970198}
+{&#39;p&#39;: 247.72011506886673, &#39;ratio&#39;: 267109.88039122697}
+{&#39;p&#39;: 247.30023911739204, &#39;ratio&#39;: 292792.65507139073}
+{&#39;p&#39;: 247.70208806098452, &#39;ratio&#39;: 268678.89226345543}
+{&#39;p&#39;: 246.16775071302695, &#39;ratio&#39;: 354776.84025650565}
+{&#39;p&#39;: 247.22737584070703, &#39;ratio&#39;: 294464.847044522}
+{&#39;p&#39;: 246.3228902380076, &#39;ratio&#39;: 347865.75090164924}
+{&#39;p&#39;: 247.16097704300145, &#39;ratio&#39;: 297458.62165643217}
+{&#39;p&#39;: 245.32750732572543, &#39;ratio&#39;: 413475.04707135423}
+{&#39;p&#39;: 245.32614164005437, &#39;ratio&#39;: 413505.1101704491}
+{&#39;p&#39;: 243.41092546336907, &#39;ratio&#39;: 339748.06744185404}
+{&#39;p&#39;: 244.41127538288058, &#39;ratio&#39;: 455866.84821161925}
+{&#39;p&#39;: 244.60250111141403, &#39;ratio&#39;: 474897.7253834612}
+{&#39;p&#39;: 244.70059627169965, &#39;ratio&#39;: 474706.5469835411}
+{&#39;p&#39;: 244.6975174317812, &#39;ratio&#39;: 475885.2900917274}
+{&#39;p&#39;: 244.69794487198106, &#39;ratio&#39;: 475985.18342594284}
+{&#39;p&#39;: 244.8893004495262, &#39;ratio&#39;: 457531.5313117909}
+{&#39;p&#39;: 244.58661872542356, &#39;ratio&#39;: 475858.6383976615}
+{&#39;p&#39;: 245.77972962150147, &#39;ratio&#39;: 384411.85002774425}
+{&#39;p&#39;: 246.25829760020375, &#39;ratio&#39;: 351951.6668559543}
+{&#39;p&#39;: 247.20014223267086, &#39;ratio&#39;: 288224.1161277057}
+{&#39;p&#39;: 247.1993937131489, &#39;ratio&#39;: 288665.5100916374}
+{&#39;p&#39;: 246.25568008724167, &#39;ratio&#39;: 352689.6784822544}
+{&#39;p&#39;: 244.69055235851573, &#39;ratio&#39;: 481766.26210249483}
+{&#39;p&#39;: 244.51759904033943, &#39;ratio&#39;: 481559.30748380465}
+{&#39;p&#39;: 245.46806763653464, &#39;ratio&#39;: 416085.580403622}
+{&#39;p&#39;: 244.57686097735765, &#39;ratio&#39;: 492806.82412753836}
+{&#39;p&#39;: 244.58106572706612, &#39;ratio&#39;: 492636.88547922514}
+{&#39;p&#39;: 245.4769551820691, &#39;ratio&#39;: 416664.58221381536}
+{&#39;p&#39;: 244.6298801170961, &#39;ratio&#39;: 493683.262910436}
+{&#39;p&#39;: 244.38049793762767, &#39;ratio&#39;: 472727.5794583395}
+{&#39;p&#39;: 243.25970568285626, &#39;ratio&#39;: 476147.0915977223}
+{&#39;p&#39;: 244.59487551213635, &#39;ratio&#39;: 494952.1244747008}
+{&#39;p&#39;: 246.1779492932858, &#39;ratio&#39;: 358498.09368851845}
+{&#39;p&#39;: 245.3119518693147, &#39;ratio&#39;: 425582.7959793369}
+{&#39;p&#39;: 244.57305048231495, &#39;ratio&#39;: 495325.5176446223}
+{&#39;p&#39;: 244.56127211506424, &#39;ratio&#39;: 496781.69666983455}
+{&#39;p&#39;: 244.03558200251513, &#39;ratio&#39;: 513635.6929481401}
+{&#39;p&#39;: 244.36778125347894, &#39;ratio&#39;: 478384.58917749714}
+{&#39;p&#39;: 244.0956347423413, &#39;ratio&#39;: 524077.27768689697}
+{&#39;p&#39;: 243.26789735759687, &#39;ratio&#39;: 344980.5690924315}
+{&#39;p&#39;: 243.2517755344353, &#39;ratio&#39;: 421342.59624082025}
+{&#39;p&#39;: 244.0517958257031, &#39;ratio&#39;: 515586.291680027}
+{&#39;p&#39;: 243.25181220070962, &#39;ratio&#39;: 345415.3336160631}
+{&#39;p&#39;: 243.23997454564645, &#39;ratio&#39;: 350041.6698327368}
+{&#39;p&#39;: 244.40165364683955, &#39;ratio&#39;: 481549.4768463393}
+{&#39;p&#39;: 243.16025918083642, &#39;ratio&#39;: 500260.59795516817}
+{&#39;p&#39;: 243.15232130594148, &#39;ratio&#39;: 506033.1686970899}
+{&#39;p&#39;: 244.01218761369572, &#39;ratio&#39;: 527282.2175207686}
+{&#39;p&#39;: 243.4570910343249, &#39;ratio&#39;: 517172.1378247615}
+{&#39;p&#39;: 244.6012651238505, &#39;ratio&#39;: 500625.3790856322}
+{&#39;p&#39;: 244.08378152162774, &#39;ratio&#39;: 538876.2088359348}
+{&#39;p&#39;: 243.46738465881708, &#39;ratio&#39;: 505733.63574474765}
+{&#39;p&#39;: 243.17592455923779, &#39;ratio&#39;: 425405.72287661256}
+{&#39;p&#39;: 243.2197112339918, &#39;ratio&#39;: 262921.3278664812}
+{&#39;p&#39;: 243.14729341060897, &#39;ratio&#39;: 220199.11479223293}
+{&#39;p&#39;: 243.06972655999934, &#39;ratio&#39;: 311253.82190497377}
+{&#39;p&#39;: 244.6093916663512, &#39;ratio&#39;: 507881.70156816544}
+{&#39;p&#39;: 245.5009956412749, &#39;ratio&#39;: 423603.52803844167}
+{&#39;p&#39;: 245.12973688107397, &#39;ratio&#39;: 461355.1535841427}
+{&#39;p&#39;: 245.49869695116914, &#39;ratio&#39;: 423700.54054932256}
+{&#39;p&#39;: 247.48173748161435, &#39;ratio&#39;: 275436.91487579327}
+{&#39;p&#39;: 247.4813645024687, &#39;ratio&#39;: 275733.80189283437}
+{&#39;p&#39;: 247.48012201922836, &#39;ratio&#39;: 275353.76923073654}
+{&#39;p&#39;: 248.41182562031616, &#39;ratio&#39;: 237705.7464666153}
+{&#39;p&#39;: 248.8119023330798, &#39;ratio&#39;: 223360.93038774302}
+{&#39;p&#39;: 248.99876413807058, &#39;ratio&#39;: 217664.47605611305}
+{&#39;p&#39;: 248.54346093430743, &#39;ratio&#39;: 232813.03469935514}
+{&#39;p&#39;: 248.97877776911548, &#39;ratio&#39;: 218082.4583341589}
+{&#39;p&#39;: 248.30585633596908, &#39;ratio&#39;: 239910.4095913514}
+{&#39;p&#39;: 248.5509511232885, &#39;ratio&#39;: 232423.5399187677}
+{&#39;p&#39;: 248.96402556496062, &#39;ratio&#39;: 216929.52466889017}
+{&#39;p&#39;: 248.81713194236784, &#39;ratio&#39;: 213535.32827767482}
+{&#39;p&#39;: 249.31053517618997, &#39;ratio&#39;: 199100.9789412354}
+{&#39;p&#39;: 248.1918784484973, &#39;ratio&#39;: 237282.31835321995}
+{&#39;p&#39;: 248.4226702402814, &#39;ratio&#39;: 227189.78184489105}
+{&#39;p&#39;: 247.95145202503895, &#39;ratio&#39;: 245440.7334559458}
+{&#39;p&#39;: 248.0568117497874, &#39;ratio&#39;: 240877.39171903546}
+{&#39;p&#39;: 247.44961690218747, &#39;ratio&#39;: 262892.6505591047}
+{&#39;p&#39;: 247.68148036342097, &#39;ratio&#39;: 252403.47254756754}
+{&#39;p&#39;: 247.49694784632538, &#39;ratio&#39;: 262244.03621768625}
+{&#39;p&#39;: 250.14724599360432, &#39;ratio&#39;: 179328.7466879736}
+{&#39;p&#39;: 250.49654204274347, &#39;ratio&#39;: 180353.36878103996}
+{&#39;p&#39;: 250.4676537338891, &#39;ratio&#39;: 180678.8340016307}
+{&#39;p&#39;: 250.2924007516048, &#39;ratio&#39;: 181017.17335711408}
+{&#39;p&#39;: 250.23579382465678, &#39;ratio&#39;: 181281.348191604}
+{&#39;p&#39;: 250.20520241090844, &#39;ratio&#39;: 181403.7267299195}
+{&#39;p&#39;: 250.30880675666668, &#39;ratio&#39;: 181890.9558425459}
+{&#39;p&#39;: 250.11474505256538, &#39;ratio&#39;: 181872.3485978588}
+{&#39;p&#39;: 250.08290585164573, &#39;ratio&#39;: 182004.2813592111}
+{&#39;p&#39;: 248.62078981120982, &#39;ratio&#39;: 221379.456848257}
+{&#39;p&#39;: 247.7803384764696, &#39;ratio&#39;: 250678.38828251057}
+{&#39;p&#39;: 247.93951743523, &#39;ratio&#39;: 241585.6142538149}
+{&#39;p&#39;: 247.80050637372315, &#39;ratio&#39;: 247178.6806058367}
+{&#39;p&#39;: 247.46428111920602, &#39;ratio&#39;: 263985.00131330616}
+{&#39;p&#39;: 248.71850723614392, &#39;ratio&#39;: 220294.14041055445}
+{&#39;p&#39;: 245.0711121687865, &#39;ratio&#39;: 476046.388149053}
+{&#39;p&#39;: 245.07416505201343, &#39;ratio&#39;: 475945.15199869947}
+{&#39;p&#39;: 245.58324440031964, &#39;ratio&#39;: 391053.70988324983}
+{&#39;p&#39;: 245.58096363361204, &#39;ratio&#39;: 391263.55970246095}
+{&#39;p&#39;: 245.53262508627571, &#39;ratio&#39;: 397002.2759073201}
+{&#39;p&#39;: 245.51247749357057, &#39;ratio&#39;: 405012.35178600904}
+{&#39;p&#39;: 245.15722798664052, &#39;ratio&#39;: 451634.61982503266}
+{&#39;p&#39;: 244.60988997221605, &#39;ratio&#39;: 528704.3938439599}
+{&#39;p&#39;: 245.47509842285194, &#39;ratio&#39;: 408001.0183583325}
+{&#39;p&#39;: 245.12772379598428, &#39;ratio&#39;: 449759.1547281978}
+{&#39;p&#39;: 245.1361577254198, &#39;ratio&#39;: 449990.8337632731}
+{&#39;p&#39;: 246.30977931747987, &#39;ratio&#39;: 328631.3637923169}
+{&#39;p&#39;: 246.68568102428264, &#39;ratio&#39;: 303271.8069327495}
+{&#39;p&#39;: 244.66347527740237, &#39;ratio&#39;: 438518.02701264987}
+{&#39;p&#39;: 242.30079468076605, &#39;ratio&#39;: 2907151.5900558187}
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_7.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_7.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;p&#39;: 94.36821045062132, &#39;ratio&#39;: 161.3286988298325}
+{&#39;p&#39;: 98.49557793459257, &#39;ratio&#39;: 283.0431256989345}
+{&#39;p&#39;: 99.71594474231955, &#39;ratio&#39;: 344.67038810679367}
+{&#39;p&#39;: 99.91160685683572, &#39;ratio&#39;: 355.7688965923353}
+{&#39;p&#39;: 99.42440176363047, &#39;ratio&#39;: 356.11531633112804}
+{&#39;p&#39;: 97.84657131026927, &#39;ratio&#39;: 464.19586934670576}
+{&#39;p&#39;: 97.82271372240663, &#39;ratio&#39;: 567.5669301222218}
+{&#39;p&#39;: 97.31652530630167, &#39;ratio&#39;: 625.961902485928}
+{&#39;p&#39;: 97.28472441947137, &#39;ratio&#39;: 648.828202504161}
+{&#39;p&#39;: 97.40335161399479, &#39;ratio&#39;: 688.644398477624}
+{&#39;p&#39;: 97.65794355430997, &#39;ratio&#39;: 691.8783431256696}
+{&#39;p&#39;: 98.60212776520113, &#39;ratio&#39;: 913.2557108051933}
+{&#39;p&#39;: 98.3792051233606, &#39;ratio&#39;: 964.7371665494242}
+{&#39;p&#39;: 98.11030232507547, &#39;ratio&#39;: 1028.1229505604506}
+{&#39;p&#39;: 98.0459976503678, &#39;ratio&#39;: 1139.3020955871916}
+{&#39;p&#39;: 101.22195535783959, &#39;ratio&#39;: 2358.263118437239}
+{&#39;p&#39;: 102.32617806024278, &#39;ratio&#39;: 2522.481236061354}
+{&#39;p&#39;: 101.93994615567219, &#39;ratio&#39;: 2884.8805783640623}
+{&#39;p&#39;: 101.75218804884126, &#39;ratio&#39;: 3054.6314655456636}
+{&#39;p&#39;: 101.72259905051013, &#39;ratio&#39;: 3122.9222212337804}
+{&#39;p&#39;: 103.75553020105536, &#39;ratio&#39;: 3215.455151715476}
+{&#39;p&#39;: 105.82760595817099, &#39;ratio&#39;: 3189.5449748360793}
+{&#39;p&#39;: 106.18519051112742, &#39;ratio&#39;: 3248.13784705927}
+{&#39;p&#39;: 106.40716630228444, &#39;ratio&#39;: 3428.1800285371532}
+{&#39;p&#39;: 106.91576656123394, &#39;ratio&#39;: 3507.3928740170977}
+{&#39;p&#39;: 106.91277606893806, &#39;ratio&#39;: 3567.9007756559363}
+{&#39;p&#39;: 106.88393425607414, &#39;ratio&#39;: 3602.006397974258}
+{&#39;p&#39;: 106.88883359461069, &#39;ratio&#39;: 3641.9729092059993}
+{&#39;p&#39;: 106.78318762419605, &#39;ratio&#39;: 3684.143222556526}
+{&#39;p&#39;: 106.82309513858075, &#39;ratio&#39;: 3676.478445994989}
+{&#39;p&#39;: 106.1204993666589, &#39;ratio&#39;: 3920.2538639860904}
+{&#39;p&#39;: 106.09187322691214, &#39;ratio&#39;: 4058.4163401748633}
+{&#39;p&#39;: 106.19001611839447, &#39;ratio&#39;: 4100.055665514672}
+{&#39;p&#39;: 106.03034127088824, &#39;ratio&#39;: 4120.096248626129}
+{&#39;p&#39;: 106.04683344469049, &#39;ratio&#39;: 4204.466004208403}
+{&#39;p&#39;: 104.47214496462404, &#39;ratio&#39;: 5210.34403393324}
+{&#39;p&#39;: 104.45025349054899, &#39;ratio&#39;: 5334.55311904379}
+{&#39;p&#39;: 104.2626913854586, &#39;ratio&#39;: 5414.875783352443}
+{&#39;p&#39;: 104.25241455037911, &#39;ratio&#39;: 5460.17702066893}
+{&#39;p&#39;: 104.58967059035551, &#39;ratio&#39;: 5560.6945638429015}
+{&#39;p&#39;: 104.83241961388008, &#39;ratio&#39;: 5612.093253374968}
+{&#39;p&#39;: 104.98526507355236, &#39;ratio&#39;: 5678.577658911108}
+{&#39;p&#39;: 106.06457307828644, &#39;ratio&#39;: 4913.0443476652645}
+{&#39;p&#39;: 106.21758347272697, &#39;ratio&#39;: 4937.421388694602}
+{&#39;p&#39;: 106.40655089338408, &#39;ratio&#39;: 4935.735039583597}
+{&#39;p&#39;: 106.49157548722206, &#39;ratio&#39;: 4974.44919460522}
+{&#39;p&#39;: 106.56122500586184, &#39;ratio&#39;: 5012.614037186491}
+{&#39;p&#39;: 106.51858854665207, &#39;ratio&#39;: 5050.798463048095}
+{&#39;p&#39;: 106.52430041667273, &#39;ratio&#39;: 5111.609672440454}
+{&#39;p&#39;: 106.49196219543431, &#39;ratio&#39;: 5163.948991238411}
+{&#39;p&#39;: 105.96886419542963, &#39;ratio&#39;: 5546.839274836428}
+{&#39;p&#39;: 105.9088123829628, &#39;ratio&#39;: 5628.764900387569}
+{&#39;p&#39;: 105.32234924266481, &#39;ratio&#39;: 6441.958235903129}
+{&#39;p&#39;: 105.23972755341035, &#39;ratio&#39;: 6506.072036194553}
+{&#39;p&#39;: 104.60165115446009, &#39;ratio&#39;: 6641.065315152235}
+{&#39;p&#39;: 104.5424768920515, &#39;ratio&#39;: 6824.840733693065}
+{&#39;p&#39;: 104.57167460458655, &#39;ratio&#39;: 6968.977327018248}
+{&#39;p&#39;: 104.8510487007586, &#39;ratio&#39;: 7053.840905014373}
+{&#39;p&#39;: 104.87902061485848, &#39;ratio&#39;: 7255.923761972634}
+{&#39;p&#39;: 104.98723013562221, &#39;ratio&#39;: 7309.751022358867}
+{&#39;p&#39;: 105.28303639518565, &#39;ratio&#39;: 7365.674009506933}
+{&#39;p&#39;: 105.40789808796653, &#39;ratio&#39;: 7468.809667011757}
+{&#39;p&#39;: 105.40093735606254, &#39;ratio&#39;: 7493.8128561285275}
+{&#39;p&#39;: 105.39112065234765, &#39;ratio&#39;: 7549.8478701964195}
+{&#39;p&#39;: 105.40262563251694, &#39;ratio&#39;: 7572.683136584456}
+{&#39;p&#39;: 105.71870631449237, &#39;ratio&#39;: 7805.549439007009}
+{&#39;p&#39;: 105.27740486145969, &#39;ratio&#39;: 8057.5532221952135}
+{&#39;p&#39;: 105.26191215468599, &#39;ratio&#39;: 8121.449341164627}
+{&#39;p&#39;: 105.2676197586609, &#39;ratio&#39;: 8137.0394048110265}
+{&#39;p&#39;: 105.39463140792975, &#39;ratio&#39;: 8294.676736004845}
+{&#39;p&#39;: 105.35153976940431, &#39;ratio&#39;: 8375.391287266199}
+{&#39;p&#39;: 105.32725926878274, &#39;ratio&#39;: 8433.197001046416}
+{&#39;p&#39;: 104.799516666876, &#39;ratio&#39;: 8700.490417372768}
+{&#39;p&#39;: 104.49043116389736, &#39;ratio&#39;: 9382.57662343946}
+{&#39;p&#39;: 103.98512358447435, &#39;ratio&#39;: 9980.465613346185}
+{&#39;p&#39;: 103.00155610401231, &#39;ratio&#39;: 11832.210917938897}
+{&#39;p&#39;: 102.69891234835163, &#39;ratio&#39;: 11967.774301739586}
+{&#39;p&#39;: 101.80660674501839, &#39;ratio&#39;: 11348.518705531364}
+{&#39;p&#39;: 101.64499716810978, &#39;ratio&#39;: 11645.829251950483}
+{&#39;p&#39;: 101.19881538724778, &#39;ratio&#39;: 11901.06386547697}
+{&#39;p&#39;: 101.13103974943525, &#39;ratio&#39;: 11948.535378216362}
+{&#39;p&#39;: 101.08570323788256, &#39;ratio&#39;: 12060.817568935963}
+{&#39;p&#39;: 100.96903441171055, &#39;ratio&#39;: 12100.39072259489}
+{&#39;p&#39;: 100.95020233401131, &#39;ratio&#39;: 12122.583296396759}
+{&#39;p&#39;: 100.91458381672484, &#39;ratio&#39;: 12245.66191918995}
+{&#39;p&#39;: 100.70911300407325, &#39;ratio&#39;: 12436.629373567284}
+{&#39;p&#39;: 100.5438119364834, &#39;ratio&#39;: 12549.013732334917}
+{&#39;p&#39;: 100.56794139257761, &#39;ratio&#39;: 12730.375773308668}
+{&#39;p&#39;: 100.56524752104936, &#39;ratio&#39;: 12722.42431398685}
+{&#39;p&#39;: 100.68466410525664, &#39;ratio&#39;: 12922.736597425454}
+{&#39;p&#39;: 100.72526737343021, &#39;ratio&#39;: 12991.194474839702}
+{&#39;p&#39;: 100.87228666454212, &#39;ratio&#39;: 13089.94620314232}
+{&#39;p&#39;: 100.87339664221125, &#39;ratio&#39;: 13084.164578482938}
+{&#39;p&#39;: 100.98823809883221, &#39;ratio&#39;: 13161.332712932306}
+{&#39;p&#39;: 101.15564980236843, &#39;ratio&#39;: 13307.079304748955}
+{&#39;p&#39;: 100.93026156331854, &#39;ratio&#39;: 13443.689602032946}
+{&#39;p&#39;: 100.93309964135722, &#39;ratio&#39;: 13491.71572561739}
+{&#39;p&#39;: 100.71186069568726, &#39;ratio&#39;: 13636.967995944302}
+{&#39;p&#39;: 100.61689633704597, &#39;ratio&#39;: 13778.170862784842}
+{&#39;p&#39;: 100.33764988940358, &#39;ratio&#39;: 13800.503061398591}
+{&#39;p&#39;: 100.3038050055012, &#39;ratio&#39;: 13887.730053759062}
+{&#39;p&#39;: 99.79940054233344, &#39;ratio&#39;: 13359.005378138347}
+{&#39;p&#39;: 98.96237507981695, &#39;ratio&#39;: 11621.881967632664}
+{&#39;p&#39;: 99.01557419317352, &#39;ratio&#39;: 11808.19406223202}
+{&#39;p&#39;: 99.85441194156694, &#39;ratio&#39;: 14283.52677893629}
+{&#39;p&#39;: 99.79445849507148, &#39;ratio&#39;: 14534.733122719763}
+{&#39;p&#39;: 98.87386106930079, &#39;ratio&#39;: 12562.722364997515}
+{&#39;p&#39;: 99.5352016989, &#39;ratio&#39;: 15007.791999397285}
+{&#39;p&#39;: 99.52844447039857, &#39;ratio&#39;: 15394.760934046433}
+{&#39;p&#39;: 95.97580548025164, &#39;ratio&#39;: 7886.354610755169}
+{&#39;p&#39;: 95.8771804629167, &#39;ratio&#39;: 8025.357846817063}
+{&#39;p&#39;: 95.99934506961515, &#39;ratio&#39;: 8059.096113073238}
+{&#39;p&#39;: 96.02103378941767, &#39;ratio&#39;: 8133.497476073261}
+{&#39;p&#39;: 96.06374390675755, &#39;ratio&#39;: 8213.058518519108}
+{&#39;p&#39;: 95.96113978968604, &#39;ratio&#39;: 8452.790454618857}
+{&#39;p&#39;: 96.06183638596836, &#39;ratio&#39;: 8680.709002510112}
+{&#39;p&#39;: 96.33951034490624, &#39;ratio&#39;: 8981.836714262612}
+{&#39;p&#39;: 99.1259603086246, &#39;ratio&#39;: 15581.610898395998}
+{&#39;p&#39;: 99.73316050995777, &#39;ratio&#39;: 18291.185869188896}
+{&#39;p&#39;: 99.72763007283118, &#39;ratio&#39;: 18313.38171566889}
+{&#39;p&#39;: 100.05284605495834, &#39;ratio&#39;: 19886.03164235507}
+{&#39;p&#39;: 100.00277609065898, &#39;ratio&#39;: 20328.641555741087}
+{&#39;p&#39;: 100.00432252008237, &#39;ratio&#39;: 21010.679439929365}
+{&#39;p&#39;: 100.02339163926526, &#39;ratio&#39;: 21234.931110152567}
+{&#39;p&#39;: 100.02179373350873, &#39;ratio&#39;: 21330.886333699822}
+{&#39;p&#39;: 99.7695301629247, &#39;ratio&#39;: 21668.16429308137}
+{&#39;p&#39;: 99.75543287045909, &#39;ratio&#39;: 21957.802581105112}
+{&#39;p&#39;: 99.797797865393, &#39;ratio&#39;: 22271.918401162304}
+{&#39;p&#39;: 99.79936525314567, &#39;ratio&#39;: 22287.73893707937}
+{&#39;p&#39;: 99.79929376189409, &#39;ratio&#39;: 22389.844998655924}
+{&#39;p&#39;: 99.81047276587758, &#39;ratio&#39;: 22564.555960883434}
+{&#39;p&#39;: 99.6588006052311, &#39;ratio&#39;: 23060.59762937637}
+{&#39;p&#39;: 99.18922697764098, &#39;ratio&#39;: 23299.694482421593}
+{&#39;p&#39;: 99.58810085031575, &#39;ratio&#39;: 24434.114763571495}
+{&#39;p&#39;: 99.56012752983705, &#39;ratio&#39;: 25195.70144806108}
+{&#39;p&#39;: 99.64679203032169, &#39;ratio&#39;: 25400.96674574674}
+{&#39;p&#39;: 99.64691769758667, &#39;ratio&#39;: 25446.55015519134}
+{&#39;p&#39;: 99.65035509307731, &#39;ratio&#39;: 25479.700601744666}
+{&#39;p&#39;: 99.57913173569577, &#39;ratio&#39;: 25724.54415196667}
+{&#39;p&#39;: 99.60385459090337, &#39;ratio&#39;: 26714.62713642326}
+{&#39;p&#39;: 95.91877252493241, &#39;ratio&#39;: 13329.727137464979}
+{&#39;p&#39;: 99.25599043287423, &#39;ratio&#39;: 26953.718362145584}
+{&#39;p&#39;: 99.26104691179246, &#39;ratio&#39;: 27085.05156015855}
+{&#39;p&#39;: 99.64102101247563, &#39;ratio&#39;: 29624.89886853585}
+{&#39;p&#39;: 99.62661381743284, &#39;ratio&#39;: 29746.702906053484}
+{&#39;p&#39;: 99.57839536287408, &#39;ratio&#39;: 29918.10062375285}
+{&#39;p&#39;: 100.06519003683981, &#39;ratio&#39;: 32174.203252764295}
+{&#39;p&#39;: 100.09486750306854, &#39;ratio&#39;: 32456.68881855312}
+{&#39;p&#39;: 100.39898982162966, &#39;ratio&#39;: 31232.780014414177}
+{&#39;p&#39;: 100.73256492369543, &#39;ratio&#39;: 31341.243746659733}
+{&#39;p&#39;: 101.08272384594582, &#39;ratio&#39;: 31768.935693400028}
+{&#39;p&#39;: 101.71980197408615, &#39;ratio&#39;: 34285.6146265433}
+{&#39;p&#39;: 101.6931098616577, &#39;ratio&#39;: 34621.69498020321}
+{&#39;p&#39;: 101.80529443314462, &#39;ratio&#39;: 35139.82864278785}
+{&#39;p&#39;: 101.78705981764314, &#39;ratio&#39;: 35322.21608924995}
+{&#39;p&#39;: 102.0870083824101, &#39;ratio&#39;: 35367.41796049301}
+{&#39;p&#39;: 102.10774474262143, &#39;ratio&#39;: 35396.028035911004}
+{&#39;p&#39;: 102.06675506417453, &#39;ratio&#39;: 35687.65876396049}
+{&#39;p&#39;: 102.06922590467721, &#39;ratio&#39;: 35709.52379683596}
+{&#39;p&#39;: 102.16391346218744, &#39;ratio&#39;: 35882.5107645273}
+{&#39;p&#39;: 102.20185799231766, &#39;ratio&#39;: 36021.98214489822}
+{&#39;p&#39;: 102.2030251371401, &#39;ratio&#39;: 36025.92232878509}
+{&#39;p&#39;: 102.20087830045256, &#39;ratio&#39;: 36090.527147765155}
+{&#39;p&#39;: 102.20238797089812, &#39;ratio&#39;: 36094.677016016256}
+{&#39;p&#39;: 102.20367218467182, &#39;ratio&#39;: 36122.88728224595}
+{&#39;p&#39;: 101.67418591406903, &#39;ratio&#39;: 36915.92784698172}
+{&#39;p&#39;: 101.58146621422071, &#39;ratio&#39;: 37286.28278032718}
+{&#39;p&#39;: 101.62066768030108, &#39;ratio&#39;: 37495.23191390359}
+{&#39;p&#39;: 101.62737956326949, &#39;ratio&#39;: 37632.35938023752}
+{&#39;p&#39;: 101.62785746476976, &#39;ratio&#39;: 37658.459693238736}
+{&#39;p&#39;: 101.68812905966256, &#39;ratio&#39;: 37755.78589675657}
+{&#39;p&#39;: 101.72040547244256, &#39;ratio&#39;: 37899.32749908377}
+{&#39;p&#39;: 101.72485325366705, &#39;ratio&#39;: 38071.28763959737}
+{&#39;p&#39;: 101.697879468257, &#39;ratio&#39;: 38098.18907176948}
+{&#39;p&#39;: 101.6815363900089, &#39;ratio&#39;: 38175.96431206631}
+{&#39;p&#39;: 101.68600984172042, &#39;ratio&#39;: 38235.298988026494}
+{&#39;p&#39;: 101.6652243084656, &#39;ratio&#39;: 38320.74884269995}
+{&#39;p&#39;: 101.55422573846926, &#39;ratio&#39;: 38442.035336047295}
+{&#39;p&#39;: 101.56151615837506, &#39;ratio&#39;: 38386.51931816868}
+{&#39;p&#39;: 101.64616548514495, &#39;ratio&#39;: 38674.13819854986}
+{&#39;p&#39;: 101.68948145998843, &#39;ratio&#39;: 38794.13987539116}
+{&#39;p&#39;: 101.77104481229277, &#39;ratio&#39;: 39079.253228726346}
+{&#39;p&#39;: 101.708635228936, &#39;ratio&#39;: 39247.88689055944}
+{&#39;p&#39;: 101.71411608252784, &#39;ratio&#39;: 39319.849293944884}
+{&#39;p&#39;: 101.74307928597896, &#39;ratio&#39;: 39401.61974896145}
+{&#39;p&#39;: 101.74101813242858, &#39;ratio&#39;: 39530.70217566141}
+{&#39;p&#39;: 101.7456829838232, &#39;ratio&#39;: 39584.46910434416}
+{&#39;p&#39;: 101.74699625908546, &#39;ratio&#39;: 39640.44700305733}
+{&#39;p&#39;: 101.74533396854781, &#39;ratio&#39;: 39648.77819185449}
+{&#39;p&#39;: 101.74335751325624, &#39;ratio&#39;: 39684.29677680925}
+{&#39;p&#39;: 101.85274257828254, &#39;ratio&#39;: 39746.71609773905}
+{&#39;p&#39;: 101.90140515022772, &#39;ratio&#39;: 39831.657963462785}
+{&#39;p&#39;: 102.02080685109043, &#39;ratio&#39;: 39893.55177990877}
+{&#39;p&#39;: 102.1016933803121, &#39;ratio&#39;: 39984.659353166106}
+{&#39;p&#39;: 102.18719583348214, &#39;ratio&#39;: 40125.59989696584}
+{&#39;p&#39;: 102.37834473982568, &#39;ratio&#39;: 40328.46117464632}
+{&#39;p&#39;: 102.36669431772206, &#39;ratio&#39;: 40572.52204025566}
+{&#39;p&#39;: 102.33602726439462, &#39;ratio&#39;: 40657.44715309259}
+{&#39;p&#39;: 102.3358975298936, &#39;ratio&#39;: 40667.31935235477}
+{&#39;p&#39;: 102.33659557583975, &#39;ratio&#39;: 40659.12261327275}
+{&#39;p&#39;: 102.34109913436107, &#39;ratio&#39;: 40751.29455222503}
+{&#39;p&#39;: 102.34889926849465, &#39;ratio&#39;: 40685.96470075435}
+{&#39;p&#39;: 102.34975882207279, &#39;ratio&#39;: 40786.40683110203}
+{&#39;p&#39;: 102.38798453808027, &#39;ratio&#39;: 41282.761988956976}
+{&#39;p&#39;: 102.38934742515562, &#39;ratio&#39;: 41438.133916981504}
+{&#39;p&#39;: 102.39011592235754, &#39;ratio&#39;: 41476.140000363346}
+{&#39;p&#39;: 102.39416804894095, &#39;ratio&#39;: 41505.725258884486}
+{&#39;p&#39;: 102.39692483329404, &#39;ratio&#39;: 41510.89150138659}
+{&#39;p&#39;: 102.39486355821198, &#39;ratio&#39;: 41555.9620947909}
+{&#39;p&#39;: 102.3994990023411, &#39;ratio&#39;: 41574.77376477064}
+{&#39;p&#39;: 102.4034657187454, &#39;ratio&#39;: 41676.85978327895}
+{&#39;p&#39;: 102.40042433428962, &#39;ratio&#39;: 41734.95746238909}
+{&#39;p&#39;: 102.40209346667315, &#39;ratio&#39;: 41771.35410850245}
+{&#39;p&#39;: 102.4009941997846, &#39;ratio&#39;: 41794.558461316396}
+{&#39;p&#39;: 102.40142790925312, &#39;ratio&#39;: 41825.084376837825}
+{&#39;p&#39;: 102.62806760073701, &#39;ratio&#39;: 41971.53969661461}
+{&#39;p&#39;: 102.71758504706513, &#39;ratio&#39;: 42058.20830941372}
+{&#39;p&#39;: 102.75190878471204, &#39;ratio&#39;: 42093.23441077741}
+{&#39;p&#39;: 102.51783458211182, &#39;ratio&#39;: 42441.206110885425}
+{&#39;p&#39;: 102.47639282287047, &#39;ratio&#39;: 42514.584081709385}
+{&#39;p&#39;: 102.47454447688749, &#39;ratio&#39;: 42566.9366401989}
+{&#39;p&#39;: 102.43805480155332, &#39;ratio&#39;: 42583.25187977496}
+{&#39;p&#39;: 102.44073741934604, &#39;ratio&#39;: 42612.78094639885}
+{&#39;p&#39;: 102.44258090253452, &#39;ratio&#39;: 42642.48516679718}
+{&#39;p&#39;: 102.3376474230331, &#39;ratio&#39;: 42775.760462509905}
+{&#39;p&#39;: 102.214497961905, &#39;ratio&#39;: 42835.878144623784}
+{&#39;p&#39;: 102.21905445559987, &#39;ratio&#39;: 42858.26161182615}
+{&#39;p&#39;: 102.2179308426112, &#39;ratio&#39;: 42908.932439875134}
+{&#39;p&#39;: 102.2274594117089, &#39;ratio&#39;: 42927.69925482315}
+{&#39;p&#39;: 102.26667656529456, &#39;ratio&#39;: 43124.09375226236}
+{&#39;p&#39;: 102.26576405594767, &#39;ratio&#39;: 43158.2779364538}
+{&#39;p&#39;: 102.43723259560421, &#39;ratio&#39;: 43273.449986086795}
+{&#39;p&#39;: 102.48100208204845, &#39;ratio&#39;: 43334.95605532322}
+{&#39;p&#39;: 102.47005891588437, &#39;ratio&#39;: 43607.52804228605}
+{&#39;p&#39;: 102.3856637642331, &#39;ratio&#39;: 43721.706441397066}
+{&#39;p&#39;: 102.38411021703982, &#39;ratio&#39;: 43744.97968930046}
+{&#39;p&#39;: 102.38447801934494, &#39;ratio&#39;: 43749.960460779745}
+{&#39;p&#39;: 102.34426496044289, &#39;ratio&#39;: 43824.039409934514}
+{&#39;p&#39;: 102.34359791436131, &#39;ratio&#39;: 43850.34406200236}
+{&#39;p&#39;: 102.345212582879, &#39;ratio&#39;: 43882.049038529774}
+{&#39;p&#39;: 102.34584627339962, &#39;ratio&#39;: 43974.88780789997}
+{&#39;p&#39;: 102.42181112529936, &#39;ratio&#39;: 44082.05475546486}
+{&#39;p&#39;: 102.46400399106659, &#39;ratio&#39;: 44190.460470321384}
+{&#39;p&#39;: 102.48645901804072, &#39;ratio&#39;: 44255.0990192825}
+{&#39;p&#39;: 102.27448614262775, &#39;ratio&#39;: 44404.929906931524}
+{&#39;p&#39;: 102.23045791726959, &#39;ratio&#39;: 44410.25570048862}
+{&#39;p&#39;: 102.22915005218536, &#39;ratio&#39;: 44479.08935149225}
+{&#39;p&#39;: 102.23447843037629, &#39;ratio&#39;: 44552.51606116587}
+{&#39;p&#39;: 102.23202439567082, &#39;ratio&#39;: 44576.11518284398}
+{&#39;p&#39;: 102.23588221268888, &#39;ratio&#39;: 44638.50746241234}
+{&#39;p&#39;: 102.23751900050729, &#39;ratio&#39;: 44682.50138862272}
+{&#39;p&#39;: 102.34070241762264, &#39;ratio&#39;: 44800.516009139494}
+{&#39;p&#39;: 102.42285750025594, &#39;ratio&#39;: 44917.76116006584}
+{&#39;p&#39;: 102.32955049158417, &#39;ratio&#39;: 45053.160061092705}
+{&#39;p&#39;: 102.30257314162128, &#39;ratio&#39;: 45322.15227173822}
+{&#39;p&#39;: 102.31285206867152, &#39;ratio&#39;: 45560.15654785666}
+{&#39;p&#39;: 101.78923943122668, &#39;ratio&#39;: 48498.67224571523}
+{&#39;p&#39;: 101.7928031631571, &#39;ratio&#39;: 48499.04430760985}
+{&#39;p&#39;: 101.75994100956655, &#39;ratio&#39;: 48685.3439437364}
+{&#39;p&#39;: 101.76084049945436, &#39;ratio&#39;: 48713.99153593338}
+{&#39;p&#39;: 101.91985449193021, &#39;ratio&#39;: 46777.40338921775}
+{&#39;p&#39;: 101.99766158877487, &#39;ratio&#39;: 46257.72465901403}
+{&#39;p&#39;: 102.05732949494615, &#39;ratio&#39;: 46353.867908805085}
+{&#39;p&#39;: 102.08121877718109, &#39;ratio&#39;: 46371.90153218927}
+{&#39;p&#39;: 102.13228195502371, &#39;ratio&#39;: 46648.50756186705}
+{&#39;p&#39;: 102.15586579097946, &#39;ratio&#39;: 46826.87441531093}
+{&#39;p&#39;: 102.02328257860515, &#39;ratio&#39;: 47007.26613844301}
+{&#39;p&#39;: 101.66919509492166, &#39;ratio&#39;: 50661.81382042719}
+{&#39;p&#39;: 101.66877547442478, &#39;ratio&#39;: 50768.6589567673}
+{&#39;p&#39;: 101.66890870667343, &#39;ratio&#39;: 50731.636116617716}
+{&#39;p&#39;: 101.66844212915366, &#39;ratio&#39;: 50827.98851394708}
+{&#39;p&#39;: 102.32560494440968, &#39;ratio&#39;: 47829.28651470815}
+{&#39;p&#39;: 101.92185050532872, &#39;ratio&#39;: 50926.020794481345}
+{&#39;p&#39;: 101.98946539983092, &#39;ratio&#39;: 51546.83326417697}
+{&#39;p&#39;: 102.09449851595957, &#39;ratio&#39;: 49662.14782728686}
+{&#39;p&#39;: 102.16573147096797, &#39;ratio&#39;: 49200.81461976678}
+{&#39;p&#39;: 102.28888107909377, &#39;ratio&#39;: 49463.362676111916}
+{&#39;p&#39;: 102.48337369013758, &#39;ratio&#39;: 49739.11412794485}
+{&#39;p&#39;: 102.61726345883777, &#39;ratio&#39;: 50229.780952636465}
+{&#39;p&#39;: 102.57044497970658, &#39;ratio&#39;: 50282.7539491097}
+{&#39;p&#39;: 102.57237708216721, &#39;ratio&#39;: 50306.09104031168}
+{&#39;p&#39;: 102.57080120417466, &#39;ratio&#39;: 50332.5957350379}
+{&#39;p&#39;: 102.57059044638304, &#39;ratio&#39;: 50387.378860129844}
+{&#39;p&#39;: 102.44356897452481, &#39;ratio&#39;: 50664.563733881856}
+{&#39;p&#39;: 102.34894698228118, &#39;ratio&#39;: 50818.536445875085}
+{&#39;p&#39;: 102.34935057721322, &#39;ratio&#39;: 50815.69230539637}
+{&#39;p&#39;: 102.35321923873892, &#39;ratio&#39;: 50817.58161544257}
+{&#39;p&#39;: 102.35322428025822, &#39;ratio&#39;: 50817.499101172056}
+{&#39;p&#39;: 102.35485640633782, &#39;ratio&#39;: 50971.59965224916}
+{&#39;p&#39;: 102.49576868819165, &#39;ratio&#39;: 51155.381705835796}
+{&#39;p&#39;: 102.50226344087139, &#39;ratio&#39;: 51230.92502929594}
+{&#39;p&#39;: 102.50231362225567, &#39;ratio&#39;: 51250.464810987076}
+{&#39;p&#39;: 102.50247453708901, &#39;ratio&#39;: 51353.63430966292}
+{&#39;p&#39;: 102.50078738541085, &#39;ratio&#39;: 51469.125831405254}
+{&#39;p&#39;: 102.45721775669239, &#39;ratio&#39;: 51510.95433147807}
+{&#39;p&#39;: 102.4585268530512, &#39;ratio&#39;: 51535.42873586541}
+{&#39;p&#39;: 102.45770307768755, &#39;ratio&#39;: 51572.72207899682}
+{&#39;p&#39;: 102.46501324037887, &#39;ratio&#39;: 51686.26429524517}
+{&#39;p&#39;: 102.46542014593454, &#39;ratio&#39;: 51753.0013048775}
+{&#39;p&#39;: 102.47436978615187, &#39;ratio&#39;: 51941.99269552751}
+{&#39;p&#39;: 102.51074962878208, &#39;ratio&#39;: 52061.11800238141}
+{&#39;p&#39;: 102.41297004295943, &#39;ratio&#39;: 52224.01842132083}
+{&#39;p&#39;: 102.30129716848035, &#39;ratio&#39;: 53141.04489005195}
+{&#39;p&#39;: 102.16305392412396, &#39;ratio&#39;: 55486.38032662432}
+{&#39;p&#39;: 102.1597912115158, &#39;ratio&#39;: 55553.67619266404}
+{&#39;p&#39;: 101.91143823087953, &#39;ratio&#39;: 56308.41177847241}
+{&#39;p&#39;: 101.91198761266507, &#39;ratio&#39;: 56323.07561395154}
+{&#39;p&#39;: 101.91093298059064, &#39;ratio&#39;: 56404.6959104731}
+{&#39;p&#39;: 101.91212476777291, &#39;ratio&#39;: 56447.5455771573}
+{&#39;p&#39;: 101.90945928194282, &#39;ratio&#39;: 56506.23831682752}
+{&#39;p&#39;: 101.86448731289116, &#39;ratio&#39;: 56611.25745377908}
+{&#39;p&#39;: 101.86682365450714, &#39;ratio&#39;: 56608.02359817449}
+{&#39;p&#39;: 101.86687365434699, &#39;ratio&#39;: 56688.96107798199}
+{&#39;p&#39;: 101.86653046930984, &#39;ratio&#39;: 56789.538220070186}
+{&#39;p&#39;: 101.95937295654568, &#39;ratio&#39;: 56881.884547380236}
+{&#39;p&#39;: 102.06717670610419, &#39;ratio&#39;: 56973.005171700424}
+{&#39;p&#39;: 102.15967747199126, &#39;ratio&#39;: 56515.17849500835}
+{&#39;p&#39;: 102.15301305665227, &#39;ratio&#39;: 57299.2185346728}
+{&#39;p&#39;: 102.15278854930992, &#39;ratio&#39;: 57321.48434616328}
+{&#39;p&#39;: 102.15208376098886, &#39;ratio&#39;: 57339.61500091065}
+{&#39;p&#39;: 102.15628615610343, &#39;ratio&#39;: 57337.933061917945}
+{&#39;p&#39;: 102.15688819030296, &#39;ratio&#39;: 57419.85501078533}
+{&#39;p&#39;: 102.1564673518102, &#39;ratio&#39;: 57410.45941872873}
+{&#39;p&#39;: 102.15057709220885, &#39;ratio&#39;: 57557.303114793154}
+{&#39;p&#39;: 102.15386831349312, &#39;ratio&#39;: 57629.53072871217}
+{&#39;p&#39;: 102.15730371085115, &#39;ratio&#39;: 57743.7806191569}
+{&#39;p&#39;: 102.15689157487044, &#39;ratio&#39;: 57840.384057063726}
+{&#39;p&#39;: 102.15745750091517, &#39;ratio&#39;: 57833.76346325044}
+{&#39;p&#39;: 102.18273199262269, &#39;ratio&#39;: 57938.530493747305}
+{&#39;p&#39;: 102.1823167226285, &#39;ratio&#39;: 57983.38741951673}
+{&#39;p&#39;: 102.22815049373013, &#39;ratio&#39;: 57315.121975177506}
+{&#39;p&#39;: 101.90457321169808, &#39;ratio&#39;: 58926.457600817135}
+{&#39;p&#39;: 101.95004292361835, &#39;ratio&#39;: 59265.808549346126}
+{&#39;p&#39;: 101.90429428361479, &#39;ratio&#39;: 59387.594779110725}
+{&#39;p&#39;: 101.79722097391264, &#39;ratio&#39;: 60798.99941372986}
+{&#39;p&#39;: 101.91015337528792, &#39;ratio&#39;: 59539.112181532866}
+{&#39;p&#39;: 102.05366492436448, &#39;ratio&#39;: 59209.536697040516}
+{&#39;p&#39;: 102.33886233624321, &#39;ratio&#39;: 58682.32416422374}
+{&#39;p&#39;: 102.34129843460498, &#39;ratio&#39;: 58717.25320720351}
+{&#39;p&#39;: 102.86946956677083, &#39;ratio&#39;: 60797.27024344629}
+{&#39;p&#39;: 102.82338527183761, &#39;ratio&#39;: 60917.93558820064}
+{&#39;p&#39;: 102.82422474011686, &#39;ratio&#39;: 60919.7507095552}
+{&#39;p&#39;: 102.88634521777853, &#39;ratio&#39;: 61024.657214595965}
+{&#39;p&#39;: 102.8883810120606, &#39;ratio&#39;: 61016.68690666259}
+{&#39;p&#39;: 102.97231210579501, &#39;ratio&#39;: 61164.11325754181}
+{&#39;p&#39;: 103.01892748135093, &#39;ratio&#39;: 62212.575891729335}
+{&#39;p&#39;: 103.01712349096738, &#39;ratio&#39;: 62314.828166684434}
+{&#39;p&#39;: 102.98245228842818, &#39;ratio&#39;: 61435.037308561834}
+{&#39;p&#39;: 102.94898506524781, &#39;ratio&#39;: 61520.321508413}
+{&#39;p&#39;: 102.9504368468139, &#39;ratio&#39;: 61538.40700828814}
+{&#39;p&#39;: 102.82553209130548, &#39;ratio&#39;: 61705.49896426272}
+{&#39;p&#39;: 102.57834024176661, &#39;ratio&#39;: 62063.788677867604}
+{&#39;p&#39;: 102.43181095200528, &#39;ratio&#39;: 65302.54555985051}
+{&#39;p&#39;: 102.58558080804302, &#39;ratio&#39;: 62265.54505922145}
+{&#39;p&#39;: 102.79201567191713, &#39;ratio&#39;: 62232.38229242833}
+{&#39;p&#39;: 102.79123372642474, &#39;ratio&#39;: 62255.65412939891}
+{&#39;p&#39;: 102.78922591372947, &#39;ratio&#39;: 62336.06925454439}
+{&#39;p&#39;: 102.79140260676641, &#39;ratio&#39;: 62523.50309898903}
+{&#39;p&#39;: 102.78865829722412, &#39;ratio&#39;: 62629.8931298478}
+{&#39;p&#39;: 102.79199953411552, &#39;ratio&#39;: 62708.517326179295}
+{&#39;p&#39;: 102.881549552731, &#39;ratio&#39;: 64589.43023216521}
+{&#39;p&#39;: 103.0743692009777, &#39;ratio&#39;: 70424.11716298557}
+{&#39;p&#39;: 103.11198218301622, &#39;ratio&#39;: 70581.03045827351}
+{&#39;p&#39;: 103.1124114981482, &#39;ratio&#39;: 70631.01289847752}
+{&#39;p&#39;: 103.18744971025718, &#39;ratio&#39;: 70875.6239071836}
+{&#39;p&#39;: 103.3069373554281, &#39;ratio&#39;: 71254.02388831809}
+{&#39;p&#39;: 103.38237112539956, &#39;ratio&#39;: 71370.10296312193}
+{&#39;p&#39;: 103.40314079432197, &#39;ratio&#39;: 71469.74796924602}
+{&#39;p&#39;: 103.46437456986679, &#39;ratio&#39;: 71714.11562745614}
+{&#39;p&#39;: 103.46516709914252, &#39;ratio&#39;: 71754.44578625678}
+{&#39;p&#39;: 103.56184314657995, &#39;ratio&#39;: 75668.97206827025}
+{&#39;p&#39;: 103.58859593402522, &#39;ratio&#39;: 75987.60376482682}
+{&#39;p&#39;: 103.5861357336149, &#39;ratio&#39;: 76200.43821462142}
+{&#39;p&#39;: 103.62038358369908, &#39;ratio&#39;: 76421.01414931712}
+{&#39;p&#39;: 103.65860862163572, &#39;ratio&#39;: 76948.69033125861}
+{&#39;p&#39;: 103.49735539857211, &#39;ratio&#39;: 76923.65126799981}
+{&#39;p&#39;: 103.57021702652347, &#39;ratio&#39;: 77426.89142197277}
+{&#39;p&#39;: 103.47572995619556, &#39;ratio&#39;: 78052.53050936002}
+{&#39;p&#39;: 103.49702644921018, &#39;ratio&#39;: 78438.016486343}
+{&#39;p&#39;: 103.56319580831418, &#39;ratio&#39;: 79805.6275334896}
+{&#39;p&#39;: 103.52084366029437, &#39;ratio&#39;: 80956.26894877086}
+{&#39;p&#39;: 103.74633517420045, &#39;ratio&#39;: 81205.83470345988}
+{&#39;p&#39;: 103.76764154755149, &#39;ratio&#39;: 81422.8241452744}
+{&#39;p&#39;: 103.70930236899001, &#39;ratio&#39;: 82031.58915790437}
+{&#39;p&#39;: 103.77999831556994, &#39;ratio&#39;: 83023.69586153523}
+{&#39;p&#39;: 103.6537978451879, &#39;ratio&#39;: 83518.63421767484}
+{&#39;p&#39;: 103.6896137027897, &#39;ratio&#39;: 84211.41778165768}
+{&#39;p&#39;: 103.56724509657339, &#39;ratio&#39;: 85302.94384176865}
+{&#39;p&#39;: 103.47106652706745, &#39;ratio&#39;: 85941.37810794933}
+{&#39;p&#39;: 103.14318990627038, &#39;ratio&#39;: 101401.10448141203}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_9.png" src="../../_images/ipynb_.ipynb_checkpoints_Kyle_Model-checkpoint_5_9.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Bootcamp Asset Pricing</a></h1>
+
+
+
+<p class="blurb">Scott Condie<br><a href="mailto:scott_condie@byu.edu">scott_condie@byu.edu</a><br><a href="http://scottcondie.github.io">scottcondie.github.io</a><br>Updated July 2018.</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lucas.html">The Lucas Tree Model of Asset Pricing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kyle.html">Orderbooks and Asset Pricing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018.
+      
+      |
+      <a href="../../_sources/ipynb/.ipynb_checkpoints/Kyle_Model-checkpoint.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

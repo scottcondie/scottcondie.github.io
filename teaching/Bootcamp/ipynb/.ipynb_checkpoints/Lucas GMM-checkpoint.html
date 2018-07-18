@@ -1,0 +1,1243 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Lucas Tree model and GMM estimation &#8212; Notes on the Lucas (1978) and Kyle (1985) asset pricing models</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2018',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+</style>
+<div class="section" id="Lucas-Tree-model-and-GMM-estimation">
+<h1>Lucas Tree model and GMM estimation<a class="headerlink" href="#Lucas-Tree-model-and-GMM-estimation" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas_datareader.data</span> <span class="k">as</span> <span class="nn">web</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">fsolve</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">broyden1</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">minimize</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">convert_to_daily_with_ffill</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;convert_to_daily_with_ffill</span>
+
+<span class="sd">    This method converts a dataframe to have a daily index and forward fills all of the missing days.  Useful for converting (for example) stock market data to quarterly data when the quarterly return is wanted.</span>
+
+<span class="sd">    :param df: a pandas.DataFrame to be converted</span>
+<span class="sd">    :returns: a pandas.DataFrame that has been converted</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">new_idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;01-01-1950&#39;</span><span class="p">,</span> <span class="s1">&#39;07-01-2018&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_idx</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+
+
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1950</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">rpce</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">DataReader</span><span class="p">(</span><span class="s1">&#39;PCECC96&#39;</span><span class="p">,</span> <span class="s1">&#39;fred&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+<span class="n">w5000</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">DataReader</span><span class="p">(</span><span class="s1">&#39;WILL5000INDFC&#39;</span><span class="p">,</span> <span class="s1">&#39;fred&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+<span class="n">w5000</span> <span class="o">=</span> <span class="n">convert_to_daily_with_ffill</span><span class="p">(</span><span class="n">w5000</span><span class="p">)</span>
+<span class="n">gdef</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">DataReader</span><span class="p">(</span><span class="s1">&#39;GDPDEF&#39;</span><span class="p">,</span> <span class="s1">&#39;fred&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+<span class="n">tb</span> <span class="o">=</span> <span class="n">web</span><span class="o">.</span><span class="n">DataReader</span><span class="p">(</span><span class="s1">&#39;TB3MS&#39;</span><span class="p">,</span> <span class="s1">&#39;fred&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;rpce&#39;</span><span class="p">,</span> <span class="s1">&#39;w5000&#39;</span><span class="p">,</span> <span class="s1">&#39;tb&#39;</span><span class="p">,</span> <span class="s1">&#39;gdef&#39;</span><span class="p">],</span> <span class="n">index</span> <span class="o">=</span> <span class="n">rpce</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;rpce&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rpce</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;w5000&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">w5000</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;gdef&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdef</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;inf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;gdef&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gdef&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;w5000_d&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;w5000&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;inf&#39;</span><span class="p">]</span>      <span class="c1"># Deflated asset price returns</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;w5000_d&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;w5000_d&#39;</span><span class="p">]</span>   <span class="c1"># Returns to asset prices</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;tb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tb</span><span class="o">/</span><span class="mf">100.</span> <span class="o">+</span> <span class="mi">1</span>    <span class="c1"># Convert to percentage and make a gross return</span>
+<span class="n">df</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># Drop NaNs</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[32]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rpce</th>
+      <th>w5000</th>
+      <th>tb</th>
+      <th>gdef</th>
+      <th>inf</th>
+      <th>w5000_d</th>
+      <th>R</th>
+    </tr>
+    <tr>
+      <th>DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1971-01-01</th>
+      <td>2968.902</td>
+      <td>1.00</td>
+      <td>1.0444</td>
+      <td>23.536</td>
+      <td>1.015270</td>
+      <td>0.984959</td>
+      <td>1.122320</td>
+    </tr>
+    <tr>
+      <th>1971-04-01</th>
+      <td>2996.124</td>
+      <td>1.12</td>
+      <td>1.0386</td>
+      <td>23.846</td>
+      <td>1.013171</td>
+      <td>1.105440</td>
+      <td>1.011948</td>
+    </tr>
+    <tr>
+      <th>1971-07-01</th>
+      <td>3020.036</td>
+      <td>1.13</td>
+      <td>1.0540</td>
+      <td>24.088</td>
+      <td>1.010148</td>
+      <td>1.118647</td>
+      <td>0.992965</td>
+    </tr>
+    <tr>
+      <th>1971-10-01</th>
+      <td>3070.230</td>
+      <td>1.12</td>
+      <td>1.0446</td>
+      <td>24.288</td>
+      <td>1.008303</td>
+      <td>1.110777</td>
+      <td>1.046124</td>
+    </tr>
+    <tr>
+      <th>1972-01-01</th>
+      <td>3110.801</td>
+      <td>1.18</td>
+      <td>1.0338</td>
+      <td>24.664</td>
+      <td>1.015481</td>
+      <td>1.162011</td>
+      <td>1.077729</td>
+    </tr>
+    <tr>
+      <th>1972-04-01</th>
+      <td>3170.159</td>
+      <td>1.26</td>
+      <td>1.0371</td>
+      <td>24.815</td>
+      <td>1.006122</td>
+      <td>1.252333</td>
+      <td>1.004674</td>
+    </tr>
+    <tr>
+      <th>1972-07-01</th>
+      <td>3219.095</td>
+      <td>1.27</td>
+      <td>1.0398</td>
+      <td>25.048</td>
+      <td>1.009389</td>
+      <td>1.258186</td>
+      <td>1.020280</td>
+    </tr>
+    <tr>
+      <th>1972-10-01</th>
+      <td>3294.606</td>
+      <td>1.30</td>
+      <td>1.0474</td>
+      <td>25.366</td>
+      <td>1.012696</td>
+      <td>1.283703</td>
+      <td>1.070357</td>
+    </tr>
+    <tr>
+      <th>1973-01-01</th>
+      <td>3354.764</td>
+      <td>1.39</td>
+      <td>1.0541</td>
+      <td>25.661</td>
+      <td>1.011630</td>
+      <td>1.374020</td>
+      <td>0.917591</td>
+    </tr>
+    <tr>
+      <th>1973-04-01</th>
+      <td>3353.357</td>
+      <td>1.28</td>
+      <td>1.0626</td>
+      <td>26.052</td>
+      <td>1.015237</td>
+      <td>1.260789</td>
+      <td>0.918401</td>
+    </tr>
+    <tr>
+      <th>1973-07-01</th>
+      <td>3365.331</td>
+      <td>1.18</td>
+      <td>1.0801</td>
+      <td>26.549</td>
+      <td>1.019077</td>
+      <td>1.157910</td>
+      <td>1.075416</td>
+    </tr>
+    <tr>
+      <th>1973-10-01</th>
+      <td>3355.493</td>
+      <td>1.27</td>
+      <td>1.0722</td>
+      <td>27.077</td>
+      <td>1.019888</td>
+      <td>1.245235</td>
+      <td>0.890522</td>
+    </tr>
+    <tr>
+      <th>1974-01-01</th>
+      <td>3326.205</td>
+      <td>1.13</td>
+      <td>1.0777</td>
+      <td>27.592</td>
+      <td>1.019020</td>
+      <td>1.108909</td>
+      <td>0.977738</td>
+    </tr>
+    <tr>
+      <th>1974-04-01</th>
+      <td>3337.864</td>
+      <td>1.11</td>
+      <td>1.0833</td>
+      <td>28.248</td>
+      <td>1.023775</td>
+      <td>1.084223</td>
+      <td>0.887369</td>
+    </tr>
+    <tr>
+      <th>1974-07-01</th>
+      <td>3351.624</td>
+      <td>0.99</td>
+      <td>1.0755</td>
+      <td>29.067</td>
+      <td>1.028993</td>
+      <td>0.962105</td>
+      <td>0.747144</td>
+    </tr>
+    <tr>
+      <th>1974-10-01</th>
+      <td>3302.477</td>
+      <td>0.74</td>
+      <td>1.0746</td>
+      <td>29.923</td>
+      <td>1.029449</td>
+      <td>0.718831</td>
+      <td>1.101863</td>
+    </tr>
+    <tr>
+      <th>1975-01-01</th>
+      <td>3330.127</td>
+      <td>0.81</td>
+      <td>1.0626</td>
+      <td>30.601</td>
+      <td>1.022658</td>
+      <td>0.792054</td>
+      <td>1.256363</td>
+    </tr>
+    <tr>
+      <th>1975-04-01</th>
+      <td>3385.744</td>
+      <td>1.01</td>
+      <td>1.0561</td>
+      <td>31.059</td>
+      <td>1.014967</td>
+      <td>0.995106</td>
+      <td>1.165059</td>
+    </tr>
+    <tr>
+      <th>1975-07-01</th>
+      <td>3434.088</td>
+      <td>1.18</td>
+      <td>1.0613</td>
+      <td>31.612</td>
+      <td>1.017805</td>
+      <td>1.159358</td>
+      <td>0.882339</td>
+    </tr>
+    <tr>
+      <th>1975-10-01</th>
+      <td>3470.491</td>
+      <td>1.04</td>
+      <td>1.0596</td>
+      <td>32.139</td>
+      <td>1.016671</td>
+      <td>1.022947</td>
+      <td>1.083615</td>
+    </tr>
+    <tr>
+      <th>1976-01-01</th>
+      <td>3539.873</td>
+      <td>1.12</td>
+      <td>1.0487</td>
+      <td>32.473</td>
+      <td>1.010392</td>
+      <td>1.108480</td>
+      <td>1.160979</td>
+    </tr>
+    <tr>
+      <th>1976-04-01</th>
+      <td>3572.443</td>
+      <td>1.30</td>
+      <td>1.0486</td>
+      <td>32.803</td>
+      <td>1.010162</td>
+      <td>1.286922</td>
+      <td>1.020317</td>
+    </tr>
+    <tr>
+      <th>1976-07-01</th>
+      <td>3610.329</td>
+      <td>1.33</td>
+      <td>1.0523</td>
+      <td>33.226</td>
+      <td>1.012895</td>
+      <td>1.313068</td>
+      <td>1.017702</td>
+    </tr>
+    <tr>
+      <th>1976-10-01</th>
+      <td>3657.456</td>
+      <td>1.36</td>
+      <td>1.0492</td>
+      <td>33.815</td>
+      <td>1.017727</td>
+      <td>1.336311</td>
+      <td>1.045802</td>
+    </tr>
+    <tr>
+      <th>1977-01-01</th>
+      <td>3699.293</td>
+      <td>1.42</td>
+      <td>1.0462</td>
+      <td>34.359</td>
+      <td>1.016088</td>
+      <td>1.397517</td>
+      <td>0.945578</td>
+    </tr>
+    <tr>
+      <th>1977-04-01</th>
+      <td>3719.733</td>
+      <td>1.34</td>
+      <td>1.0454</td>
+      <td>34.841</td>
+      <td>1.014028</td>
+      <td>1.321462</td>
+      <td>1.046546</td>
+    </tr>
+    <tr>
+      <th>1977-07-01</th>
+      <td>3755.186</td>
+      <td>1.40</td>
+      <td>1.0519</td>
+      <td>35.270</td>
+      <td>1.012313</td>
+      <td>1.382971</td>
+      <td>0.962486</td>
+    </tr>
+    <tr>
+      <th>1977-10-01</th>
+      <td>3811.769</td>
+      <td>1.36</td>
+      <td>1.0616</td>
+      <td>36.036</td>
+      <td>1.021718</td>
+      <td>1.331091</td>
+      <td>1.021521</td>
+    </tr>
+    <tr>
+      <th>1978-01-01</th>
+      <td>3833.825</td>
+      <td>1.38</td>
+      <td>1.0644</td>
+      <td>36.573</td>
+      <td>1.014902</td>
+      <td>1.359738</td>
+      <td>0.967781</td>
+    </tr>
+    <tr>
+      <th>1978-04-01</th>
+      <td>3915.624</td>
+      <td>1.34</td>
+      <td>1.0629</td>
+      <td>37.242</td>
+      <td>1.018292</td>
+      <td>1.315929</td>
+      <td>1.098702</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2010-07-01</th>
+      <td>10063.083</td>
+      <td>41.37</td>
+      <td>1.0016</td>
+      <td>101.429</td>
+      <td>1.004566</td>
+      <td>41.181971</td>
+      <td>1.125067</td>
+    </tr>
+    <tr>
+      <th>2010-10-01</th>
+      <td>10166.127</td>
+      <td>46.57</td>
+      <td>1.0013</td>
+      <td>101.949</td>
+      <td>1.005127</td>
+      <td>46.332466</td>
+      <td>1.112449</td>
+    </tr>
+    <tr>
+      <th>2011-01-01</th>
+      <td>10217.123</td>
+      <td>51.77</td>
+      <td>1.0015</td>
+      <td>102.399</td>
+      <td>1.004414</td>
+      <td>51.542493</td>
+      <td>1.062445</td>
+    </tr>
+    <tr>
+      <th>2011-04-01</th>
+      <td>10237.676</td>
+      <td>55.16</td>
+      <td>1.0006</td>
+      <td>103.145</td>
+      <td>1.007285</td>
+      <td>54.761053</td>
+      <td>1.009587</td>
+    </tr>
+    <tr>
+      <th>2011-07-01</th>
+      <td>10282.234</td>
+      <td>55.62</td>
+      <td>1.0004</td>
+      <td>103.768</td>
+      <td>1.006040</td>
+      <td>55.286070</td>
+      <td>0.840235</td>
+    </tr>
+    <tr>
+      <th>2011-10-01</th>
+      <td>10316.777</td>
+      <td>46.52</td>
+      <td>1.0002</td>
+      <td>103.917</td>
+      <td>1.001436</td>
+      <td>46.453298</td>
+      <td>1.115234</td>
+    </tr>
+    <tr>
+      <th>2012-01-01</th>
+      <td>10379.022</td>
+      <td>52.08</td>
+      <td>1.0003</td>
+      <td>104.466</td>
+      <td>1.005283</td>
+      <td>51.806304</td>
+      <td>1.128493</td>
+    </tr>
+    <tr>
+      <th>2012-04-01</th>
+      <td>10396.630</td>
+      <td>58.73</td>
+      <td>1.0008</td>
+      <td>104.943</td>
+      <td>1.004566</td>
+      <td>58.463053</td>
+      <td>0.967372</td>
+    </tr>
+    <tr>
+      <th>2012-07-01</th>
+      <td>10424.119</td>
+      <td>56.86</td>
+      <td>1.0010</td>
+      <td>105.508</td>
+      <td>1.005384</td>
+      <td>56.555512</td>
+      <td>1.064553</td>
+    </tr>
+    <tr>
+      <th>2012-10-01</th>
+      <td>10453.204</td>
+      <td>60.45</td>
+      <td>1.0010</td>
+      <td>105.935</td>
+      <td>1.004047</td>
+      <td>60.206340</td>
+      <td>1.000469</td>
+    </tr>
+    <tr>
+      <th>2013-01-01</th>
+      <td>10502.300</td>
+      <td>60.47</td>
+      <td>1.0007</td>
+      <td>106.349</td>
+      <td>1.003908</td>
+      <td>60.234600</td>
+      <td>1.108354</td>
+    </tr>
+    <tr>
+      <th>2013-04-01</th>
+      <td>10523.929</td>
+      <td>66.90</td>
+      <td>1.0006</td>
+      <td>106.570</td>
+      <td>1.002078</td>
+      <td>66.761266</td>
+      <td>1.038858</td>
+    </tr>
+    <tr>
+      <th>2013-07-01</th>
+      <td>10573.135</td>
+      <td>69.69</td>
+      <td>1.0004</td>
+      <td>107.084</td>
+      <td>1.004823</td>
+      <td>69.355490</td>
+      <td>1.065368</td>
+    </tr>
+    <tr>
+      <th>2013-10-01</th>
+      <td>10662.222</td>
+      <td>74.27</td>
+      <td>1.0005</td>
+      <td>107.636</td>
+      <td>1.005155</td>
+      <td>73.889114</td>
+      <td>1.092243</td>
+    </tr>
+    <tr>
+      <th>2014-01-01</th>
+      <td>10713.384</td>
+      <td>81.04</td>
+      <td>1.0004</td>
+      <td>108.083</td>
+      <td>1.004153</td>
+      <td>80.704842</td>
+      <td>1.026866</td>
+    </tr>
+    <tr>
+      <th>2014-04-01</th>
+      <td>10805.115</td>
+      <td>83.34</td>
+      <td>1.0003</td>
+      <td>108.692</td>
+      <td>1.005635</td>
+      <td>82.873047</td>
+      <td>1.047802</td>
+    </tr>
+    <tr>
+      <th>2014-07-01</th>
+      <td>10909.862</td>
+      <td>87.23</td>
+      <td>1.0003</td>
+      <td>109.187</td>
+      <td>1.004554</td>
+      <td>86.834542</td>
+      <td>0.982173</td>
+    </tr>
+    <tr>
+      <th>2014-10-01</th>
+      <td>11045.225</td>
+      <td>85.41</td>
+      <td>1.0002</td>
+      <td>109.345</td>
+      <td>1.001447</td>
+      <td>85.286585</td>
+      <td>1.065065</td>
+    </tr>
+    <tr>
+      <th>2015-01-01</th>
+      <td>11145.286</td>
+      <td>90.82</td>
+      <td>1.0003</td>
+      <td>109.326</td>
+      <td>0.999826</td>
+      <td>90.835784</td>
+      <td>1.008585</td>
+    </tr>
+    <tr>
+      <th>2015-04-01</th>
+      <td>11227.947</td>
+      <td>92.11</td>
+      <td>1.0002</td>
+      <td>109.916</td>
+      <td>1.005397</td>
+      <td>91.615578</td>
+      <td>1.011488</td>
+    </tr>
+    <tr>
+      <th>2015-07-01</th>
+      <td>11304.567</td>
+      <td>92.98</td>
+      <td>1.0003</td>
+      <td>110.286</td>
+      <td>1.003366</td>
+      <td>92.668060</td>
+      <td>0.923230</td>
+    </tr>
+    <tr>
+      <th>2015-10-01</th>
+      <td>11379.273</td>
+      <td>85.73</td>
+      <td>1.0002</td>
+      <td>110.513</td>
+      <td>1.002058</td>
+      <td>85.553906</td>
+      <td>1.058437</td>
+    </tr>
+    <tr>
+      <th>2016-01-01</th>
+      <td>11430.549</td>
+      <td>90.61</td>
+      <td>1.0026</td>
+      <td>110.582</td>
+      <td>1.000624</td>
+      <td>90.553462</td>
+      <td>1.008346</td>
+    </tr>
+    <tr>
+      <th>2016-04-01</th>
+      <td>11537.728</td>
+      <td>91.86</td>
+      <td>1.0023</td>
+      <td>111.249</td>
+      <td>1.006032</td>
+      <td>91.309248</td>
+      <td>1.027938</td>
+    </tr>
+    <tr>
+      <th>2016-07-01</th>
+      <td>11618.098</td>
+      <td>94.18</td>
+      <td>1.0030</td>
+      <td>111.628</td>
+      <td>1.003407</td>
+      <td>93.860240</td>
+      <td>1.041101</td>
+    </tr>
+    <tr>
+      <th>2016-10-01</th>
+      <td>11702.120</td>
+      <td>98.21</td>
+      <td>1.0033</td>
+      <td>112.190</td>
+      <td>1.005035</td>
+      <td>97.718031</td>
+      <td>1.042949</td>
+    </tr>
+    <tr>
+      <th>2017-01-01</th>
+      <td>11758.040</td>
+      <td>102.42</td>
+      <td>1.0051</td>
+      <td>112.746</td>
+      <td>1.004956</td>
+      <td>101.914922</td>
+      <td>1.059697</td>
+    </tr>
+    <tr>
+      <th>2017-04-01</th>
+      <td>11852.958</td>
+      <td>108.27</td>
+      <td>1.0080</td>
+      <td>113.029</td>
+      <td>1.002510</td>
+      <td>107.998915</td>
+      <td>1.026918</td>
+    </tr>
+    <tr>
+      <th>2017-07-01</th>
+      <td>11916.576</td>
+      <td>111.48</td>
+      <td>1.0107</td>
+      <td>113.614</td>
+      <td>1.005176</td>
+      <td>110.905988</td>
+      <td>1.044363</td>
+    </tr>
+    <tr>
+      <th>2017-10-01</th>
+      <td>12035.227</td>
+      <td>116.50</td>
+      <td>1.0107</td>
+      <td>114.275</td>
+      <td>1.005818</td>
+      <td>115.826130</td>
+      <td>1.064069</td>
+    </tr>
+  </tbody>
+</table>
+<p>188 rows × 7 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">GMMEstimator_q1</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A GMM Estimator for question 1&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mf">0.99</span>   <span class="c1"># Since we are not changing this, I make it an instance property from the start.</span>
+
+    <span class="k">def</span> <span class="nf">calculate_m</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Define the SDF given values for beta and gamma&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rpce&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rpce&#39;</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="p">)</span>
+        <span class="c1">#self.df = self.df.dropna(axis=0).copy()</span>
+
+    <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">gamma</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculate_m</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+        <span class="c1">#cov = self.df[[&#39;m&#39;, &#39;R&#39;]].cov()[&#39;R&#39;][&#39;m&#39;]</span>
+        <span class="c1">#ER = self.df[&#39;R&#39;].mean()</span>
+        <span class="c1">#Em = self.df[&#39;m&#39;].mean()</span>
+        <span class="c1">#dif = 1 -</span>
+        <span class="c1">#print(cov + ER*Em)</span>
+        <span class="c1">#return (1 - cov - ER*Em)**2</span>
+
+    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Estimate values for beta and gamma&#39;&#39;&#39;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+
+<span class="n">e</span> <span class="o">=</span> <span class="n">GMMEstimator_q1</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="c1">#e.objective(2.0)</span>
+<span class="n">e</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+      fun: nan
+ hess_inv: array([[1]])
+      jac: array([nan])
+  message: &#39;Desired error not necessarily achieved due to precision loss.&#39;
+     nfev: 3
+      nit: 0
+     njev: 1
+   status: 2
+  success: False
+        x: array([3.])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">GMMEstimator_q3</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mf">0.99</span>   <span class="c1"># Since we are not changing this, I make it an instance property from the start.</span>
+
+    <span class="k">def</span> <span class="nf">calculate_m</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Define the SDF given values for beta and gamma&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rpce&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rpce&#39;</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">gamma</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculate_m</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+        <span class="c1">#print(self.df)</span>
+        <span class="c1">#cov = self.df[[&#39;m&#39;, &#39;R&#39;]].cov()[&#39;R&#39;][&#39;m&#39;]</span>
+        <span class="c1">#ER = self.df[&#39;R&#39;].mean()</span>
+        <span class="c1">#Em = self.df[&#39;m&#39;].mean()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;inv_m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tb&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;inv_m&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">new_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">ob</span> <span class="o">=</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;diff&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="c1">#cov = df[[&#39;m&#39;, &#39;R&#39;]].cov()[&quot;R&quot;][&#39;m&#39;]</span>
+        <span class="c1">#ER = df[&#39;R&#39;].mean()</span>
+        <span class="c1">#Em = df[&#39;m&#39;].mean()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ob</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Estimate values for beta and gamma&#39;&#39;&#39;</span>
+        <span class="c1">#s, info, ier, msg = fsolve(self.objective, init, full_output=True)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">):</span>
+        <span class="n">ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span> <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ar</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">e</span> <span class="o">=</span> <span class="n">GMMEstimator_q3</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">e</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="n">e</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/ipynb_.ipynb_checkpoints_Lucas_GMM-checkpoint_4_0.png" src="../../_images/ipynb_.ipynb_checkpoints_Lucas_GMM-checkpoint_4_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;fun&#39;: 0.33268058450798116,
+ &#39;hess_inv&#39;: array([[25.47909069]]),
+ &#39;jac&#39;: array([-1.86264515e-08]),
+ &#39;message&#39;: &#39;Optimization terminated successfully.&#39;,
+ &#39;nfev&#39;: 18,
+ &#39;nit&#39;: 4,
+ &#39;njev&#39;: 6,
+ &#39;status&#39;: 0,
+ &#39;success&#39;: True,
+ &#39;x&#39;: array([2.7733041])}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">GMMEstimator_q4</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span>
+
+    <span class="k">def</span> <span class="nf">calculate_m</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Define the SDF given values for beta and gamma&#39;&#39;&#39;</span>
+        <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">beta</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rpce&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rpce&#39;</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;The function to be minimized.&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculate_m</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="c1">#print(self.df)</span>
+        <span class="c1">#cov = self.df[[&#39;m&#39;, &#39;R&#39;]].cov()[&#39;R&#39;][&#39;m&#39;]</span>
+        <span class="c1">#ER = self.df[&#39;R&#39;].mean()</span>
+        <span class="c1">#Em = self.df[&#39;m&#39;].mean()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;inv_m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tb&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;inv_m&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">new_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">ob</span> <span class="o">=</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;diff&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">ob1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ob</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">new_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">new_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">ob2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+
+        <span class="c1">#cov = df[[&#39;m&#39;, &#39;R&#39;]].cov()[&quot;R&quot;][&#39;m&#39;]</span>
+        <span class="c1">#ER = df[&#39;R&#39;].mean()</span>
+        <span class="c1">#Em = df[&#39;m&#39;].mean()</span>
+        <span class="k">return</span> <span class="n">ob1</span> <span class="o">+</span> <span class="n">ob2</span>
+
+    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Estimate values for beta and gamma&#39;&#39;&#39;</span>
+        <span class="c1">#s, info, ier, msg = fsolve(self.objective, init, full_output=True)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">):</span>
+        <span class="n">ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span> <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ar</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">e</span> <span class="o">=</span> <span class="n">GMMEstimator_q4</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">e</span><span class="o">.</span><span class="n">estimate</span><span class="p">([</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">])</span>
+
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">bg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">grid</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">for ii in grid[0].shape[0]:</span>
+<span class="sd">    for jj in grid[0].shape[1]:</span>
+<span class="sd">        i = grid[0][ii,jj]</span>
+<span class="sd">        j = grid[1][ii,jj]</span>
+<span class="sd">        idx.append([ii,jj])</span>
+<span class="sd">        params.append([i,j])</span>
+
+<span class="sd">obj = np.zeros(grid[0].shape)</span>
+<span class="sd">obj_list = []</span>
+<span class="sd">for kk in params:</span>
+<span class="sd">    obj_list.append(e.objective(kk))</span>
+
+<span class="sd"># Now reshape</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;fun&#39;: 123.0064128892117,
+ &#39;hess_inv&#39;: array([[4.52509601e-04, 1.52559473e-02],
+       [1.52559473e-02, 3.08875020e+00]]),
+ &#39;jac&#39;: array([-3.81469727e-06,  0.00000000e+00]),
+ &#39;message&#39;: &#39;Optimization terminated successfully.&#39;,
+ &#39;nfev&#39;: 68,
+ &#39;nit&#39;: 14,
+ &#39;njev&#39;: 17,
+ &#39;status&#39;: 0,
+ &#39;success&#39;: True,
+ &#39;x&#39;: array([0.70945172, 0.7018161 ])}
+(50, 20) (50, 20)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-35-a3b2207e57e1&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+<span class="ansi-green-fg">     57</span> idx <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-yellow-intense-fg ansi-bold">]</span>
+<span class="ansi-green-fg">     58</span>
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 59</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">for</span> ii <span class="ansi-green-intense-fg ansi-bold">in</span> grid<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>shape<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">     60</span>     <span class="ansi-green-intense-fg ansi-bold">for</span> jj <span class="ansi-green-intense-fg ansi-bold">in</span> grid<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>shape<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">     61</span>         i <span class="ansi-yellow-intense-fg ansi-bold">=</span> grid<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">[</span>ii<span class="ansi-yellow-intense-fg ansi-bold">,</span>jj<span class="ansi-yellow-intense-fg ansi-bold">]</span>
+
+<span class="ansi-red-intense-fg ansi-bold">TypeError</span>: &#39;int&#39; object is not iterable
+</pre></div></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Bootcamp Asset Pricing</a></h1>
+
+
+
+<p class="blurb">Scott Condie<br><a href="mailto:scott_condie@byu.edu">scott_condie@byu.edu</a><br><a href="http://scottcondie.github.io">scottcondie.github.io</a><br>Updated July 2018.</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lucas.html">The Lucas Tree Model of Asset Pricing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kyle.html">Orderbooks and Asset Pricing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018.
+      
+      |
+      <a href="../../_sources/ipynb/.ipynb_checkpoints/Lucas GMM-checkpoint.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

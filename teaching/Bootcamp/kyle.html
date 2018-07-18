@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Orderbooks and Asset Pricing &#8212; Notes on the Lucas (1978) and Kyle (1985) asset pricing models</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2018',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="The Lucas Tree Model of Asset Pricing" href="lucas.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="orderbooks-and-asset-pricing">
+<h1>Orderbooks and Asset Pricing<a class="headerlink" href="#orderbooks-and-asset-pricing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-kyle-model-of-orderbook-shape">
+<h2>The Kyle model of orderbook shape<a class="headerlink" href="#the-kyle-model-of-orderbook-shape" title="Permalink to this headline">¶</a></h2>
+<p>This model of the orderbook is given in Kyle (1985).  We have uninformed traders, informed traders (or insiders in Kyle’s language) and market makers.  Uninformed traders have random demand that has mean 0 and a known variance.  Let the demand for uninformed traders be given by</p>
+<div class="math">
+\[u \sim N(0, \sigma^{2}_{u}).\]</div>
+<p>Informed traders observe the future value of the asset <span class="math">\(v\)</span> and select their demand <span class="math">\(x\)</span> as a function of this observed <span class="math">\(v\)</span> and the price set by the market makers.  Assume that</p>
+<div class="math">
+\[v \sim N(p_{0}, \Sigma_{0}).\]</div>
+<p>A competitive set of market makers establish an order book parameterized as a price that is a function of the number of orders that they observe <span class="math">\(y = x + u\)</span>.  Since these market makers are competitive, they will in expectation earn zero profit.  It is assumed that market makers cannot distinguish between informed and uninformed liquidity requests.</p>
+<p>The expected profit to a market maker given the demand for liquidity <span class="math">\(y\)</span> is</p>
+<div class="math">
+\[E[\pi|y] = E[(v - p)(-y)|y] = -yE[v-p|y]\]</div>
+<p>(recall that the market maker must take the opposite position of the liquidity demanders, who have position <span class="math">\(y\)</span>).  If expected profits are to be zero for every <span class="math">\(y\)</span>, then in equilibrium <span class="math">\(p = E[v|y]\)</span>.   In order to find an equilibrium in this model, we proceed by making an assumption about the behavior of market makers, which at the end we verify to be true.    Let us assume that market makers set the price according to a linear function of the demand that they observe.  Specifically, assume that the equilibrium price is given by a function of the formula</p>
+<div class="math">
+\[P(y) = \mu + \lambda y\]</div>
+<p>Now, we consider the problem of informed traders.  The expected profit to informed traders is</p>
+<div class="math">
+\[E\pi = E[(v-p(y))x|v].\]</div>
+<p>In order to maximize this profit, informed traders solve (given the price function of market makers)</p>
+<div class="math">
+\[\max_{x} E[\pi] = \max_{x} E[(v-\mu - \lambda(x + u))x|v]\]</div>
+<p>We start by passing the expectation into this equation to get (we note that <span class="math">\(v\)</span>, <span class="math">\(\mu\)</span> and <span class="math">\(\lambda\)</span> are assumed to be known in equilibrium)</p>
+<div class="math">
+\[\max_{x} vx - \mu x - \lambda x^{2}\]</div>
+<p>(Recall that <span class="math">\(Eu = 0\)</span>).  The first order condition for this problem (which can be verified to be strictly concave) is</p>
+<div class="math">
+\[v - \mu - 2\lambda x = 0\]</div>
+<p>This has the solution <span class="math">\(x = -\frac{\mu}{2\lambda} + \frac{1}{2\lambda}v\)</span>.  Notice if the market makers use a linear pricing rule, then the informed traders will set their demand as a linear function of the signal that they receive.</p>
+<p>Now we go back to the problem of market makers.  Given that the demand that they observe is <span class="math">\(y = x + u\)</span>, they need to calculate <span class="math">\(E[v|x + u]\)</span>.  Note that <span class="math">\(v\)</span> and <span class="math">\(y\)</span> are related since <span class="math">\(v\)</span> determines <span class="math">\(x\)</span> which is a part of <span class="math">\(y\)</span>.  In fact, since <span class="math">\(y\)</span> is a linear function of <span class="math">\(v\)</span>, <span class="math">\(y\)</span> and <span class="math">\(v\)</span> are jointly normally distributed.  The demand <span class="math">\(y\)</span> is <span class="math">\(y \sim N(-\frac{\mu}{2\lambda} + \frac{1}{\lambda}p_{0}, \frac{1}{\lambda^2}\Sigma_{0})\)</span>.  The covariance between <span class="math">\(y\)</span> and <span class="math">\(v\)</span> is</p>
+<blockquote>
+<div><div class="math">
+\[\begin{split}E(y - Ey)(v - Ev) &amp; = E(-\frac{\mu}{2\lambda} + \frac{1}{2\lambda}v + u +\frac{\mu}{2\lambda} + \frac{1}{2\lambda}p_{0} )(v- p_{0}) \\
+&amp; = E(\frac{1}{2\lambda}(v-p_{0}))(v-p_{0}) \\
+&amp; = \frac{1}{2\lambda}\Sigma_{0}\end{split}\]</div>
+</div></blockquote>
+<p>For two jointly normal random variables <span class="math">\((a,b)\)</span>, <span class="math">\(E[a|b] = Ea + \frac{cov(a,b)}{\sigma^{2}_{b}}(b - Eb)\)</span>.  Applying this formula to <span class="math">\(y\)</span> and <span class="math">\(v\)</span> gives</p>
+<blockquote>
+<div><div class="math">
+\[E[v|y] = p_{0} + \frac{\frac{1}{2\lambda}\Sigma_{0}}{\frac{1}{4\lambda^2}\Sigma_{0} + \sigma^{2}_{u}}(y + \frac{\mu}{2\lambda} - \frac{1}{2\lambda}p_{0}).\]</div>
+</div></blockquote>
+<p>Now, recall our original assumption that <span class="math">\(P(y) = \mu + \lambda y\)</span>.  Since <span class="math">\(P(y) = E[v|y]\)</span>, we can compare coefficients and we notice that the coefficient on <span class="math">\(y\)</span> implies that</p>
+<blockquote>
+<div><div class="math">
+\[\lambda = \frac{\frac{1}{2\lambda}\Sigma_{0}}{\frac{1}{4\lambda^2}\Sigma_{0} + \sigma^{2}_{u}}\]</div>
+</div></blockquote>
+<p>Solving this, for <span class="math">\(\lambda\)</span> produces the result that</p>
+<div class="math">
+\[\lambda = \frac{\sqrt{\Sigma_{0}}}{2\sigma_{u}}\]</div>
+<p>Furthermore, it can be seen by inspection that <span class="math">\(\mu = p_{0}\)</span> is a solution to that equation.</p>
+<p>Therefore, an equilibrium price function of this game is</p>
+<div class="math">
+\[P(y) = p_{0} + \frac{\sqrt{\Sigma_{0}}}{2\sigma_{u}}y.\]</div>
+</div>
+<div class="section" id="interpreting-the-model">
+<h2>Interpreting the model<a class="headerlink" href="#interpreting-the-model" title="Permalink to this headline">¶</a></h2>
+<p>Traditionally, orderbooks are drawn on a two-dimensional graph with the price on the horizontal axis and the number of units available (to buy or sell) on the vertical axis.</p>
+<p>To place the equilibrium above in a manner similar to the usual picture, we solve to <span class="math">\(y\)</span> to get</p>
+<div class="math" id="equation-ob">
+<span class="eqno">(1)<a class="headerlink" href="#equation-ob" title="Permalink to this equation">¶</a></span>\[y(P) = \frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}(P - p_{0})\]</div>
+<p>Notice, that for prices greater than the market makers’ prior mean about the value of the asset (<span class="math">\(p_{0}\)</span>), the market maker’s position will be positive (i.e. when the market maker sells <span class="math">\(y&gt;0\)</span>) and when the market maker buys <span class="math">\(y&lt;0\)</span>.  As such, the common picture of the orderbook is</p>
+<div class="math">
+\[OB(P) = \left | \frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}(P - p_{0}) \right |\]</div>
+<p>However, we will work with the easier to deal with version given in <a class="reference internal" href="#equation-ob">(1)</a>.
+Let’s make a few observations about this orderbook.</p>
+<dl class="docutils">
+<dt>Properties of the Kyle Orderbook</dt>
+<dd><ol class="first last arabic simple">
+<li>The BBO (sometimes just called the spread, or price) will occur at <span class="math">\(P = p_{0}\)</span>.</li>
+<li>Relatively ``flat’’  or ``thin’’ orderbooks arise when the standard deviation of noise trader demand is small relative to the standard deviation of informed trader demand.  This makes sense, since on average large swings in demand will be caused by informed traders in this scenario. Market makers are concerned about trading with informed traders, so they offer relatively small amounts of shares near the BBO (best bid and offer).  Similarly, ``steep’’ of ``thick’’ orderbooks arise when there is a lot of noise and relatively little variance in informed trader demand.</li>
+<li>In this model, all changes in orderbooks can be thought of as changes in beliefs in the fundamental value of the asset (changes in <span class="math">\(p_{0}\)</span>) and changes in beliefs about the properties of traders (changes in <span class="math">\(\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}\)</span>.)</li>
+</ol>
+</dd>
+</dl>
+</div>
+<div class="section" id="estimating-the-parameters-of-the-model">
+<h2>Estimating the parameters of the model<a class="headerlink" href="#estimating-the-parameters-of-the-model" title="Permalink to this headline">¶</a></h2>
+<p>Equation <a class="reference internal" href="#equation-ob">(1)</a>, can be estimated by way of linear regression.  If we transform equation <a class="reference internal" href="#equation-ob">(1)</a> into slope intercept form we get</p>
+<div class="math" id="equation-orderbook-eqn">
+<span class="eqno">(2)<a class="headerlink" href="#equation-orderbook-eqn" title="Permalink to this equation">¶</a></span>\[y = -p_{0}\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}} + \frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}P\]</div>
+<p>So, estimating the equation</p>
+<div class="math" id="equation-orderbook-estimation-eqn">
+<span class="eqno">(3)<a class="headerlink" href="#equation-orderbook-estimation-eqn" title="Permalink to this equation">¶</a></span>\[y = \gamma + \beta P\]</div>
+<p>using the price and quantity amounts from the orderbook, we can back out the parameters <span class="math">\(p_{0}\)</span> and <span class="math">\(\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}\)</span> by solving</p>
+<div class="math">
+\[\begin{split}\hat{\gamma} = -p_{0}\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}} \\
+\hat{\beta} = \frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}\end{split}\]</div>
+<p>for <span class="math">\(p_{0}\)</span> and <span class="math">\(\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}\)</span> which yields</p>
+<div class="math">
+\[\begin{split}p_{0} &amp; = -\frac{\hat{\gamma}}{\hat{\beta}} \\
+\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}} &amp; = \hat{\beta}\end{split}\]</div>
+<dl class="docutils">
+<dt>Note.</dt>
+<dd>For hypothesis testing, care must be taken here since <em>if</em> <span class="math">\(\hat{\gamma}\)</span> and <span class="math">\(\hat{\beta}\)</span> have a <span class="math">\(t\)</span>-distribution then the distribution of the estimate of <span class="math">\(\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}\)</span> is the ratio of two <span class="math">\(t\)</span>-distributions which is non-trivial. <a class="footnote-reference" href="#id2" id="id1">[1]</a></dd>
+</dl>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>See Press (1969) (<a class="reference external" href="https://www.jstor.org/stable/2283732?seq=1#page_scan_tab_contents">https://www.jstor.org/stable/2283732?seq=1#page_scan_tab_contents</a>) for details.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="implications-of-the-model">
+<h2>Implications of the model<a class="headerlink" href="#implications-of-the-model" title="Permalink to this headline">¶</a></h2>
+<p>By looking at comparative statics on equation <a class="reference internal" href="#equation-orderbook-eqn">(2)</a> we see that changes in the midpoint represent changes in the beliefs of market makers about <span class="math">\(p_{0}\)</span>.  Changes in the slope of the orderbook relate to changes in market maker beliefs about the ratio <span class="math">\(\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}\)</span>.  Thus, changes in the BBO reflect (according to this model) changes in the value of the asset directly, whereas changes in the slope reflect changes in the relative volatility of trade between informed and uninformed traders.</p>
+<p>Consider a simple model of market maker learning about the true value of the asset.  Market makers have prior beliefs that the asset is distributed <span class="math">\(v \sim N(p_{0},\Sigma_{0})\)</span>.  Suppose that they receive a public signal about the asset of the form <span class="math">\(s = v + \epsilon\)</span> where <span class="math">\(\epsilon\)</span> is independent of <span class="math">\(v\)</span> and distributed <span class="math">\(\epsilon \sum N(0, 1/\rho_{\epsilon})\)</span>.  Let <span class="math">\(\rho = 1/\Sigma_{0}\)</span>.  Then,</p>
+<div class="math" id="equation-bayes-update-eqn">
+<span class="eqno">(4)<a class="headerlink" href="#equation-bayes-update-eqn" title="Permalink to this equation">¶</a></span>\[v|s \sim N\left ( \frac{\rho p_{0} + \rho_{\epsilon} s}{\rho + \rho_{\epsilon}}, \rho + \rho_{\epsilon} \right )\]</div>
+<p>If a sequence <span class="math">\(s_{1}, s_{2}, \ldots, s_{t}\)</span> have been received, each i.i.d., then the updated beliefs of the market makers are</p>
+<div class="math" id="equation-bayes-update-multiple-eqn">
+<span class="eqno">(5)<a class="headerlink" href="#equation-bayes-update-multiple-eqn" title="Permalink to this equation">¶</a></span>\[v|s_{1},\ldots,s_{t} \sim N\left ( \frac{\rho p_{0} + \rho_{\epsilon}\left (\sum_{i=1}^{t}s_{i}   \right )}{\rho + t\rho_{\epsilon}}, \rho + \rho_{\epsilon} \right )\]</div>
+<p>Here, as additional signals are received <em>for the same prior belief</em>, the precision of the beliefs goes up and the variance of the market makers’ beliefs about the asset’s worth goes down.  Because of this, the slope of the orderbook and the liquidity of the market go up. Likewise, this model implies that if one observes the market become less liquid, that must mean that the signals now being received by market makers convey information about a different distribution that what was originally believed to be true about <span class="math">\(v\)</span>.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>These exercises are intended to help you use the Kyle model to understand the orderbooks of 5 tickers on a particular day (July 11, 2017).  The data have been compiled from the NASDAQ ITCH data files for those days.  The data are Python pickle files where each file contains a list of the following form <code class="code docutils literal"><span class="pre">[(timestamp1,{P1:</span> <span class="pre">Q1,</span> <span class="pre">P2:</span> <span class="pre">Q2,</span> <span class="pre">P3:Q3,</span> <span class="pre">...}),</span> <span class="pre">(timestamp2,</span> <span class="pre">{P1:</span> <span class="pre">Q1,</span> <span class="pre">P2,</span> <span class="pre">Q2,</span> <span class="pre">...})...</span> <span class="pre">]</span></code>.  That is, the data comes as a list of tuples, where each tuple contains a timestamp, and an orderbook, where the orderbook is a dictionary where the keys are prices and the values are the quantities available at each price.  These data have been compiled in such a way that we have the orderbook every 60 seconds throughtout the trading day.</p>
+<ol class="arabic simple">
+<li>Write a Python class that represents a single orderbook, where the data for that single orderbook is an instance property.  Write a method for that orderbook that will use the data to the parameters <span class="math">\(\gamma\)</span> and <span class="math">\(\beta\)</span> from equation <a class="reference internal" href="#equation-orderbook-estimation-eqn">(3)</a>.  Plot the orderbook and the estimated equation.  Where does the model fit well and where does it not?  Might one want to estimate the model using only a subset of the orderbook?  If so, where?</li>
+<li>For each ticker, plot the estimated values of <span class="math">\(\frac{2\sigma_{u}}{\sqrt{\Sigma_{0}}}\)</span> throughout the day.</li>
+<li>Compare the estimates of <span class="math">\(p_{0}\)</span> to the actual midpoint of the BBO over time.  What do these differences say about the nature of the orderbook and the estimation procedure you’re using?</li>
+<li>Compare/contrast the results for each ticker. Are the noise/signal ratios that you calculate consistent with what you would have expected? What about the movements in <span class="math">\(p_{0}\)</span>?</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Bootcamp Asset Pricing</a></h1>
+
+
+
+<p class="blurb">Scott Condie<br><a href="mailto:scott_condie@byu.edu">scott_condie@byu.edu</a><br><a href="http://scottcondie.github.io">scottcondie.github.io</a><br>Updated July 2018.</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lucas.html">The Lucas Tree Model of Asset Pricing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Orderbooks and Asset Pricing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-kyle-model-of-orderbook-shape">The Kyle model of orderbook shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interpreting-the-model">Interpreting the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#estimating-the-parameters-of-the-model">Estimating the parameters of the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implications-of-the-model">Implications of the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="lucas.html" title="previous chapter">The Lucas Tree Model of Asset Pricing</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018.
+      
+      |
+      <a href="_sources/kyle.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

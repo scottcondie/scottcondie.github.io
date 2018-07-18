@@ -1,0 +1,101 @@
+.. default-role:: math
+
+
+Orderbooks and Asset Pricing
+------------------------------------
+
+The Kyle Model of Orderbook Shape
+++++++++++++++++++++++++++++++++++++++
+
+This model of the orderbook is given in Kyle (1985).  We have uninformed traders, informed traders (or insiders in Kyle's language) and market makers.  Uninformed traders have random demand that has mean 0 and a known variance.  Let the demand for uninformed traders be given by
+
+.. math::
+  u \sim N(0, \sigma^{2}_{u}).
+
+Informed traders observe the future value of the asset `v` and select their demand `x` as a function of this observed `v` and the price set by the market makers.  Assume that
+
+.. math::
+  v \sim N(p_{0}, \Sigma_{0}).
+
+A competitive set of market makers establish an order book parameterized as a price that is a function of the number of orders that they observe `y = x + u`.  Since these market makers are competitive, they will in expectation earn zero profit.  It is assumed that market makers cannot distinguish between informed and uninformed liquidity requests.
+
+The expected profit to a market maker given the demand for liquidity `y` is
+
+.. math::
+  E[\pi|y] = E[(v - p)(-y)|y] = -yE[v-p|y]
+
+(recall that the market maker must take the opposite position of the liquidity demanders, who have position `y`).  If expected profits are to be zero for every `y`, then in equilibrium `p = E[v|y]`.   In order to find an equilibrium in this model, we proceed by making an assumption about the behavior of market makers, which at the end we verify to be true.    Let us assume that market makers set the price according to a linear function of the demand that they observe.  Specifically, assume that the equilibrium price is given by a function of the formula
+
+.. math::
+
+  P(y) = \mu + \lambda y
+
+Now, we consider the problem of informed traders.  The expected profit to informed traders is
+
+.. math::
+
+  E\pi = E[(v-p(y))x|v].
+
+In order to maximize this profit, informed traders solve (given the price function of market makers)
+
+.. math::
+
+  \max_{x} E[\pi] = \max_{x} E[(v-\mu - \lambda(x + u))x|v]
+
+We start by passing the expectation into this equation to get (we note that `v`, `\mu` and `\lambda` are assumed to be known in equilibrium)
+
+.. math::
+
+  \max_{x} vx - \mu x - \lambda x^{2}
+
+(Recall that `Eu = 0`).  The first order condition for this problem (which can be verified to be strictly concave) is
+
+.. math::
+
+  v - \mu - 2\lambda x = 0
+
+This has the solution `x = -\frac{\mu}{2\lambda} + \frac{1}{2\lambda}v`.  Notice if the market makers use a linear pricing rule, then the informed traders will set their demand as a linear function of the signal that they receive.
+
+Now we go back to the problem of market makers.  Given that the demand that they observe is `y = x + u`, they need to calculate `E[v|x + u]`.  Note that `v` and `y` are related since `v` determines `x` which is a part of `y`.  In fact, since `y` is a linear function of `v`, `y` and `v` are jointly normally distributed.  The demand `y` is `y \sim N(-\frac{\mu}{2\lambda} + \frac{1}{\lambda}p_{0}, \frac{1}{\lambda^2}\Sigma_{0})`.  The covariance between `y` and `v` is
+
+	.. math::
+
+		  E(y - Ey)(v - Ev) & = E(-\frac{\mu}{2\lambda} + \frac{1}{2\lambda}v + u +\frac{\mu}{2\lambda} + \frac{1}{2\lambda}p_{0} )(v- p_{0}) \\
+		  & = E(\frac{1}{2\lambda}(v-p_{0}))(v-p_{0}) \\
+		  & = \frac{1}{2\lambda}\Sigma_{0}
+
+For two jointly normal random variables `(a,b)`, `E[a|b] = Ea + \frac{cov(a,b)}{\sigma^{2}_{b}}(b - Eb)`.  Applying this formula to `y` and `v` gives
+
+	.. math::
+		E[v|y] = p_{0} + \frac{\frac{1}{2\lambda}\Sigma_{0}}{\frac{1}{4\lambda^2}\Sigma_{0} + \sigma^{2}_{u}}(y + \frac{\mu}{2\lambda} - \frac{1}{2\lambda}p_{0}).
+
+Now, recall our original assumption that `P(y) = \mu + \lambda y`.  Since `P(y) = E[v|y]`, we can compare coefficients and we notice that the coefficient on `y` implies that
+
+	.. math::
+
+		\lambda = \frac{\frac{1}{2\lambda}\Sigma_{0}}{\frac{1}{4\lambda^2}\Sigma_{0} + \sigma^{2}_{u}}
+
+Solving this, for `\lambda` produces the result that
+
+	.. math::
+
+		\lambda = \frac{\sqrt{\Sigma_{0}}}{2\sigma_{u}}
+
+Furthermore, it can be seen by inspection that `\mu = p_{0}` is a solution to that equation.
+
+Therefore, an equilibrium price function of this game is
+
+.. math::
+
+  P(y) = p_{0} + \frac{\sqrt{\Sigma_{0}}}{2\sigma_{u}y.
+
+Interpreting the Model
+++++++++++++++++++++++++++
+
+Traditionally, orderbooks are drawn on a two-dimensional graph with the price on the horizontal axis and the number of units available (to buy or sell) on the vertical axis.
+
+The equilibrium 
+
+
+Exercise.
+  Estimate these parameters given some data.
