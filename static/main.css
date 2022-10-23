@@ -4,9 +4,9 @@
 }
 
 body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
     background-color: white;
-    color:#777777;
+    color:#444444;
 }
 
 img {
@@ -17,12 +17,12 @@ img {
 }
 
 a {
-    color: #31a0cb;
+    color: darkslategray;
     font-weight: bold;
 }
 
 a:visited {
-    color: #31a0cb;
+    color: darkslategray;
     font-weight: bold;
 }
 
@@ -92,9 +92,8 @@ h3 {
 #contact {
     position: fixed;
     left: 50px;
-    bottom: 50px;
+    top: 50px;
 }
-
 
 
 
