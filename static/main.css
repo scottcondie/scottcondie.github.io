@@ -4,7 +4,7 @@
 }
 
 body {
-    font-family: "Mukta", "Noto Serif", "PT Serif", "Lora", "Verdana", 'Source Sans Pro', Helvetica, sans-serif;
+    font-family: "Mukta",'Source Sans Pro', Helvetica, sans-serif;
     font-weight: 300;
     font-size: 18px;
     background-color: white;
@@ -20,12 +20,12 @@ img {
 }
 
 a {
-    color: gray;
+    color: lightslategray;
     font-weight: 400;
 }
 
 a:visited {
-    color: darkslategray;
+    color: lightslategray;
     font-weight: bold;
 }
 
@@ -50,6 +50,7 @@ h2 {
     margin-top: 1em;
     margin-bottom: 0.5em;
     font-weight: 600;
+    color: lightslategray;
 }
 
 .nav-ul {
@@ -116,6 +117,12 @@ h3 {
     text-align: center;
 }
 
+.headline-name {
+    font-size: 32px;
+    font-weight: 700;
+    color: lightslategray;
+}
+
 
 @media all and (max-width: 800px) {
     #content {
@@ -128,3 +135,4 @@ h3 {
         width: 200px; 
     }
 }
+
