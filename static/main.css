@@ -84,6 +84,13 @@ h2 {
     margin-bottom:0.3em;
 }
 
+.abstract {
+    margin-top: -0.8em;
+    margin-left: 2em;
+    font-size: 0.8em;
+    margin-bottom: 1em;
+}
+
 .about-text {
     margin-left: 2em;
 }
