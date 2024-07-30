@@ -12,11 +12,12 @@ body {
 }
 
 img {
-    width: 240px;
+    width: 190px;
     text-align: auto;
     height: auto;
     border-radius: 48%;
     margin-bottom: 1em;
+    margin-top:7em;
 }
 
 a {
