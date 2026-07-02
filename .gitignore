@@ -1,0 +1,6 @@
+# Secrets — never commit
+.git-token
+token
+
+# OS cruft
+.DS_Store
