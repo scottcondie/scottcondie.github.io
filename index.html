@@ -1,99 +1,116 @@
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="static/main.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet"> 
-        <title>Scott Condie</title>
-        <meta name="google-site-verification" content="m9RUE4-rpAzR6VywaEi8L0hP7wtz7eUa0PDyNKQqYxY" />
-        <meta name="description" content="Economist specializing in finance, financial markets, wealth and income dynamics, limit orderbooks, trading, equities, fixed income, tariffs, trade, international finance, asset pricing, natural language processing, machine learning, cryptocurrency, bitcoin, uniswap, stable coins, litigation support, and software development."
-    </head>
-    <body>
-        <div id="contact">
-            <img src="static/img-square.jpg" alt="image"><br>
-            <div id="contact-text">
-                <span class="headline-name">Scott Condie</span><br>
-                Assoc. Professor<br>
-                Dept. of Economics<br>
-                Brigham Young University<br>
-                <a href="mailto:ssc@byu.edu">ssc@byu.edu</a><br>
-                <a href="https://scottcondie.github.io">scottcondie.github.io</a><br>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scott Condie</title>
+    <link rel="stylesheet" type="text/css" href="static/main.css">
+    <link rel="icon" href="static/favicon.svg" type="image/svg+xml">
+    <meta name="google-site-verification" content="m9RUE4-rpAzR6VywaEi8L0hP7wtz7eUa0PDyNKQqYxY">
+    <meta name="description" content="Economist specializing in finance, financial markets, wealth and income dynamics, limit orderbooks, trading, equities, fixed income, tariffs, trade, international finance, asset pricing, natural language processing, machine learning, cryptocurrency, bitcoin, uniswap, stable coins, litigation support, and software development.">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-inner">
+            <a class="brand" href="index.html">Scott Condie</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research" class="active">Research</a></li>
+                <li><a href="teaching/">Teaching</a></li>
+                <li><a href="#media">Media</a></li>
+            </ul>
         </div>
-        <div id="content">
-            <nav class="nav-ul">
-                <ul>
-                    <li class="nav-item"><a href="#about">About</a></li>
-                    <li class="nav-item"><a href="#research">Research</a></li>
-                    <li class="nav-item"><a href="#teaching">Teaching</a></li>
-                    <li class="nav-item"><a href="#media">Media</a></li>
-                </ul>
-            </nav>
-            <div id="about">
-                <h2>About</h2>
-                <div class="about-text">
-                    <p class="about-paragraph">I am an economist at Brigham Young University. My research focuses on information transmition and price and wealth dynamics in modern markets. I study mathematical models of information in asset markets as well as building software systems to extract information from large and complex signals like order book data, spoken word audio, satellite images and machine code.</p>    
+    </header>
+
+    <main>
+        <div class="hero">
+            <img src="static/img-square-web.jpg" alt="Scott Condie">
+            <div>
+                <h1 class="hero-name">Scott Condie</h1>
+                <p class="hero-role">Associate Professor of Economics &middot; Brigham Young University</p>
+                <p class="hero-tagline">I study information, price, and wealth dynamics in modern markets &mdash; building both mathematical models and software that extracts signal from complex market data.</p>
+                <div class="hero-links">
+                    <a href="mailto:ssc@byu.edu">&#9993;&nbsp; ssc@byu.edu</a>
+                    <a href="https://scholar.google.com/scholar?q=Scott+Condie+economics" target="_blank" rel="noopener">&#9670;&nbsp; Google Scholar</a>
                 </div>
             </div>
-
-            <div id="research">
-                <h2>Research</h2>
-                <h3>Working Papers/Work in Progress</h3>
-                <ul class="work-list">
-                    <li class="work-item"><a target="_blank" href="static/capm_11october2023.pdf">Unawareness premia</a> (with Lars Stentoft and Marie-Louise Vierø)</li>
-                        <p class="abstract">This paper considers the effect on asset prices of investors contemplating the possible occurrence of unexpected and unprecedented events that they have no basis to evaluate. We build a Capital Asset Pricing Model (CAPM) where, in addition to regular risk, investors are aware that they are potentially unaware of some events. We show that when investors feel that there exist states about which they are unaware, asset prices contain an unawareness premium. A driving force is that the “risk free” asset is no longer considered to be truly risk free. We develop a methodology that enables us to estimate the systematic portion of the unawareness premium, and we estimate it using daily data from 1980 to 2021. This unawareness premium implies a theoretical motivation behind the correlation between estimated asset alphas and betas in the cross section. We find evidence in support of the hypothesis that unawareness, in addition to risk, is a determinant of expected equity returns. This additional factor adds insights into asset market behavior around market run ups like those during the dot com boom and the pre-financial crisis market outperformance.</p>
-                    <li class="work-item"><a target="_blank" href="static/condie-platt-orderbooks.pdf">Limit order book spreads, depth, and market efficiency in a general equilibrium model</a> (with Brennan Platt)</li>
-                        <p class="abstract">This paper studies equilibrium order book formation in a limit-order market by building a search-theoretic model where the shape of the order book and its spread are determined jointly in equilibrium. The model characterizes liquidity as a function of differences in valuation between sellers and buyers, beliefs about the probability distribution of the arrival of buyers and sellers, exchange fees, and preference parameters like patience and beliefs about the expected lifespan of information. The efficiency of the market is characterized as a function of these parameters. We demonstrate how to extract the model’s parameters from order book data and, using a sample of data from Coinbase’s Bitcoin/U.S. Dollar exchange, characterize market liquidity as a function of these factors. We derive the optimal timing of frequent batch auctions in our model and show how this timing can be calculated for all limit-order markets.
-                        </p>
-                    <li class="work-item"><a target="_blank" href="static/condie-panics.pdf">Market panics and their effect on those who leave and those who stay</a></li>
-                        <p class="abstract">
-                            This paper studies the welfare and asset pricing consequences of market panics driven by ambiguity aversion. When information is perceived to be highly ambiguous, ambiguity-averse traders exit the market entirely, raising the risk premium and creating opposing effects for expected-utility traders who remain: a wealth loss from falling prices and an expanded trading opportunity from reduced risk sharing. This paper characterizes the size of these effects and their impact on welfare. In a two-period extension the premium associated with the possibility of a future panic is caculated.  Even when all fundamental uncertainty is normal, the distribution of interim prices is left-skewed and fat-tailed. Price variance decomposes into a fundamental component and an ambiguity-driven component, providing structural microfoundations for well-documented non-normalities in equity returns.
-                        </p>
-                    <li class="work-item"><a target="_blank" href="static/oversight_risk_practitioner.pdf">Oversight risk: How investment committees shape portfolio performance</a></li>
-                        <p class="abstract">
-                            Most institutional portfolios are overseen by an investment committee that has formal authority over the portfolio manager's decisions. These committee members often bring diverse perspectives and expertise. This paper develops a model of institutional portfolio management in which investment decisions are subject to oversight by a committee with heterogeneous beliefs and risk preferences. Since the committee's effective beliefs and risk aversion governing portfolio choice can reflect changes in committee preferences and power dynamics within a committee, the resulting portfolio of the committee is subject to what we call \textit{oversight risk}. This paper characterizes the consequences of oversight risk for portfolio performance. There are at least two channels through which oversight risk can operate: fluctuations in effective risk aversion and fluctuations in effective beliefs. We show that fluctuations in effective risk aversion affect all standard performance metrics---Sharpe ratio, beta, Jensen's alpha, and the Information Ratio---through a market-timing channel whose direction depends on the correlation between risk aversion and market returns. Fluctuations in effective beliefs erode performance by increasing portfolio churn without necessarily generating compensating active returns. Simulations calibrated to monthly U.S.\ equity sector data spanning March 1970 to December 2025 confirm these predictions and document a skill--noise tradeoff in which committee skill raises expected performance while oversight noise widens the distribution of outcomes. Implications for investment committees are provided.
-                        </p>
-                </ul>
-                <h3>Publications</h3>
-                <ul class="work-list">
-                    <li class="work-item">Condie, S., Lehnardt, G., & Tavita, J. (2025). <a target="_blank" href="static/oversight_risk_practitioner.pdf">Oversight risk: How investment committees shape portfolio performance.</a> Journal of Portfolio Management, <em>Forthcoming.</em>&nbsp;[<a target="_blank" href="static/oversight_risk_appendix.pdf">Online appendix</a>]</li>
-                    <li class="work-item">Condie, S. (2025). <a href="https://www.sciencedirect.com/science/article/pii/S1544612325008748">Configurable arbitrage and slippage in automated market making systems.</a> Finance Research Letters, 83, 107615.</li>
-                    <li class="work-item">Nielsen, L.B., Warnick, S., & Condie, S. (2023). <a href="static/nielsen-warnick-condie.pdf">Characterizing the informativity of level II book data for high frequency trading</a>2023 IEEE Conference on Control Technology and Applications (CCTA)</li>
-                    <li class="work-item">Illeditsch, P. K., Ganguli, J. V, & Condie, S. (2021). <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/jofi.12979">Information inertia.</a> Journal of Finance, 76, 443-479.</li>
-                    <li class="work-item">Condie, S., & Ganguli, J. (2017). <a href="https://www.ineteconomics.org/uploads/papers/PricingEffectsAmbiguousPrivateInformation.pdf">The pricing effects of ambiguous private information.</a> Journal of Economic Theory, 172, 512-557.</li>
-                    <li class="work-item">Barmish, B. R., Condie, S., Materassi, D., Primbs, J. A., & Warnick, S. (2016, July). <a href="https://ieeexplore.ieee.org/abstract/document/7526559/">On Nasdaq order book dynamics: New problems for the control field.</a> In American Control Conference (ACC), 2016 (pp. 5671-5672). IEEE.</li>
-                    <li class="work-item">Condie, S. S., & Phillips, K. L. (2016). <a href="https://www.sciencedirect.com/science/article/pii/S0165176515005170">Can irrational investors survive in the long run? The role of generational type transmission.</a> Economics Letters, 139, 40-42.</li>
-                    <li class="work-item">Condie, S. S., Evans, R. W., & Phillips, K. L. (2016). <a href="https://b8b26839-a-62cb3a1a-s-sites.googlegroups.com/site/rickecon/SimpPiketty.pdf?attachauth=ANoY7cpi3gjZLbCPDVog_-UeOKV7thG0rRV7OhvH4DY6kKBRb_lDwXTKhorrE0oOU60Hk9o42UrIg8ofmeuZIR8I_Wjv2LBduitRZ2Qrj7CzFXTA2nSUsLmqlXUeR4-zhM7xGwbRA6Je2DmekxKAh5rVXKa_ilb8yONLecD7jqDr6HkHJdoArsylzjmZQ5ZB4B1a7JhZQ9xj4ONikopcVtMa8tEAFQ_7bQ%3D%3D&attredirects=0">Natural Limits of Wealth Inequality and the Effectiveness of Tax Policy.</a> Public Finance Review, 1091142117707970.</li>
-                    <li class="work-item">Condie, S., Lefgren, L., & Sims, D. (2014). <a href="https://www.sciencedirect.com/science/article/abs/pii/S0272775713001647">Teacher heterogeneity, value-added and education policy.</a> Economics of Education Review, 40, 76-92.</li>
-                    <li class="work-item">Condie, S., & Ganguli, J. V. (2011). <a href="https://link.springer.com/article/10.1007/s00199-011-0646-2">Informational efficiency with ambiguous information.</a> Economic Theory, 48(2-3), 229-242.</li>
-                    <li class="work-item">Condie, S., & Ganguli, J. V. (2011). <a href="https://academic.oup.com/restud/article-abstract/78/3/821/1568711">Ambiguity and rational expectations equilibria.</a> The Review of Economic Studies, 78(3), 821-845.</li>
-                    <li class="work-item">Condie, S., & Yoo, S. H. (2011). <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/j.1742-7363.2011.00159.x">Market selection with endogenous information revelation.</a> International Journal of Economic Theory, 7(2), 201-215.</li>
-                    <li class="work-item">Condie, S. (2008). <a href="https://link.springer.com/article/10.1007/s00199-007-0264-1">Living with ambiguity: prices and survival when investors have heterogeneous preferences for ambiguity.</a> Economic Theory, 36(1), 81-108.</li>
-                    <li class="work-item">Groen, J. A., Jakubson, G. H., Ehrenberg, R. G., Condie, S., & Liu, A. Y. (2008). <a href="https://www.sciencedirect.com/science/article/abs/pii/S0272775707000246">Program design and student outcomes in graduate education.</a> Economics of Education Review, 27(2), 111-124.</li>
-                </ul>
-            </div>
-            <div id="teaching">
-                <h2>Teaching</h2>
-                <ul class="work-list">
-                    <li class="work-item">Advanced Micro (First-year graduate level)</li><br>
-                    <li class="work-item">Financial Economics (Advanced undergraduate)</li><br>
-                    <li class="work-item">Intermediate Macroeconomics</li>
-		    <li class="work-item"><a href="teaching/Bootcamp/index.html">Bootcamp Asset Pricing</a></li>
-                </ul>
-            </div>
-            <div id="media">
-                <h2>Media</h2>
-                <ul class="work-list">
-                    <li class="work-item"><a href="https://www.deseret.com/authors/scott-condie/">Deseret News Articles</a><br>
-                        Economic analysis and opinion pieces in the Deseret News</li>
-                    <li class="work-item"><a href="https://www.horizonsbycompass.com/topics/cryptocurrency-the-evolution-of-finance">Cryptocurrency and the evolution of finance </a><br>
-                        Interview on the role and future of crypto with Compass Datacenters.
-                    </li>
-                    <li class="work-item"><a href="https://www.ksl.com/article/50161598/gephardt-is-cryptocurrency-actually-a-viable-currency">Is cryptocurrency actually a viable currency?</a><br>
-                        Interview on cryptocurrency with KSL News' Matt Gephardt.
-                    </li>
-                </ul>
-            </div>
         </div>
-    </body>
+
+        <section id="about">
+            <p class="section-label">About</p>
+            <hr class="section-rule">
+            <p>I am an economist at Brigham Young University. My research focuses on information transmission and price and wealth dynamics in modern markets. I study mathematical models of information in asset markets as well as building software systems to extract information from large and complex signals like order book data, spoken word audio, satellite images, and machine code.</p>
+        </section>
+
+        <section id="research">
+            <p class="section-label">Research</p>
+            <hr class="section-rule">
+
+            <h2 class="subhead">Working papers &amp; work in progress</h2>
+
+            <div class="paper">
+                <a class="paper-title" target="_blank" href="static/capm_11october2023.pdf">Unawareness premia</a>
+                <span class="paper-authors">&mdash; with Lars Stentoft and Marie-Louise Vier&oslash;</span>
+                <p class="abstract">This paper considers the effect on asset prices of investors contemplating the possible occurrence of unexpected and unprecedented events that they have no basis to evaluate. We build a Capital Asset Pricing Model (CAPM) where, in addition to regular risk, investors are aware that they are potentially unaware of some events. We show that when investors feel that there exist states about which they are unaware, asset prices contain an unawareness premium. A driving force is that the &ldquo;risk free&rdquo; asset is no longer considered to be truly risk free. We develop a methodology that enables us to estimate the systematic portion of the unawareness premium, and we estimate it using daily data from 1980 to 2021. This unawareness premium implies a theoretical motivation behind the correlation between estimated asset alphas and betas in the cross section. We find evidence in support of the hypothesis that unawareness, in addition to risk, is a determinant of expected equity returns. This additional factor adds insights into asset market behavior around market run ups like those during the dot com boom and the pre-financial crisis market outperformance.</p>
+            </div>
+
+            <div class="paper">
+                <a class="paper-title" target="_blank" href="static/condie-platt-orderbooks.pdf">Limit order book spreads, depth, and market efficiency in a general equilibrium model</a>
+                <span class="paper-authors">&mdash; with Brennan Platt</span>
+                <p class="abstract">This paper studies equilibrium order book formation in a limit-order market by building a search-theoretic model where the shape of the order book and its spread are determined jointly in equilibrium. The model characterizes liquidity as a function of differences in valuation between sellers and buyers, beliefs about the probability distribution of the arrival of buyers and sellers, exchange fees, and preference parameters like patience and beliefs about the expected lifespan of information. The efficiency of the market is characterized as a function of these parameters. We demonstrate how to extract the model&rsquo;s parameters from order book data and, using a sample of data from Coinbase&rsquo;s Bitcoin/U.S. Dollar exchange, characterize market liquidity as a function of these factors. We derive the optimal timing of frequent batch auctions in our model and show how this timing can be calculated for all limit-order markets.</p>
+            </div>
+
+            <div class="paper">
+                <a class="paper-title" target="_blank" href="static/condie-panics.pdf">Market panics and their effect on those who leave and those who stay</a>
+                <p class="abstract">This paper studies the welfare and asset pricing consequences of market panics driven by ambiguity aversion. When information is perceived to be highly ambiguous, ambiguity-averse traders exit the market entirely, raising the risk premium and creating opposing effects for expected-utility traders who remain: a wealth loss from falling prices and an expanded trading opportunity from reduced risk sharing. This paper characterizes the size of these effects and their impact on welfare. In a two-period extension the premium associated with the possibility of a future panic is calculated. Even when all fundamental uncertainty is normal, the distribution of interim prices is left-skewed and fat-tailed. Price variance decomposes into a fundamental component and an ambiguity-driven component, providing structural microfoundations for well-documented non-normalities in equity returns.</p>
+            </div>
+
+            <div class="paper">
+                <a class="paper-title" target="_blank" href="static/oversight_risk_practitioner.pdf">Oversight risk: How investment committees shape portfolio performance</a>
+                <p class="abstract">Most institutional portfolios are overseen by an investment committee that has formal authority over the portfolio manager&rsquo;s decisions. These committee members often bring diverse perspectives and expertise. This paper develops a model of institutional portfolio management in which investment decisions are subject to oversight by a committee with heterogeneous beliefs and risk preferences. Since the committee&rsquo;s effective beliefs and risk aversion governing portfolio choice can reflect changes in committee preferences and power dynamics within a committee, the resulting portfolio of the committee is subject to what we call <em>oversight risk</em>. This paper characterizes the consequences of oversight risk for portfolio performance. There are at least two channels through which oversight risk can operate: fluctuations in effective risk aversion and fluctuations in effective beliefs. We show that fluctuations in effective risk aversion affect all standard performance metrics&mdash;Sharpe ratio, beta, Jensen&rsquo;s alpha, and the Information Ratio&mdash;through a market-timing channel whose direction depends on the correlation between risk aversion and market returns. Fluctuations in effective beliefs erode performance by increasing portfolio churn without necessarily generating compensating active returns. Simulations calibrated to monthly U.S. equity sector data spanning March 1970 to December 2025 confirm these predictions and document a skill&ndash;noise tradeoff in which committee skill raises expected performance while oversight noise widens the distribution of outcomes. Implications for investment committees are provided.</p>
+            </div>
+
+            <h2 class="subhead">Publications</h2>
+            <ul class="pub-list">
+                <li>Condie, S., Lehnardt, G., &amp; Tavita, J. (2025). <a target="_blank" href="https://www.pm-research.com/content/iijpormgmt/early/2026/05/29/jpm2026025">Oversight risk: How investment committees shape portfolio performance.</a> <span class="venue">Journal of Portfolio Management, <em>Forthcoming.</em></span> [<a target="_blank" href="static/oversight_risk_appendix.pdf">Online appendix</a>]</li>
+                <li>Condie, S. (2025). <a target="_blank" href="https://www.sciencedirect.com/science/article/pii/S1544612325008748">Configurable arbitrage and slippage in automated market making systems.</a> <span class="venue">Finance Research Letters, 83, 107615.</span></li>
+                <li>Nielsen, L.B., Warnick, S., &amp; Condie, S. (2023). <a target="_blank" href="static/nielsen-warnick-condie.pdf">Characterizing the informativity of level II book data for high frequency trading.</a> <span class="venue">2023 IEEE Conference on Control Technology and Applications (CCTA).</span></li>
+                <li>Illeditsch, P. K., Ganguli, J. V., &amp; Condie, S. (2021). <a target="_blank" href="https://onlinelibrary.wiley.com/doi/full/10.1111/jofi.12979">Information inertia.</a> <span class="venue">Journal of Finance, 76, 443&ndash;479.</span></li>
+                <li>Condie, S., &amp; Ganguli, J. (2017). <a target="_blank" href="https://www.ineteconomics.org/uploads/papers/PricingEffectsAmbiguousPrivateInformation.pdf">The pricing effects of ambiguous private information.</a> <span class="venue">Journal of Economic Theory, 172, 512&ndash;557.</span></li>
+                <li>Barmish, B. R., Condie, S., Materassi, D., Primbs, J. A., &amp; Warnick, S. (2016). <a target="_blank" href="https://ieeexplore.ieee.org/abstract/document/7526559/">On Nasdaq order book dynamics: New problems for the control field.</a> <span class="venue">American Control Conference (ACC), 2016 (pp. 5671&ndash;5672). IEEE.</span></li>
+                <li>Condie, S. S., &amp; Phillips, K. L. (2016). <a target="_blank" href="https://www.sciencedirect.com/science/article/pii/S0165176515005170">Can irrational investors survive in the long run? The role of generational type transmission.</a> <span class="venue">Economics Letters, 139, 40&ndash;42.</span></li>
+                <li>Condie, S. S., Evans, R. W., &amp; Phillips, K. L. (2016). <a target="_blank" href="https://b8b26839-a-62cb3a1a-s-sites.googlegroups.com/site/rickecon/SimpPiketty.pdf?attachauth=ANoY7cpi3gjZLbCPDVog_-UeOKV7thG0rRV7OhvH4DY6kKBRb_lDwXTKhorrE0oOU60Hk9o42UrIg8ofmeuZIR8I_Wjv2LBduitRZ2Qrj7CzFXTA2nSUsLmqlXUeR4-zhM7xGwbRA6Je2DmekxKAh5rVXKa_ilb8yONLecD7jqDr6HkHJdoArsylzjmZQ5ZB4B1a7JhZQ9xj4ONikopcVtMa8tEAFQ_7bQ%3D%3D&amp;attredirects=0">Natural limits of wealth inequality and the effectiveness of tax policy.</a> <span class="venue">Public Finance Review, 1091142117707970.</span></li>
+                <li>Condie, S., Lefgren, L., &amp; Sims, D. (2014). <a target="_blank" href="https://www.sciencedirect.com/science/article/abs/pii/S0272775713001647">Teacher heterogeneity, value-added and education policy.</a> <span class="venue">Economics of Education Review, 40, 76&ndash;92.</span></li>
+                <li>Condie, S., &amp; Ganguli, J. V. (2011). <a target="_blank" href="https://link.springer.com/article/10.1007/s00199-011-0646-2">Informational efficiency with ambiguous information.</a> <span class="venue">Economic Theory, 48(2&ndash;3), 229&ndash;242.</span></li>
+                <li>Condie, S., &amp; Ganguli, J. V. (2011). <a target="_blank" href="https://academic.oup.com/restud/article-abstract/78/3/821/1568711">Ambiguity and rational expectations equilibria.</a> <span class="venue">The Review of Economic Studies, 78(3), 821&ndash;845.</span></li>
+                <li>Condie, S., &amp; Yoo, S. H. (2011). <a target="_blank" href="https://onlinelibrary.wiley.com/doi/full/10.1111/j.1742-7363.2011.00159.x">Market selection with endogenous information revelation.</a> <span class="venue">International Journal of Economic Theory, 7(2), 201&ndash;215.</span></li>
+                <li>Condie, S. (2008). <a target="_blank" href="https://link.springer.com/article/10.1007/s00199-007-0264-1">Living with ambiguity: prices and survival when investors have heterogeneous preferences for ambiguity.</a> <span class="venue">Economic Theory, 36(1), 81&ndash;108.</span></li>
+                <li>Groen, J. A., Jakubson, G. H., Ehrenberg, R. G., Condie, S., &amp; Liu, A. Y. (2008). <a target="_blank" href="https://www.sciencedirect.com/science/article/abs/pii/S0272775707000246">Program design and student outcomes in graduate education.</a> <span class="venue">Economics of Education Review, 27(2), 111&ndash;124.</span></li>
+            </ul>
+        </section>
+
+        <section id="media">
+            <p class="section-label">Media</p>
+            <hr class="section-rule">
+            <ul class="media-list">
+                <li>
+                    <a href="https://www.deseret.com/authors/scott-condie/" target="_blank" rel="noopener">Deseret News articles</a>
+                    <div class="desc">Economic analysis and opinion pieces in the Deseret News.</div>
+                </li>
+                <li>
+                    <a href="https://www.horizonsbycompass.com/topics/cryptocurrency-the-evolution-of-finance" target="_blank" rel="noopener">Cryptocurrency and the evolution of finance</a>
+                    <div class="desc">Interview on the role and future of crypto with Compass Datacenters.</div>
+                </li>
+                <li>
+                    <a href="https://www.ksl.com/article/50161598/gephardt-is-cryptocurrency-actually-a-viable-currency" target="_blank" rel="noopener">Is cryptocurrency actually a viable currency?</a>
+                    <div class="desc">Interview on cryptocurrency with KSL News&rsquo; Matt Gephardt.</div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        Scott Condie &middot; Department of Economics, Brigham Young University &middot; <a href="mailto:ssc@byu.edu">ssc@byu.edu</a>
+    </footer>
+</body>
 </html>
