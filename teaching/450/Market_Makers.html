@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>16&nbsp; Market Makers – Asset Prices, Risk, and Information</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Solutions.html" rel="next">
+<link href="./Credit_Models.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5f0e52f7877e3a078c44e13fc828ca0d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2f8ef6ac35c506a55552e17f1b00ddbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./BlackLitterman.html">Advanced market models</a></li><li class="breadcrumb-item"><a href="./Market_Makers.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Asset Prices, Risk, and Information</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Asset Prices, Risk, and Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Markets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Individual portfolio selection and market equilibrium</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CAPM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Information, trading and market efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EMH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fixed income securities and pricing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Interest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Yields.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./YieldCurve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FIPortfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Derivatives</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Forwards_and_Futures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced market models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BlackLitterman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Credit_Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Market_Makers.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">16.1</span> Introduction</a></li>
+  <li><a href="#the-glosten-milgrom-model-of-the-spread" id="toc-the-glosten-milgrom-model-of-the-spread" class="nav-link" data-scroll-target="#the-glosten-milgrom-model-of-the-spread"><span class="header-section-number">16.2</span> The Glosten-Milgrom model of the spread</a></li>
+  <li><a href="#the-kyle-model-of-orderbook-shape" id="toc-the-kyle-model-of-orderbook-shape" class="nav-link" data-scroll-target="#the-kyle-model-of-orderbook-shape"><span class="header-section-number">16.3</span> The Kyle Model of Orderbook Shape</a></li>
+  <li><a href="#the-grossman-stiglitz-model-of-information-and-asset-prices" id="toc-the-grossman-stiglitz-model-of-information-and-asset-prices" class="nav-link" data-scroll-target="#the-grossman-stiglitz-model-of-information-and-asset-prices"><span class="header-section-number">16.4</span> The Grossman-Stiglitz model of information and asset prices</a></li>
+  <li><a href="#application-a-trading-desk-pricing-the-spread" id="toc-application-a-trading-desk-pricing-the-spread" class="nav-link" data-scroll-target="#application-a-trading-desk-pricing-the-spread"><span class="header-section-number">16.5</span> Application: A trading desk pricing the spread</a></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">16.6</span> Homework problems</a>
+  <ul class="collapse">
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">16.6.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">16.6.2</span> Quantitative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./BlackLitterman.html">Advanced market models</a></li><li class="breadcrumb-item"><a href="./Market_Makers.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">16.1</span> Introduction</h2>
+<p>Three questions structure this chapter. First, why does a bid-ask spread exist at all — why will a dealer simultaneously quote a lower price to buy and a higher price to sell the same asset? Second, how does an informed trader’s strategic demand choice interact with competitive market makers’ pricing rules to determine how efficiently private information is incorporated into prices? Third, if prices do reveal private information, what incentive remains for anyone to acquire that information in the first place? These questions sit at the heart of market microstructure, and the three canonical models examined here — Glosten-Milgrom, Kyle, and Grossman-Stiglitz — each isolates a different facet of the same underlying tension between informed and uninformed trading.</p>
+<p>The first question matters because the bid-ask spread is the most visible cost of transacting in financial markets. A spread is not the result of dealer greed or market power alone; it arises even among perfectly competitive market makers as a rational response to the risk of trading against someone who knows more than they do. When an investor places a buy order, a competitive market maker cannot tell whether that investor is acting on a private signal that the asset is undervalued or merely has liquidity needs. Setting the ask equal to the expected value of the asset conditional on receiving a buy order — higher than the unconditional expectation — is the only way to avoid expected losses. The Glosten-Milgrom model formalizes this logic, showing that the spread is determined by the proportion of informed traders in the market and the magnitude of the information asymmetry, and that it shrinks as competition among market makers intensifies or as underlying asset volatility falls.</p>
+<p>The second question takes the analysis a step further by asking how an informed trader should optimally exploit her informational advantage when she knows the market maker will adjust prices against her. The Kyle model addresses this: the insider trades strategically, spreading her demand across time to camouflage it within the noise generated by uninformed liquidity traders. In equilibrium the market maker sets a linear pricing rule whose slope — the Kyle lambda — measures market depth, the price impact of each additional unit of order flow. A higher fraction of noise trading relative to fundamental uncertainty produces a deeper market and a lower price impact, but never eliminates it entirely.</p>
+<p>The third question strikes at the foundations of price informativeness. If prices were to perfectly aggregate and reveal all private information, the value of acquiring that information would vanish and no one would bother to collect it — yet without anyone collecting it, prices could not be informative. The Grossman-Stiglitz model resolves this paradox by showing that an equilibrium with fully revealing prices cannot exist when information acquisition is costly. Instead, prices are only partially informative: they reveal enough that the marginal informed trader is exactly indifferent between paying the cost of information and free-riding on the price signal. The chapter develops all three models in sequence, building from the simple binary-value setting of Glosten-Milgrom through the continuous Gaussian framework of Kyle to the competitive rational-expectations equilibrium of Grossman-Stiglitz.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="In the news">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In the news
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When a retail trader places a “free” trade on an app, a market maker is on the other side, earning the bid–ask spread and paying the broker for the order. NBC News examined what lies “beneath the surface” of the 2021 GameStop frenzy — payment for order flow, and firms like Citadel Securities that handle a large share of retail volume. The spread those firms quote, and how it widens when they fear trading against someone better informed, is exactly the market-microstructure problem modeled in this chapter. Read it at <a href="https://www.nbcnews.com/business/personal-finance/trading-hot-stocks-gamestop-seems-fun-until-you-look-beneath-n1258147">NBC News</a>.</p>
+</div>
+</div>
+</section>
+<section id="the-glosten-milgrom-model-of-the-spread" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="the-glosten-milgrom-model-of-the-spread"><span class="header-section-number">16.2</span> The Glosten-Milgrom model of the spread</h2>
+<p>The Glosten-Milgrom model helps us to understand the motivation of liquidity providers when setting bid and ask prices.</p>
+<p>Consider a set of identical, competitive market makers that do not know whether a stock will go up or down today. They must set prices at which they are willing to buy and sell shares of a particular stock. The price at which they will buy the stock is the bid (<span class="math inline">\(B\)</span>) and the price at which they will sell the stock is the offer (or ask) (<span class="math inline">\(A\)</span>).</p>
+<p>Each market maker knows that the stock will be worth either <span class="math inline">\(V_0\)</span> or <span class="math inline">\(V_1\)</span> at the end of the day where <span class="math inline">\(V_0 &lt; V_1\)</span>. Prior to the opening of trading, that market maker believes that the probability that the stock will be worth <span class="math inline">\(V_0\)</span> is <span class="math inline">\(P(V_0) = 1-\pi\)</span>. Regardless of the future value of the stock, uninformed traders will arrive to both buy and sell the stock.</p>
+<p>The market maker must decide where to set <span class="math inline">\(B\)</span> and <span class="math inline">\(A\)</span> in order to not lose money on average. If however, any market maker sets their spread wide enough to earn positive profits on average, competition will drive another market maker to come in and supply a better (narrower) bid/ask spread. The desire to not lose money, combined with competition means that in equilibrium, we will look for <span class="math inline">\(B = E(V|\mbox{next order is a sell})\)</span> and <span class="math inline">\(A = E(V|\mbox{next order is a buy})\)</span>.</p>
+<p>Suppose that amongst liquidity demanders, the fraction <span class="math inline">\(\mu\)</span> are informed, meaning they know the value of the signal that has been received. Fraction <span class="math inline">\(1-\mu\)</span> are uninformed. Each liquidity demander will demand exactly one share of the asset. The resolution of uncertainty is depicted in figure 1.</p>
+<figure class="figure">
+<embed src="tree.pdf" class="align-center" width="400" height="250">
+<figcaption>
+The resolution of uncertainty in the Glosten-Milgrom model
+</figcaption>
+</figure>
+<p>Thus, if an uninformed trader arrives at the market, the market maker will learn nothing about the value of the asset from trading with them. As such</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[E[V|\mbox{uninformed buy}] = E[V|\mbox{uninformed sell}] = E[V]\]</span></p>
+</blockquote>
+<p>This implies that if traders were all uninformed, the spread on an asset would be zero. The bid <span class="math inline">\(B = E[V|\mbox{sell order}] = E[V]\)</span> while the ask is <span class="math inline">\(A = E[V|\mbox{buy order}] = E[V]\)</span>.</p>
+<p>However, an informed trader knows the true value of the asset. Therefore, if the market maker knew that the next trade to arrive is coming from an informed trader, then <span class="math inline">\(A = E[V|\mbox{buy order}] = V_{1}\)</span> and <span class="math inline">\(B = E[V|\mbox{sell order}] = V_{0}\)</span>. The problem then for a market maker is that she doesn't know whether she is trading with an informed trader or an uninformed trader. As such, she must set the spread so that she doesn't lose money on average. That is, the money that she loses from trading with informed traders she recoups from trading with uninformed traders. We want to calculate <span class="math inline">\(E[V|\mbox{buy}]\)</span>. To do that, we first calculate <span class="math inline">\(P(\mbox{buy}) =  \pi \mu + \pi(1-\mu)\frac{1}{2} + (1-\pi)(1-\mu)\frac{1}{2} = \pi \mu + \frac{1}{2}(1-\mu)\)</span>. (An informed trader buys only when the value is high, an event of probability <span class="math inline">\(\pi\mu\)</span>; an uninformed trader buys with probability <span class="math inline">\(\frac12\)</span> regardless of value, contributing <span class="math inline">\(\frac12(1-\mu)\)</span>.) Bayes’ rule then gives the probability that a buyer is informed,</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[P(\mbox{In}|\mbox{buy}) = \frac{\pi\mu}{\pi\mu + \frac{1}{2}(1-\mu)}, \qquad P(\mbox{Un}|\mbox{buy}) = \frac{\frac{1}{2}(1-\mu)}{\pi\mu + \frac{1}{2}(1-\mu)},\]</span></p>
+</blockquote>
+<p>and <span class="math inline">\(E[V|\mbox{buy},\mbox{In}] = V_1\)</span> (an informed buyer knows the value is high), while <span class="math inline">\(E[V|\mbox{buy},\mbox{Un}] = E[V] = \pi V_1 + (1-\pi)V_0\)</span>. Then, to calculate the ask (similarly for the bid) we calculate</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\begin{aligned}
+\begin{aligned}
+A &amp; = E[V|\mbox{buy order}] = P(In|\mbox{buy})E[V|\mbox{buy}, \mbox{In}] + P(\mbox{Un}|\mbox{buy})E[V|\mbox{buy}, \mbox{Un}] \\
+&amp; = \frac{1}{\pi \mu + \frac{1}{2}(1-\mu)} \left (\pi\mu V_{1} + \frac{1-\mu}{2}\left [ \pi V_{1} + (1-\pi)V_{0} \right ] \right) \\
+&amp; = \frac{\pi(1+\mu)V_{1} + (1-\pi)(1-\mu)V_{0}}{1 + (2\pi - 1)\mu} \\
+\end{aligned}
+\end{aligned}\]</span></p>
+</blockquote>
+<p>The last line multiplies the numerator and denominator of the previous line by <span class="math inline">\(2\)</span>: the denominator becomes <span class="math inline">\(2\pi\mu + (1-\mu) = 1 + (2\pi-1)\mu\)</span>, and the numerator becomes <span class="math inline">\(2\pi\mu V_1 + (1-\mu)[\pi V_1 + (1-\pi)V_0] = \pi(1+\mu)V_1 + (1-\pi)(1-\mu)V_0\)</span>.</p>
+<p>Whereas the bid is</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\begin{aligned}
+\begin{aligned}
+B &amp; = E[V|\mbox{sell order}] = P(\mbox{In}|\mbox{sell})E[V|\mbox{sell}, \mbox{In}] + P(Un|\mbox{sell})E[V|\mbox{sell}, \mbox{Un}] \\
+&amp; = \frac{1}{(1-\pi) \mu + \frac{1}{2}(1-\mu)} \left ((1-\pi)\mu V_{0} + \frac{1-\mu}{2}\left [ \pi V_{1} + (1-\pi)V_{0} \right ] \right) \\
+&amp; = \frac{\pi(1-\mu)V_{1} + (1-\pi)(1+\mu)V_{0}}{1 + (1-2\pi)\mu}
+\end{aligned}
+\end{aligned}\]</span></p>
+</blockquote>
+<p>From this we can compute the spread <span class="math inline">\(A-B\)</span>. Note that the ask and bid have <em>different</em> denominators: writing <span class="math inline">\(D_A = 1 + (2\pi-1)\mu\)</span> and <span class="math inline">\(D_B = 1 + (1-2\pi)\mu = 1 - (2\pi-1)\mu\)</span>, we have <span class="math inline">\(A = N_A/D_A\)</span> and <span class="math inline">\(B = N_B/D_B\)</span> with numerators <span class="math inline">\(N_A = \pi(1+\mu)V_1 + (1-\pi)(1-\mu)V_0\)</span> and <span class="math inline">\(N_B = \pi(1-\mu)V_1 + (1-\pi)(1+\mu)V_0\)</span>. Combining over the common denominator <span class="math inline">\(D_A D_B = 1 - (2\pi-1)^2\mu^2\)</span>,</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[A - B = \frac{N_A D_B - N_B D_A}{1 - (2\pi-1)^2\mu^2}.\]</span></p>
+</blockquote>
+<p>Expanding the numerator, the pieces symmetric in the two states cancel and one is left with <span class="math inline">\(N_A D_B - N_B D_A = 4\pi(1-\pi)\mu\,(V_1 - V_0)\)</span>, so</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[A - B = \frac{4\pi(1-\pi)\mu\,(V_{1} - V_{0})}{1 - (2\pi-1)^2\mu^2}.\]</span></p>
+</blockquote>
+<p>If <span class="math inline">\(\pi = 0.5\)</span> the denominator is <span class="math inline">\(1\)</span> and <span class="math inline">\(2\pi-1 = 0\)</span>, so this becomes <span class="math inline">\(A-B = \mu(V_{1} - V_{0})\)</span>.</p>
+<p>The Glosten-Milgrom model shows that there are several forces which narrow spreads and thus increase liquidity in limit order markets. These forces include</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>Competition between market makers</li>
+<li>Decreases in the probability of informed trading, and</li>
+<li>Decreases in the volatility of the underlying asset.</li>
+</ol>
+</blockquote>
+</section>
+<section id="the-kyle-model-of-orderbook-shape" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="the-kyle-model-of-orderbook-shape"><span class="header-section-number">16.3</span> The Kyle Model of Orderbook Shape</h2>
+<p>The participants in the Kyle model are similar to those in the Glosten-Milgrom model. We have uninformed traders, informed traders (or insiders in Kyle's language) and market makers. Uninformed traders have random demand that has mean 0 and a known variance. Let the demand for uninformed traders be given by <span class="math inline">\(u \sim N(0, \sigma^{2}_{u})\)</span>. Informed traders observe the future value of the asset <span class="math inline">\(v\)</span> and select their demand <span class="math inline">\(x\)</span> as a function of this observed <span class="math inline">\(v\)</span> and the price set by the market makers. Assume that <span class="math inline">\(v \sim N(p_{0}, \Sigma_{0})\)</span>. A competitive set of market makers establish an order book described as a price that is a function of the number of orders that they observe <span class="math inline">\(y = x + u\)</span>. Since these market makers are competitive, they will in expectation earn zero profit. It is assumed that market makers cannot distinguish between informed and uninformed liquidity requests.</p>
+<p>The expected profit to a market maker given the demand for liquidity <span class="math inline">\(y\)</span> is <span class="math inline">\(E\pi = E(v - p)(-y)\)</span> (recall that the market maker must take the opposite position of the liquidity demanders). If expected profits are to be zero for every <span class="math inline">\(y\)</span>, then in equilibrium <span class="math inline">\(p = E[v|y]\)</span>. In order to find an equilibrium in this model, we proceed by making an assumption about the behavior of market makers, which at the end we verify to be true. Let us assume that market makers set the price according to a linear function of the demand that they observe. Specifically, let <span class="math inline">\(P(y) = \mu + \lambda y\)</span>.</p>
+<p>Now, we consider the problem of informed traders. The expected profit to informed traders is <span class="math inline">\(E\pi = E[(v-p(y))x|v]\)</span>. In order to maximize this profit, informed traders solve (given the price function of market makers.)</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[max_{x} E[\pi] = \max_{x} E[(v-\mu - \lambda(x + u))x|v]\]</span></p>
+</blockquote>
+<p>Since <span class="math inline">\(Eu = 0\)</span>, the objective is <span class="math inline">\(E[\pi] = (v - \mu - \lambda x)x = vx - \mu x - \lambda x^2\)</span>. Differentiating with respect to <span class="math inline">\(x\)</span> and setting the derivative to zero gives the first order condition</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\frac{\partial E[\pi]}{\partial x} = v - \mu - 2\lambda x = 0.\]</span></p>
+</blockquote>
+<p>Solving for <span class="math inline">\(x\)</span> gives <span class="math inline">\(x = \frac{v - \mu}{2\lambda} = -\frac{\mu}{2\lambda} + \frac{1}{2\lambda}v\)</span>. Notice if the market makers use a linear pricing rule, then the informed traders will set their demand as a linear function of the signal that they receive.</p>
+<p>Now consider the problem of market makers. Given that the demand that they observe is <span class="math inline">\(y = x + u\)</span>, they need to calculate <span class="math inline">\(E[v|x + u]\)</span>. Note that <span class="math inline">\(v\)</span> and <span class="math inline">\(y\)</span> are related since <span class="math inline">\(v\)</span> determines <span class="math inline">\(x\)</span> which is a part of <span class="math inline">\(y\)</span>. In fact, since <span class="math inline">\(y\)</span> is a linear function of <span class="math inline">\(v\)</span>, <span class="math inline">\(y\)</span> and <span class="math inline">\(v\)</span> are jointly normally distributed. The demand <span class="math inline">\(y\)</span> is <span class="math inline">\(y \sim N(-\frac{\mu}{2\lambda} + \frac{1}{\lambda}p_{0}, \frac{1}{\lambda^2}\Sigma_{0})\)</span>. The covariance between <span class="math inline">\(y\)</span> and <span class="math inline">\(v\)</span> is</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\begin{aligned}
+\begin{aligned}
+E(y - Ey)(v - Ev) &amp; = E(-\frac{\mu}{2\lambda} + \frac{1}{2\lambda}v + u +\frac{\mu}{2\lambda} + \frac{1}{2\lambda}p_{0} )(v- p_{0}) \\
+&amp; = E(\frac{1}{2\lambda}(v-p_{0}))(v-p_{0}) \\
+&amp; = \frac{1}{2\lambda}\Sigma_{0}
+\end{aligned}
+\end{aligned}\]</span></p>
+</blockquote>
+<p>For two jointly normal random variables <span class="math inline">\((a,b)\)</span>, <span class="math inline">\(E[a|b] = Ea + \frac{cov(a,b)}{\sigma^{2}_{b}}(b - Eb)\)</span>. Applying this formula to <span class="math inline">\(y\)</span> and <span class="math inline">\(v\)</span> gives</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[E[v|y] = p_{0} + \frac{\frac{1}{2\lambda}\Sigma_{0}}{\frac{1}{4\lambda^2}\Sigma_{0} + \sigma^{2}_{u}}(y + \frac{\mu}{2\lambda} - \frac{1}{2\lambda}p_{0}).\]</span></p>
+</blockquote>
+<p>Now, recall our original assumption that <span class="math inline">\(P(y) = \mu + \lambda y\)</span>. Since <span class="math inline">\(P(y) = E[v|y]\)</span>, we can compare coefficients and we notice that the coefficient on <span class="math inline">\(y\)</span> implies that</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\lambda = \frac{\frac{1}{2\lambda}\Sigma_{0}}{\frac{1}{4\lambda^2}\Sigma_{0} + \sigma^{2}_{u}}\]</span></p>
+</blockquote>
+<p>To solve, cross-multiply by the denominator:</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\lambda\left(\frac{1}{4\lambda^2}\Sigma_0 + \sigma^2_u\right) = \frac{1}{2\lambda}\Sigma_0 \quad\Longrightarrow\quad \frac{1}{4\lambda}\Sigma_0 + \lambda\sigma^2_u = \frac{1}{2\lambda}\Sigma_0.\]</span></p>
+</blockquote>
+<p>Move the <span class="math inline">\(\Sigma_0\)</span> terms to one side, <span class="math inline">\(\lambda\sigma^2_u = \frac{1}{2\lambda}\Sigma_0 - \frac{1}{4\lambda}\Sigma_0 = \frac{1}{4\lambda}\Sigma_0\)</span>, and multiply through by <span class="math inline">\(\lambda\)</span>:</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\lambda^2\sigma^2_u = \frac{\Sigma_0}{4} \quad\Longrightarrow\quad \lambda^2 = \frac{\Sigma_0}{4\sigma^2_u}.\]</span></p>
+</blockquote>
+<p>Taking the positive root (depth must be positive) produces the result that</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\lambda = \frac{\sqrt{\Sigma_{0}}}{2\sigma_{u}}\]</span></p>
+</blockquote>
+<p>Furthermore, it can be seen by inspection that <span class="math inline">\(\mu = p_{0}\)</span> is a solution to that equation.</p>
+</section>
+<section id="the-grossman-stiglitz-model-of-information-and-asset-prices" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="the-grossman-stiglitz-model-of-information-and-asset-prices"><span class="header-section-number">16.4</span> The Grossman-Stiglitz model of information and asset prices</h2>
+<p>In the Grossman-Stiglitz model, participants are similar to the Kyle model, except that they are risk averse (and have CARA utility) and markets are competitive. Consider a fraction a large number of traders. Fraction <span class="math inline">\(\lambda\)</span> of them are given a signal that takes the form <span class="math inline">\(s = v + \epsilon\)</span> where <span class="math inline">\(v\)</span> is the true future value of the asset and <span class="math inline">\(\epsilon \sim N(0, \sigma^{2}_{\epsilon})\)</span> is the noise term. The future value of the asset <span class="math inline">\(v \sim N(\mu_{0}, \sigma^{2}_{v})\)</span>. The risk-free asset has a net return of 0 and a normalized price of 1. Noise traders take the form of a noisy supply <span class="math inline">\(Z \sim N(0,\sigma^{2}_{z})\)</span>. We assume that <span class="math inline">\(Z, v\)</span> and <span class="math inline">\(\epsilon\)</span> are all independent of each other.</p>
+<p>First, we consider the problem of the informed agents. As was shown in class, when traders have utility of the form <span class="math inline">\(U(w) = -e^{-\gamma w}\)</span>, and <span class="math inline">\(w\)</span> is distributed normally, we can simplify their utility problem to become</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\max_{\theta} \theta(E[v|I]-P) - \frac{\gamma}{2}\sigma^{2}(v|I)\]</span></p>
+</blockquote>
+<p>where <span class="math inline">\(I\)</span> represents the information that a trader has. This implies a demand function of</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\theta(I) = \frac{E[v|I] - P}{\gamma \sigma^{2}(v|I)}\]</span></p>
+</blockquote>
+<p>Using the demand functions for both informed and uninformed traders, equilibrium requires that</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\lambda \frac{E[v|s] - P}{\gamma \sigma^{2}(v|s)} + (1-\lambda) \frac{E[v|P] - P}{\gamma \sigma^{2}(v|P)} = Z\]</span></p>
+</blockquote>
+<p>To isolate <span class="math inline">\(P\)</span>, write the two demand weights as <span class="math inline">\(A_s = \frac{\lambda}{\gamma\sigma^2(v|s)}\)</span> and <span class="math inline">\(A_p = \frac{1-\lambda}{\gamma\sigma^2(v|P)}\)</span>. The market-clearing condition is <span class="math inline">\(A_s(E[v|s] - P) + A_p(E[v|P] - P) = Z\)</span>. Distribute and collect the terms in <span class="math inline">\(P\)</span>:</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[A_s E[v|s] + A_p E[v|P] - (A_s + A_p)P = Z.\]</span></p>
+</blockquote>
+<p>Moving the <span class="math inline">\(P\)</span> term to one side and dividing by <span class="math inline">\(A_s + A_p\)</span> gives</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[P = \frac{\lambda \frac{E[v|s]}{\gamma \sigma^{2}(v|s)} + (1-\lambda)\frac{E[v|P]}{\gamma \sigma^{2}(v|P)}}{\frac{\lambda}{\gamma\sigma^{2}(v|s)} + \frac{1-\lambda}{\gamma\sigma^{2}(v|P)}} - \frac{1}{ \frac{\lambda}{\gamma\sigma^{2}(v|s)} + \frac{1-\lambda}{\gamma\sigma^{2}(v|P)} } Z,\]</span></p>
+</blockquote>
+<p>which is exactly the conjectured form <span class="math inline">\(P = a + bs - dZ\)</span> once the conditional expectations below are substituted.</p>
+<p>By the properties of updating for normal distributions, <span class="math inline">\(E[v|s] = \mu + \frac{\sigma^{2}_{v}}{\sigma^{2}_{v} + \sigma^{2}_{\epsilon}}s\)</span> and given our assumption about the price function <span class="math inline">\(E[v|P] = \mu +\frac{b\sigma^{2}_{v}}{b^{2}(\sigma^{2}_{\epsilon}) + d^{2}\sigma^{2}_{z}}\left (P - a - b\mu \right)\)</span>.</p>
+<p>Thus, the previous equation becomes <span class="math inline">\(KP = \lambda (\mu + Ms) + (1-\lambda)(\mu + N(P - a - b\mu))) - Z\)</span> where</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[K = \frac{\lambda}{\gamma\sigma^{2}(v|s)} + \frac{1-\lambda}{\gamma\sigma^{2}(v|P)},\]</span></p>
+<p><span class="math display">\[M = \frac{\sigma^{2}_{v}}{\sigma^{2}_{v} + \sigma^{2}_{\epsilon}}\]</span></p>
+</blockquote>
+<p>and</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[N = \frac{b\sigma^{2}_{v}}{b^{2}(\sigma^{2}_{\epsilon}) + d^{2}\sigma^{2}_{z}}.\]</span></p>
+</blockquote>
+<p>We notice that this has a linear form and hence can be solved for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(d\)</span>. Concretely, substituting <span class="math inline">\(E[v|s] = \mu + Ms\)</span> and <span class="math inline">\(E[v|P] = \mu + N(P - a - b\mu)\)</span> into <span class="math inline">\(KP = \lambda(\mu + Ms) + (1-\lambda)(\mu + N(P-a-b\mu)) - Z\)</span> and equating the coefficients of <span class="math inline">\(1\)</span>, <span class="math inline">\(s\)</span>, and <span class="math inline">\(Z\)</span> on both sides of <span class="math inline">\(P = a + bs - dZ\)</span> yields three equations in <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(d\)</span>. Because <span class="math inline">\(N\)</span> itself depends on <span class="math inline">\(b\)</span> and <span class="math inline">\(d\)</span> (see its definition above), this is a fixed-point system rather than a simple linear solve.</p>
+<!-- TODO: complete the coefficient-matching solution for a, b, d. This requires solving the fixed point in (b,d) induced by N = b σ_v² / (b² σ_ε² + d² σ_z²); the full closed form was left as a placeholder ("[DISCUSS]") in the source and is not reproduced here to avoid inventing an unverified result. -->
+<p>The thing to get out of this solution is that the price depends on the signal <span class="math inline">\(s\)</span> but, because it is contaminated by the noisy supply <span class="math inline">\(Z\)</span>, does not allow someone who is only observing the price to completely infer the signal. This partial revelation is exactly what preserves a positive return to becoming informed, resolving the Grossman-Stiglitz paradox.</p>
+</section>
+<section id="application-a-trading-desk-pricing-the-spread" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="application-a-trading-desk-pricing-the-spread"><span class="header-section-number">16.5</span> Application: A trading desk pricing the spread</h2>
+<p>Picture the trader at a market-making firm responsible for quoting bid and ask prices in the minutes before a Federal Reserve announcement. Every quote exposes the desk to the possibility that whoever trades against it knows something it does not, and the models in this chapter tell the trader exactly how to respond. The Glosten–Milgrom framework shows that the bid-ask spread is the desk’s defense against informed traders: the greater the chance that an incoming order carries private information, the wider the quotes must be to avoid being systematically picked off. As the announcement nears and the risk of informed trading rises, the desk widens its spread; once the news is public and uncertainty resolves, it tightens again. The spread that a retail investor experiences as a small, almost invisible cost is, on the other side of the trade, the precise output of this adverse-selection calculation.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Further listening
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Planet Money</em> (NPR) — <a href="https://www.npr.org/transcripts/963466346">“Why Robinhood froze the buying of some stocks”</a>: how payment for order flow, market makers like Citadel Securities, and the clearinghouse sit behind every “free” trade — the microstructure this chapter models.</p>
+</div>
+</div>
+</section>
+<section id="homework-problems" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">16.6</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="16.6.1">
+<h3 data-number="16.6.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">16.6.1</span> Conceptual</h3>
+<p><strong>MM-C1.</strong> Two stocks trade on the same exchange with identical fundamental values, but for stock X the market maker believes fraction <span class="math inline">\(\mu = 0.10\)</span> of arriving traders are informed, while for stock Y she believes <span class="math inline">\(\mu = 0.40\)</span>. Using the logic of the Glosten-Milgrom model, explain which stock will have the wider bid-ask spread and why. In your answer, describe the specific mechanism by which the presence of informed traders forces a competitive, zero-profit market maker to quote <span class="math inline">\(A = E[V|\mbox{buy order}]\)</span> above <span class="math inline">\(E[V]\)</span> and <span class="math inline">\(B = E[V|\mbox{sell order}]\)</span> below <span class="math inline">\(E[V]\)</span>.</p>
+<p><strong>MM-C2.</strong> A commentator argues that bid-ask spreads exist purely because market makers have monopoly power and use it to gouge traders. Drawing on the Glosten-Milgrom model, explain why a positive spread can arise even among perfectly competitive market makers who earn zero expected profit. What would the spread be in this model if every arriving trader were uninformed (<span class="math inline">\(\mu = 0\)</span>), and what does that imply about the commentator’s claim?</p>
+<p><strong>MM-C3.</strong> Explain why, in the Glosten-Milgrom model, a competitive market maker sets the ask equal to <span class="math inline">\(A = E[V|\mbox{buy order}]\)</span> rather than the unconditional expectation <span class="math inline">\(E[V]\)</span>. Walk through the role Bayes’ rule plays in computing <span class="math inline">\(P(\mbox{In}|\mbox{buy}) = \frac{\pi\mu}{\pi\mu + \frac{1}{2}(1-\mu)}\)</span>, and explain intuitively why observing a buy order is itself “bad news” for the market maker that pushes the quote above <span class="math inline">\(E[V]\)</span>.</p>
+<p><strong>MM-C4.</strong> Using the spread formula <span class="math inline">\(A - B = \frac{4\pi(1-\pi)\mu(V_1 - V_0)}{1 - (2\pi-1)^2\mu^2}\)</span>, explain how the spread responds to (i) the gap <span class="math inline">\(V_1 - V_0\)</span> between the two possible asset values and (ii) the fraction <span class="math inline">\(\mu\)</span> of informed traders. Which of the three spread-narrowing forces listed in the chapter — competition, less informed trading, lower volatility — does each of these two channels correspond to?</p>
+<p><strong>MM-C5.</strong> In the Kyle model the insider does not simply buy as many shares as possible when she learns that <span class="math inline">\(v\)</span> is high. Explain why the insider optimally restrains her demand, and describe the role that the noise traders’ demand <span class="math inline">\(u \sim N(0,\sigma^2_u)\)</span> plays in making it profitable for her to trade at all. What would happen to the informativeness of order flow if the noise-trader variance <span class="math inline">\(\sigma^2_u\)</span> shrank toward zero?</p>
+<p><strong>MM-C6.</strong> The Kyle lambda <span class="math inline">\(\lambda = \frac{\sqrt{\Sigma_0}}{2\sigma_u}\)</span> is described as a measure of “market depth” or price impact. Consider two assets: asset A has high fundamental uncertainty <span class="math inline">\(\Sigma_0\)</span> and thin noise trading (low <span class="math inline">\(\sigma_u\)</span>), while asset B has low <span class="math inline">\(\Sigma_0\)</span> and heavy noise trading (high <span class="math inline">\(\sigma_u\)</span>). Explain which asset has the deeper market, what “deeper” means for a trader submitting a large order, and why market makers rationally choose a steeper pricing rule for asset A.</p>
+<p><strong>MM-C7.</strong> The insider’s first-order condition in the Kyle model is <span class="math inline">\(v - \mu - 2\lambda x = 0\)</span>, giving the optimal order <span class="math inline">\(x = \frac{v - \mu}{2\lambda}\)</span>. Explain economically why the optimal order is proportional to the “surprise” <span class="math inline">\(v - \mu\)</span> in the insider’s information and inversely proportional to <span class="math inline">\(2\lambda\)</span>. Why does a deeper market (smaller <span class="math inline">\(\lambda\)</span>) induce the insider to trade more aggressively on the same signal, and how does the market maker’s linear pricing rule remain self-consistent in equilibrium?</p>
+<p><strong>MM-C8.</strong> The Grossman-Stiglitz model is often summarized by the claim that “prices cannot be perfectly informative if information is costly.” Explain the paradox this addresses: if the equilibrium price <span class="math inline">\(P = a + bs - dZ\)</span> perfectly revealed the signal <span class="math inline">\(s\)</span>, why would no trader pay to become informed, and why does that in turn make it impossible for the price to be perfectly revealing? Describe the role of the noisy supply <span class="math inline">\(Z \sim N(0,\sigma^2_z)\)</span> in resolving the paradox.</p>
+<p><strong>MM-C9.</strong> Suppose a regulator succeeds in eliminating all noise trading from a market described by the Grossman-Stiglitz model (so <span class="math inline">\(\sigma^2_z \to 0\)</span>). Explain what happens to the ability of the price to reveal the informed traders’ signal, and use this to explain why the fraction <span class="math inline">\(\lambda\)</span> of traders who choose to acquire the costly signal would collapse. Why does a healthy market, somewhat paradoxically, require some traders who trade for reasons unrelated to fundamental value?</p>
+<p><strong>MM-C10.</strong> Both Glosten-Milgrom and Kyle produce a wedge between the price a trader pays and the market maker’s unconditional expectation of value, yet the models attribute that wedge to different features of the trading environment. Compare the two: identify what plays the role of the “adverse-selection cost” in each, contrast the binary-value, single-share Glosten-Milgrom setting with the continuous Gaussian, strategic-quantity Kyle setting, and explain why the market maker earns zero expected profit in both despite systematically losing to informed traders.</p>
+<p><strong>MM-C11.</strong> The Grossman-Stiglitz demand function <span class="math inline">\(\theta(I) = \frac{E[v|I] - P}{\gamma \sigma^2(v|I)}\)</span> shows how a CARA investor’s position depends on her information <span class="math inline">\(I\)</span>. Explain why informed traders (conditioning on the signal <span class="math inline">\(s\)</span>) and uninformed traders (conditioning only on the price <span class="math inline">\(P\)</span>) generally hold different positions, and how the term <span class="math inline">\(\sigma^2(v|I)\)</span> in the denominator encodes the value of information. Why does a smaller posterior variance make an informed trader willing to take a larger position?</p>
+<p><strong>MM-C12.</strong> Textbooks distinguish “information-based” theories of the bid-ask spread (like Glosten-Milgrom) from “inventory-based” theories. Explain the core mechanism of each: in an information model, what generates the spread, and in an inventory model, why would a dealer who accumulates a large long or short position adjust her quotes? Give one empirical prediction that could help distinguish which mechanism dominates for a given asset.</p>
+</section>
+<section id="quantitative" class="level3" data-number="16.6.2">
+<h3 data-number="16.6.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">16.6.2</span> Quantitative</h3>
+<p><strong>MM-Q1.</strong> A stock will be worth either <span class="math inline">\(V_0 = 90\)</span> or <span class="math inline">\(V_1 = 110\)</span> at the end of the day. The market maker’s prior probability that the value is high is <span class="math inline">\(\pi = 0.5\)</span>, and fraction <span class="math inline">\(\mu = 0.3\)</span> of arriving liquidity demanders are informed. Using the Glosten-Milgrom results, compute the ask <span class="math inline">\(A\)</span>, the bid <span class="math inline">\(B\)</span>, and the spread <span class="math inline">\(A - B\)</span>. (Since <span class="math inline">\(\pi = 0.5\)</span> you may use the simplified spread formula <span class="math inline">\(A - B = \mu(V_1 - V_0)\)</span> and verify it against the full ask and bid expressions.)</p>
+<p><strong>MM-Q2.</strong> A stock will be worth <span class="math inline">\(V_0 = 20\)</span> or <span class="math inline">\(V_1 = 80\)</span>. The market maker’s prior on the high value is <span class="math inline">\(\pi = 0.7\)</span>, and fraction <span class="math inline">\(\mu = 0.5\)</span> of arriving traders are informed. Compute <span class="math inline">\(E[V]\)</span> and the ask <span class="math inline">\(A = \frac{\pi(1+\mu)V_1 + (1-\pi)(1-\mu)V_0}{1 + (2\pi-1)\mu}\)</span>. Verify that <span class="math inline">\(A &gt; E[V]\)</span> and explain in one sentence why the ask lies above the unconditional expectation.</p>
+<p><strong>MM-Q3.</strong> A stock will be worth <span class="math inline">\(V_0 = 40\)</span> or <span class="math inline">\(V_1 = 60\)</span>. The market maker’s prior on the high value is <span class="math inline">\(\pi = 0.6\)</span>, and fraction <span class="math inline">\(\mu = 0.25\)</span> of traders are informed. Compute the ask <span class="math inline">\(A = \frac{\pi(1+\mu)V_1 + (1-\pi)(1-\mu)V_0}{1 + (2\pi-1)\mu}\)</span>, the bid <span class="math inline">\(B = \frac{\pi(1-\mu)V_1 + (1-\pi)(1+\mu)V_0}{1 + (1-2\pi)\mu}\)</span>, and the spread <span class="math inline">\(A - B\)</span>. Then confirm your spread against the closed form <span class="math inline">\(A - B = \frac{4\pi(1-\pi)\mu(V_1 - V_0)}{1 - (2\pi-1)^2\mu^2}\)</span>.</p>
+<p><strong>MM-Q4.</strong> A stock will be worth <span class="math inline">\(V_0 = 100\)</span> or <span class="math inline">\(V_1 = 140\)</span>, with <span class="math inline">\(\pi = 0.5\)</span> and informed fraction <span class="math inline">\(\mu = 0.4\)</span>. Compute the spread using the simplified formula <span class="math inline">\(A - B = \mu(V_1 - V_0)\)</span>, then find <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> individually (recall that when <span class="math inline">\(\pi = 0.5\)</span> the spread is symmetric about <span class="math inline">\(E[V]\)</span>). Finally, state what the spread would be if the informed fraction rose to <span class="math inline">\(\mu = 0.8\)</span>, holding everything else fixed.</p>
+<p><strong>MM-Q5.</strong> In a Kyle-model market the fundamental value has variance <span class="math inline">\(\Sigma_0 = 16\)</span> and the noise-trader demand has variance <span class="math inline">\(\sigma^2_u = 4\)</span> (so <span class="math inline">\(\sigma_u = 2\)</span>). Compute the equilibrium price-impact coefficient <span class="math inline">\(\lambda = \frac{\sqrt{\Sigma_0}}{2\sigma_u}\)</span>. Then, if total order flow observed by the market maker is <span class="math inline">\(y = 3\)</span> and the prior mean is <span class="math inline">\(p_0 = 100\)</span> (so <span class="math inline">\(\mu = p_0\)</span>), compute the price <span class="math inline">\(P(y) = \mu + \lambda y\)</span> that the market maker sets.</p>
+<p><strong>MM-Q6.</strong> In a Kyle market the fundamental variance is <span class="math inline">\(\Sigma_0 = 36\)</span> and the noise-trader variance is <span class="math inline">\(\sigma^2_u = 9\)</span> (so <span class="math inline">\(\sigma_u = 3\)</span>). (a) Compute <span class="math inline">\(\lambda\)</span>. (b) Now suppose noise trading intensifies so that <span class="math inline">\(\sigma^2_u = 36\)</span> (so <span class="math inline">\(\sigma_u = 6\)</span>), with <span class="math inline">\(\Sigma_0\)</span> unchanged; recompute <span class="math inline">\(\lambda\)</span>. (c) State whether the market became deeper or shallower and explain, in one sentence, what this means for the price impact of a large order.</p>
+<p><strong>MM-Q7.</strong> Consider a Kyle market with prior mean <span class="math inline">\(p_0 = 50\)</span>, fundamental variance <span class="math inline">\(\Sigma_0 = 25\)</span>, and noise variance <span class="math inline">\(\sigma^2_u = 100\)</span>. (a) Compute <span class="math inline">\(\lambda\)</span>. (b) An insider observes <span class="math inline">\(v = 60\)</span>. Using the insider’s optimal demand <span class="math inline">\(x = \frac{v - \mu}{2\lambda}\)</span> with <span class="math inline">\(\mu = p_0\)</span>, compute her demand <span class="math inline">\(x\)</span>. (c) Now suppose the noise variance quadruples to <span class="math inline">\(\sigma^2_u = 400\)</span> while <span class="math inline">\(\Sigma_0\)</span> is unchanged; recompute <span class="math inline">\(\lambda\)</span> and, for the same signal <span class="math inline">\(v = 60\)</span>, recompute <span class="math inline">\(x\)</span>, commenting on whether the insider trades more or less aggressively.</p>
+<p><strong>MM-Q8.</strong> A Kyle market has prior mean <span class="math inline">\(p_0 = 30\)</span>, fundamental variance <span class="math inline">\(\Sigma_0 = 64\)</span>, and noise variance <span class="math inline">\(\sigma^2_u = 16\)</span> (so <span class="math inline">\(\sigma_u = 4\)</span>). (a) Compute <span class="math inline">\(\lambda\)</span> and set <span class="math inline">\(\mu = p_0\)</span>. (b) An insider observes <span class="math inline">\(v = 45\)</span> and submits her optimal order <span class="math inline">\(x = \frac{v - \mu}{2\lambda}\)</span>; compute <span class="math inline">\(x\)</span>. (c) If the realized noise-trader demand is <span class="math inline">\(u = -2.5\)</span>, compute the total order flow <span class="math inline">\(y = x + u\)</span> and the price <span class="math inline">\(P(y) = \mu + \lambda y\)</span> the market maker sets, and state whether the insider bought at a price below the true value <span class="math inline">\(v = 45\)</span>.</p>
+<p><strong>MM-Q9.</strong> In a Grossman-Stiglitz setting the fundamental has variance <span class="math inline">\(\sigma^2_v = 9\)</span> and the informed signal <span class="math inline">\(s = v + \epsilon\)</span> has noise variance <span class="math inline">\(\sigma^2_\epsilon = 3\)</span>. Using <span class="math inline">\(E[v|s] = \mu + M s\)</span> with <span class="math inline">\(M = \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_\epsilon}\)</span>, compute the updating weight <span class="math inline">\(M\)</span>. If the prior mean is <span class="math inline">\(\mu = 20\)</span> and an informed trader observes <span class="math inline">\(s = 26\)</span>, compute her conditional expectation <span class="math inline">\(E[v|s]\)</span>.</p>
+<p><strong>MM-Q10.</strong> In a Grossman-Stiglitz market the fundamental variance is <span class="math inline">\(\sigma^2_v = 16\)</span> and the signal noise variance is <span class="math inline">\(\sigma^2_\epsilon = 16\)</span>. (a) Compute the updating weight <span class="math inline">\(M = \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_\epsilon}\)</span>. (b) With prior mean <span class="math inline">\(\mu = 50\)</span> and observed signal <span class="math inline">\(s = 70\)</span>, compute <span class="math inline">\(E[v|s] = \mu + M s\)</span>. (c) State, in one sentence, what happens to <span class="math inline">\(M\)</span> as the signal becomes very noisy (<span class="math inline">\(\sigma^2_\epsilon \to \infty\)</span>) and why that makes intuitive sense.</p>
+<p><strong>MM-Q11.</strong> An informed trader in the Grossman-Stiglitz model has CARA risk aversion <span class="math inline">\(\gamma = 2\)</span>. Conditional on her signal she believes <span class="math inline">\(E[v|s] = 25\)</span> with conditional variance <span class="math inline">\(\sigma^2(v|s) = 5\)</span>, and the market price is <span class="math inline">\(P = 22\)</span>. Using the CARA demand <span class="math inline">\(\theta(I) = \frac{E[v|I] - P}{\gamma \sigma^2(v|I)}\)</span>, compute her optimal share demand <span class="math inline">\(\theta\)</span>. Then state, in one sentence, how her demand would change if her posterior uncertainty <span class="math inline">\(\sigma^2(v|s)\)</span> doubled.</p>
+<p><strong>MM-Q12.</strong> Two Grossman-Stiglitz traders face the same price <span class="math inline">\(P = 24\)</span> and the same risk aversion <span class="math inline">\(\gamma = 4\)</span>, and both hold the posterior belief <span class="math inline">\(E[v|I] = 30\)</span> with conditional variance <span class="math inline">\(\sigma^2(v|I) = 2\)</span>. (a) Using <span class="math inline">\(\theta(I) = \frac{E[v|I] - P}{\gamma \sigma^2(v|I)}\)</span>, compute each trader’s demand <span class="math inline">\(\theta\)</span>. (b) A less risk-averse trader with <span class="math inline">\(\gamma = 1\)</span> shares the same beliefs; compute her demand. (c) State, in one sentence, the general relationship between risk aversion and the size of the position an investor is willing to take on a given expected gain.</p>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/scottcondie\.github\.io\/teaching\/450\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Credit_Models.html" class="pagination-link" aria-label="Credit Risk Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Solutions.html" class="pagination-link" aria-label="Solutions to homework problems">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; The Yield Curve – Asset Prices, Risk, and Information</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./FIPortfolio.html" rel="next">
+<link href="./Yields.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5f0e52f7877e3a078c44e13fc828ca0d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2f8ef6ac35c506a55552e17f1b00ddbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Interest.html">Fixed income securities and pricing</a></li><li class="breadcrumb-item"><a href="./YieldCurve.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Asset Prices, Risk, and Information</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Asset Prices, Risk, and Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Markets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Individual portfolio selection and market equilibrium</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CAPM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Information, trading and market efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EMH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fixed income securities and pricing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Interest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Yields.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./YieldCurve.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FIPortfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Derivatives</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Forwards_and_Futures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced market models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BlackLitterman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Credit_Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Market_Makers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#the-yield-curve" id="toc-the-yield-curve" class="nav-link" data-scroll-target="#the-yield-curve"><span class="header-section-number">10.2</span> The Yield Curve</a></li>
+  <li><a href="#bond-pricing" id="toc-bond-pricing" class="nav-link" data-scroll-target="#bond-pricing"><span class="header-section-number">10.3</span> Bond pricing</a></li>
+  <li><a href="#the-yield-curve-without-interest-rate-risk" id="toc-the-yield-curve-without-interest-rate-risk" class="nav-link" data-scroll-target="#the-yield-curve-without-interest-rate-risk"><span class="header-section-number">10.4</span> The yield curve without interest rate risk</a></li>
+  <li><a href="#theories-of-the-yield-curve" id="toc-theories-of-the-yield-curve" class="nav-link" data-scroll-target="#theories-of-the-yield-curve"><span class="header-section-number">10.5</span> Theories of the yield curve</a></li>
+  <li><a href="#forward-rates-and-future-loans" id="toc-forward-rates-and-future-loans" class="nav-link" data-scroll-target="#forward-rates-and-future-loans"><span class="header-section-number">10.6</span> Forward rates and future loans</a></li>
+  <li><a href="#application-a-bank-treasurer-managing-the-gap" id="toc-application-a-bank-treasurer-managing-the-gap" class="nav-link" data-scroll-target="#application-a-bank-treasurer-managing-the-gap"><span class="header-section-number">10.7</span> Application: A bank treasurer managing the gap</a></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">10.8</span> Homework problems</a>
+  <ul class="collapse">
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">10.8.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">10.8.2</span> Quantitative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Interest.html">Fixed income securities and pricing</a></li><li class="breadcrumb-item"><a href="./YieldCurve.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
+<p>Three questions are at the heart of the study of the yield curve. First, how does the arbitrage principle relate yields of different maturities to one another, and what does this imply about bond pricing when the yield curve is not flat? Second, what information about future interest rates is encoded in the forward rates that can be extracted from the term structure today — and can an investor lock in those rates through a trading strategy? Third, why does the yield curve typically slope upward, and is that slope driven by expectations about rising short rates, by risk premia demanded by investors, or by some combination of both? These questions are central to financial markets because the yield curve is among the most closely watched signals in global finance. Central banks use it to assess the transmission of monetary policy; corporations use it to time debt issuance; mortgage lenders use it to set long-term rates; and investors use it to infer the market’s collective view of the macroeconomic outlook. A rigorous understanding of how the curve is constructed, what it implies, and why it takes the shape it does is indispensable for fixed income analysis.</p>
+<p>The first question establishes that bonds of different maturities cannot be priced independently of one another. Once zero-coupon spot rates for various maturities are observed, the no-arbitrage principle requires that every coupon-paying bond be priced by discounting each cash flow at the spot rate appropriate for its timing. If this were not the case, the bond could be stripped into its individual zero-coupon components and the pieces reassembled or sold separately for a riskless profit. This stripping and reconstitution argument pins down the entire pricing structure for fixed income instruments once the spot curve is known.</p>
+<p>The second question concerns forward rates — the future short-term rates that are mathematically implied by today’s spot curve. The chapter shows that under certainty, the forward rate is identical to the future short rate, and that the yield to maturity on any bond is simply the geometric average of the implied short rates over its life. More practically, it demonstrates how an investor or borrower can use existing zero-coupon bonds to lock in a future borrowing or lending rate today, effectively trading at the forward rate. This result has direct application for institutions that need to hedge future financing costs.</p>
+<p>The third question requires moving beyond arbitrage to theories of investor behavior. The expectations hypothesis asserts that forward rates are unbiased forecasts of future short rates, so the yield curve slopes upward only when the market expects rates to rise. The liquidity preference theory offers an alternative: most investors have relatively short horizons, and they demand a premium — a liquidity premium — to hold long-term bonds that expose them to interest rate risk. Under this theory, the curve can slope upward even when short rates are not expected to rise. The chapter uses Jensen’s inequality to derive precise conditions under which each theory implies a particular relationship between forward rates and expected future short rates, providing a formal foundation for the debate.</p>
+<p>The chapter opens by explaining the stripping of coupon bonds into zero-coupon components and deriving spot rates from observed prices, then shows how these spot rates pin down the pricing of coupon bonds. It next develops forward rates from the spot curve and demonstrates the geometric average relationship between yields and short rates. The chapter then develops the theoretical framework for the term structure, contrasting the expectations hypothesis with liquidity preference theory and grounding each in a treatment of investor preferences under uncertainty. It closes by working through a detailed example of using existing zero-coupon bonds to lock in a future borrowing rate at the forward rate.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="In the news">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In the news
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The shape of the yield curve is among the most-watched signals in finance. CNBC reported that the Fed’s “favorite recession indicator” — the gap between short- and long-term Treasury yields — was flashing a warning as the curve inverted, a configuration that has preceded most U.S. recessions. Why the curve takes the shape it does, and what the forward rates embedded in it reveal about expected future rates, is the subject of this chapter. Read it at <a href="https://www.cnbc.com/2025/02/26/federal-reserves-favorite-recession-indicator-is-flashing-danger-again.html">CNBC</a>.</p>
+</div>
+</div>
+</section>
+<section id="the-yield-curve" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="the-yield-curve"><span class="header-section-number">10.2</span> The Yield Curve</h2>
+<p>The United States Treasury and many other institutions like to separate bonds into their principal and coupon payments. In fact, one may think of bonds as being a conglomeration of lots of different securities. Each coupon payment represents a security that guarantees a payment (the coupon payment) to the holder at the specified price. The law of one price (i.e.&nbsp;the arbitrage principle) ensures that if one were to add up the price of all of these individual securities, one would get exactly the value of the group of securities.</p>
+<dl>
+<dt>Example.</dt>
+<dd>
+<p>Consider a 2 year T-note paying a 10% coupon annually (for simplicity). Suppose that the price of such a security is 100% of par value. This security can be split into three pieces. One that pays 10% of par value in one year, another that pays 10% of par value in 2 years and a third that pays 100% of par value in 2 years. Suppose the price of the first security is 9% of par value, the price of the second security is 9% of par value and the price of the third is 81% of par value. What strategy should you implement? You should sell the 2 year T-note and receive 100% of par value. Then purchase the three individual securities for a total cost of 99% of par value and then go to the treasury and ask them to reconstitute the security. Once reconstituted, you give the security back to cover the one that you sold short. Since you could do this as long as the prices differ, this shows that the prices must be the same.</p>
+</dd>
+</dl>
+<p>For many reasons, treasury securities are often split into their individual payments. This creates a set of zero-coupon bonds. From the prices of these zero-coupon bonds, one may calculate the yield to maturity for zeros of various maturities.</p>
+<dl>
+<dt>Example.</dt>
+<dd>
+<p>Suppose that zeros of 1,2 and 3 years maturity with $1000 par value sell for the prices $943.396, $881.659, $816.298. What are the YTMs of these zeros? They are 6%, 6.5% and 7% respectively.</p>
+</dd>
+<dt>Spot rate.</dt>
+<dd>
+<p>The currently observed yield to maturity for a particular duration. For example, "the 3-year spot rate is 10%" or "the one-year spot rate is 5%."</p>
+</dd>
+<dt>Short rate.</dt>
+<dd>
+<p>The interest rate for a particular interval of time (often a short interval like 1 year). For example, "the 1 year short rate three years from now will be 5%" or "the current short rate is 10% which by definition is the current 1-year spot rate."</p>
+</dd>
+</dl>
+</section>
+<section id="bond-pricing" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="bond-pricing"><span class="header-section-number">10.3</span> Bond pricing</h2>
+<p>The existence of differences in yields for zeros of different maturities has implications for the pricing of bonds. In particular, a zero coupon bond to be received at time <span class="math inline">\(n\)</span> should be discounted using the yield for other zeros of the same maturity.</p>
+<dl>
+<dt>Example.</dt>
+<dd>
+<p>Suppose that the yield curve is given by (y_1,y_2). Then a risk-free bond that matures in 2 years and makes annual coupon payments of <span class="math inline">\(b\)</span> and has face value <span class="math inline">\(M\)</span> would have price</p>
+<p><span class="math display">\[P = \frac{b}{1 + y_1} + \frac{b}{(1 + y_2)^2} + \frac{M}{(1 + y_2)^2}\]</span></p>
+</dd>
+</dl>
+</section>
+<section id="the-yield-curve-without-interest-rate-risk" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="the-yield-curve-without-interest-rate-risk"><span class="header-section-number">10.4</span> The yield curve without interest rate risk</h2>
+<p>Under certainty the future short rate can be derived from the current yield curve. This follows from the arbitrage principle. To see this, suppose that the yield curve over one and two years is given by the interest rates <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span>. Consider saving $1000 today that you will consume in 2 years. You have several savings options available to you. The first is that you can put the money into a two year zero. At the end of the two years you will be paid <span class="math inline">\(1000(1 + y_2)^2\)</span>. Another option is that you can purchase a one year zero and at the end of the first year extract your money and put it into another one year zero. Both of these strategies yield exactly the same cash flow, so by the arbitrage principle they must give the same return at the end of the 2 years. Therefore, the short rate (<span class="math inline">\(r_2\)</span>) after 1 year (for the period of the second year) must satisfy</p>
+<p><span class="math display">\[1000(1 + y_2)^2 = 1000(1 + y_1)(1 + r_2)\]</span></p>
+<p>which implies that <span class="math inline">\(1 + r_2 = \frac{(1 + y_2)^2}{1 + y_1}\)</span>. Thus the future short rate can be calculated from the yield curve. In particular, the yield to maturity will be the <em>geometric</em> average of all of the future short rates. This can be seen since <span class="math inline">\((1 + y_n)^n = (1 + r_1)(1+r_2)\cdots(1 + r_n)\)</span> which implies that <span class="math inline">\(1 + y_n = [(1 + r_1)(1+r_2)\cdots(1 + r_n)]^{1/n}\)</span>.</p>
+<p>This can be done generally. If <span class="math inline">\(n\)</span> represents the maturity of a risk-free zero-coupon bond in the yield curve then in general we have that <span class="math inline">\(1 + r_n = \frac{(1+ y_n)^n}{(1 + y_{n-1})^{n-1}}\)</span>.</p>
+<p>What is the rate of return to holding the 1 year zero vs.&nbsp;the 2 year zero for one year and then selling it? Since there is no uncertainty and the two investment strategies have the same payoff, their returns must be equal. To see this, note that at the end of one year, the two year zero is exactly a one year zero. As such it must have price <span class="math inline">\(P = \frac{1000}{1 + r_2}\)</span>. Therefore, the return to holding the two year zero (which was purchased for <span class="math inline">\(\frac{1000}{(1+y_2)^2}\)</span>) will be</p>
+<p><span class="math display">\[r = \frac{ \frac{1000}{1 + r_2} - \frac{1000}{(1 + y_2)^2}}{\frac{1000}{(1 + y_2)^2}} = \frac{(1+y_2)^2}{1 + r_2} - 1.\]</span></p>
+<p>To simplify, substitute the no-arbitrage relation <span class="math inline">\(1 + r_2 = \frac{(1 + y_2)^2}{1 + y_1}\)</span> from above. Then <span class="math inline">\(\frac{(1+y_2)^2}{1+r_2} = \frac{(1+y_2)^2 (1 + y_1)}{(1+y_2)^2} = 1 + y_1\)</span>, so</p>
+<p><span class="math display">\[r = (1 + y_1) - 1 = y_1.\]</span></p>
+<p>(The net one-year holding-period return on the two-year zero is <span class="math inline">\(y_1\)</span> — not <span class="math inline">\(1 + y_1\)</span>; the gross return is <span class="math inline">\(1 + y_1\)</span>.) Thus the holding period returns of the two assets are equal.</p>
+<dl>
+<dt>Example.</dt>
+<dd>
+<p>Suppose that the current yield curve is given by <span class="math inline">\(y_1 = 0.0230\)</span> and <span class="math inline">\(y_2 = 0.0235\)</span>. In a world with no uncertainty, what must the 1-year short rate be one year from now? To calculate this, simply match cash flows. Investing $1 in a two-year zero will yield <span class="math inline">\(1.0235^2 = 1.04755\)</span> at the end of two years. Investing in the 1-year zero and then rolling over will give <span class="math inline">\(1.0230(1 + r_2)\)</span> at the end of two years. Since under certainty these must be the same we have <span class="math inline">\(1.04755 = 1.0230(1 + r_2)\)</span> which implies that <span class="math inline">\(r_2 = 0.02400\)</span>.</p>
+</dd>
+</dl>
+<p>Of course, future short rates of return are unknown currently. The interest rate could go up or down between now and one, two or 10 years from now.</p>
+<dl>
+<dt>Forward interest rate.</dt>
+<dd>
+<p>The future short interest rate that is implied by the current yield curve. In particular, if the current yield curve is given by <span class="math inline">\((y_1,y_2,y_3,\ldots,y_T)\)</span> then the forward rate <span class="math inline">\(f_n\)</span> solves</p>
+<p><span class="math display">\[1 + f_n = \frac{(1+ y_n)^n}{(1 + y_{n-1})^{n-1}}\]</span></p>
+</dd>
+<dt>Example.</dt>
+<dd>
+<p>The yield curve as of 9/16/08 at approximately 1:30 pm EDT (from Bloomberg<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) is <span class="math inline">\((y_1,y_2,y_3) = (0.0154,0.0174,0.0198)\)</span>. What are the forward rates <span class="math inline">\((f_2,f_3)\)</span>?</p>
+<p><span class="math display">\[\begin{aligned}
+f_2 = \frac{(1+y_2)^2}{1 + y_1} - 1 = \frac{1.0174^2}{1.0154} =  0.019404 \\
+f_3 = \frac{(1+y_3)^3}{(1 + y_2)^2} - 1 = \frac{1.0198^3}{1.0174^2} =  0.024617
+\end{aligned}\]</span></p>
+</dd>
+</dl>
+</section>
+<section id="theories-of-the-yield-curve" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="theories-of-the-yield-curve"><span class="header-section-number">10.5</span> Theories of the yield curve</h2>
+<p>What is the relationship between the future short rate <span class="math inline">\(r_n\)</span> and the forward rate <span class="math inline">\(f_n\)</span>? One difference is that <span class="math inline">\(f_n\)</span> can be calculated directly today while <span class="math inline">\(r_n\)</span> is a random variable. Can we relate <span class="math inline">\(Er_n\)</span> to <span class="math inline">\(f_n\)</span>?</p>
+<dl>
+<dt>Example.</dt>
+<dd>
+<p>Consider an investor who knows that she wants to invest for a two-year horizon. The investor's preferences can be represented by a utility function <span class="math inline">\(U(x)\)</span> where <span class="math inline">\(x\)</span> represents her consumption at the end of two years. The investor preferences over risky alternatives can be represented by the expected utility functional <span class="math inline">\(EU(x)\)</span>. Assume that the investor is risk averse so <span class="math inline">\(U(x)\)</span> is strictly increasing in <span class="math inline">\(x\)</span> and is strictly concave. There are two possible assets that may be used. The first is a two year, zero-coupon bond with current yield to maturity of <span class="math inline">\(y_2\)</span>. The alternative is to invest in a one-year zero coupon bond at current rate <span class="math inline">\(y_1\)</span> and then roll this investment over at the end of one year. The payoff to this strategy will be <span class="math inline">\((1 + y_1)(1 + r_2)\)</span> but <span class="math inline">\(r_2\)</span> is unknown currently. If the investor were indifferent between the two assets then it must be true that <span class="math inline">\(EU((1 + y_1)(1 + r_2)) = U((1 + y_2)^2)\)</span> (recall that the two-year return to the two-year zero is certain). Recall from Jensen's inequality that for a strictly concave function <span class="math inline">\(f(x)\)</span> we have that <span class="math inline">\(Ef(x) &lt; f(Ex).\)</span> Therefore we have that</p>
+<p><span class="math display">\[U(E(1+y_1)(1+r_2)) &gt; U((1 + y_2)^2).\]</span></p>
+<p>Recall that the forward rate <span class="math inline">\(f_2\)</span> is defined as <span class="math inline">\(1 + f_2 = \frac{(1 + y_2)^2}{1 + y_1}\)</span>. From the previous equation we have that <span class="math inline">\(E(1+y_1)(1+r_2) &gt; (1 + y_2)^2\)</span> which implies that</p>
+<p><span class="math display">\[1 + f_2 = \frac{(1 + y_2)^2}{1 + y_1} &lt; E(1 + r_2).\]</span></p>
+<p>Thus, if all investors are long term investors then the expected future short rate will be larger than the forward rate. Investors in the long-term asset do not have to deal with interest rate risk so they are willing to accept a low yield on that asset. This lower yield is inherent in <span class="math inline">\(y_2\)</span> since <span class="math inline">\((1 + y_2)^2 = (1 + y_1)(1 + f_2)\)</span>. Investors are willing to accept an implied future short rate that is less than the expected value of the future short rate because they don't have to deal with the interest rate risk.</p>
+</dd>
+<dt>Example.</dt>
+<dd>
+<p>Now consider an investor who knows that she wants to invest for only one year. She can invest in the one-year zero and earn return <span class="math inline">\(y_1\)</span> for sure. Or she can invest in the two year security and sell it at the end of the first year. What will be the return to this strategy? It depends on the one-year short rate that is realized at the end of the year. Call this short rate <span class="math inline">\(r_2\)</span>.</p>
+<p><span class="math display">\[R = \frac{ \frac{1}{1 + r_2} }{ \frac{1}{(1 + y_2)^2} } = \frac{(1 + y_2)^2}{1 + r_2}\]</span></p>
+<p>If the investor is to be indifferent between the two assets it must be that</p>
+<p><span class="math display">\[EU\left (\frac{(1 + y_2)^2}{1 + r_2} \right ) = U( 1 + y_1 ) = U \left ( \frac{(1 + y_2)^2}{1 + f_2} \right )\]</span></p>
+<p>Again by Jensen's inequality we have that</p>
+<p><span class="math display">\[U \left ( E \frac{( 1 + y_2)^2}{1 + r_2} \right ) &gt;  U \left ( \frac{(1 + y_2)^2}{1 + f_2} \right )\]</span></p>
+<p>which implies that</p>
+<p><span class="math display">\[E \frac{( 1 + y_2)^2}{1 + r_2}  &gt;   \frac{(1 + y_2)^2}{1 + f_2}\]</span></p>
+<p>That is, the expected return to holding the 2-year security will have to be larger than the return to holding the one year security because the two year zero bears the risk of the currently unknown forward spot rate <span class="math inline">\(r_2\)</span>. How does this relate to the expected future spot rate <span class="math inline">\(Er_2\)</span>? Suppose that <span class="math inline">\(f_2 = Er_2\)</span>. Notice that <span class="math inline">\(\frac{1}{1 + r_2}\)</span> is convex in <span class="math inline">\(r_2\)</span> so <span class="math inline">\(E\frac{1}{1 + r_2} &lt; \frac{1}{1 + Er_2}\)</span> by Jensen's inequality. Multiplying both sides of this inequality by the positive constant <span class="math inline">\((1 + y_2)^2\)</span> preserves it,</p>
+<p><span class="math display">\[E \frac{(1 + y_2)^2}{1 + r_2} &lt; \frac{(1 + y_2)^2}{1 + Er_2},\]</span></p>
+<p>and substituting the supposition <span class="math inline">\(Er_2 = f_2\)</span> into the right-hand side gives</p>
+<p><span class="math display">\[E \frac{( 1 + y_2)^2}{1 + r_2}  &lt;   \frac{(1 + y_2)^2}{1 + f_2}\]</span></p>
+<p>which violates the previous equation. Therefore it must be that <span class="math inline">\(f_2 = Er_2 + LP\)</span> where <span class="math inline">\(LP\)</span> is a positive risk (or liquidity) premium that is sufficient to make it so that</p>
+<p><span class="math display">\[E \frac{( 1 + y_2)^2}{1 + r_2}  &gt;   \frac{(1 + y_2)^2}{1 + Er_2 + RP} =  \frac{(1 + y_2)^2}{1 + f_2}\]</span></p>
+<p>In other words, if all investors are short term investors then they will only be willing to hold the two-year zero if its return incorporates a positive risk premium (i.e.&nbsp;<span class="math inline">\(f_2 &gt; Er_2\)</span>).</p>
+</dd>
+</dl>
+<p>There are two alternative hypotheses about the yield curve. One is called the <em>expectations hypothesis</em> which asserts that forward rates are exactly the expectation of future interest rates. As seen previously, this is equivalent to assuming either that 1) The number of short term and long term investors in the market exactly counteract each other, or 2) there exist investors in the market who are risk-neutral and so care only about expectations. An alternative hypothesis is the <em>liquidity preference theory</em> which asserts that most investors in the market are short term investors and so the reason that the yield curve often slopes upward is that investors require a liquidity premium to hold the longer term debt, since doing so requires one to take on interest rate risk.</p>
+</section>
+<section id="forward-rates-and-future-loans" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="forward-rates-and-future-loans"><span class="header-section-number">10.6</span> Forward rates and future loans</h2>
+<p>If it is currently known that you will need access to funds in the future, one may lock in the future interest rate by using the current forward rates. Assume that the current yield curve is given by <span class="math inline">\((y_1,y_2,\ldots,y_T)\)</span>. You will need access to the amount <span class="math inline">\(x\)</span> at time <span class="math inline">\(n\)</span> and will repay it at time <span class="math inline">\(n+1\)</span>. The general strategy is to sell (i.e.&nbsp;short) enough <span class="math inline">\(n+1\)</span>-year zeros to pay for the purchase of <span class="math inline">\(x\)</span> dollars of <span class="math inline">\(n\)</span>-year zeros. The <span class="math inline">\(n\)</span>-year zeros will payoff in period <span class="math inline">\(n\)</span>, but you won't have to purchase the <span class="math inline">\(n+1\)</span>-year zeros to cover your short position until year <span class="math inline">\(n+1\)</span>. The price of an <span class="math inline">\(n\)</span>-year zero is <span class="math inline">\(P_n = \frac{M}{(1 + y_n)^n}\)</span> where <span class="math inline">\(M\)</span> is the face value of the zero. The price of the <span class="math inline">\(n+1\)</span> year zero is <span class="math inline">\(P_{n+1} = \frac{M}{(1 + y_{n+1})^{n+1}}\)</span>.</p>
+<p>To receive the amount <span class="math inline">\(x\)</span> at time <span class="math inline">\(n\)</span> you must purchase <span class="math inline">\(x/M\)</span> units of the <span class="math inline">\(n\)</span>-year zeros. This cost is <span class="math inline">\(\frac{x}{(1 + y_n)^n}\)</span>. To fund this position with <span class="math inline">\(n+1\)</span>-year zeros that have face value <span class="math inline">\(M\)</span> you must sell</p>
+<p><span class="math display">\[q = \frac{(1 + y_{n+1})^{n+1}}{M(1 + y_n)^n}\]</span></p>
+<p>units of the <span class="math inline">\(n+1\)</span>-year zero to fund this position. Recall from the definition of <span class="math inline">\(f_{n+1}\)</span> that</p>
+<p><span class="math display">\[1 + f_{n+1} =  \frac{(1 + y_{n+1})^{n+1}}{(1 + y_n)^n}\]</span></p>
+<p>which implies that</p>
+<p><span class="math display">\[q = (1 + f_{n+1}) \frac{x}{M}.\]</span></p>
+<p>Thus the amount you must repay in period <span class="math inline">\(n+1\)</span> is <span class="math inline">\(qM = (1 + f_{n+1}) x\)</span>. That is, you received <span class="math inline">\(x\)</span> at the beginning of period <span class="math inline">\(n\)</span> and must repay <span class="math inline">\((1 + f_{n+1})x\)</span> at the beginning of period <span class="math inline">\(n+1\)</span>. You have effectively taken a loan of <span class="math inline">\(x\)</span> at time <span class="math inline">\(n\)</span> at rate <span class="math inline">\(f_{n+1}\)</span>.</p>
+<dl>
+<dt>Example.</dt>
+<dd>
+<p>Suppose that you want to raise $1M from the capital markets to be received by you in one year and payed off one year later. Assume that one-year and two-year zeros have face value <span class="math inline">\(M = \$1000\)</span>. The current yield curve is <span class="math inline">\((y_1,y_2) = (0.0154,0.0174)\)</span>. So the price of the one year zero is <span class="math inline">\(1000/1.0154 = 984.834\)</span>. The price of the two year zero is <span class="math inline">\(1000/1.0174^2 = 966.0877\)</span>. To have $1M in one year you will need purchase 1000 one year zeros in the market. This will cost you $984,834. In order to raise that capital you start by selling <span class="math inline">\(q = 984,834/966.0877 = 1019.404\)</span> two year zeros in the market. This gives you $984,834 to be used to purchase the 1 year zeros. In 1 year you will have exactly $1M dollars as a payoff from the one year zeros. In two years you will need to purchase all of the two year zeros that you owe so that you can pay back the person from whom you borrowed them. How much will this cost? The value of the two year zeros in two years will be <span class="math inline">\(1000\cdot 1019.404 = \$1,019,404\)</span>. Thus you will have paid $19,404 in interest on the one year loan. Recall from before that <span class="math inline">\(f_2 = 0.019404\)</span>.</p>
+</dd>
+</dl>
+</section>
+<section id="application-a-bank-treasurer-managing-the-gap" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="application-a-bank-treasurer-managing-the-gap"><span class="header-section-number">10.7</span> Application: A bank treasurer managing the gap</h2>
+<p>The treasurer of a regional bank must decide how much to fund long-dated loans with short-term deposits — a choice that determines both the bank’s profit and its vulnerability. The term structure of interest rates is the treasurer’s map. The shape of the yield curve, and the forward rates embedded in it, reveal what the market expects future short rates to be and how much extra return long maturities currently offer; the expectations hypothesis and the role of term premia explain why the curve slopes as it does. Reading that signal is not academic: a treasurer who borrows short and lends long without accounting for how the curve can move is exposed to exactly the maturity mismatch that destroyed Silicon Valley Bank when rates rose, and the analysis in this chapter is what allows the risk to be measured and managed rather than ignored.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Further listening
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The Indicator from Planet Money</em> (NPR) — <a href="https://www.npr.org/2023/04/04/1168039533/the-inverted-yield-curve-is-screaming-recession">“The inverted yield curve is screaming RECESSION”</a>: why the slope of the yield curve has predicted past recessions, and what an inversion really means.</p>
+</div>
+</div>
+</section>
+<section id="homework-problems" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">10.8</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="10.8.1">
+<h3 data-number="10.8.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">10.8.1</span> Conceptual</h3>
+<p><strong>YC-C1.</strong> A trader claims that a coupon-paying two-year T-note can be priced by discounting all of its cash flows at the single two-year spot rate <span class="math inline">\(y_2\)</span>. Explain, using the stripping-and-reconstitution (no-arbitrage) argument, why this is incorrect when the yield curve is not flat, and state the correct pricing rule for each of the note’s cash flows.</p>
+<p><strong>YC-C2.</strong> A colleague argues that if a coupon bond and a portfolio of zeros replicating its cash flows sold at different prices, “the market would just eventually correct.” Explain instead the <em>immediate</em> arbitrage trade (which security to buy, which to sell, and the role of the Treasury’s stripping and reconstitution facility) that forces the coupon bond’s price to equal the sum of the values of its stripped cash flows. Why does the mere possibility of this trade pin down the price, regardless of investor sentiment?</p>
+<p><strong>YC-C3.</strong> A colleague states, “The three-year spot rate <span class="math inline">\(y_3\)</span> tells us the market’s forecast of the short rate that will prevail three years from now.” Explain why this statement confuses a spot rate with a forward (or short) rate. In your answer, describe precisely what <span class="math inline">\(y_3\)</span> measures today, what the forward rate <span class="math inline">\(f_3\)</span> measures, and how the two are related through the definition <span class="math inline">\(1 + f_3 = \frac{(1+y_3)^3}{(1+y_2)^2}\)</span>.</p>
+<p><strong>YC-C4.</strong> Carefully distinguish the three rate concepts used in this chapter — the spot rate <span class="math inline">\(y_n\)</span>, the short rate <span class="math inline">\(r_n\)</span>, and the forward rate <span class="math inline">\(f_n\)</span> — by stating which are observable today and which are (in general) random variables. Explain why <span class="math inline">\(f_n\)</span> and <span class="math inline">\(r_n\)</span> coincide in a world of certainty but generally differ under uncertainty, and why <span class="math inline">\(y_n\)</span> can always be written as a geometric average of a sequence of rates.</p>
+<p><strong>YC-C5.</strong> Explain how an investor who knows she will need to borrow money one year from now, and repay it two years from now, can lock in today’s forward rate <span class="math inline">\(f_2\)</span> without any uncertainty. Describe the trading strategy in words (which zeros to buy, which to short) and explain why the effective borrowing rate is exactly <span class="math inline">\(f_2\)</span> rather than <span class="math inline">\(y_1\)</span> or <span class="math inline">\(y_2\)</span>.</p>
+<p><strong>YC-C6.</strong> A borrower says, “To lock in a future loan I would need a counterparty willing to sign a forward contract with me today.” Explain why, given a full set of zero-coupon bonds, no such explicit forward contract is necessary: describe how the long-and-short zero position <em>manufactures</em> the forward loan synthetically, and identify precisely at which dates cash flows in and out so that nothing changes hands between today and the start of the loan.</p>
+<p><strong>YC-C7.</strong> The chapter shows that if all investors are long-term (two-year-horizon) investors, then <span class="math inline">\(f_2 &lt; Er_2\)</span>, whereas the expectations hypothesis asserts <span class="math inline">\(f_2 = Er_2\)</span>. Explain in words why a market populated entirely by long-horizon investors produces a forward rate <em>below</em> the expected future short rate. What feature of the two-year zero makes those investors willing to accept a lower implied rate, and how does Jensen’s inequality enter the argument?</p>
+<p><strong>YC-C8.</strong> Under the expectations hypothesis, an upward-sloping yield curve is interpreted as a signal that the market expects future short rates to rise. Explain the reasoning that connects the slope of the curve to expected future short rates under this hypothesis, using the relationship <span class="math inline">\(f_n = Er_n\)</span>. What would a downward-sloping (inverted) curve imply about <span class="math inline">\(Er_n\)</span> relative to today’s short rate?</p>
+<p><strong>YC-C9.</strong> According to the liquidity preference theory, the yield curve can slope upward even when the market expects short rates to remain unchanged. Using the decomposition <span class="math inline">\(f_2 = Er_2 + LP\)</span> with <span class="math inline">\(LP &gt; 0\)</span>, explain why this is possible and what economic force <span class="math inline">\(LP\)</span> represents. Contrast this interpretation of an upward slope with the expectations-hypothesis interpretation.</p>
+<p><strong>YC-C10.</strong> The chapter derives that if all investors are short-term (one-year-horizon) investors, then <span class="math inline">\(f_2 &gt; Er_2\)</span>, so a positive liquidity premium <span class="math inline">\(LP = f_2 - Er_2\)</span> is required for anyone to hold the two-year zero. Explain intuitively why short-horizon investors demand this premium, and why it is these investors — not the long-horizon investors — whose behavior the liquidity preference theory takes to dominate the market.</p>
+<p><strong>YC-C11.</strong> Under the assumption of certainty, the chapter shows that buying a two-year zero and selling it after one year earns exactly the same <em>net</em> one-year holding-period return as simply holding a one-year zero, namely <span class="math inline">\(y_1\)</span>. Explain in words why the no-arbitrage principle forces these two strategies to have equal one-year returns. Be careful to state whether it is the <em>net</em> return or the <em>gross</em> return that equals <span class="math inline">\(y_1\)</span>, and give the value of the other one.</p>
+<p><strong>YC-C12.</strong> A student writes on an exam that “the one-year holding-period return on a two-year zero equals <span class="math inline">\(1 + y_1\)</span>.” Explain precisely what is wrong with this statement, distinguishing the gross return (one plus the net return) from the net return. Identify which of <span class="math inline">\(y_1\)</span> and <span class="math inline">\(1 + y_1\)</span> is the net one-year holding-period return and which is the gross return, and show where in the derivation the “<span class="math inline">\(-1\)</span>” enters.</p>
+<p><strong>YC-C13.</strong> Suppose that on a given morning the spread between the 10-year and 3-month Treasury yields turns negative (the curve inverts), and financial news outlets warn of a possible recession. Drawing on the chapter’s framing of the yield curve as a signal, explain what an inverted curve implies about the market’s expectations for future short rates under the expectations hypothesis, and why a bank treasurer who borrows short and lends long should pay attention to this configuration.</p>
+<p><strong>YC-C14.</strong> The bank-treasurer application describes funding long-dated loans with short-term deposits — “borrowing short and lending long.” Using the language of spot rates, forward rates, and term/liquidity premia developed in this chapter, explain both <em>why</em> this maturity mismatch is typically profitable when the curve slopes upward and <em>why</em> it is risky. Connect the risk explicitly to the possibility that realized future short rates <span class="math inline">\(r_n\)</span> differ from today’s forward rates <span class="math inline">\(f_n\)</span>.</p>
+</section>
+<section id="quantitative" class="level3" data-number="10.8.2">
+<h3 data-number="10.8.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">10.8.2</span> Quantitative</h3>
+<p><strong>YC-Q1.</strong> The current yield curve is <span class="math inline">\((y_1, y_2, y_3) = (0.030, 0.035, 0.038)\)</span>. Consider a two-year risk-free note with face value <span class="math inline">\(M = \$1000\)</span> paying an annual coupon of <span class="math inline">\(b = \$60\)</span>. Using the no-arbitrage rule <span class="math inline">\(P = \frac{b}{1+y_1} + \frac{b + M}{(1+y_2)^2}\)</span>, compute the price of the note. Then show that discounting <em>both</em> cash flows at the single rate <span class="math inline">\(y_2\)</span> gives a different (incorrect) price.</p>
+<p><strong>YC-Q2.</strong> Zeros of 1-, 2-, and 3-year maturity with $1000 par sell for $970.874, $942.596, and $915.142 respectively. (a) Extract the spot rates <span class="math inline">\(y_1, y_2, y_3\)</span>. (b) Use them to price a three-year note with face value $1000 and annual coupon $50 by discounting each cash flow at the spot rate of matching maturity.</p>
+<p><strong>YC-Q3.</strong> The current yield curve is <span class="math inline">\((y_1, y_2, y_3) = (0.030, 0.035, 0.038)\)</span>. Compute the forward rates <span class="math inline">\(f_2\)</span> and <span class="math inline">\(f_3\)</span> using <span class="math inline">\(1 + f_n = \frac{(1+y_n)^n}{(1+y_{n-1})^{n-1}}\)</span>.</p>
+<p><strong>YC-Q4.</strong> Zero-coupon bonds with $1000 par sell for the following prices: the 1-year zero for $952.381 and the 2-year zero for $898.452. Extract the spot rates <span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span>, then compute the forward rate <span class="math inline">\(f_2\)</span>.</p>
+<p><strong>YC-Q5.</strong> Suppose the future short rates under certainty are <span class="math inline">\(r_1 = 0.020\)</span>, <span class="math inline">\(r_2 = 0.030\)</span>, and <span class="math inline">\(r_3 = 0.040\)</span>. Using the geometric-average relationship <span class="math inline">\((1 + y_n)^n = (1 + r_1)(1 + r_2)\cdots(1 + r_n)\)</span>, compute the three-year spot rate <span class="math inline">\(y_3\)</span>.</p>
+<p><strong>YC-Q6.</strong> The two-year spot rate is <span class="math inline">\(y_2 = 0.05\)</span> and the one-year spot rate is <span class="math inline">\(y_1 = 0.04\)</span>. Under the assumption of certainty, use the arbitrage relation <span class="math inline">\((1 + y_2)^2 = (1 + y_1)(1 + r_2)\)</span> to find the one-year short rate <span class="math inline">\(r_2\)</span> that will prevail one year from now.</p>
+<p><strong>YC-Q7.</strong> The current yield curve is <span class="math inline">\((y_1, y_2) = (0.04, 0.05)\)</span> and each zero has face value $1000. An investor buys the two-year zero today and sells it after one year, once it has become a one-year zero. Under certainty: (a) compute the purchase price today; (b) compute the one-year short rate <span class="math inline">\(r_2\)</span> and hence the resale price after one year; (c) compute the <em>net</em> one-year holding-period return and verify it equals <span class="math inline">\(y_1\)</span>; and (d) state the corresponding <em>gross</em> return.</p>
+<p><strong>YC-Q8.</strong> A two-year zero with $1000 par is bought today at a one-year spot rate <span class="math inline">\(y_1 = 0.03\)</span> and two-year spot rate <span class="math inline">\(y_2 = 0.045\)</span>, and sold after one year under certainty. Compute the resale price and the <em>gross</em> one-year holding-period return <span class="math inline">\(\frac{\text{resale price}}{\text{purchase price}}\)</span>. Confirm that the <em>net</em> return equals <span class="math inline">\(y_1 = 0.03\)</span>, and explain in one sentence why reporting <span class="math inline">\(1 + y_1\)</span> as the holding-period return would be an error.</p>
+<p><strong>YC-Q9.</strong> The current yield curve is <span class="math inline">\((y_1, y_2) = (0.0154, 0.0174)\)</span>, matching the chapter example. Under the expectations hypothesis, the market expects the one-year short rate one year from now to equal the forward rate: <span class="math inline">\(Er_2 = f_2\)</span>. Compute <span class="math inline">\(f_2\)</span> and hence <span class="math inline">\(Er_2\)</span>. Then, if instead the liquidity preference theory holds with a premium <span class="math inline">\(LP = 0.004\)</span> and the forward rate is unchanged, compute the implied expected future short rate <span class="math inline">\(Er_2\)</span> from <span class="math inline">\(f_2 = Er_2 + LP\)</span>.</p>
+<p><strong>YC-Q10.</strong> Suppose <span class="math inline">\(y_1 = 0.03\)</span>, and the market’s expected future one-year short rate is <span class="math inline">\(Er_2 = 0.05\)</span>. (a) Under the expectations hypothesis (<span class="math inline">\(f_2 = Er_2\)</span>), determine the two-year spot rate <span class="math inline">\(y_2\)</span> consistent with this expectation, using <span class="math inline">\((1 + y_2)^2 = (1 + y_1)(1 + f_2)\)</span>. (b) Now suppose instead that a liquidity premium <span class="math inline">\(LP = 0.01\)</span> raises the forward rate to <span class="math inline">\(f_2 = Er_2 + LP\)</span>; recompute <span class="math inline">\(y_2\)</span> and comment on how the premium steepens the curve.</p>
+<p><strong>YC-Q11.</strong> You want to raise $2M from the capital markets to be received in one year and repaid one year later. One-year and two-year zeros have face value <span class="math inline">\(M = \$1000\)</span>. The current yield curve is <span class="math inline">\((y_1, y_2) = (0.020, 0.025)\)</span>. Compute (a) the price of each zero, (b) how many one-year zeros you must buy to receive $2M in one year, (c) how many two-year zeros <span class="math inline">\(q\)</span> you must short to fund the purchase, and (d) the total amount you must repay in two years. Verify that the effective interest paid corresponds to the forward rate <span class="math inline">\(f_2\)</span>.</p>
+<p><strong>YC-Q12.</strong> Using the general result that a loan of <span class="math inline">\(x\)</span> received at time <span class="math inline">\(n\)</span> and repaid at time <span class="math inline">\(n+1\)</span> carries effective rate <span class="math inline">\(f_{n+1}\)</span>, suppose the yield curve is <span class="math inline">\((y_1, y_2, y_3) = (0.030, 0.035, 0.040)\)</span> and you wish to lock in a loan of <span class="math inline">\(x = \$500{,}000\)</span> to be received at time 2 and repaid at time 3. Compute the forward rate <span class="math inline">\(f_3\)</span>, the number of zeros involved via <span class="math inline">\(q = (1 + f_3)\frac{x}{M}\)</span> with <span class="math inline">\(M = \$1000\)</span>, and the amount <span class="math inline">\((1 + f_3)x\)</span> you must repay at time 3.</p>
+
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><code>http://www.bloomberg.com/markets/rates/index.html</code><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/scottcondie\.github\.io\/teaching\/450\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Yields.html" class="pagination-link" aria-label="Fixed Income Yields">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./FIPortfolio.html" class="pagination-link" aria-label="Fixed Income Portfolio Management">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

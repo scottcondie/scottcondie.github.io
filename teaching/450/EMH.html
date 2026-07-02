@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; The efficient markets hypothesis – Asset Prices, Risk, and Information</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Interest.html" rel="next">
+<link href="./Performance.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5f0e52f7877e3a078c44e13fc828ca0d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2f8ef6ac35c506a55552e17f1b00ddbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./EMH.html">Information, trading and market efficiency</a></li><li class="breadcrumb-item"><a href="./EMH.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Asset Prices, Risk, and Information</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Asset Prices, Risk, and Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Markets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Individual portfolio selection and market equilibrium</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CAPM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Information, trading and market efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EMH.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fixed income securities and pricing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Interest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Yields.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./YieldCurve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FIPortfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Derivatives</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Forwards_and_Futures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced market models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BlackLitterman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Credit_Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Market_Makers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7.1</span> Introduction</a></li>
+  <li><a href="#the-efficient-markets-hypothesis" id="toc-the-efficient-markets-hypothesis" class="nav-link" data-scroll-target="#the-efficient-markets-hypothesis"><span class="header-section-number">7.2</span> The efficient markets hypothesis</a></li>
+  <li><a href="#behavioral-finance" id="toc-behavioral-finance" class="nav-link" data-scroll-target="#behavioral-finance"><span class="header-section-number">7.3</span> Behavioral Finance</a></li>
+  <li><a href="#how-strong-are-the-capm-assumptions" id="toc-how-strong-are-the-capm-assumptions" class="nav-link" data-scroll-target="#how-strong-are-the-capm-assumptions"><span class="header-section-number">7.4</span> How strong are the CAPM assumptions?</a></li>
+  <li><a href="#what-does-alpha-mean" id="toc-what-does-alpha-mean" class="nav-link" data-scroll-target="#what-does-alpha-mean"><span class="header-section-number">7.5</span> What does alpha mean?</a></li>
+  <li><a href="#the-capm-as-a-personal-investment-checklist" id="toc-the-capm-as-a-personal-investment-checklist" class="nav-link" data-scroll-target="#the-capm-as-a-personal-investment-checklist"><span class="header-section-number">7.6</span> The CAPM as a personal investment checklist</a></li>
+  <li><a href="#application-a-saver-choosing-index-or-active" id="toc-application-a-saver-choosing-index-or-active" class="nav-link" data-scroll-target="#application-a-saver-choosing-index-or-active"><span class="header-section-number">7.7</span> Application: A saver choosing index or active</a></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">7.8</span> Homework problems</a>
+  <ul class="collapse">
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">7.8.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">7.8.2</span> Quantitative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./EMH.html">Information, trading and market efficiency</a></li><li class="breadcrumb-item"><a href="./EMH.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">7.1</span> Introduction</h2>
+<p>Three questions give this chapter its organizing logic. First, what does it mean to say a market is “efficient,” and how do the three standard versions of that claim — weak, semi-strong, and strong — differ in what they assume prices already reflect? Second, what are the precise empirical implications of each level of efficiency, and what kinds of trading strategies would each render unprofitable? Third, even if individual investors display systematic psychological biases, does that necessarily mean market prices will be distorted, or can arbitrageurs correct for those biases? Together these questions trace a path from the information contained in prices all the way to the aggregate efficiency — or inefficiency — of the market.</p>
+<p>The first question matters because “efficiency” is not a single thing. Weak-form efficiency asserts only that past price history contains no exploitable information. Semi-strong efficiency is more demanding: it asserts that all publicly available information — earnings, filings, news — is already impounded in prices. Strong-form efficiency is the most demanding of all: it asserts that even private, insider information is reflected in prices. The distinction is crucial because it determines how much information one is willing to assume the market has already digested before drawing conclusions about what analysis can accomplish.</p>
+<p>The second question translates these levels into testable empirical claims. Weak-form efficiency rules out profitable technical analysis, since it holds that patterns in past prices cannot be exploited. Semi-strong efficiency rules out returns to fundamental analysis and factor-based strategies, since all public information is already priced. Strong-form efficiency rules out profits even from insider trading. Each form has direct implications for the value of different investment strategies, and the chapter is candid about the formidable empirical difficulties in testing any of them.</p>
+<p>The third question — whether individual behavioral biases translate into market-level inefficiency — grounds the chapter’s discussion of behavioral finance. Psychologists have documented robust and systematic departures from expected-utility maximization: overconfidence, representativeness bias, loss aversion, and others. But the existence of such biases at the individual level does not automatically imply that prices will be distorted, because rational arbitrageurs can in principle trade against biased investors and eliminate the resulting mispricings. Whether they actually do so depends on whether arbitrage is limited by transaction costs, financing constraints, or the risk that mispricings worsen before they correct — a set of frictions that the chapter examines as the boundary conditions for behavioral influences on asset prices.</p>
+<p>The chapter then draws out the close kinship between market efficiency and the CAPM. Because the CAPM’s sharp “no free lunch” conclusion rests on six assumptions, the chapter examines each in turn and asks how strong it really is, and it uses that examination to make precise what <em>alpha</em> means: a return in excess of what a pricing model warrants, which can arise either because a CAPM assumption fails or because the efficient markets hypothesis does — the joint-hypothesis problem that makes any measured alpha ambiguous. Turning this logic to personal use, the chapter closes by developing the CAPM as a practical checklist for evaluating any investment pitched as offering high returns with little risk: walking through the assumptions one at a time reveals which risk, if any, a purportedly extraordinary opportunity is really paying you to bear — and when the honest answer is none, that the promised returns are almost certainly illusory.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="In the news">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In the news
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The efficient-markets hypothesis makes a testable prediction: most professional managers should not be able to beat the market after fees. CNBC reported that <em>fewer</em> active managers beat their index benchmarks again last year — part of a long pattern that has pushed trillions of dollars from active funds into low-cost index funds. Whether that pattern reflects truly efficient prices, and what the exceptions tell us, is the question this chapter takes up. Read it at <a href="https://www.cnbc.com/2026/02/25/active-managers-vs-index-funds.html">CNBC</a>.</p>
+</div>
+</div>
+</section>
+<section id="the-efficient-markets-hypothesis" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="the-efficient-markets-hypothesis"><span class="header-section-number">7.2</span> The efficient markets hypothesis</h2>
+<p>The efficient markets hypothesis is a term that has many definitions. All of the definitions center around the idea that participants in the market will use all of the available information in a market as soon as it becomes available and hence that trading on information will likely have no value. Some imprecise definitions of the efficient market hypothesis are</p>
+<dl>
+<dt>Weak-form efficient markets hypothesis.</dt>
+<dd>
+<p>The assumption that all data that is available from observing the history of market prices has already been incorporated into current market prices. Thus, investment strategies that rely on past market data should not yield returns to investors beyond what the investors can expect from holding the market requisite amount of risk.</p>
+</dd>
+<dt>Semistrong-form efficient market hypothesis.</dt>
+<dd>
+<p>The assumption that all information available from observing <em>any</em> publicly available data has already been incorporated into the market price. Thus, investment strategies that rely on earnings or other balance sheet data should not yield returns to investors beyond what they can expect from holding the market requisite amount of risk.</p>
+</dd>
+<dt>Strong-form efficient market hypothesis.</dt>
+<dd>
+<p>The assumption that asset prices reflect <em>all</em> information that is relevant to the payoffs of that asset. This includes all the information that a CEO or other insider might know.</p>
+</dd>
+</dl>
+<p>Note that these hypotheses imply that certain trading strategies will not be successful. For example the weak-form assumption implies that Technical Analysis is unlikely to be successful. Likewise, the semistrong-hypothesis implies that both fundamental analysis and quantitative (factor) models are likely to not be successful. The strong-form hypothesis implies that no analysis, including insider trading, will help in picking stocks. If the strong form hypothesis holds then there is no reason for anyone to ever hold anything but the market portfolio (i.e.&nbsp;everyone should have a passive strategy).</p>
+<p>Of course these are only assumptions. One might want to test whether these hypotheses are true. There are several reasons why testing these hypotheses is difficult. The first is that if you truly had a very profitable trading strategy you would never tell anyone about it. Instead you would make millions on your own and once it stopped working you would tell people about it. Also, unless markets are highly inefficient, the volatility of the market would make it hard to notice a strategy that increased returns by 5%. An increase of 20% would be observable, but the ability to have such an increase would mean the market was really inefficient. A third reason is that we can only observe finite time periods of data. Being successful over 5 years (or 10 or 20) does not necessarily imply that you have a successful trading strategy. You may be a monkey who picked stocks by throwing darts, but happened to throw darts in the right direction.</p>
+</section>
+<section id="behavioral-finance" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="behavioral-finance"><span class="header-section-number">7.3</span> Behavioral Finance</h2>
+<p>There is some indication that the expected utility model with no other constraints does not generate predictions that reflect the data that is observed about asset prices. The field of behavioral finance (and behavioral economics in general) has sought to improve the predictions of traditional economic models by changing the set of assumptions that underly the preferences of the participating agents. Often these changes are based on research performed by psychologists about the nature of individual decision makers. These psychologists speak of behavioral "biases" that are evidenced by behavior that is inconsistent with expected utility. Some of these biases have to do with the ability of investors to process information. These include (one should read the definitions of these in the book)</p>
+<dl>
+<dt>Overconfidence.</dt>
+<dd>
+<p>Some individuals overestimate the precision of their beliefs or forecasts. This may cause them to take larger positions in particular equities than they would otherwise take.</p>
+</dd>
+<dt>Representativeness bias.</dt>
+<dd>
+<p>This is sometimes called "the law of small numbers." It is the bias that at times individuals believe that small samples provide a better estimate than they actually do about the future. This leads investors to invest based on extrapolated trends that are not believed to be as noisy as they really are. If all investors do this, it has been shown that mutual funds with otherwise irrational managers may survive.</p>
+</dd>
+</dl>
+<p>Others have to do with the nature of investors' vN-M utility functions. These are discussed in the book and include prospect theory, regret avoidance, framing and others.</p>
+<p>Note that simply because <em>individuals</em> display these types of biases does not imply that market prices will display biases consistent with these individual behaviors. If arbitrageurs are able to profit from the existence of these traders, then they may drive the resulting mispricings out of the market. Thus, in order for these behaviors to have an effect on market prices, it must be true that there is some limit to the ability of these arbitrageurs to buy and sell in the market. Can you think of some of these limits? (Transactions costs, etc.)</p>
+</section>
+<section id="how-strong-are-the-capm-assumptions" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="how-strong-are-the-capm-assumptions"><span class="header-section-number">7.4</span> How strong are the CAPM assumptions?</h2>
+<p>The efficient markets hypothesis and the CAPM are close relatives. The CAPM makes a very sharp version of the “no free lunch” claim: in equilibrium every asset lies on the security market line, so its expected return is exactly <span class="math inline">\(r_f + \beta_i(Er_M - r_f)\)</span> — compensation for its systematic risk and nothing more. There is no room for a positive “alpha,” no room for an investment whose expected return exceeds what its risk warrants. That is a powerful conclusion, but it is only as strong as the assumptions it rests on. Recall the six assumptions of the CAPM, and notice that on closer inspection each of them can seem very strong.</p>
+<dl>
+<dt>All investors are price takers.</dt>
+<dd>
+<p>This treats every participant as too small to move prices. But some players are clearly large enough to affect the prices at which they trade — a large institution unwinding a position, an activist investor, or a single large order in a thin or illiquid market. When a trader’s own actions move prices, the tidy competitive equilibrium behind the CAPM is disturbed.</p>
+</dd>
+<dt>One identical holding period.</dt>
+<dd>
+<p>Investors plainly do not share a single horizon. A twenty-five-year-old saving for retirement, a retiree drawing income, and a trading desk judged on quarterly performance are optimizing over very different lengths of time. The single-period framing also ignores that the investment opportunity set itself shifts over time, so that a long-horizon investor may rationally want to hedge against future changes in interest rates or expected returns — considerations the one-period model cannot see.</p>
+</dd>
+<dt>All investments are publicly traded.</dt>
+<dd>
+<p>This is perhaps the strongest assumption of all. Enormous fractions of real wealth are not tradable: your human capital and future labor income, privately held businesses, closely held real estate, and the returns to education. These assets are correlated with the market and cannot be freely diversified or hedged, so the “market portfolio” the theory prices is not the true portfolio of aggregate wealth. An investor whose largest asset is her own earning power faces a risk-return problem the CAPM does not fully describe.</p>
+</dd>
+<dt>No transactions costs and no taxes.</dt>
+<dd>
+<p>Real trading incurs commissions and bid-ask spreads, and returns are taxed. Taxes in particular differ across investors — capital gains rates, holding-period rules, and the distinction between taxable and tax-advantaged accounts all drive a wedge between what different investors will pay for the very same stream of cash flows. Once such wedges exist, investors need not agree on prices even if they agree on everything else.</p>
+</dd>
+<dt>All investors are mean-variance optimizers.</dt>
+<dd>
+<p>Mean-variance optimization is exactly correct only under quadratic utility or (roughly) normally distributed returns. But investors demonstrably care about more than the mean and the variance. They care about downside risk, about skewness and lottery-like payoffs, and about the possibility of ruin. The behavioral biases discussed in the previous section are themselves direct departures from this assumption.</p>
+</dd>
+<dt>Homogeneous expectations.</dt>
+<dd>
+<p>Investors visibly disagree about the means and variances of asset payoffs. Analyst price targets diverge, and the sheer volume of trade is hard to reconcile with universal agreement — if everyone truly held identical beliefs, there would be far less reason to trade with one another at all. Disagreement is the normal condition of financial markets, not the exception.</p>
+</dd>
+</dl>
+</section>
+<section id="what-does-alpha-mean" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="what-does-alpha-mean"><span class="header-section-number">7.5</span> What does alpha mean?</h2>
+<p>The discussion above referred informally to an investment that offers “more return than its risk warrants.” That idea has a name. <em>Alpha</em> is the return an asset or portfolio earns in excess of what a benchmark asset-pricing model says it should earn given its risk. When the benchmark is the CAPM, the relevant risk is systematic risk and the benchmark return is the security market line, so the alpha of asset <span class="math inline">\(i\)</span> is</p>
+<p><span class="math display">\[\alpha_i = Er_i - \big[\, r_f + \beta_i(Er_M - r_f)\,\big].\]</span></p>
+<p>Geometrically, <span class="math inline">\(\alpha_i\)</span> is the vertical distance between the asset’s expected return and the security market line: a positive alpha means the asset plots <em>above</em> the line, delivering more than its beta would entitle it to, while a negative alpha means it plots below. If both the CAPM and the efficient markets hypothesis hold, then every asset lies exactly on the line and <span class="math inline">\(\alpha_i = 0\)</span> for everything. A nonzero alpha is therefore not a free-standing fact; it is a statement that something in that joint prediction has given way. There are two distinct ways this can happen.</p>
+<p>The first is that the CAPM is simply the wrong benchmark — one of its assumptions fails. If trading is not frictionless, if investors hold large non-traded assets such as human capital, if they care about more than mean and variance, or if they do not share the same beliefs, then the security market line is not the correct description of equilibrium expected returns. In that case an asset can show a positive alpha <em>relative to the CAPM</em> while earning exactly fair compensation for some risk the CAPM leaves out. Here the alpha is an artifact of measuring against the wrong model — a “bad benchmark” — rather than a genuine reward in excess of risk.</p>
+<p>The second is that the CAPM correctly describes the trade-off between risk and return, but the efficient markets hypothesis fails, so prices depart from the values that available information implies. Then a nonzero alpha reflects a true mispricing: a return available, at least for a time, to an investor who identifies it before prices adjust.</p>
+<p>Because either channel — a broken pricing-model assumption or a failure of market efficiency — can produce the same number, a measured alpha is never self-interpreting. This is the <em>joint hypothesis problem</em>: any test of alpha is simultaneously a test of the pricing model used to define it and of market efficiency, and a nonzero estimate on its own cannot say which is responsible. A third possibility further complicates matters, namely that an estimated alpha is nonzero purely by chance in a finite sample of returns, an issue the performance-measurement material takes up when it distinguishes skill from luck.</p>
+<p>This section takes no position on how large alpha typically is, or on whether investors can reliably identify it in advance. Those are empirical questions, and reasonable people disagree about the answers. The narrower point here is definitional: alpha is a return that a given asset-pricing model cannot account for, and its existence in any particular case depends on a violation of that model’s assumptions or of the efficient markets hypothesis.</p>
+</section>
+<section id="the-capm-as-a-personal-investment-checklist" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="the-capm-as-a-personal-investment-checklist"><span class="header-section-number">7.6</span> The CAPM as a personal investment checklist</h2>
+<p>None of this means the CAPM is useless. On the contrary, once you appreciate how demanding its assumptions are, the model becomes a remarkably practical guide to personal investing — especially when you are being pitched an opportunity you did not go looking for. Sooner or later a family member, a friend, or a friend of a friend will describe an investment that supposedly offers high returns with little corresponding risk. The CAPM gives you a disciplined way to think about that claim.</p>
+<p>The logic is simple. The CAPM result says that unless one of its six assumptions is violated, there cannot be a project or investment opportunity that delivers returns higher than its risk would predict. Every legitimate opportunity sits on the security market line. So when someone asserts that an investment beats that line — high return, modest risk — you are left with only two possibilities. Either the claim is simply false, or one of the assumptions is genuinely being violated in a way that creates the opportunity. The value of the CAPM is that it hands you a checklist for telling these two cases apart. Walk through the assumptions one at a time and ask which one the pitch relies on:</p>
+<ol type="1">
+<li><p><strong>Is the return really compensation for illiquidity or non-tradability?</strong> A private business, a startup, or an interest in real estate is not publicly traded (assumption 3). Its extra return may be payment for the fact that you cannot easily sell it or diversify it away — a real risk you would be bearing, not a free lunch.</p></li>
+<li><p><strong>Is there a genuine tax advantage?</strong> If the opportunity exploits a feature of the tax code that applies to you (assumption 4), the higher after-tax return may be real — but it depends on your specific tax situation, not on any mispricing.</p></li>
+<li><p><strong>Do you actually possess information others don’t?</strong> An edge that depends on private information touches both the strong-form EMH and the homogeneous-expectations assumption (assumption 6). Be honest about whether you truly know something the market does not — and whether acting on it is even legal.</p></li>
+<li><p><strong>Is the “high return” hiding a fat downside?</strong> Many high-return pitches are really lottery tickets or strategies that pay off steadily until they collapse (assumption 5). Mean-variance intuition understates that danger; the return is compensation for a tail risk you may not want.</p></li>
+<li><p><strong>Could someone be moving the price?</strong> If the opportunity depends on a large player pushing prices around (assumption 1), you need to ask whether you are the one benefiting from that or the one being taken advantage of.</p></li>
+</ol>
+<p>If you go through this list and cannot identify any assumption that is plausibly violated, then the CAPM’s verdict is blunt: the promised returns are almost certainly illusory, mismeasured because the risk is being ignored, or outright fraudulent. And when an opportunity <em>is</em> real, naming the specific assumption it violates tells you exactly what risk you are being paid to bear — and whether you are the right person to bear it.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Market insight: affinity fraud and the trusted messenger">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Market insight: affinity fraud and the trusted messenger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The checklist above assumes you can weigh a pitch dispassionately. But the most dangerous “high return” offers arrive through exactly the channel that tends to switch off scrutiny: a trusted member of your own community — the family member or friend who introduced the opportunity to you in the first place. This is <em>affinity fraud</em>, fraud that spreads through tight-knit groups in which shared identity substitutes for due diligence.</p>
+<p>The empirical record bears this out. Analyzing data on more than half a million participants in the collapsed U.S. pyramid scheme Fortune Hi-Tech Marketing, Bosley and Knorr (2018) found that recruitment flourished in counties with identifiable affinity groups, with religious communities prominent among them. Reviewing why people join such schemes, Hock and Button (2023) point on the participants’ side to the vision of high reward for little work, and on the organizers’ side to the deliberate exploitation of specific groups combined with high-pressure sales — with victims frequently enlisted to become recruiters themselves.</p>
+<p>The connection to this chapter is direct. When a relative or fellow congregant offers you an opportunity with unusually high returns, the trust you place in the <em>messenger</em> does the work that the CAPM says the <em>numbers</em> cannot: it makes an off-the-security-market-line promise feel safe. The checklist is precisely the antidote. Run through the assumptions regardless of who is pitching — and treat a trusted-community source not as a reason to skip the checklist but as a reason to work through it more carefully.</p>
+<ul>
+<li>Bosley, S. and Knorr, M. (2018), “Pyramids, Ponzis and fraud prevention: lessons from a case study,” <em>Journal of Financial Crime</em>, 25(1), 81–94. <a href="https://doi.org/10.1108/JFC-10-2016-0062" class="uri">https://doi.org/10.1108/JFC-10-2016-0062</a></li>
+<li>Hock, B. and Button, M. (2023), “Why do people join pyramid schemes?,” <em>Journal of Financial Crime</em>, 30(5), 1130–1139. <a href="https://doi.org/10.1108/JFC-09-2022-0225" class="uri">https://doi.org/10.1108/JFC-09-2022-0225</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="application-a-saver-choosing-index-or-active" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="application-a-saver-choosing-index-or-active"><span class="header-section-number">7.7</span> Application: A saver choosing index or active</h2>
+<p>A university employee reviewing the menu of funds in her retirement plan faces a deceptively simple question: should she pay for an actively managed fund that promises to beat the market, or accept the market’s return through a low-cost index fund? The efficient-markets hypothesis is the framework that answers her. If prices already impound available information, then consistently identifying mispriced securities is extraordinarily difficult, and the fees charged by active managers become a near-certain drag on her returns — which is precisely what the long-run evidence on active underperformance shows. Understanding the different forms of market efficiency, and the anomalies that genuinely challenge them, lets her judge how much, if anything, she should be willing to pay in pursuit of returns above the index.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Further listening
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Planet Money</em> (NPR) — <a href="https://www.npr.org/transcripts/1022440582">“Summer School 2: Index Funds &amp; The Bet”</a>: Warren Buffett’s million-dollar wager that a simple index fund would beat the experts — a real-world test of market efficiency.</p>
+</div>
+</div>
+</section>
+<section id="homework-problems" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">7.8</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="7.8.1">
+<h3 data-number="7.8.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">7.8.1</span> Conceptual</h3>
+<p><strong>EMH-C1.</strong> A hedge fund advertises a proprietary system that studies charts of past prices and trading volume to time entries and exits. State which form of the EMH, if true, would render this strategy unprofitable in expectation, and explain why. Then contrast this with a fund that trades on newly released accounting ratios: which form is required to rule out that second strategy, and why is it a stronger assumption?</p>
+<p><strong>EMH-C2.</strong> Carefully distinguish the three forms of the efficient markets hypothesis by the information set each assumes is already impounded in prices. Explain why the three forms are nested — that is, why the strong form implies the semi-strong form, which in turn implies the weak form — and give one concrete example of information that is included in the semi-strong information set but not the weak-form information set.</p>
+<p><strong>EMH-C3.</strong> A journalist claims: “A corporate insider who traded ahead of a merger announcement made a large profit, therefore markets are not efficient.” Explain which form of the EMH this observation bears on, whether it is evidence against the weak or semi-strong forms, and why the strong-form EMH is generally regarded as the hardest to defend empirically.</p>
+<p><strong>EMH-C4.</strong> For each of the three standard investment approaches — technical analysis, fundamental (and factor) analysis, and insider trading — state which form of the EMH must hold to render it unprofitable in expectation, and explain the reasoning. Then explain the claim in the chapter that if the strong-form hypothesis holds, no one should ever hold anything but the market portfolio.</p>
+<p><strong>EMH-C5.</strong> Suppose a researcher documents that a real trading strategy earned 5% per year above a risk-matched benchmark over the past ten years. The chapter gives several reasons why this is weak evidence against the EMH. Explain at least two of these reasons (for example, market volatility masking the signal and the finite-sample “dart-throwing monkey” problem) and describe what additional evidence would make the case against efficiency more convincing.</p>
+<p><strong>EMH-C6.</strong> The chapter argues that testing the EMH is genuinely hard. One reason it gives is that a trader with a truly profitable strategy has an incentive to keep it secret. Explain how this incentive complicates empirical tests of efficiency, and explain separately why an increase in returns of, say, 5% is much harder to detect in the data than an increase of 20% — and why the very detectability of a 20% edge would itself signal a highly inefficient market.</p>
+<p><strong>EMH-C7.</strong> Psychological studies find that many individual investors are overconfident and exhibit representativeness bias. A colleague concludes that market prices must therefore be systematically distorted. Explain why this conclusion does not follow automatically, and describe the conditions on arbitrage under which individual behavioral biases can nonetheless move equilibrium prices. Give two concrete limits to arbitrage that would allow biased traders to affect prices.</p>
+<p><strong>EMH-C8.</strong> Define overconfidence and representativeness bias as the chapter uses them, and for each describe a specific way it could lead an investor to make a decision inconsistent with expected-utility maximization. The chapter notes that representativeness bias (“the law of small numbers”) can allow mutual funds run by otherwise irrational managers to survive. Explain the intuition for how a bias in investors’ beliefs could sustain such funds rather than driving them out.</p>
+<p><strong>EMH-C9.</strong> The chapter presents the requirement that arbitrage be limited as the bridge between individual behavioral biases and market-level mispricing. Explain why, in a world of frictionless arbitrage, biased traders would have no lasting effect on prices. Then discuss how the risk that a mispricing worsens before it corrects — as opposed to simple transaction costs — can deter an arbitrageur even when the arbitrageur correctly identifies the mispricing.</p>
+<p><strong>EMH-C10.</strong> Choose three of the six CAPM assumptions and, for each, explain why it may be “very strong” in the sense the chapter means, giving a concrete real-world situation in which it fails. Then explain why the failure of any one of these assumptions undermines the sharp CAPM conclusion that every asset must lie exactly on the security market line.</p>
+<p><strong>EMH-C11.</strong> The chapter singles out “all investments are publicly traded” as “perhaps the strongest assumption of all.” Explain what kinds of wealth are not publicly traded, and why the existence of large non-traded assets such as human capital means the CAPM’s “market portfolio” is not the true portfolio of aggregate wealth. Discuss why this matters for an investor whose largest asset is her own future labor income.</p>
+<p><strong>EMH-C12.</strong> Define alpha relative to the CAPM benchmark in words, and explain geometrically what a positive versus a negative alpha means in relation to the security market line. Explain why, if both the CAPM and the EMH hold, every asset must have an alpha of exactly zero.</p>
+<p><strong>EMH-C13.</strong> State the joint-hypothesis problem in your own words. A researcher estimates a statistically significant positive alpha for a portfolio. Enumerate the distinct explanations the chapter offers for a nonzero measured alpha — a broken CAPM assumption (“bad benchmark”), a genuine failure of market efficiency, and finite-sample chance — and explain why a single nonzero estimate cannot by itself tell you which is responsible.</p>
+<p><strong>EMH-C14.</strong> A friend describes an investment that supposedly offers high returns with little corresponding risk. Using the chapter’s “personal investment checklist,” walk through how you would evaluate the pitch by asking which CAPM assumption, if any, the opportunity relies on. Explain what conclusion you should draw if you cannot identify any assumption that is plausibly violated.</p>
+<p><strong>EMH-C15.</strong> Explain what “affinity fraud” is and why the chapter argues that a trusted-community source is a reason to work through the CAPM checklist <em>more</em> carefully rather than to skip it. Connect this to the chapter’s point that trust in the <em>messenger</em> can do the work that the CAPM says the <em>numbers</em> cannot.</p>
+<p><strong>EMH-C16.</strong> The “In the news” note reports that fewer active managers beat their benchmarks and that trillions of dollars have flowed from active into low-cost index funds. Explain how the efficient markets hypothesis predicts this pattern, and then explain why persistent active underperformance is not, by itself, decisive proof that markets are efficient — identify what alternative explanations the chapter’s framework leaves open.</p>
+</section>
+<section id="quantitative" class="level3" data-number="7.8.2">
+<h3 data-number="7.8.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">7.8.2</span> Quantitative</h3>
+<p><strong>EMH-Q1.</strong> A stock has a beta of <span class="math inline">\(1.2\)</span>. The risk-free rate is <span class="math inline">\(3\%\)</span> and the expected return on the market is <span class="math inline">\(9\%\)</span>. An analyst forecasts that the stock will actually earn an expected return of <span class="math inline">\(12\%\)</span>.</p>
+<ol type="a">
+<li><p>Using the security market line, compute the return the CAPM says the stock should earn given its risk.</p></li>
+<li><p>Compute the stock’s alpha, <span class="math inline">\(\alpha_i = Er_i - [\,r_f + \beta_i(Er_M - r_f)\,]\)</span>.</p></li>
+<li><p>State whether the stock plots above or below the security market line, and explain what the joint-hypothesis problem implies about how you should interpret this nonzero alpha.</p></li>
+</ol>
+<p><strong>EMH-Q2.</strong> Two portfolios are evaluated against the CAPM. The risk-free rate is <span class="math inline">\(2\%\)</span> and the market risk premium <span class="math inline">\(Er_M - r_f\)</span> is <span class="math inline">\(5\%\)</span>. Portfolio A has a beta of <span class="math inline">\(0.8\)</span> and an expected return of <span class="math inline">\(7\%\)</span>. Portfolio B has a beta of <span class="math inline">\(1.5\)</span> and an expected return of <span class="math inline">\(9\%\)</span>.</p>
+<ol type="a">
+<li><p>Compute the CAPM-implied expected return and the alpha for each portfolio.</p></li>
+<li><p>Which portfolio has the larger alpha? Does the portfolio with the higher <em>raw</em> expected return also have the higher alpha? Explain what this shows about comparing investments on raw return versus risk-adjusted return.</p></li>
+<li><p>If both alphas are in fact zero in the true population and your estimates are nonzero, name the reason from the chapter that would explain the discrepancy.</p></li>
+</ol>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/scottcondie\.github\.io\/teaching\/450\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Performance.html" class="pagination-link" aria-label="Portfolio performance evaluation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Interest.html" class="pagination-link" aria-label="Interest">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; Fixed Income Portfolio Management – Asset Prices, Risk, and Information</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Forwards_and_Futures.html" rel="next">
+<link href="./YieldCurve.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5f0e52f7877e3a078c44e13fc828ca0d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2f8ef6ac35c506a55552e17f1b00ddbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Interest.html">Fixed income securities and pricing</a></li><li class="breadcrumb-item"><a href="./FIPortfolio.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Asset Prices, Risk, and Information</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Asset Prices, Risk, and Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Markets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Individual portfolio selection and market equilibrium</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CAPM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Information, trading and market efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EMH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fixed income securities and pricing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Interest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Yields.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./YieldCurve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FIPortfolio.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Derivatives</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Forwards_and_Futures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced market models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BlackLitterman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Credit_Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Market_Makers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">11.1</span> Introduction</a></li>
+  <li><a href="#the-sensitivity-of-bond-prices-to-yields" id="toc-the-sensitivity-of-bond-prices-to-yields" class="nav-link" data-scroll-target="#the-sensitivity-of-bond-prices-to-yields"><span class="header-section-number">11.2</span> The sensitivity of bond prices to yields</a></li>
+  <li><a href="#durations-properties" id="toc-durations-properties" class="nav-link" data-scroll-target="#durations-properties"><span class="header-section-number">11.3</span> Duration's properties</a></li>
+  <li><a href="#portfolio-immunization" id="toc-portfolio-immunization" class="nav-link" data-scroll-target="#portfolio-immunization"><span class="header-section-number">11.4</span> Portfolio Immunization</a></li>
+  <li><a href="#convexity" id="toc-convexity" class="nav-link" data-scroll-target="#convexity"><span class="header-section-number">11.5</span> Convexity</a></li>
+  <li><a href="#application-a-pension-manager-immunizing-liabilities" id="toc-application-a-pension-manager-immunizing-liabilities" class="nav-link" data-scroll-target="#application-a-pension-manager-immunizing-liabilities"><span class="header-section-number">11.6</span> Application: A pension manager immunizing liabilities</a></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">11.7</span> Homework problems</a>
+  <ul class="collapse">
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">11.7.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">11.7.2</span> Quantitative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Interest.html">Fixed income securities and pricing</a></li><li class="breadcrumb-item"><a href="./FIPortfolio.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">11.1</span> Introduction</h2>
+<p>Three questions drive the analysis of fixed income portfolio management. First, how sensitive is a bond’s price to a change in interest rates, and how can that sensitivity be measured and summarized in a tractable way? Second, how can a portfolio manager use that measure to construct a portfolio that is protected — immunized — against the losses that arise when yields shift unexpectedly? Third, why does duration-based immunization break down for large yield movements, and what additional tool is needed to achieve more accurate hedging? These questions are of direct practical importance to any institution that holds fixed income assets or issues fixed income liabilities. Pension funds must ensure that the present value of their assets tracks the present value of their obligations; insurance companies must fund future claims; banks must manage the mismatch between the durations of their loan portfolios and their deposit liabilities. A rigorous framework for measuring and managing interest rate risk is therefore not merely an academic exercise but a core competency of institutional finance.</p>
+<p>The first question leads to the concept of duration. Macaulay’s duration is the time-weighted average of the present values of a bond’s cash flows — effectively the center of gravity of the payment stream — and provides an intuitive summary of when, on average, the bondholder receives value. Modified duration translates this directly into a first-order approximation: a bond with modified duration <span class="math inline">\(D^*\)</span> will lose approximately <span class="math inline">\(D^* \Delta y\)</span> percent of its value for each percentage-point increase in yield. This makes precise the familiar intuition that long-maturity, low-coupon bonds are far more sensitive to rate changes than short-maturity, high-coupon bonds, and it provides a single number that can be compared and aggregated across an entire portfolio.</p>
+<p>The second question leads to the strategy of immunization. If the duration of a portfolio of assets equals the duration of the corresponding liabilities, then a small parallel shift in yields will change the two sides of the balance sheet by approximately the same amount, leaving the net position intact. The chapter works through this strategy concretely, showing how a company that has issued an annuity-like obligation can select a zero-coupon bond — choosing both its face value and its maturity — so that the two sides of the portfolio are duration-matched and the net value is insensitive to small yield changes.</p>
+<p>The third question arises because duration is only a first-order, linear approximation. As the magnitude of yield changes increases, the linear approximation loses accuracy, and a duration-matched portfolio can still show residual losses or gains depending on the curvature of the price-yield relationship. This curvature is captured by convexity — the second derivative of bond price with respect to yield — which is almost always positive for standard bonds. Convexity is generally a desirable property: for a given duration, a more convex bond gains more when yields fall and loses less when yields rise. Matching both duration and convexity across assets and liabilities extends the accuracy of immunization to larger yield movements.</p>
+<p>The chapter begins by deriving the price sensitivity of bonds using calculus, introducing modified duration and Macaulay’s duration and establishing their key properties — including that a zero-coupon bond’s duration equals its maturity and that duration falls as the coupon rate rises. It then develops the immunization strategy through detailed examples and closes with a treatment of convexity, demonstrating how second-order hedging extends the robustness of an immunized portfolio.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="In the news">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In the news
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Duration is not a dry statistic — it can sink a bank. NPR explained how Silicon Valley Bank loaded up on long-term government bonds and then watched their market value collapse as interest rates rose in 2022, leaving it with billions in losses when it was forced to sell. A bank or pension that matches the duration of its assets to its liabilities — the immunization strategy in this chapter — is protected from exactly that shock. Read it at <a href="https://www.npr.org/2023/03/19/1164531413/bank-fail-how-government-bonds-turned-toxic-for-silicon-valley-bank">NPR</a>.</p>
+</div>
+</div>
+</section>
+<section id="the-sensitivity-of-bond-prices-to-yields" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="the-sensitivity-of-bond-prices-to-yields"><span class="header-section-number">11.2</span> The sensitivity of bond prices to yields</h2>
+<p>Interest rate risk is one of the principle risks faced by the manager of a bond portfolio. Changes in yield affect the value of a bond. This can be seen from definition of yield to maturity. A bond that matures in T periods, pays the coupon <span class="math inline">\(b\)</span>, has face value <span class="math inline">\(M\)</span> and price <span class="math inline">\(P\)</span> will have a YTM defined by</p>
+<p><span class="math display">\[P = \sum_{t=1}^{T} \frac{b}{(1 + y)^t} + \frac{M}{(1+y)^T}\]</span></p>
+<p>Suppose that you were to ask yourself the question "If yields change by a small amount (say <span class="math inline">\(\Delta y\)</span>), what would be the approximate change in the value of the bond?" Since you know calculus you know that a good approximation for small <span class="math inline">\(\Delta y\)</span> is given by</p>
+<p><span class="math display">\[\Delta P = \frac{\partial P}{\partial (1+y)} \Delta y.\]</span></p>
+<p>If you wanted to know the percent change in price (i.e.&nbsp;the return) that arises from a small change in yield you would calculate</p>
+<p><span class="math display">\[\frac{\Delta P}{P} = \frac{\partial P}{ P \partial (1+y)} \Delta y = -D^{*} \Delta y\]</span></p>
+<p>The quantity <span class="math inline">\(D^{*}\)</span> is called a bond's <em>modified duration</em>. For what follows, let <span class="math inline">\(CF_t\)</span> represent the cash flows to the bond in question where <span class="math inline">\(CF_t = b\)</span> for all <span class="math inline">\(t &lt; T\)</span> and <span class="math inline">\(CF_T = b + M\)</span>.</p>
+<dl>
+<dt>Modified duration.</dt>
+<dd>
+<p>For a bond with price <span class="math inline">\(P\)</span>, and current YTM <span class="math inline">\(y\)</span> the bond's modified duration is given by</p>
+<p><span class="math display">\[D^{*} = -\frac{\partial P}{ P \partial (1+y)}\]</span></p>
+<p>The modified duration of a bond with cash flows <span class="math inline">\(CF_t\)</span> is given by</p>
+<p><span class="math display">\[D^{*} = \frac{1}{P} \sum_{t=1}^{T} \frac{t CF_{t}}{(1+y)^{t+1}}\]</span></p>
+</dd>
+</dl>
+<p>To obtain the closed form, differentiate the pricing equation <span class="math inline">\(P = \sum_{t=1}^{T} CF_t (1+y)^{-t}\)</span> term by term with respect to <span class="math inline">\((1+y)\)</span>. Using the power rule, <span class="math inline">\(\frac{\partial}{\partial(1+y)}(1+y)^{-t} = -t(1+y)^{-t-1}\)</span>, so</p>
+<p><span class="math display">\[\frac{\partial P}{\partial (1+y)} = \sum_{t=1}^{T} CF_t \cdot \left(-t\right)(1+y)^{-t-1} = -\sum_{t=1}^{T} \frac{t\, CF_t}{(1+y)^{t+1}}.\]</span></p>
+<p>Every term in the sum is positive, so <span class="math inline">\(\partial P/\partial(1+y) &lt; 0\)</span>: prices fall when yields rise, as expected. Dividing by <span class="math inline">\(-P\)</span> flips the sign and gives a positive number,</p>
+<p><span class="math display">\[D^{*} = -\frac{1}{P}\frac{\partial P}{\partial (1+y)} = \frac{1}{P} \sum_{t=1}^{T} \frac{t\, CF_{t}}{(1+y)^{t+1}},\]</span></p>
+<p>which is the formula above.</p>
+<p>For economists a natural way to think about the sensitivity of this bond's value to changes in yield is the <em>yield elasticity of bond price</em>. From your 380/382 experience you know that this can be written as</p>
+<p><span class="math display">\[\epsilon = \frac{\partial P}{\partial (1+y)} \frac{1+y}{P}\]</span></p>
+<p>This has an alternative definition.</p>
+<dl>
+<dt>Duration (Macaulay's duration).</dt>
+<dd>
+<p>The Macaulay duration of a bond with cash flows <span class="math inline">\(CF_t\)</span> is given by</p>
+<p><span class="math display">\[D = -\frac{\partial P}{\partial (1+y)} \frac{1+y}{P} = \frac{1}{P} \sum_{t=1}^{T} \frac{t CF_{t}}{(1+y)^{t}}\]</span></p>
+<p>An alternative way to interpret Macaulay's duration is to think of it as the time weighted average of present value cash flows. Notice in the above equation that the present value of each cash flow <span class="math inline">\(CF_{t}/(1+y)^t\)</span> is multiplied by the time at which it is received and divided by the price.</p>
+</dd>
+<dt>Example.</dt>
+<dd>
+<p>Consider a bond making annual coupon payments at a rate of 10% that will mature in 3 years and is currently selling at par ($1000). What is the bond's duration (Macaulay)? This is calculated as</p>
+<p><span class="math display">\[D =\frac{1}{1000} \left ( 1 \cdot \frac{100}{1.10} + 2 \cdot \frac{100}{1.10^2} + 3 \cdot \frac{1100}{1.10^3} \right ) = 2.736\]</span></p>
+<p>This can be interpreted as a "summary statistic of the effective average maturity of the portfolio."<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</dd>
+</dl>
+</section>
+<section id="durations-properties" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="durations-properties"><span class="header-section-number">11.3</span> Duration's properties</h2>
+<ol type="1">
+<li><p><em>The duration of a zero coupon bond is its time to maturity</em>. To see this notice that the formula above gives</p>
+<p><span class="math display">\[D = \frac{1}{P} \frac{TM}{(1 + y)^T} = \frac{(1 + y)^T}{M}\frac{TM}{(1 + y)^T} = T\]</span></p></li>
+<li><p><em>Duration decreases in the coupon rate</em>. Increasing the coupon rate moves more of the payments from the bond forward in time. As such it also makes the price of the bond less susceptible to changes in yield.</p></li>
+<li><p><em>Duration often increases with the maturity of bonds</em>. For most bonds, increasing the maturity means spreading payments out over a longer period. However, this may not be true for some bonds selling at a very deep discount.</p></li>
+</ol>
+</section>
+<section id="portfolio-immunization" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="portfolio-immunization"><span class="header-section-number">11.4</span> Portfolio Immunization</h2>
+<p>Knowledge about the duration of a particular payment stream gives a portfolio manager the ability to <em>immunize</em> her portfolio from the riskiness of yields. The strategy employed by such procedures is to purchase the rights to an obligation whose value changes exactly opposite to the change in value arising from a change in yield to the payment obligation.</p>
+<dl>
+<dt>Example.</dt>
+<dd>
+<p>Consider a company that has agreed to pay an annuity of <span class="math inline">\(T\)</span> annual payments with value <span class="math inline">\(M\)</span> to an individual. If the current yield (discount rate) for such a payment stream is <span class="math inline">\(y\)</span>, then the value of such an annuity is</p>
+<p><span class="math display">\[V = \frac{M}{y} \left ( 1 - \frac{1}{(1 + y)^T} \right )\]</span></p>
+<p>The duration of this payment obligation is</p>
+<p><span class="math display">\[D = \frac{1}{P} \sum_{t=1}^{T} \frac{tM}{(1 + y)^t}\]</span></p>
+<p>The company wants to fund the annuity using a zero coupon bond and they want to simultaneously insulate themselves from changes in yield. To do so, they must choose the face value of the debt (F) that they will purchase and then choose the maturity (<span class="math inline">\(\tau\)</span>) (i.e.&nbsp;choose the duration of the bond). The portfolio of obligations that the company will have after immunizing will be the fixed annuity payments and a single payment from the bond. The value of the portfolio of payment obligations is</p>
+<p><span class="math display">\[V =  - \frac{M}{y} \left ( 1 - \frac{1}{(1 + y)^T} \right ) + \frac{F}{(1 + y)^{\tau}}\]</span></p>
+<p>This company will choose <span class="math inline">\(F\)</span> and <span class="math inline">\(\tau\)</span> such that <span class="math inline">\(V = 0\)</span> and <span class="math inline">\(\partial V/ \partial y = 0\)</span>.</p>
+<p>These two conditions pin down <span class="math inline">\(F\)</span> and <span class="math inline">\(\tau\)</span>. Write the value of the obligation as <span class="math inline">\(P_{obl} = \frac{M}{y}\left(1 - (1+y)^{-T}\right)\)</span> and the value of the zero as <span class="math inline">\(Z = F(1+y)^{-\tau}\)</span>, so that <span class="math inline">\(V = -P_{obl} + Z\)</span>. The first condition, <span class="math inline">\(V = 0\)</span>, requires <span class="math inline">\(Z = P_{obl}\)</span>: the zero must be purchased so that its present value equals the present value of the obligation.</p>
+<p>For the second condition, differentiate. The zero satisfies <span class="math inline">\(\frac{\partial Z}{\partial (1+y)} = -\tau\,F(1+y)^{-\tau-1} = -\dfrac{\tau}{1+y}\,Z\)</span>, so its modified duration is <span class="math inline">\(\tau/(1+y)\)</span> and its Macaulay duration is exactly its maturity <span class="math inline">\(\tau\)</span>. The obligation satisfies <span class="math inline">\(\frac{\partial P_{obl}}{\partial(1+y)} = -\dfrac{D_{obl}}{1+y}P_{obl}\)</span>, where <span class="math inline">\(D_{obl}\)</span> is its Macaulay duration. Setting the derivative of <span class="math inline">\(V\)</span> to zero,</p>
+<p><span class="math display">\[\frac{\partial V}{\partial(1+y)} = \frac{D_{obl}}{1+y}P_{obl} - \frac{\tau}{1+y}Z = 0.\]</span></p>
+<p>Because <span class="math inline">\(V = 0\)</span> already forces <span class="math inline">\(Z = P_{obl}\)</span>, the common factor <span class="math inline">\(P_{obl}/(1+y)\)</span> cancels and we are left with <span class="math inline">\(D_{obl} = \tau\)</span>. Duration-matching therefore forces the zero’s maturity <span class="math inline">\(\tau\)</span> to equal the Macaulay duration of the obligation.</p>
+</dd>
+<dt>Example.</dt>
+<dd>
+<p>Consider the previous example of a bond that matures in three years, makes annual coupon payments of 10% and currently sells at par ($1000). It was shown that the duration of the bond is 2.736. Consider the company choosing to meet the obligations of the bond by selling a zero coupon bond. So that the payment of the zero coupon bond has the same duration as the payment of the obligation. In order to hedge the obligation (which has a present value of $1000) the company purchases the zero in a quantity such that its present value is exactly $1000. The duration of the zero that they purchase should be <span class="math inline">\(\tau = 2.736\)</span>. Thus, <span class="math inline">\(F\)</span> solves</p>
+<p><span class="math display">\[\$ 1000 = \frac{F}{1.10^{2.736}}\]</span></p>
+<p>which implies that <span class="math inline">\(F = \$1297.927\)</span>. Let's check that this works. Suppose that yields increase by a very small amount. What is the approximate change in the value of your portfolio?</p>
+<p><span class="math display">\[\frac{\partial V}{\partial y} \frac{1 + y}{V} = - D + D = -2.736 + 2.736 = 0\]</span></p>
+<p>Now suppose that yields on both the zero and the payment obligation increase by .0001 (1 basis point). What is the new value of the bond that you issued? It is given by</p>
+<p><span class="math display">\[V_{B} = \frac{100}{1.1001} \left ( 1 - \frac{1}{(1.1001)^3} \right )  + \frac{1000}{1.1001^3} = \$999.751358\]</span></p>
+<p>The value of the zero that you own is</p>
+<p><span class="math display">\[V_{Z} = \frac{1297.927}{1.1001^3} = 999.751039\]</span></p>
+<p>so the change in the value of your portfolio from a 1 basis point change in yields is <span class="math inline">\(-999.751358 + 999.751039 = -\$0.000319\)</span>. So your portfolio is largely immunized from small changes in yields.</p>
+</dd>
+</dl>
+<p>Notice however that duration is an (first order) approximation of the change in the value of your portfolio as yields change. This approximation gets worse as the changes in yields get higher. To see this consider the following.</p>
+<dl>
+<dt>Example cont'd.</dt>
+<dd>
+<p>Now suppose that instead of a 1 basis point change in yields you have a 50 basis point change in yields. Then the value of your portfolio becomes</p>
+<p><span class="math display">\[\begin{aligned}
+V &amp; = -\frac{100}{1.105} \left ( 1 - \frac{1}{(1.105)^3} \right )  + \frac{1000}{1.105^3} + \frac{1297.927}{1.105^3} \\
+&amp;= -987.67438 + 987.668207 \\
+&amp;= - .0061723
+\end{aligned}\]</span></p>
+</dd>
+</dl>
+<p>What if there were a 200 basis point change in yields?</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\begin{aligned}
+\begin{aligned}
+V &amp;= -\frac{100}{1.12} \left ( 1 - \frac{1}{(1.12)^3} \right )  + \frac{1000}{1.12^3} + \frac{1297.927}{1.12^3} \\
+&amp;= -951.96337 + 951.896559 \\
+&amp;= -0.066811
+\end{aligned}
+\end{aligned}\]</span></p>
+</blockquote>
+<p>So the approximation gets worse as changes in yield get larger. Why is this so?</p>
+</section>
+<section id="convexity" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="convexity"><span class="header-section-number">11.5</span> Convexity</h2>
+<p>Recall that the change in the value of the bond portfolio was approximately the modified duration multiplied by the change in yield in the same sense that a finite change in the argument of a function leads to a change in the value of the function that is approximately the derivative of the function multiplied by the change in the argument. We can also do a second order Taylor series approximation of the price of the bond as a function of yield. To find the second derivative, differentiate the first derivative <span class="math inline">\(\frac{\partial P}{\partial(1+y)} = -\sum_{t=1}^{T} t\,CF_t (1+y)^{-t-1}\)</span> once more with respect to <span class="math inline">\((1+y)\)</span>. Applying the power rule to <span class="math inline">\((1+y)^{-t-1}\)</span> gives <span class="math inline">\(-(t+1)(1+y)^{-t-2}\)</span>, so each term’s two negative signs combine to a positive:</p>
+<p><span class="math display">\[\frac{\partial^2 P}{\partial (1+y)^2} = -\sum_{t=1}^{T} t\,CF_t\cdot\left(-(t+1)\right)(1+y)^{-t-2} = \sum_{t=1}^{T} \frac{t(t+1)CF_t}{(1+y)^{t+2}}.\]</span></p>
+<p>Because <span class="math inline">\(y\)</span> and <span class="math inline">\(1+y\)</span> differ by a constant, <span class="math inline">\(\partial/\partial y = \partial/\partial(1+y)\)</span>, and the second derivative of the price of a bond as a function of yield is</p>
+<p><span class="math display">\[\frac{\partial^2 P}{\partial y^2} = \sum_{t=1}^T \frac{t(t+1)CF_{t}}{(1 + y)^{t+2}}\]</span></p>
+<p>which is positive, confirming that the price-yield curve is convex.</p>
+<p>Notice that bond price as a function of yield is convex for standard bonds. As such, we have the following definition.</p>
+<dl>
+<dt>Convexity.</dt>
+<dd>
+<p>The second derivative of the bond price with respect to yield expressed as a fraction of the bond price.</p>
+</dd>
+</dl>
+<p><span class="math display">\[Convexity(P(y)) = \frac{1}{P(1 + y)^2} \sum_{t=1}^{T} \frac{t(t + 1)CF_t}{(1 + y)^t}\]</span></p>
+<p>In general, convexity is seen as a desirable property. Notice that since bonds are convex in yields, if yields go up the decrease in price that occurs will be much smaller than the increase in price that would occur if yields go down.</p>
+<dl>
+<dt>Example.</dt>
+<dd>
+<p>Suppose that you have a payment obligation of $b a year for each of the next <span class="math inline">\(T\)</span> years. You are concerned that the value of this obligation will increase (i.e.&nbsp;you are concerned that yields will decrease.) You want to provide a hedge against this occurence by purchasing assets with the money that you receive from selling the obligation. The present value of the payment obligation is</p>
+<p><span class="math display">\[V = \sum_{t=1}^{T} \frac{b}{(1 + y)^t}\]</span></p>
+<p>and the modified duration is</p>
+<p><span class="math display">\[D = \frac{b}{P(1+y)} \sum_{t=1}^{T} \frac{1}{(1 + y)^t}\]</span></p>
+<p>You want to purchase two different zero coupon bonds (of possibly different maturities) that have the same present value, modified duration and convexity when taken together as a portfolio. Notice that the convexity of a zero coupon bond is given by</p>
+<p><span class="math display">\[\begin{aligned}
+Convexity \left( \frac{M}{(1 + y)^T} \right) = &amp; \frac{1}{P} \frac{T(T+1)M}{(1 + y)^{T+1}}  \\
+&amp; = \frac{(1 + y)^T}{M} \frac{T(T+1)M}{(1 + y)^{T+1}} \\
+&amp; = \frac{T(T+1)}{(1 + y)^2}
+\end{aligned}\]</span></p>
+<p>The (Macaulay) duration of your obligation is given by <span class="math inline">\(D\)</span> and the convexity is given by <span class="math inline">\(C\)</span>. Let <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> denote the present values (the dollar amounts) invested in the two zeros, with weights <span class="math inline">\(w_i = p_i/V\)</span>, so that <span class="math inline">\(p_1 + p_2 = V\)</span> and <span class="math inline">\(w_1 + w_2 = 1\)</span>. Because each zero has Macaulay duration equal to its maturity <span class="math inline">\(\tau_i\)</span> and convexity <span class="math inline">\(\tau_i(\tau_i+1)/(1+y)^2\)</span>, and the duration and convexity of a portfolio are the present-value-weighted averages of the components’, you must select <span class="math inline">\(p_1, p_2, \tau_1, \tau_2\)</span> such that</p>
+<p><span class="math display">\[\begin{aligned}
+V &amp; = \frac{M_1}{(1 + y)^{\tau_1}} + \frac{M_2}{(1 + y)^{\tau_2}} = p_1 + p_2 \\
+D &amp; = w_1 \tau_1 + w_2 \tau_2 \\
+C(1+y)^2 &amp; = w_1\,\tau_1(\tau_1 + 1) + w_2\,\tau_2(\tau_2 + 1)
+\end{aligned}\]</span></p>
+<p>where <span class="math inline">\(M_i = p_i(1+y)^{\tau_i}\)</span> is the face value of zero <span class="math inline">\(i\)</span>. Note that matching the <em>Macaulay</em> duration <span class="math inline">\(D\)</span> is equivalent to matching the modified duration <span class="math inline">\(D^* = D/(1+y)\)</span>, since both the obligation and the hedge portfolio are discounted at the same yield, so the common factor <span class="math inline">\(1/(1+y)\)</span> cancels from both sides.</p>
+</dd>
+<dt>Example.</dt>
+<dd>
+<p>Consider the previous example in which the obligation is the three-year 10% par bond (<span class="math inline">\(\$1000\)</span> face, annual coupons of <span class="math inline">\(\$100\)</span>, and the <span class="math inline">\(\$1000\)</span> principal repaid at maturity), currently selling at par. Its duration was <span class="math inline">\(2.736\)</span>. The convexity of this bond is</p>
+<p><span class="math display">\[\begin{aligned}
+Convexity &amp; = \frac{1}{1000(1.1)^2}  \\
+&amp; \quad\times \left (\frac{1(1+1)100}{1.1^1} + \frac{2(2+1)100}{1.1^2} + \frac{3(3 + 1)1100}{(1.1)^3} \right ) \\
+&amp; = \frac{10595.04}{1210} = 8.7562
+\end{aligned}\]</span></p>
+<p>(The final cash flow is <span class="math inline">\(\$1100\)</span> — the last coupon plus the <span class="math inline">\(\$1000\)</span> principal — not <span class="math inline">\(\$100\)</span>; including the principal is what makes the third term dominate.) To keep the algebra clean, suppose we split the hedge equally between the two zeros, so <span class="math inline">\(w_1 = w_2 = \tfrac{1}{2}\)</span> (each zero has present value <span class="math inline">\(\$500\)</span>). The second and third matching conditions from the general example then become</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\begin{aligned}
+2.736 &amp; = \tfrac{1}{2}\tau_1 + \tfrac{1}{2}\tau_2 \quad\Longrightarrow\quad \tau_1 + \tau_2 = 5.472, \mbox{ and} \\
+8.7562\,(1.1^2) &amp; = \tfrac{1}{2}\tau_1(\tau_1+1) + \tfrac{1}{2}\tau_2(\tau_2+1) \\
+&amp;\Longrightarrow\quad \tau_1^2 + \tau_2^2 + \tau_1 + \tau_2 = 21.190.
+\end{aligned}\]</span></p>
+</blockquote>
+<p>Substituting <span class="math inline">\(\tau_1 + \tau_2 = 5.472\)</span> into the second equation gives <span class="math inline">\(\tau_1^2 + \tau_2^2 = 21.190 - 5.472 = 15.718\)</span>. Combined with the identity <span class="math inline">\((\tau_1+\tau_2)^2 = \tau_1^2 + \tau_2^2 + 2\tau_1\tau_2\)</span>, this yields</p>
+<p><span class="math display">\[2\tau_1\tau_2 = 5.472^2 - 15.718 = 29.943 - 15.718 = 14.225, \qquad \tau_1\tau_2 = 7.113.\]</span></p>
+<p>So <span class="math inline">\(\tau_1\)</span> and <span class="math inline">\(\tau_2\)</span> are the two roots of <span class="math inline">\(z^2 - 5.472\,z + 7.113 = 0\)</span>:</p>
+<p><span class="math display">\[\tau = \frac{5.472 \pm \sqrt{5.472^2 - 4(7.113)}}{2} = \frac{5.472 \pm \sqrt{1.505}}{2} = \frac{5.472 \pm 1.227}{2},\]</span></p>
+<p>giving <span class="math inline">\(\tau_1 = 2.12\)</span> years and <span class="math inline">\(\tau_2 = 3.35\)</span> years. Purchasing <span class="math inline">\(\$500\)</span> of a <span class="math inline">\(2.12\)</span>-year zero and <span class="math inline">\(\$500\)</span> of a <span class="math inline">\(3.35\)</span>-year zero matches the obligation’s present value, duration, and convexity, so the hedge remains accurate even for sizeable yield moves.</p>
+</dd>
+</dl>
+</section>
+<section id="application-a-pension-manager-immunizing-liabilities" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="application-a-pension-manager-immunizing-liabilities"><span class="header-section-number">11.6</span> Application: A pension manager immunizing liabilities</h2>
+<p>A manager of a defined-benefit pension fund has promised a stream of payments to retirees stretching decades into the future, and must invest today’s assets so those promises are met whatever happens to interest rates. Duration and convexity are the instruments that make this possible. By measuring the duration of both the liabilities and the bond portfolio, the manager can match them so that a rise or fall in rates moves the value of assets and obligations together, immunizing the plan against the very shocks that would otherwise open a funding gap. The same arithmetic that quantifies how much a long bond falls when yields rise — the mechanism behind well-publicized bank failures — is, in the manager’s hands, the tool that keeps a pension solvent.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Further listening
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The Indicator from Planet Money</em> (NPR) — <a href="https://www.npr.org/2023/03/13/1163157993/silicon-valley-banks-three-fatal-flaws">“How Silicon Valley Bank became the largest bank failure since 2008”</a>: how an unhedged duration mismatch — the exact risk this chapter manages — brought down a major bank.</p>
+</div>
+</div>
+</section>
+<section id="homework-problems" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">11.7</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="11.7.1">
+<h3 data-number="11.7.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">11.7.1</span> Conceptual</h3>
+<p><strong>FIP-C1.</strong> Two bonds have the same maturity and yield to maturity <span class="math inline">\(y\)</span>, but bond A pays a 3% annual coupon while bond B pays a 9% annual coupon. Using property 2 of duration, explain why bond A has the larger Macaulay duration <span class="math inline">\(D\)</span>, and state which of the two bonds will lose a larger percentage of its value when yields rise by a small amount <span class="math inline">\(\Delta y\)</span>.</p>
+<p><strong>FIP-C2.</strong> The chapter interprets Macaulay duration as the “center of gravity” of a bond’s payment stream — the time-weighted average of the present values of its cash flows. Using the formula <span class="math inline">\(D = \frac{1}{P}\sum_{t=1}^{T} \frac{t\,CF_t}{(1+y)^t}\)</span>, explain why raising the yield <span class="math inline">\(y\)</span> (holding the cash flows fixed) <em>lowers</em> the Macaulay duration. Which cash flows lose the most weight in the average when <span class="math inline">\(y\)</span> rises, and why does that pull the center of gravity toward the present?</p>
+<p><strong>FIP-C3.</strong> A colleague argues that a 30-year zero coupon bond and a 30-year coupon bond selling at par are equally risky because “they mature at the same time.” Using the definition of modified duration <span class="math inline">\(D^*\)</span> as a measure of interest-rate sensitivity, and the chapter’s result that a zero’s Macaulay duration equals its maturity <span class="math inline">\(T\)</span>, explain why the two bonds do not have the same sensitivity to a change in yield. Which one would you expect to fall more in price for a given increase in <span class="math inline">\(y\)</span>?</p>
+<p><strong>FIP-C4.</strong> The chapter states that “long-maturity, low-coupon bonds are far more sensitive to rate changes than short-maturity, high-coupon bonds.” Using the relation <span class="math inline">\(\frac{\Delta P}{P} \approx -D^* \Delta y\)</span> together with the qualitative properties of duration, explain why both the <em>maturity</em> effect and the <em>coupon</em> effect push in the same direction here, and why <span class="math inline">\(D^*\)</span> is the single number that lets a manager compare and aggregate this sensitivity across an entire portfolio.</p>
+<p><strong>FIP-C5.</strong> State property 2 of duration (“duration decreases in the coupon rate”) and explain the mechanism in terms of <em>when, on average, the bondholder receives value</em>. A perpetuity paying a fixed coupon forever and a zero coupon bond have very different duration behavior as the coupon rate changes — which of these two has a duration that does not depend on maturity at all, and how does that connect to property 2?</p>
+<p><strong>FIP-C6.</strong> Property 3 says duration “often increases with the maturity of bonds,” but the chapter warns this “may not be true for some bonds selling at a very deep discount.” Explain intuitively why lengthening maturity usually raises duration (in terms of spreading payments further into the future), and describe qualitatively why a deep-discount bond can break the pattern.</p>
+<p><strong>FIP-C7.</strong> A pension fund holds long-maturity Treasury bonds as assets and owes a stream of retiree payments as liabilities. Explain what it means to say the fund’s assets and liabilities are “duration-matched,” and describe what happens to the fund’s net position after a small parallel rise in yields if (a) asset duration equals liability duration, versus (b) asset duration is much shorter than liability duration. Connect part (b) to the Silicon Valley Bank episode described in the chapter.</p>
+<p><strong>FIP-C8.</strong> In the immunization example the company chooses the face value <span class="math inline">\(F\)</span> and maturity <span class="math inline">\(\tau\)</span> of a zero to satisfy <span class="math inline">\(V = 0\)</span> and <span class="math inline">\(\partial V/\partial y = 0\)</span>. Explain in words what each of these two conditions guarantees, and show why together they force the zero’s maturity to equal the Macaulay duration of the obligation (<span class="math inline">\(\tau = D_{obl}\)</span>). Why is it the <em>Macaulay</em> duration of the obligation, and not its maturity <span class="math inline">\(T\)</span>, that determines <span class="math inline">\(\tau\)</span>?</p>
+<p><strong>FIP-C9.</strong> The chapter shows that a duration-matched portfolio still shows a small residual loss for a 50-basis-point move and a larger one for a 200-basis-point move. Explain, in terms of the second derivative <span class="math inline">\(\partial^2 P/\partial y^2\)</span> and the curvature of the price-yield relationship, why a duration-only measure understates the true price for large yield moves. Why is the sign of the approximation error the same whether yields rise or fall?</p>
+<p><strong>FIP-C10.</strong> A bond fund manager says, “Given a choice between two bonds with identical duration, I will always take the one with higher convexity, and I would even pay a slightly higher price for it.” Using the chapter’s statement that a more convex bond “gains more when yields fall and loses less when yields rise,” explain why convexity is a desirable property and why it commands a price premium.</p>
+<p><strong>FIP-C11.</strong> In the chapter’s convexity-hedging example, the manager hedges a coupon obligation by buying <em>two</em> zero coupon bonds rather than one. Explain why one zero is not enough: how many conditions (present value, duration, convexity) must the hedge satisfy, and how many free choices does a single zero versus two zeros provide? Relate your count to the fact that in the worked example the two required conditions on maturities were <span class="math inline">\(\tau_1 + \tau_2 = 5.472\)</span> and a second equation in <span class="math inline">\(\tau_1(\tau_1+1) + \tau_2(\tau_2+1)\)</span>.</p>
+<p><strong>FIP-C12.</strong> The barbell example matches present value, duration, <em>and</em> convexity using present-value weights <span class="math inline">\(w_i = p_i / V\)</span>. Explain why the duration and convexity of the two-bond portfolio are the present-value-weighted averages of the individual zeros’ durations and convexities (rather than, say, face-value-weighted averages). Why does matching Macaulay duration <span class="math inline">\(D\)</span> automatically match modified duration <span class="math inline">\(D^* = D/(1+y)\)</span> here, so that only one duration condition is needed?</p>
+</section>
+<section id="quantitative" class="level3" data-number="11.7.2">
+<h3 data-number="11.7.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">11.7.2</span> Quantitative</h3>
+<p><strong>FIP-Q1.</strong> A bond makes annual coupon payments of $60 (a 6% coupon on $1000 face) and matures in 3 years. Its YTM is <span class="math inline">\(y = 0.06\)</span>, so it sells at par (<span class="math inline">\(P = 1000\)</span>). Compute its Macaulay duration <span class="math inline">\(D\)</span> using <span class="math inline">\(D = \frac{1}{P}\sum_{t=1}^{T} \frac{t\,CF_t}{(1+y)^t}\)</span>.</p>
+<p><strong>FIP-Q2.</strong> A bond makes annual coupon payments of $40 (a 4% coupon on $1000 face) and matures in 2 years, so its cash flows are $40 at <span class="math inline">\(t=1\)</span> and $1040 at <span class="math inline">\(t=2\)</span>. Its YTM is <span class="math inline">\(y = 0.04\)</span>, so it sells at par (<span class="math inline">\(P = 1000\)</span>). Compute its Macaulay duration <span class="math inline">\(D = \frac{1}{P}\sum_{t=1}^{T} \frac{t\,CF_t}{(1+y)^t}\)</span>.</p>
+<p><strong>FIP-Q3.</strong> A zero coupon bond has face value <span class="math inline">\(M = 5000\)</span>, maturity <span class="math inline">\(T = 8\)</span> years, and YTM <span class="math inline">\(y = 0.05\)</span>. Using the chapter’s result that a zero’s Macaulay duration equals its maturity, state <span class="math inline">\(D\)</span>, and then compute its modified duration <span class="math inline">\(D^* = D/(1+y)\)</span>.</p>
+<p><strong>FIP-Q4.</strong> A coupon bond has Macaulay duration <span class="math inline">\(D = 2.833\)</span> and YTM <span class="math inline">\(y = 0.06\)</span>. Compute its modified duration <span class="math inline">\(D^* = D/(1+y)\)</span>, and state the economic meaning of the number: for a 1-percentage-point rise in yield, approximately what percentage of its value does the bond lose?</p>
+<p><strong>FIP-Q5.</strong> A bond portfolio has price <span class="math inline">\(P = 40{,}000\)</span> and modified duration <span class="math inline">\(D^* = 7.2\)</span>. Using <span class="math inline">\(\frac{\Delta P}{P} = -D^* \Delta y\)</span>, compute the approximate percentage change and the approximate dollar change in the portfolio’s value if yields rise by 40 basis points (<span class="math inline">\(\Delta y = 0.0040\)</span>).</p>
+<p><strong>FIP-Q6.</strong> A bond portfolio has price <span class="math inline">\(P = 25{,}000\)</span> and modified duration <span class="math inline">\(D^* = 6.5\)</span>. Using <span class="math inline">\(\frac{\Delta P}{P} = -D^* \Delta y\)</span>, compute the approximate percentage change and the approximate dollar change in the portfolio’s value if yields <em>fall</em> by 25 basis points (<span class="math inline">\(\Delta y = -0.0025\)</span>).</p>
+<p><strong>FIP-Q7.</strong> A liability has present value <span class="math inline">\(V = 250{,}000\)</span> and modified duration <span class="math inline">\(D^* = 11\)</span>. A manager wishes to immunize it with a single zero coupon bond of the same present value. Using <span class="math inline">\(\frac{\Delta P}{P} = -D^*\Delta y\)</span>, what must the zero’s modified duration be for the net position to be first-order immune to small yield changes, and (with <span class="math inline">\(y = 0.04\)</span>) what is the required <em>maturity</em> <span class="math inline">\(\tau\)</span> of the zero (recall a zero’s <span class="math inline">\(D^* = \tau/(1+y)\)</span>)?</p>
+<p><strong>FIP-Q8.</strong> A company owes an annuity of <span class="math inline">\(M = 200\)</span> per year for <span class="math inline">\(T = 4\)</span> years, discounted at <span class="math inline">\(y = 0.05\)</span>. Its present value is <span class="math inline">\(V = \frac{M}{y}\left(1 - \frac{1}{(1+y)^T}\right)\)</span>. Compute <span class="math inline">\(V\)</span>. Then it funds the annuity with a zero coupon bond whose present value equals <span class="math inline">\(V\)</span> and whose maturity is <span class="math inline">\(\tau = 2.5\)</span>. Compute the required face value <span class="math inline">\(F\)</span> from <span class="math inline">\(V = \frac{F}{(1+y)^{\tau}}\)</span>.</p>
+<p><strong>FIP-Q9.</strong> A 2-year bond pays an annual coupon of $50 (5% on $1000 face) and matures at $1050 in year 2. Its YTM is <span class="math inline">\(y = 0.05\)</span> so <span class="math inline">\(P = 1000\)</span>. Compute its convexity using <span class="math inline">\(Convexity = \frac{1}{P(1+y)^2}\sum_{t=1}^{T}\frac{t(t+1)CF_t}{(1+y)^t}\)</span>.</p>
+<p><strong>FIP-Q10.</strong> A zero coupon bond has maturity <span class="math inline">\(T = 3\)</span> years and YTM <span class="math inline">\(y = 0.05\)</span>. Using the chapter’s closed form for the convexity of a zero, <span class="math inline">\(Convexity = \frac{T(T+1)}{(1+y)^2}\)</span>, compute its convexity. (Confirm you get the same answer as evaluating the general convexity formula on a single cash flow at <span class="math inline">\(t = 3\)</span>.)</p>
+<p><strong>FIP-Q11.</strong> Using the bond from FIP-Q9 (<span class="math inline">\(P = 1000\)</span>, <span class="math inline">\(D^* = D/(1+y)\)</span> with <span class="math inline">\(D\)</span> its Macaulay duration, and convexity <span class="math inline">\(C\)</span> from FIP-Q9), estimate the change in price for a large yield increase of <span class="math inline">\(\Delta y = 0.02\)</span> using the second-order approximation <span class="math inline">\(\Delta P \approx -D^* P \,\Delta y + \tfrac{1}{2} C P (\Delta y)^2\)</span>. (Take <span class="math inline">\(D = 1.9524\)</span> for this bond.)</p>
+<p><strong>FIP-Q12.</strong> For the same bond as FIP-Q11 (<span class="math inline">\(P = 1000\)</span>, <span class="math inline">\(D = 1.9524\)</span>, <span class="math inline">\(y = 0.05\)</span>, convexity <span class="math inline">\(C = 5.2694\)</span>), estimate the change in price for a large yield <em>decrease</em> of <span class="math inline">\(\Delta y = -0.03\)</span> using <span class="math inline">\(\Delta P \approx -D^* P \,\Delta y + \tfrac{1}{2} C P (\Delta y)^2\)</span>. Comment on how the convexity term affects the estimate relative to the duration-only prediction.</p>
+
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Bodie, Kane and Marcus, pg. 517<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/scottcondie\.github\.io\/teaching\/450\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./YieldCurve.html" class="pagination-link" aria-label="The Yield Curve">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Forwards_and_Futures.html" class="pagination-link" aria-label="Forwards and Futures">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; The Capital Asset Pricing Model – Asset Prices, Risk, and Information</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Performance.html" rel="next">
+<link href="./MV.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5f0e52f7877e3a078c44e13fc828ca0d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2f8ef6ac35c506a55552e17f1b00ddbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./MV.html">Individual portfolio selection and market equilibrium</a></li><li class="breadcrumb-item"><a href="./CAPM.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Asset Prices, Risk, and Information</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Asset Prices, Risk, and Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Markets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Individual portfolio selection and market equilibrium</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CAPM.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Information, trading and market efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EMH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fixed income securities and pricing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Interest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Yields.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./YieldCurve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FIPortfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Derivatives</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Forwards_and_Futures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced market models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BlackLitterman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Credit_Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Market_Makers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">5.1</span> Introduction</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">5.2</span> Assumptions</a></li>
+  <li><a href="#implications" id="toc-implications" class="nav-link" data-scroll-target="#implications"><span class="header-section-number">5.3</span> Implications</a></li>
+  <li><a href="#derivation" id="toc-derivation" class="nav-link" data-scroll-target="#derivation"><span class="header-section-number">5.4</span> Derivation</a></li>
+  <li><a href="#systematic-and-idiosyncratic-risk" id="toc-systematic-and-idiosyncratic-risk" class="nav-link" data-scroll-target="#systematic-and-idiosyncratic-risk"><span class="header-section-number">5.5</span> Systematic and idiosyncratic risk</a>
+  <ul class="collapse">
+  <li><a href="#diversification-eliminates-idiosyncratic-risk" id="toc-diversification-eliminates-idiosyncratic-risk" class="nav-link" data-scroll-target="#diversification-eliminates-idiosyncratic-risk"><span class="header-section-number">5.5.1</span> Diversification eliminates idiosyncratic risk</a></li>
+  </ul></li>
+  <li><a href="#application-a-cfo-setting-a-hurdle-rate" id="toc-application-a-cfo-setting-a-hurdle-rate" class="nav-link" data-scroll-target="#application-a-cfo-setting-a-hurdle-rate"><span class="header-section-number">5.6</span> Application: A CFO setting a hurdle rate</a></li>
+  <li><a href="#appendix-formal-derivation-of-the-capm" id="toc-appendix-formal-derivation-of-the-capm" class="nav-link" data-scroll-target="#appendix-formal-derivation-of-the-capm"><span class="header-section-number">5.7</span> Appendix: Formal Derivation of the CAPM</a>
+  <ul class="collapse">
+  <li><a href="#setup-and-notation" id="toc-setup-and-notation" class="nav-link" data-scroll-target="#setup-and-notation"><span class="header-section-number">5.7.1</span> Setup and notation</a></li>
+  <li><a href="#step-1-individual-optimization-and-the-tangency-portfolio" id="toc-step-1-individual-optimization-and-the-tangency-portfolio" class="nav-link" data-scroll-target="#step-1-individual-optimization-and-the-tangency-portfolio"><span class="header-section-number">5.7.2</span> Step 1: Individual optimization and the tangency portfolio</a></li>
+  <li><a href="#step-2-market-clearing-and-the-market-risk-premium" id="toc-step-2-market-clearing-and-the-market-risk-premium" class="nav-link" data-scroll-target="#step-2-market-clearing-and-the-market-risk-premium"><span class="header-section-number">5.7.3</span> Step 2: Market clearing and the market risk premium</a></li>
+  <li><a href="#step-3-the-security-market-line" id="toc-step-3-the-security-market-line" class="nav-link" data-scroll-target="#step-3-the-security-market-line"><span class="header-section-number">5.7.4</span> Step 3: The Security Market Line</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.7.5</span> Summary</a></li>
+  </ul></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">5.8</span> Homework problems</a>
+  <ul class="collapse">
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">5.8.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">5.8.2</span> Quantitative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./MV.html">Individual portfolio selection and market equilibrium</a></li><li class="breadcrumb-item"><a href="./CAPM.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1</span> Introduction</h2>
+<p>Two questions lie at the heart of the Capital Asset Pricing Model. First, if all investors optimize in the mean-variance sense and share identical beliefs about expected returns and covariances, what must the market portfolio look like in equilibrium? Second, given that equilibrium, how should the expected return on any individual asset be determined by its contribution to the risk of a well-diversified investor’s portfolio? These questions matter profoundly because they address the most basic practical problem in finance: what return should a rational investor demand as compensation for holding an asset, given the risk it carries? A credible answer to this question is needed to estimate the cost of capital, to assess whether a security is fairly priced, and to evaluate the performance of a portfolio manager.</p>
+<p>The first question has a striking answer. Because all investors face the same inputs — identical beliefs about means, variances, and covariances — they all solve the same mean-variance optimization problem and therefore all select the same risky portfolio. In equilibrium, since every investor holds the same risky portfolio and all assets must be held, that portfolio must be the value-weighted portfolio of all traded assets: the market portfolio. This result, which follows directly from the separation property established in the preceding chapter, implies that the Capital Market Line — the capital allocation line through the market portfolio — is the single efficient frontier that every investor faces, regardless of her risk aversion. A more risk-averse investor simply holds more of the risk-free asset and less of the market; she does not change the composition of the risky portion of her portfolio.</p>
+<p>The second question yields the CAPM’s central quantitative prediction: the Security Market Line. In equilibrium, the expected excess return on any asset is proportional to its beta, where beta is defined as the covariance of the asset’s return with the market portfolio divided by the variance of the market. Beta is the right measure of risk here because it captures exactly the contribution of an asset to the variance of the market portfolio — the only portfolio that any investor holds. An asset’s standalone variance is irrelevant; what matters is how much it adds to aggregate risk when held as part of the market. High-beta assets amplify market swings, demand a higher risk premium to be held voluntarily, and have higher expected returns in equilibrium. Low-beta and negative-beta assets reduce portfolio risk and can therefore be held at lower expected returns. To see why standalone variance does not matter, the chapter decomposes each asset’s risk into a systematic component tied to its beta and an idiosyncratic component specific to the asset, and shows that the idiosyncratic part can be diversified away at no cost — so only systematic risk is compensated in equilibrium.</p>
+<p>The chapter derives both implications rigorously from six clearly stated assumptions: investors are price takers; all plan over a single identical holding period; all assets are publicly traded; there are no transaction costs or taxes; all investors are mean-variance optimizers; and expectations are homogeneous. The derivation shows that equilibrium market clearing, combined with the first-order conditions from mean-variance optimization, forces the market portfolio to be the tangency portfolio and pins down individual asset risk premia through the ratio of covariance with the market to market variance. The quantitative relationship between the market risk premium and average risk aversion also emerges directly from the clearing condition.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="In the news">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In the news
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The CAPM’s required return is the rate at which investors discount a company’s future cash flows — so when that rate rises, prices fall, and they fall most for firms whose payoffs lie furthest in the future. NBC News reported a sharp sell-off in technology shares on fears of higher interest rates, precisely because high-growth, high-beta stocks are the most sensitive to a rising discount rate. The link between an asset’s risk, its required return, and its price is the heart of this chapter. Read it at <a href="https://www.nbcnews.com/business/markets/tech-stocks-sink-rcna348684">NBC News</a>.</p>
+</div>
+</div>
+</section>
+<section id="assumptions" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">5.2</span> Assumptions</h2>
+<p>Consider a world where:</p>
+<ol type="1">
+<li>All investors are price takers</li>
+<li>All investors plan for one identical holding period. This behavior may not be optimal for those planning for a longer horizon.</li>
+<li>All investments are publicly traded (this rules out education, labor income, private capital and others).</li>
+<li>There are no transactions costs and no taxes to be paid on returns.</li>
+<li>All investors are mean-variance optimizers.</li>
+<li>Investors agree on the means and variances of all of the securities that they trade. This is called <em>homogeneous expectations</em>.</li>
+</ol>
+</section>
+<section id="implications" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="implications"><span class="header-section-number">5.3</span> Implications</h2>
+<ol type="1">
+<li><p>All investors will hold the risky portfolio (although in perhaps different amounts).</p></li>
+<li><p>The market portfolio will be the tangency portfolio to the CAL. This will be called the <em>Capital Market Line</em> (CML). This line is the optimal CAL for all investors (homogeneous expectations).</p></li>
+<li><p>The risk premium on the market portfolio will be given by <span class="math inline">\(Er_M - r_f = \bar A \sigma^2_M\)</span> where <span class="math inline">\(\sigma^2_M\)</span> is the variance on the market portfolio and <span class="math inline">\(\bar A\)</span> is the average degree of risk aversion. Notice that <span class="math inline">\(\sigma^2_M\)</span> is the systematic risk in the environment.</p></li>
+<li><p>For asset <span class="math inline">\(i\)</span>, let</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[\beta_i = \frac{Cov(r_i,r_M)}{\sigma^2_M}\]</span></p>
+<p>Then it will be true that</p>
+<p><span class="math display">\[Er_i - r_f = \beta_i(Er_M - r_f) = \frac{Cov(r_i,r_M)}{\sigma^2_M}(Er_M - r_f)\]</span></p>
+</blockquote></li>
+</ol>
+<p>Why is this true?</p>
+</section>
+<section id="derivation" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="derivation"><span class="header-section-number">5.4</span> Derivation</h2>
+<p>By assumptions 2,3,5 and 6 each of the investors in this economy will want to hold the same risky portfolio. Call this portfolio <em>the market portfolio</em> <span class="math inline">\(M\)</span>. So the weights given to each asset in the risky portion of every investor's portfolio will be the same. What this means is that this weight will be the same weight that is given throughout the market. To see this, imagine that there are 2 risk assets and that the current value of both assets added together is $1 M. Suppose that there are two investors in the market. Together they own the whole market. Investor 1 and investor 2 have 20% of their wealth in asset 1. Since the total of these two investor's wealths is $1 M and both have exactly 20% in asset 1, it must be that asset 1 comprises 20% of the market value.</p>
+<p>Claim 2 follows from Claim 1 together with the separation property. By separation, the single risky portfolio that every investor holds is the tangency portfolio — the portfolio at which a ray from <span class="math inline">\(r_f\)</span> touches the risky-asset efficient frontier. Since every investor holds this same tangency portfolio and their combined risky holdings sum to the market, the market portfolio <em>is</em> the tangency portfolio. The CAL running from <span class="math inline">\(r_f\)</span> through it — the Capital Market Line — is therefore the optimal CAL for every investor. (A fully rigorous statement is given in the appendix.)</p>
+<p>Claim three follows from the demand of an individual MV optimizer who puts some fraction <span class="math inline">\(y\)</span> of wealth into the risky asset and the fraction <span class="math inline">\(1-y\)</span> into the risk free asset. Recall that the demand for this individual is given by</p>
+<p><span class="math display">\[y = \frac{Er_M - r_f}{A\sigma^2_M}\]</span></p>
+<p>Index investors by <span class="math inline">\(i\)</span>, so investor <span class="math inline">\(i\)</span> with wealth <span class="math inline">\(W_i\)</span> and risk aversion <span class="math inline">\(A_i\)</span> demands</p>
+<p><span class="math display">\[y_i = \frac{Er_M - r_f}{A_i\sigma^2_M}.\]</span></p>
+<p>We now aggregate across investors. In this model any borrowing done by one investor must be offset by lending from another, so the risk-free asset is in zero net supply and total wealth is held in the market portfolio. The dollars each investor places in risky assets, <span class="math inline">\(W_i y_i\)</span>, must therefore sum to aggregate wealth <span class="math inline">\(W = \sum_i W_i\)</span>:</p>
+<p><span class="math display">\[\sum_i W_i y_i = W \quad\Longleftrightarrow\quad \sum_i \frac{W_i}{W}\,y_i = 1,\]</span></p>
+<p>so the <em>wealth-weighted</em> average fraction placed in the risky asset is 1. Substituting the demands and pulling the common factor out of the sum,</p>
+<p><span class="math display">\[\sum_i \frac{W_i}{W}\cdot\frac{Er_M - r_f}{A_i\sigma^2_M} = \frac{Er_M - r_f}{\sigma^2_M}\sum_i \frac{W_i}{W}\,\frac{1}{A_i} = 1.\]</span></p>
+<p>Solving for the risk premium gives</p>
+<p><span class="math display">\[\bar A \sigma^2_M  = Er_M - r_f, \qquad \bar A \equiv \left(\sum_i \frac{W_i}{W}\,\frac{1}{A_i}\right)^{-1}.\]</span></p>
+<p>The “average” risk aversion <span class="math inline">\(\bar A\)</span> that appears is thus the <em>wealth-weighted harmonic mean</em> of the individual coefficients — the same object derived formally in the appendix — because it is the reciprocals <span class="math inline">\(1/A_i\)</span>, not the <span class="math inline">\(A_i\)</span> themselves, that average linearly across investors.</p>
+<p>The most often cited implication of the CAPM model is claim 4. Recall from the previous lecture that the expected reward to risk ratio (the market price of risk) must be the same for all assets and the market portfolio. Thus</p>
+<p><span class="math display">\[\frac{Er_i - r_f}{Cov(r_i,r_M)} = \frac{Er_j - r_f}{Cov(r_j,r_M)} = \frac{Er_M - r_f}{Cov(r_M,r_M)} \mbox{ for all } i,j\]</span></p>
+<p>This implies (by rearranging) that</p>
+<p><span class="math display">\[Er_i - r_f = \frac{Cov(r_i,r_M)}{\sigma^2_M}(Er_M - r_f)\]</span></p>
+</section>
+<section id="systematic-and-idiosyncratic-risk" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="systematic-and-idiosyncratic-risk"><span class="header-section-number">5.5</span> Systematic and idiosyncratic risk</h2>
+<p>The CAPM says that only an asset’s beta — its covariance with the market — determines its expected return, and that an asset’s standalone variance is irrelevant. To see why, it helps to split the risk of any asset into two pieces: a part that moves with the market and a part that is specific to the asset itself.</p>
+<p>Write the return on asset <span class="math inline">\(i\)</span> as its projection on the market return plus a residual:</p>
+<p><span class="math display">\[r_i = \alpha_i + \beta_i r_M + \epsilon_i,\]</span></p>
+<p>where <span class="math inline">\(\beta_i = Cov(r_i,r_M)/\sigma^2_M\)</span> as before, and <span class="math inline">\(\epsilon_i\)</span> is the firm-specific surprise, constructed so that it is uncorrelated with the market: <span class="math inline">\(Cov(\epsilon_i, r_M) = 0\)</span> and <span class="math inline">\(E\epsilon_i = 0\)</span>. This is simply the regression of the asset’s return on the market’s: <span class="math inline">\(\beta_i r_M\)</span> is the fitted part and <span class="math inline">\(\epsilon_i\)</span> is the residual.</p>
+<p>Taking the variance of both sides and using <span class="math inline">\(Cov(\epsilon_i, r_M) = 0\)</span> gives the <strong>variance decomposition</strong></p>
+<p><span class="math display">\[\sigma^2_i = \underbrace{\beta_i^2 \sigma^2_M}_{\text{systematic}} + \underbrace{\sigma^2_{\epsilon_i}}_{\text{idiosyncratic}}.\]</span></p>
+<p>The first term, <span class="math inline">\(\beta_i^2\sigma^2_M\)</span>, is the <strong>systematic</strong> (or market) risk of the asset: it comes from the asset’s exposure to economy-wide movements and is governed entirely by beta. The second term, <span class="math inline">\(\sigma^2_{\epsilon_i}\)</span>, is the <strong>idiosyncratic</strong> (or firm-specific) risk: it reflects events that affect this asset alone — a product recall, a lawsuit, a management shake-up — and is uncorrelated with what happens to the rest of the market.</p>
+<section id="diversification-eliminates-idiosyncratic-risk" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="diversification-eliminates-idiosyncratic-risk"><span class="header-section-number">5.5.1</span> Diversification eliminates idiosyncratic risk</h3>
+<p>Idiosyncratic risk is special because it can be removed at essentially no cost simply by holding many assets. Consider an equally weighted portfolio of <span class="math inline">\(n\)</span> assets, <span class="math inline">\(r_P = \frac{1}{n}\sum_{i=1}^n r_i\)</span>. Substituting the decomposition,</p>
+<p><span class="math display">\[r_P = \bar\alpha + \left(\frac{1}{n}\sum_{i=1}^n \beta_i\right) r_M + \frac{1}{n}\sum_{i=1}^n \epsilon_i.\]</span></p>
+<p>The systematic part has coefficient equal to the average beta <span class="math inline">\(\bar\beta = \frac{1}{n}\sum_i\beta_i\)</span>, which does not shrink as <span class="math inline">\(n\)</span> grows. The idiosyncratic part is the average of the residuals. If the firm-specific shocks are uncorrelated across assets, each with variance no larger than some bound <span class="math inline">\(\bar\sigma^2_\epsilon\)</span>, then</p>
+<p><span class="math display">\[Var\!\left(\frac{1}{n}\sum_{i=1}^n \epsilon_i\right) = \frac{1}{n^2}\sum_{i=1}^n \sigma^2_{\epsilon_i} \le \frac{\bar\sigma^2_\epsilon}{n} \xrightarrow{\;n\to\infty\;} 0.\]</span></p>
+<p>As the number of assets grows, the portfolio’s idiosyncratic variance vanishes while its systematic variance, <span class="math inline">\(\bar\beta^2\sigma^2_M\)</span>, remains. A well-diversified portfolio therefore carries essentially only systematic risk:</p>
+<p><span class="math display">\[\sigma^2_P \;\longrightarrow\; \bar\beta^2\,\sigma^2_M.\]</span></p>
+<div class="market-insight">
+<p><strong>Market Insight</strong></p>
+<p>Because idiosyncratic risk can be diversified away for free, an investor who holds the market portfolio bears none of it. Risk that everyone can costlessly eliminate cannot command a reward in equilibrium: if an asset offered a premium for its firm-specific risk, investors would buy it, diversify that risk away, and bid the premium to zero. Only systematic risk — the part that survives in every diversified portfolio — must be compensated with higher expected return.</p>
+<p>This is precisely why the Security Market Line prices assets by beta rather than by total variance <span class="math inline">\(\sigma^2_i\)</span>. Two assets with the same standalone standard deviation can have very different expected returns if one is mostly systematic risk and the other mostly idiosyncratic; the CAPM rewards the first and not the second. The practical lesson is twofold. An investor who holds only a handful of stocks is bearing firm-specific risk that the market does not pay her to hold — she could earn the same expected return at lower risk by diversifying. And when judging how an asset contributes to a portfolio that is already diversified, its standalone volatility is the wrong measure; what matters is its beta, the systematic risk it adds.</p>
+</div>
+</section>
+</section>
+<section id="application-a-cfo-setting-a-hurdle-rate" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="application-a-cfo-setting-a-hurdle-rate"><span class="header-section-number">5.6</span> Application: A CFO setting a hurdle rate</h2>
+<p>When a manufacturing company considers building a new plant, its chief financial officer must decide what return the project has to clear to be worth undertaking — and that hurdle rate is, in practice, the cost of equity the CAPM is designed to produce. The CFO estimates the project’s beta from comparable firms, combines it with the prevailing risk-free rate and an estimate of the market risk premium, and reads off the Security Market Line the return that shareholders require for bearing the project’s systematic risk. That single number flows directly into the discounted-cash-flow valuation that determines whether the plant is approved. The CAPM is therefore not merely a description of equilibrium prices; it is the everyday machinery by which corporate investment decisions, securities valuations, and the evaluation of portfolio managers are carried out.</p>
+</section>
+<section id="appendix-formal-derivation-of-the-capm" class="level2 appendix" data-number="5.7">
+<h2 class="appendix anchored" data-number="5.7" data-anchor-id="appendix-formal-derivation-of-the-capm"><span class="header-section-number">5.7</span> Appendix: Formal Derivation of the CAPM</h2>
+<p>This appendix derives the four claims of the CAPM rigorously from the six assumptions stated above. The arguments proceed in three steps: individual optimization, aggregation via market clearing, and the resulting asset pricing equation.</p>
+<section id="setup-and-notation" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="setup-and-notation"><span class="header-section-number">5.7.1</span> Setup and notation</h3>
+<p>There are <span class="math inline">\(N\)</span> risky assets with random returns <span class="math inline">\(r_1, \ldots, r_N\)</span>. Let <span class="math inline">\(\mu = (\mu_1,\ldots,\mu_N)'\)</span> denote the vector of expected returns and <span class="math inline">\(\Sigma\)</span> the <span class="math inline">\(N\times N\)</span> positive-definite variance-covariance matrix. A risk-free asset with return <span class="math inline">\(r_f\)</span> is also available. There are <span class="math inline">\(I\)</span> investors; investor <span class="math inline">\(i\)</span> has initial wealth <span class="math inline">\(W_i\)</span> and risk-aversion coefficient <span class="math inline">\(A_i &gt; 0\)</span>. Let <span class="math inline">\(W = \sum_i W_i\)</span> denote aggregate wealth.</p>
+<p>By assumptions 5 and 6 every investor solves the same mean-variance problem, taking <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\Sigma\)</span>, and <span class="math inline">\(r_f\)</span> as given.</p>
+</section>
+<section id="step-1-individual-optimization-and-the-tangency-portfolio" class="level3" data-number="5.7.2">
+<h3 data-number="5.7.2" class="anchored" data-anchor-id="step-1-individual-optimization-and-the-tangency-portfolio"><span class="header-section-number">5.7.2</span> Step 1: Individual optimization and the tangency portfolio</h3>
+<p>Investor <span class="math inline">\(i\)</span> chooses portfolio weights <span class="math inline">\(w \in \mathbb{R}^N\)</span> on the risky assets (the remainder <span class="math inline">\(1 - \mathbf{1}'w\)</span> is placed in the risk-free asset) to maximize</p>
+<p><span class="math display">\[U_i = w'(\mu - r_f\mathbf{1}) + r_f - \frac{A_i}{2}\,w'\Sigma w.\]</span></p>
+<p>The first-order condition is</p>
+<p><span class="math display">\[(\mu - r_f\mathbf{1}) - A_i\,\Sigma w_i^* = 0,\]</span></p>
+<p>which gives the optimal risky-asset weights for investor <span class="math inline">\(i\)</span>:</p>
+<p><span class="math display">\[w_i^* = \frac{1}{A_i}\,\Sigma^{-1}(\mu - r_f\mathbf{1}).\]</span></p>
+<p>Every investor holds the same vector <span class="math inline">\(\Sigma^{-1}(\mu - r_f\mathbf{1})\)</span>, scaled by <span class="math inline">\(1/A_i\)</span>. The composition of the risky portion of the portfolio is therefore identical across investors; only the overall scale differs. Normalising to unit weight gives the <strong>tangency portfolio</strong></p>
+<p><span class="math display">\[w_T = \frac{\Sigma^{-1}(\mu - r_f\mathbf{1})}{\mathbf{1}'\Sigma^{-1}(\mu - r_f\mathbf{1})},\]</span></p>
+<p>and we can write <span class="math inline">\(w_i^* = y_i\,w_T\)</span> where the scalar</p>
+<p><span class="math display">\[y_i = \frac{\mathbf{1}'\Sigma^{-1}(\mu - r_f\mathbf{1})}{A_i}\]</span></p>
+<p>is the fraction of wealth investor <span class="math inline">\(i\)</span> places in the risky tangency portfolio. This confirms <strong>Claim 1</strong> and <strong>Claim 2</strong>: every investor holds the same risky portfolio <span class="math inline">\(w_T\)</span>, and the capital market line passes through <span class="math inline">\(w_T\)</span>.</p>
+</section>
+<section id="step-2-market-clearing-and-the-market-risk-premium" class="level3" data-number="5.7.3">
+<h3 data-number="5.7.3" class="anchored" data-anchor-id="step-2-market-clearing-and-the-market-risk-premium"><span class="header-section-number">5.7.3</span> Step 2: Market clearing and the market risk premium</h3>
+<p>Market clearing requires that the aggregate demand for every risky asset equals its supply. The aggregate dollar demand for the risky-asset vector is</p>
+<p><span class="math display">\[\sum_i W_i\,w_i^* = \left(\sum_i \frac{W_i}{A_i}\right)\Sigma^{-1}(\mu - r_f\mathbf{1}).\]</span></p>
+<p>The supply of risky assets equals their total market capitalisation, which as a share of aggregate wealth is precisely <span class="math inline">\(w_M\)</span>, the vector of <strong>market-portfolio weights</strong>. Equilibrium therefore requires</p>
+<p><span class="math display">\[W\,w_M = \left(\sum_i \frac{W_i}{A_i}\right)\Sigma^{-1}(\mu - r_f\mathbf{1}).\]</span></p>
+<p>This confirms that <span class="math inline">\(w_M \propto \Sigma^{-1}(\mu - r_f\mathbf{1})\)</span>, so the tangency portfolio and the market portfolio coincide: <span class="math inline">\(w_T = w_M\)</span>.</p>
+<p>To obtain the market risk premium, note that the net supply of the risk-free asset is zero in the aggregate, so the wealth-weighted mean fraction invested in risky assets must equal one:</p>
+<p><span class="math display">\[\frac{\sum_i y_i W_i}{W} = 1.\]</span></p>
+<p>Substituting <span class="math inline">\(y_i = (\mu_M - r_f)/(A_i\sigma^2_M)\)</span>, where <span class="math inline">\(\mu_M = w_M'\mu\)</span> and <span class="math inline">\(\sigma^2_M = w_M'\Sigma w_M\)</span>:</p>
+<p><span class="math display">\[\frac{\mu_M - r_f}{\sigma^2_M}\cdot\frac{\sum_i W_i/A_i}{W} = 1.\]</span></p>
+<p>Define the <strong>wealth-weighted harmonic mean of risk aversion</strong></p>
+<p><span class="math display">\[\bar{A} = \left(\frac{\sum_i W_i/A_i}{W}\right)^{-1}.\]</span></p>
+<p>Then the market-clearing condition becomes</p>
+<p><span class="math display">\[\boxed{\mu_M - r_f = \bar{A}\,\sigma^2_M,}\]</span></p>
+<p>which is <strong>Claim 3</strong>. The market risk premium equals the product of average risk aversion and market variance. When investors are on average more risk-averse, or when the market is more volatile, the equilibrium risk premium is larger.</p>
+</section>
+<section id="step-3-the-security-market-line" class="level3" data-number="5.7.4">
+<h3 data-number="5.7.4" class="anchored" data-anchor-id="step-3-the-security-market-line"><span class="header-section-number">5.7.4</span> Step 3: The Security Market Line</h3>
+<p>Returning to the first-order condition <span class="math inline">\(\Sigma w_M = \frac{1}{\bar{A}}(\mu - r_f\mathbf{1})\)</span>, the <span class="math inline">\(n\)</span>-th row reads</p>
+<p><span class="math display">\[\sum_{j=1}^N \sigma_{nj}\,w_{M,j} = \frac{\mu_n - r_f}{\bar{A}}.\]</span></p>
+<p>The left-hand side is exactly <span class="math inline">\(Cov(r_n,\,r_M) = Cov\!\left(r_n,\,\sum_j w_{M,j} r_j\right)\)</span>, so</p>
+<p><span class="math display">\[Cov(r_n, r_M) = \frac{\mu_n - r_f}{\bar{A}}.\]</span></p>
+<p>Applying the same equation to the market portfolio itself (<span class="math inline">\(n = M\)</span>) gives</p>
+<p><span class="math display">\[\sigma^2_M = Cov(r_M, r_M) = \frac{\mu_M - r_f}{\bar{A}}.\]</span></p>
+<p>Dividing the first equation by the second eliminates <span class="math inline">\(\bar{A}\)</span>:</p>
+<p><span class="math display">\[\frac{\mu_n - r_f}{\mu_M - r_f} = \frac{Cov(r_n, r_M)}{\sigma^2_M} \equiv \beta_n.\]</span></p>
+<p>Rearranging yields <strong>Claim 4</strong>, the <strong>Security Market Line</strong>:</p>
+<p><span class="math display">\[\boxed{\mu_n - r_f = \beta_n\,(\mu_M - r_f), \qquad \beta_n = \frac{Cov(r_n,r_M)}{\sigma^2_M}.}\]</span></p>
+<p>Every asset’s expected excess return is proportional to its beta. Assets with <span class="math inline">\(\beta_n &gt; 1\)</span> amplify market risk and must offer a premium above the market; assets with <span class="math inline">\(\beta_n &lt; 1\)</span> contribute less than proportionally to aggregate variance and therefore command a smaller premium; assets with <span class="math inline">\(\beta_n = 0\)</span> are uncorrelated with the market and, in equilibrium, earn only the risk-free rate as their expected return.</p>
+</section>
+<section id="summary" class="level3" data-number="5.7.5">
+<h3 data-number="5.7.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.7.5</span> Summary</h3>
+<p>The four claims of the CAPM follow in sequence. Homogeneous expectations and mean-variance optimization (Assumptions 5–6) imply that every investor holds the same tangency portfolio. The public-markets assumption (Assumption 3) and price-taking (Assumption 1) ensure that aggregate demand must equal aggregate supply at every asset, which forces the tangency portfolio to be the market portfolio and pins down the market risk premium as <span class="math inline">\(\bar{A}\sigma^2_M\)</span>. The first-order conditions then deliver the Security Market Line as an immediate algebraic consequence, with beta as the sole determinant of an asset’s required excess return.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Further listening
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Odd Lots</em> (Bloomberg) — <a href="https://podcasts.apple.com/us/podcast/cliff-asness-on-how-markets-got-dumber-in-the-last-10-years/id1056200096?i=1000736563747">“Cliff Asness on How Markets Got Dumber in the Last 10 Years”</a>: a student of Eugene Fama on risk, return, and the factor models that grew out of the CAPM.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="homework-problems" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">5.8</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">5.8.1</span> Conceptual</h3>
+<p><strong>CAPM-C1.</strong> Two investors, a cautious retiree and an aggressive young professional, share identical beliefs about the means, variances, and covariances of all traded assets and both are mean-variance optimizers. Explain why, despite their very different attitudes toward risk, the <em>composition</em> of the risky portion of their portfolios must be identical. In your answer, describe how each investor expresses her risk preference and what role the risk-free asset plays.</p>
+<p><strong>CAPM-C2.</strong> Explain why, in equilibrium, the single risky portfolio that every investor holds must be the <em>market</em> portfolio — the value-weighted portfolio of all traded assets. Use the fact that all assets must be held by someone and that every investor gives the same weights to the risky assets. What would go wrong if the common risky portfolio placed zero weight on some traded asset?</p>
+<p><strong>CAPM-C3.</strong> Suppose a new class of investors enters the market who, unlike everyone else, believe technology stocks are far riskier than the rest of the market believes. Explain how this violation of homogeneous expectations could cause different investors to hold different risky portfolios, and why the market portfolio would then no longer necessarily be the tangency portfolio for every investor.</p>
+<p><strong>CAPM-C4.</strong> Assumptions 5 and 6 (mean-variance optimization and homogeneous expectations) are what force every investor to solve the <em>same</em> optimization problem. Explain how each of these two assumptions contributes to the conclusion that the market portfolio equals the tangency portfolio, and describe qualitatively what happens to that conclusion if investors instead disagree about expected returns.</p>
+<p><strong>CAPM-C5.</strong> Two assets have exactly the same standalone standard deviation <span class="math inline">\(\sigma_i\)</span>, but asset A has <span class="math inline">\(\beta_A = 1.4\)</span> and asset B has <span class="math inline">\(\beta_B = 0.3\)</span>. Which asset should have the higher expected return in equilibrium, and why? In your answer, explain why the CAPM prices assets by beta rather than by total variance <span class="math inline">\(\sigma^2_i\)</span>.</p>
+<p><strong>CAPM-C6.</strong> A financial advisor tells a client that a stock with a very high standalone volatility is “too risky to hold” and should command a huge risk premium. Using the definition <span class="math inline">\(\beta_i = Cov(r_i,r_M)/\sigma^2_M\)</span> and the idea that beta measures an asset’s contribution to the variance of the market portfolio, explain the flaw in this reasoning. What if the stock had a beta of zero despite its high volatility?</p>
+<p><strong>CAPM-C7.</strong> Explain why, according to the equilibrium condition <span class="math inline">\(Er_M - r_f = \bar A \sigma^2_M\)</span>, the market risk premium would be expected to rise during a period in which investors collectively become more risk-averse (for example, during a financial panic), even if the underlying variance of the market <span class="math inline">\(\sigma^2_M\)</span> did not change.</p>
+<p><strong>CAPM-C8.</strong> In the derivation of the market risk premium, the wealth-weighted average of the fraction <span class="math inline">\(y\)</span> placed in the risky asset is set equal to one. Explain the market-clearing logic behind this step: why must this average equal exactly one, and what does this have to do with borrowing and lending across investors and the risk-free asset being in zero net supply?</p>
+<p><strong>CAPM-C9.</strong> Using the decomposition <span class="math inline">\(\sigma^2_i = \beta_i^2 \sigma^2_M + \sigma^2_{\epsilon_i}\)</span>, explain in words the difference between the systematic and idiosyncratic components of an asset’s risk. Give a concrete example of a real-world event that would show up in <span class="math inline">\(\epsilon_i\)</span> but not in the market return <span class="math inline">\(r_M\)</span>.</p>
+<p><strong>CAPM-C10.</strong> Consider the single-index representation <span class="math inline">\(r_i = \alpha_i + \beta_i r_M + \epsilon_i\)</span>. Explain why <span class="math inline">\(\epsilon_i\)</span> is constructed to be uncorrelated with <span class="math inline">\(r_M\)</span>, and how that requirement is exactly what allows the variance of <span class="math inline">\(r_i\)</span> to split cleanly into a systematic term and an idiosyncratic term with no cross term. Which term captures economy-wide movements and which captures firm-specific events?</p>
+<p><strong>CAPM-C11.</strong> An investor holds a portfolio of only three stocks and complains that it swings wildly. Using the result that the idiosyncratic variance of an equally weighted portfolio behaves like <span class="math inline">\(\bar\sigma^2_\epsilon / n\)</span>, explain why adding many more uncorrelated stocks would reduce her risk at essentially no cost, and explain what portion of the portfolio’s variance would remain no matter how many stocks she added.</p>
+<p><strong>CAPM-C12.</strong> Explain why the systematic risk of a well-diversified equally weighted portfolio, <span class="math inline">\(\bar\beta^2\sigma^2_M\)</span>, does <em>not</em> shrink as the number of assets <span class="math inline">\(n\)</span> grows, while its idiosyncratic risk does. Relate this to the statement that “there is no free lunch” for market risk: what is the fundamental difference between the two components that makes one diversifiable and the other not?</p>
+<p><strong>CAPM-C13.</strong> Explain why, in CAPM equilibrium, an asset earns no premium for bearing idiosyncratic risk. Frame your answer as an arbitrage-style argument: what would investors do if an asset offered a premium for its firm-specific risk, and how would that drive the premium to zero?</p>
+<p><strong>CAPM-C14.</strong> A stock is found to have <span class="math inline">\(\beta_i = 0\)</span> even though its standalone standard deviation is large. According to the CAPM, what expected return should it earn, and why does its large idiosyncratic risk earn it nothing? Contrast this with the expectation of a naive investor who prices the stock by its total volatility.</p>
+</section>
+<section id="quantitative" class="level3" data-number="5.8.2">
+<h3 data-number="5.8.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">5.8.2</span> Quantitative</h3>
+<p><strong>CAPM-Q1.</strong> An asset has <span class="math inline">\(\beta_i = 1.3\)</span>. The risk-free rate is <span class="math inline">\(r_f = 0.02\)</span> and the expected return on the market is <span class="math inline">\(Er_M = 0.09\)</span>. Use the Security Market Line <span class="math inline">\(Er_i - r_f = \beta_i(Er_M - r_f)\)</span> to compute the asset’s equilibrium expected return <span class="math inline">\(Er_i\)</span>.</p>
+<p><strong>CAPM-Q2.</strong> The market risk premium is <span class="math inline">\(Er_M - r_f = 0.06\)</span> and the risk-free rate is <span class="math inline">\(r_f = 0.03\)</span>. Two assets have betas <span class="math inline">\(\beta_A = 0.5\)</span> and <span class="math inline">\(\beta_B = 1.6\)</span>. Use the Security Market Line to compute the equilibrium expected return of each asset, and find the difference <span class="math inline">\(Er_B - Er_A\)</span>.</p>
+<p><strong>CAPM-Q3.</strong> An analyst estimates that a stock’s covariance with the market is <span class="math inline">\(Cov(r_i, r_M) = 0.018\)</span> and the variance of the market is <span class="math inline">\(\sigma^2_M = 0.036\)</span>. Compute the stock’s beta <span class="math inline">\(\beta_i = Cov(r_i,r_M)/\sigma^2_M\)</span>. Then, using the market risk premium <span class="math inline">\(Er_M - r_f = 0.055\)</span> and <span class="math inline">\(r_f = 0.025\)</span>, find the stock’s expected return <span class="math inline">\(Er_i\)</span> from the Security Market Line.</p>
+<p><strong>CAPM-Q4.</strong> A stock has standard deviation <span class="math inline">\(\sigma_i = 0.30\)</span> and correlation <span class="math inline">\(\rho_{iM} = 0.4\)</span> with the market, and the market has standard deviation <span class="math inline">\(\sigma_M = 0.20\)</span>. Using <span class="math inline">\(Cov(r_i,r_M)=\rho_{iM}\sigma_i\sigma_M\)</span> and <span class="math inline">\(\beta_i = Cov(r_i,r_M)/\sigma^2_M\)</span>, compute the stock’s beta.</p>
+<p><strong>CAPM-Q5.</strong> The average degree of risk aversion in the market is <span class="math inline">\(\bar A = 2.5\)</span> and the variance of the market portfolio is <span class="math inline">\(\sigma^2_M = 0.04\)</span>. Using <span class="math inline">\(Er_M - r_f = \bar A \sigma^2_M\)</span>, compute the equilibrium market risk premium. If the risk-free rate is <span class="math inline">\(r_f = 0.03\)</span>, what is the expected return on the market portfolio <span class="math inline">\(Er_M\)</span>?</p>
+<p><strong>CAPM-Q6.</strong> In equilibrium the market risk premium is observed to be <span class="math inline">\(Er_M - r_f = 0.06\)</span> and the variance of the market is <span class="math inline">\(\sigma^2_M = 0.05\)</span>. Using the relation <span class="math inline">\(Er_M - r_f = \bar A \sigma^2_M\)</span>, solve for the implied average degree of risk aversion <span class="math inline">\(\bar A\)</span> in the market.</p>
+<p><strong>CAPM-Q7.</strong> An investor with risk-aversion coefficient <span class="math inline">\(A = 3\)</span> faces a market with risk premium <span class="math inline">\(Er_M - r_f = 0.07\)</span> and variance <span class="math inline">\(\sigma^2_M = 0.04\)</span>. Using the individual demand rule <span class="math inline">\(y = (Er_M - r_f)/(A\sigma^2_M)\)</span>, compute the fraction <span class="math inline">\(y\)</span> of wealth this investor places in the risky market portfolio. Is she a net borrower or lender at the risk-free rate?</p>
+<p><strong>CAPM-Q8.</strong> Using the demand rule <span class="math inline">\(y = (Er_M - r_f)/(A\sigma^2_M)\)</span> with a market risk premium of <span class="math inline">\(Er_M - r_f = 0.05\)</span> and market variance <span class="math inline">\(\sigma^2_M = 0.025\)</span>, find the risk-aversion coefficient <span class="math inline">\(A\)</span> of an investor who chooses to hold exactly <span class="math inline">\(y = 1\)</span> (all wealth in the market and nothing in the risk-free asset). Interpret how this value relates to the average risk aversion <span class="math inline">\(\bar A\)</span> in equilibrium.</p>
+<p><strong>CAPM-Q9.</strong> An asset has <span class="math inline">\(\beta_i = 1.2\)</span>, and the market has variance <span class="math inline">\(\sigma^2_M = 0.05\)</span>. The idiosyncratic variance of the asset is <span class="math inline">\(\sigma^2_{\epsilon_i} = 0.02\)</span>. Using the decomposition <span class="math inline">\(\sigma^2_i = \beta_i^2 \sigma^2_M + \sigma^2_{\epsilon_i}\)</span>, compute the asset’s total variance <span class="math inline">\(\sigma^2_i\)</span> and its total standard deviation <span class="math inline">\(\sigma_i\)</span>. What fraction of the total variance is systematic?</p>
+<p><strong>CAPM-Q10.</strong> A stock has total variance <span class="math inline">\(\sigma^2_i = 0.10\)</span> and beta <span class="math inline">\(\beta_i = 0.8\)</span>. The market variance is <span class="math inline">\(\sigma^2_M = 0.045\)</span>. Using the variance decomposition <span class="math inline">\(\sigma^2_i = \beta_i^2 \sigma^2_M + \sigma^2_{\epsilon_i}\)</span>, solve for the stock’s idiosyncratic variance <span class="math inline">\(\sigma^2_{\epsilon_i}\)</span>, and compute the systematic share of total variance.</p>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/scottcondie\.github\.io\/teaching\/450\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./MV.html" class="pagination-link" aria-label="Mean-Variance Portfolios">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Performance.html" class="pagination-link" aria-label="Portfolio performance evaluation">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

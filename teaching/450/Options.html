@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>13&nbsp; Options – Asset Prices, Risk, and Information</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./BlackLitterman.html" rel="next">
+<link href="./Forwards_and_Futures.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5f0e52f7877e3a078c44e13fc828ca0d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2f8ef6ac35c506a55552e17f1b00ddbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Forwards_and_Futures.html">Derivatives</a></li><li class="breadcrumb-item"><a href="./Options.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Asset Prices, Risk, and Information</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Asset Prices, Risk, and Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Markets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Individual portfolio selection and market equilibrium</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CAPM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Information, trading and market efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EMH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fixed income securities and pricing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Interest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Yields.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./YieldCurve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FIPortfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Derivatives</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Forwards_and_Futures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Options.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced market models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BlackLitterman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Credit_Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Market_Makers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
+  <li><a href="#option-contracts" id="toc-option-contracts" class="nav-link" data-scroll-target="#option-contracts"><span class="header-section-number">13.2</span> Option contracts</a></li>
+  <li><a href="#stock-options" id="toc-stock-options" class="nav-link" data-scroll-target="#stock-options"><span class="header-section-number">13.3</span> Stock Options</a></li>
+  <li><a href="#put-call-parity" id="toc-put-call-parity" class="nav-link" data-scroll-target="#put-call-parity"><span class="header-section-number">13.4</span> Put-Call Parity</a></li>
+  <li><a href="#option-strategies" id="toc-option-strategies" class="nav-link" data-scroll-target="#option-strategies"><span class="header-section-number">13.5</span> Option Strategies</a></li>
+  <li><a href="#binomial-option-pricing-models" id="toc-binomial-option-pricing-models" class="nav-link" data-scroll-target="#binomial-option-pricing-models"><span class="header-section-number">13.6</span> Binomial Option Pricing Models</a></li>
+  <li><a href="#black-scholes-option-pricing" id="toc-black-scholes-option-pricing" class="nav-link" data-scroll-target="#black-scholes-option-pricing"><span class="header-section-number">13.7</span> Black-Scholes Option Pricing</a></li>
+  <li><a href="#first-order-analytics-the-greeks" id="toc-first-order-analytics-the-greeks" class="nav-link" data-scroll-target="#first-order-analytics-the-greeks"><span class="header-section-number">13.8</span> First-order analytics: The Greeks</a></li>
+  <li><a href="#application-a-manager-buying-protection" id="toc-application-a-manager-buying-protection" class="nav-link" data-scroll-target="#application-a-manager-buying-protection"><span class="header-section-number">13.9</span> Application: A manager buying protection</a></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">13.10</span> Homework problems</a>
+  <ul class="collapse">
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">13.10.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">13.10.2</span> Quantitative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Forwards_and_Futures.html">Derivatives</a></li><li class="breadcrumb-item"><a href="./Options.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">13.1</span> Introduction</h2>
+<p>Four questions define the study of options. First, what factors determine the price of an option, and what qualitative predictions can be made before any formal model is specified? Second, how should an option be priced — that is, what is the fair value of the right, without obligation, to buy or sell an asset at a fixed price on or before a future date? Third, how can the relative prices of puts and calls on the same underlying asset be constrained by no-arbitrage, and what does that constraint imply about early exercise? Fourth, how can options be combined with one another to engineer specific payoff profiles, and how are the resulting positions managed dynamically? These questions matter profoundly for financial markets. Options allow investors and corporations to hedge specific risks with surgical precision, to speculate on volatility independently of the direction of asset prices, and to tailor their exposure to future outcomes in ways that cannot be achieved with forwards, futures, or the underlying asset alone. The solution to the pricing question, provided by Black, Scholes, and Merton in the early 1970s, effectively founded the modern era of quantitative finance.</p>
+<p>The first question establishes a qualitative framework before any formula is derived. A call option increases in value when the underlying stock price rises (more likely to expire in the money), when the strike price falls (a lower hurdle), when time to expiration increases (more opportunity for the stock to move favorably), when volatility rises (greater dispersion of outcomes, and only the favorable tail matters to the option holder), and when the risk-free rate rises (reducing the present value of the fixed payment owed upon exercise). These five factors — stock price, strike, time, volatility, and rate — are the inputs to every option pricing model and understanding their effects qualitatively provides a vital intuition check on any formula.</p>
+<p>The second question is answered by the replication argument. If the payoff of an option can be reproduced exactly by a portfolio of the underlying stock and a risk-free bond, then no-arbitrage forces the option price to equal the cost of that portfolio. The binomial model makes this argument transparent in a discrete-time, two-state setting: the hedge ratio — the number of shares needed to offset the option’s risk — can be computed directly from the range of possible payoffs and prices, and the resulting option price requires no assumption about investor risk preferences or the probability of an up move. The Black-Scholes formula extends this replication logic to a continuous-time setting with lognormal stock prices, yielding a closed-form expression for the call price and revealing that implied volatility — the only unobservable input — is what option markets are ultimately pricing.</p>
+<p>The third question leads to put-call parity: a constraint relating the prices of European puts and calls with the same strike and expiration. The derivation is a straightforward portfolio comparison, but its implications are far-reaching. It immediately implies that an American call on a non-dividend-paying stock should never be exercised early — selling the option is always worth at least as much as exercising it — so American and European calls on such stocks have the same price. For puts, this logic fails, and early exercise can be optimal.</p>
+<p>The fourth question concerns the vast space of strategies that options make possible. Even a small number of options can be combined into bull spreads, bear spreads, butterfly spreads, straddles, and strangles to express views on direction, on the magnitude of price movement, or on the range within which prices will stay. Dynamic management of these positions requires understanding the Greeks — delta, gamma, theta, vega, and rho — which measure the option’s sensitivity to each of its inputs and are the primary tools of risk management for any options portfolio.</p>
+<p>The chapter begins by cataloguing the factors affecting option prices and deriving put-call parity with its early-exercise implications. A survey of option strategies follows. It then introduces the binomial model to build intuition for replication and hedge ratios, before presenting the Black-Scholes formula and working through its interpretation. The chapter concludes with the Greeks, deriving delta, gamma, vega, and rho from the Black-Scholes formula and explaining delta hedging and why higher-order sensitivities matter for managing options positions over time.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="In the news">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In the news
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The options market this chapter prices has exploded in size and speed. IFR reported that zero-days-to-expiry (“0DTE”) contracts have become the <em>dominant</em> force in the S&amp;P 500 options market — now around half of all index-options volume, much of it traded by individuals. Every one of those contracts is priced by the same Black–Scholes logic and hedged using the Greeks introduced here. Read it at <a href="https://www.ifre.com/topic-codes/2321645/zero-day-contracts-become-dominant-force-in-sp-500-options-market">IFR</a>.</p>
+</div>
+</div>
+</section>
+<section id="option-contracts" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="option-contracts"><span class="header-section-number">13.2</span> Option contracts</h2>
+<p>An options contract is an agreement that gives the long position the right, but not the obligation to purchase or sell a particular asset by a certain date in the future for a particular price. The price at which the option may be bought or sold is called the <em>strike price</em> or <em>exercise price</em> and the date specified in the contract is the <em>maturity date</em> or <em>expiration date</em>. Options can be either <em>European</em> which means that they must be exercised on a given day, or <em>American</em> which means that they may be exercised at any point before the expiration date.</p>
+<dl>
+<dt>Call options.</dt>
+<dd>
+<p>A call option gives the long position the right to buy an underlying asset for the strike price. The seller or short position on the option is said to "write" the call. If the price of the call option is <span class="math inline">\(c\)</span>, the price of the stock at expiration is <span class="math inline">\(S_{T}\)</span> and the strike price is <span class="math inline">\(K\)</span> then the total payoff to the option is <span class="math inline">\(\max \{S_T - K, 0\} - c\)</span>. The payoff to the short position will be <span class="math inline">\(c - \max \{S_T - K, 0\}\)</span>. (Draw)</p>
+</dd>
+<dt>Put options.</dt>
+<dd>
+<p>Put options give the long position the right to sell a particular asset at a given strike price. If the price of the put is <span class="math inline">\(p\)</span> then the payoff to the put will be <span class="math inline">\(\max \{K - S_T, 0\} - p\)</span>. The payoff to the short position will be <span class="math inline">\(p - \max \{K - S_T,0 \}\)</span>. (Draw)</p>
+</dd>
+</dl>
+<p>Options can be written on many underlying assets including: stocks, market indices, futures contracts, interest rate derivatives, etc. For most of our discussion we will consider options whose underlying asset is a stock. For equity options the contract is usually for 100 shares of the underlying stock. Thus, if the price of a call option on stock XYZ is $5.00 per share then the initial investment for one options contract is $500.</p>
+</section>
+<section id="stock-options" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="stock-options"><span class="header-section-number">13.3</span> Stock Options</h2>
+<p>There are a few factors that affect the price of equity options. These include</p>
+<ol type="1">
+<li>The current stock price <span class="math inline">\(S_0\)</span>. Holding all other factors constant (especially the strike price of the option) an increase in <span class="math inline">\(S_0\)</span> will increase the price of any particular call option and decrease the price of a put option.</li>
+<li>The strike price <span class="math inline">\(K\)</span>. Holding all else constant, increasing <span class="math inline">\(K\)</span> will lead calls to be less likely to be in the money and cause puts to be more likely to be in the money. Thus the price of a call decreases in <span class="math inline">\(K\)</span> while the price of the put increases in <span class="math inline">\(K\)</span>.</li>
+<li>Time to expiration. For American options, both put and call options weakly increase in value with the time to expiration. This happens because they each have more chance to be in the money as the expiration date increases. With European options it is not so simple.</li>
+<li>Volatility. Both call and put options (American and European) increase in the volatility of the underlying stock. As the stock gets more volatile, it has more likelihood of being in the money.</li>
+<li>Risk-free rate. Holding the stock price constant, an increase in the risk-free rate will increase the value of calls and decrease the value of puts.</li>
+</ol>
+</section>
+<section id="put-call-parity" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="put-call-parity"><span class="header-section-number">13.4</span> Put-Call Parity</h2>
+<p>There is a relationship between the price <span class="math inline">\(p\)</span> of a European put and the price <span class="math inline">\(c\)</span> of a European call. To see this, consider the following two portfolios.</p>
+<ol type="1">
+<li>Holding one European call option with strike price <span class="math inline">\(K\)</span> and cash in the amount of <span class="math inline">\(Ke^{-rT}\)</span>.</li>
+<li>Hold one share of the stock and one European put option with strike price <span class="math inline">\(K\)</span>.</li>
+</ol>
+<p>Consider the payoff to portfolio 1. If <span class="math inline">\(S_T &lt; K\)</span> then the total value of the portfolio is <span class="math inline">\(K\)</span> (the value of the cash at time <span class="math inline">\(T\)</span>). If <span class="math inline">\(S_T &gt; K\)</span> then the value of the portfolio is <span class="math inline">\(S_T - K + K = S_T\)</span>. As such, the value of portfolio 1 is <span class="math inline">\(\max(S_T,K)\)</span>.</p>
+<p>Now consider the value of portfolio 2. If <span class="math inline">\(S_T &lt; K\)</span> then the payoff to the put is <span class="math inline">\(K - S_T\)</span> and the value of the stock is <span class="math inline">\(S_T\)</span> so the total value of the portfolio is <span class="math inline">\(K\)</span>. On the other hand, if <span class="math inline">\(S_T &gt; K\)</span> then the value of the put is zero and the value of the stock is <span class="math inline">\(S_T\)</span>. Thus the value of portfolio 2 is also <span class="math inline">\(\max(S_T,K)\)</span> and the payoffs to each portfolio are the same. Since their payoffs are the same, they must have the same price. This implies that</p>
+<p><span class="math display">\[c + Ke^{-rT} = p + S_0.\]</span></p>
+<p>That is, the price of a call plus the cash position must be equal to the price of the put and the current stock price.</p>
+<p>Notice first that <span class="math inline">\(c \ge 0\)</span> and <span class="math inline">\(p \ge 0\)</span> since puts and calls may always be left unexercised and as such will not impose any liability on the holder. Rearranging the put-call parity relationship then shows that</p>
+<p><span class="math display">\[c = p + S_0 - Ke^{-rT}\]</span></p>
+<p>If we call <span class="math inline">\(C\)</span> the price of an American call we note that <span class="math inline">\(C \ge c\)</span>. Since <span class="math inline">\(p \ge 0\)</span> this implies that</p>
+<p><span class="math display">\[C \ge c \ge  S_0 - Ke^{-rT} &gt; S_0 - K\]</span></p>
+<p>Notice that the right hand side of this inequality is the value that would be received if the American option were to be exercised today. The left hand side is the value that would be obtained if the American call were sold. Since the left hand side is always larger than the right hand side, we see that it is never optimal to exercise an American call option. If a person wants to close out her position, she should just sell the option.</p>
+<p>Since it is never optimal to exercise an American call early, the early exercise option must have no value. Hence it should be that <span class="math inline">\(C = c\)</span>. For put options this is not the case. If a firm on which you hold a put goes bankrupt, there is no possibility that the stock price will fall any lower (it is already 0) so the option should be exercised so that the money can be invested somewhere else. Hence <span class="math inline">\(P &gt; p\)</span> (the price of an American put is higher than a European put).</p>
+</section>
+<section id="option-strategies" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="option-strategies"><span class="header-section-number">13.5</span> Option Strategies</h2>
+<p>Options provide an investor a wide range of opportunities for taking a view on stock prices. What follows are some possible investment strategies using options.</p>
+<dl>
+<dt>Spread.</dt>
+<dd>
+<p>A spread involves taking a position in 2 or more options of the same type.</p>
+</dd>
+<dt>Bull spread.</dt>
+<dd>
+<p>One way to construct a bull spread is to buy a call option with a strike price <span class="math inline">\(K_1\)</span> and selling a call option with a strike price <span class="math inline">\(K_2 &gt; K_1\)</span>. The payoff to the first option is <span class="math inline">\(\max (S_T - K_1,0) - c_1\)</span> while the payoff to the second is <span class="math inline">\(c_2 - \max(S_T - K_2,0)\)</span>. Therefore, the payoff to the total position is <span class="math inline">\(\max (S_T - K_1,0) - \max(S_T - K_2,0) - c_1 + c_2\)</span>. Notice that since <span class="math inline">\(K_2 &gt; K_1\)</span>, <span class="math inline">\(c_2 &lt; c_1\)</span>.</p>
+</dd>
+<dt>Bear spread.</dt>
+<dd>
+<p>A bear spread is a bet on stock prices decreasing. One way to construct one is by buying a put with one strike price and writing a put with a lower strike price. In this case the payoff to the option that is purchased is <span class="math inline">\(\max(K_1 - S_T,0) - p_1\)</span> while the payoff to the option that is written is <span class="math inline">\(p_2 - \max(K_2 - S_T,0)\)</span> so the total payoff is <span class="math inline">\(p_2 - p_1 + \max(K_1 - S_T,0) - \max(K_2 - S_T,0)\)</span>.</p>
+</dd>
+<dt>Butterfly spread.</dt>
+<dd>
+<p>A butterfly spread allows the holder to bet that prices won't vary much. It can be constructed by buying two call options with differing strike prices and selling a call option with a strike price in between these two.</p>
+</dd>
+</dl>
+<p>Calendar spread.</p>
+<dl>
+<dt>Straddle.</dt>
+<dd>
+<p>Allows the investor to bet on prices having significant movement. Implemented by buying a put and a call with the same strike price.</p>
+</dd>
+<dt>Strangle.</dt>
+<dd>
+<p>Similar to a straddle except the call has a strike price that is higher than the put. Thus, prices must move even more than under a straddle for the strangle to be profitable.</p>
+</dd>
+</dl>
+<p>Interestingly, it can be shown that if there were options at every possible strike price then any possible payoff profile could be constructed.</p>
+</section>
+<section id="binomial-option-pricing-models" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="binomial-option-pricing-models"><span class="header-section-number">13.6</span> Binomial Option Pricing Models</h2>
+<p>The binomial model is a somewhat flexible model for pricing options contracts. As an introduction, consider a stock that currently sells for $50. In one month, there is a 50% chance that the price of the stock will have increased by 10% to $55 and a 50% chance that the price will have decreased by 10% to $45. That is, there is a 50% chance that the price in 1 month will be <span class="math inline">\(u50\)</span> and a 50% chance that in 1 month the price will be <span class="math inline">\(d50\)</span> where <span class="math inline">\(u = 1.1\)</span> and <span class="math inline">\(d = 0.9\)</span>. Consider a call option that expires in 1 month and has a strike price of $52. Suppose that the monthly interest rate is 0.01 (1%). If one holds the option in one month, the payoff will either be 0 (if the price is $45) or $3 if the price is $55. How much should one be willing to pay to purchase the call option? Let's use <span class="math inline">\(C\)</span> to represent the price of the call option today. So purchasing the call option today implies paying <span class="math inline">\(C\)</span> today and in one month getting $3.000 if the price is $55 and zero otherwise. Another way to get the same payoff in one month is to borrow <span class="math inline">\(\frac{45}{1.01} = 44.554\)</span> today at 1% interest to be paid back in one month and to purchase one share of the stock. Why exactly <span class="math inline">\(\frac{45}{1.01}\)</span>? The loan is chosen to be the present value of the <em>down-state</em> stock price. In one month the loan requires repayment of <span class="math inline">\(44.554 \times 1.01 = 45\)</span>, so in the down state the $45 from selling the share exactly repays the loan and the levered position is worth <span class="math inline">\(45 - 45 = 0\)</span> — matching the option, which also pays 0 there. Setting the loan to the present value of the down payoff is precisely what zeroes out the down state and leaves a payoff only in the up state. The total cash outlay for doing this is 50 - 44.554 = 5.446. Doing so means that if the price in one month is $45, then one may sell the share of stock to pay back the loan and have a payoff of 0. If the price is $55 then the total payoff is $55 - $45 = $10. This payoff is <span class="math inline">\(\frac{10}{3}\)</span> the payoff of owning the option in every state (price going up or price going down). That is, owning 3.33 options contracts will give you exactly the payoff that this portfolio gives you. Holding the one share of stock and taking out the loan costs 5.446, so the price of the options contract should satisfy</p>
+<p><span class="math display">\[3.33C = 5.446\]</span></p>
+<p>which implies that <span class="math inline">\(C = 1.635\)</span>.</p>
+<p>Another way to look at this is to note that the payoff to writing 3.33 calls and one share of stock is perfectly hedged. That is, its payoff doesn't depend on the realization of the stock price. If the price of the stock is $55 then the stock pays $55 and the obligation from the calls is <span class="math inline">\(\$3\cdot 3.33 = \$10\)</span>, so the total payoff is $45. If the price is $45 then the obligation from the options is 0 and the stock is worth $45. So writing 3.33 options and owning the share of stock offers a riskfree payoff. Thus the current price of such a payoff should be <span class="math inline">\(\frac{45}{1.01} = 44.554\)</span>. This is the same as buying the stock ($50) and gaining the income from selling the puts (<span class="math inline">\(3.33\cdot 1.635 = 5.446\)</span>) which gives a total cost of <span class="math inline">\(50-5.446 = 44.554\)</span>.</p>
+<p>Deriving this price depends on the ability to buy stock and borrow cash in such a way that perfectly offsets the payoff to the option. The number of shares of stock per option needed to replicate the option portfolio is called the hedge ratio. The hedge ratio for this example is <span class="math inline">\(\frac{1}{3.33...} = .3\)</span>. Notice that in the binomial model the hedge ratio is the ratio of the range of possible option payoffs to the range of possible stock prices. This is <span class="math inline">\(\frac{3-0}{55-45} = 0.3\)</span>.</p>
+</section>
+<section id="black-scholes-option-pricing" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="black-scholes-option-pricing"><span class="header-section-number">13.7</span> Black-Scholes Option Pricing</h2>
+<p>The Black-Scholes formula gives an explicit formula for the price of an option under very specific assumptions. These assumptions include</p>
+<ol type="1">
+<li>The stock pays no dividends.</li>
+<li>The price path of the stock moves continuously and the joint distribution between prices at any two points in time is normally distributed, with constant mean and variance.</li>
+<li>Trading can be conducted continuously.</li>
+</ol>
+<p>Under these assumptions the price of a European call option is given by the formula below. (It is derived by extending the binomial replication argument above to continuous time: a continuously rebalanced portfolio of stock and cash replicates the option, and requiring that this self-financing hedge earn the risk-free rate leads to the Black-Scholes partial differential equation, whose solution is the formula quoted here.)</p>
+<p><span class="math display">\[\begin{aligned}
+C_0 &amp; = S_0 N(d_1) - Ke^{-rT}N(d_2) \\
+d_1 &amp; = \frac{\ln \left ( \frac{S_0}{K} \right ) + \left (r + \frac{\sigma^2}{2} \right ) T}{\sigma \sqrt{T}} \\
+d_2 &amp; = d_1 - \sigma \sqrt{T}
+\end{aligned}\]</span></p>
+<p>where <span class="math inline">\(C_0\)</span> is the current call option value, <span class="math inline">\(S_0\)</span> is the current stock price, <span class="math inline">\(N(d)\)</span> is the probability that a random draw from a standard normal distribution will be less than <span class="math inline">\(d\)</span>. <span class="math inline">\(K\)</span> is the exercise price, <span class="math inline">\(r\)</span> is the risk free rate, <span class="math inline">\(T\)</span> is the time to expiration and <span class="math inline">\(\sigma\)</span> is the standard deviation of the stock.</p>
+<p>This formula makes intuitive sense. If both of the <span class="math inline">\(N\)</span> terms are close to one, then payoff is nearly certain so the value of the call is <span class="math inline">\(S_0 - Ke^{-rT}\)</span> which is exactly what it should be given that you have a nearly certain obligation to buy the stock at <span class="math inline">\(K\)</span> and the current value of that stock is <span class="math inline">\(S_0\)</span>. If both of the <span class="math inline">\(N\)</span> terms are really low (close to zero) then the value of the call option will be worth nothing.</p>
+<dl>
+<dt>Example.</dt>
+<dd>
+<p>Consider a stock that has current price <span class="math inline">\(S_0 = \$50\)</span>, with a one month risk free rate of <span class="math inline">\(0.01\)</span> a standard deviation of 0.08. What is the price of an option with strike price <span class="math inline">\(\$53\)</span>? Plugging into the Black-Scholes formula we get that</p>
+<p><span class="math display">\[\begin{aligned}
+d_1 &amp; = \frac{\ln \left ( \frac{50}{53} \right ) + \left (0.01 + \frac{0.006 }{2} \right ) 1}{0.01} = -4.52689 \\
+d_2 &amp; = -4.60689 \\
+N(d_1) &amp; = 2.9929 \cdot 10^{-6} \\
+N(d_2) &amp; = 2.04368 \cdot 10^{-6} \\
+C &amp; = 50*2.9929 \cdot 10^{-6}  - 53e^{-0.01}2.04368 \cdot 10^{-6} = 4.241 \cdot 10^{-5} \approx 0
+\end{aligned}\]</span></p>
+<p>Now suppose that the strike price is 50, then the price of the call would be</p>
+<p><span class="math display">\[\begin{aligned}
+d_1 &amp; = \frac{\ln \left ( \frac{50}{50} \right ) + \left (0.01 + \frac{0.006 }{2} \right ) 1}{0.01} = 1.22 \\
+d_2 &amp; = 1.14 \\
+N(d_1) &amp; = 0.88877 \\
+N(d_2) &amp; = 0.87286 \\
+C &amp; = 50\cdot0.88877  - 50e^{-0.01}0.87286 = \$ 1.2298
+\end{aligned}\]</span></p>
+</dd>
+</dl>
+<p>Puts can be priced by using Black-Scholes and put-call parity. Notice that the only unobservable quantity in the formula is volatility. Hence, by observing option prices one may backout the implied volatility of the stock. This is the principle behind the CBOE Vix index (volatility index.)</p>
+</section>
+<section id="first-order-analytics-the-greeks" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="first-order-analytics-the-greeks"><span class="header-section-number">13.8</span> First-order analytics: The Greeks</h2>
+<p>The partial derivative of the Black-Scholes formula with respect to particular variables is of practical and theoretical interest. These derivatives are often referred to by greek letters and are often collectively called "the Greeks."</p>
+<dl>
+<dt><span class="math inline">\(\Delta\)</span></dt>
+<dd>
+<p>The delta (<span class="math inline">\(\Delta\)</span>) of an option is the change in the price of an option that occurs from an underlying change in the price of the asset on which the option is based. Thus, for a call option on a stock, the <span class="math inline">\(\Delta\)</span> is defined as</p>
+<p><span class="math display">\[\Delta = \frac{\partial c}{\partial S}\]</span></p>
+<p>For a call option that meets the assumptions of the Black-Scholes formula, this derivative is</p>
+<p><span class="math display">\[\Delta = N(d_1)\]</span></p>
+<p>For a put that meets the Black-Scholes formula assumptions this is</p>
+<p><span class="math display">\[\Delta = N(d_1) - 1\]</span></p>
+<p>This is not obvious, since both <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span> are functions of <span class="math inline">\(S\)</span>. Differentiating <span class="math inline">\(C_0 = S_0 N(d_1) - Ke^{-rT}N(d_2)\)</span> with the product and chain rules, and using <span class="math inline">\(\frac{\partial d_1}{\partial S} = \frac{\partial d_2}{\partial S} = \frac{1}{S\sigma\sqrt{T}}\)</span> (they differ only by the constant <span class="math inline">\(\sigma\sqrt{T}\)</span>), gives</p>
+<p><span class="math display">\[\Delta = N(d_1) + \frac{1}{S\sigma\sqrt{T}}\Big[\, S N'(d_1) - Ke^{-rT}N'(d_2)\,\Big].\]</span></p>
+<p>The bracketed term vanishes because of the identity</p>
+<p><span class="math display">\[S N'(d_1) = Ke^{-rT}N'(d_2),\]</span></p>
+<p>which follows from <span class="math inline">\(N'(d) = \frac{1}{\sqrt{2\pi}}e^{-d^2/2}\)</span> and the fact that <span class="math inline">\(\tfrac{1}{2}(d_1^2 - d_2^2) = \ln(S/K) + rT\)</span>, so that <span class="math inline">\(N'(d_1)/N'(d_2) = (K/S)e^{-rT}\)</span>. The two product-rule terms therefore cancel and <span class="math inline">\(\Delta = N(d_1)\)</span>. This same identity <span class="math inline">\(S N'(d_1) = Ke^{-rT}N'(d_2)\)</span> is what makes the other Greeks simplify below.</p>
+</dd>
+</dl>
+<p><span class="math inline">\(\Delta\)</span> gives you the number of call options necessary to hedge a long position in a particular stock (at least to a first order approximation). Notice that if a call option is deeply in the money then <span class="math inline">\(\Delta \approx 1\)</span>. If it is deeply out of the money then <span class="math inline">\(\Delta \approx 0\)</span>.</p>
+<dl>
+<dt>Example (<span class="math inline">\(\Delta\)</span> hedging).</dt>
+<dd>
+<p>Consider an investor that has purchased 10 calls on the S&amp;P 500. Each contract is for 100 shares of an S&amp;P ETF. Suppose that the current price of the ETFs is $50 and that <span class="math inline">\(\Delta = 0.4\)</span>. Suppose that the price of the call is $5.00. The investor could sell short <span class="math inline">\(0.4 \cdot 1000 = 400\)</span> shares of the ETF to hedge this call position. To see this, note that if the price of the stock decreases by $1.00 (i.e.&nbsp;the new price is $49), then the value of the stock position is now <span class="math inline">\(400\cdot 1  = 400\)</span>. On the other hand, the calls that are held have gone down in price by the amount <span class="math inline">\(0.4 \cdot 1.00\)</span> (<span class="math inline">\(= \Delta\)</span> times the dollar decrease in the price of the stock) so the price has now become $4.60 per share which implies that the value of the total position is <span class="math inline">\(4.60 \cdot 1000 = 4,600\)</span>. Thus, the changes in the stock portfolio offset the changes in the value of the call.</p>
+</dd>
+</dl>
+<p>Notice that the <span class="math inline">\(\Delta\)</span> of the option changes as the stock price changes. That is, once the price moves, in order to remain <span class="math inline">\(\Delta\)</span>-neutral the stock position must be changed.</p>
+<dl>
+<dt><span class="math inline">\(\Theta\)</span>.</dt>
+<dd>
+<p><span class="math inline">\(\Theta\)</span> is the rate of change of the value of the portfolio with respect to the passage of time with all else remaining constant. This is often quoted in days.</p>
+</dd>
+<dt><span class="math inline">\(\Gamma\)</span>.</dt>
+<dd>
+<p><span class="math inline">\(\Gamma\)</span> is the rate of change of <span class="math inline">\(\Delta\)</span> with respect to the stock price. Hence it is the second derivative of the option price with respect to the stock price. Since <span class="math inline">\(\Delta = N(d_1)\)</span>, differentiate once more: <span class="math inline">\(\Gamma = \frac{\partial}{\partial S}N(d_1) = N'(d_1)\frac{\partial d_1}{\partial S}\)</span>, and with <span class="math inline">\(\frac{\partial d_1}{\partial S} = \frac{1}{S\sigma\sqrt{T}}\)</span> this gives</p>
+<p><span class="math display">\[\Gamma = \frac{N'(d_1)}{S_0 \sigma \sqrt{T}}\]</span></p>
+</dd>
+<dt><span class="math inline">\(\mathcal{V}\)</span> (vega).</dt>
+<dd>
+<p><span class="math inline">\(\mathcal{V}\)</span> is the derivative of the value of an option with respect to volatility. Differentiating <span class="math inline">\(C_0 = S_0 N(d_1) - Ke^{-rT}N(d_2)\)</span> in <span class="math inline">\(\sigma\)</span> gives <span class="math inline">\(\mathcal{V} = S_0 N'(d_1)\frac{\partial d_1}{\partial\sigma} - Ke^{-rT}N'(d_2)\frac{\partial d_2}{\partial\sigma}\)</span>. Applying the identity <span class="math inline">\(S_0 N'(d_1) = Ke^{-rT}N'(d_2)\)</span> collapses this to <span class="math inline">\(S_0 N'(d_1)\left(\frac{\partial d_1}{\partial\sigma} - \frac{\partial d_2}{\partial\sigma}\right)\)</span>, and since <span class="math inline">\(d_1 - d_2 = \sigma\sqrt{T}\)</span> has derivative <span class="math inline">\(\sqrt{T}\)</span>, it is given by (for the Black-Scholes model).</p>
+<p><span class="math display">\[\mathcal{V} = S_0 \sqrt{T} N'(d_1)\]</span></p>
+</dd>
+<dt><span class="math inline">\(\rho\)</span>.</dt>
+<dd>
+<p>The derivative of the value of the option with respect to changes in the interest rate. Differentiating in <span class="math inline">\(r\)</span> produces three terms: <span class="math inline">\(S_0 N'(d_1)\frac{\partial d_1}{\partial r}\)</span> from the first piece, and <span class="math inline">\(+TKe^{-rT}N(d_2) - Ke^{-rT}N'(d_2)\frac{\partial d_2}{\partial r}\)</span> from the second (the <span class="math inline">\(+TKe^{-rT}N(d_2)\)</span> coming from differentiating the discount factor <span class="math inline">\(e^{-rT}\)</span>). Because <span class="math inline">\(\frac{\partial d_1}{\partial r} = \frac{\partial d_2}{\partial r} = \frac{\sqrt{T}}{\sigma}\)</span> and <span class="math inline">\(S_0 N'(d_1) = Ke^{-rT}N'(d_2)\)</span>, the two <span class="math inline">\(N'\)</span> terms cancel, leaving only the discount-factor term. For Black-Scholes calls this is</p>
+<p><span class="math display">\[\rho = KTe^{-rT}N(d_2)\]</span></p>
+<p>for puts this is</p>
+<p><span class="math display">\[\rho = -KTe^{-rT}N(-d_2)\]</span></p>
+</dd>
+</dl>
+</section>
+<section id="application-a-manager-buying-protection" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="application-a-manager-buying-protection"><span class="header-section-number">13.9</span> Application: A manager buying protection</h2>
+<p>A portfolio manager running a technology-heavy fund worries about a sharp drop through earnings season but does not want to sell her positions and incur taxes and transaction costs. Buying put options on a market index lets her insure the portfolio instead, and the pricing tools of this chapter tell her what that insurance costs and how it will behave. The Black–Scholes formula translates the index level, the strike, the time to expiry, and — crucially — volatility into a price, while the Greeks tell her how the value of her hedge will respond as the market moves, as time passes, and as volatility itself changes. With volatility historically low, she can see that protection is inexpensive; understanding why, and how the hedge’s delta and gamma will evolve, is what lets her buy the right amount rather than guessing.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Further listening
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Odd Lots</em> (Bloomberg) — <a href="https://podcasts.apple.com/us/podcast/what-the-dramatic-boom-in-zero-day-options-means-for-stocks/id1056200096?i=1000604615705">“What the Dramatic Boom in Zero-Day Options Means for Stocks”</a>: how same-day options work, why volume has exploded, and how dealer hedging can move the market.</p>
+</div>
+</div>
+</section>
+<section id="homework-problems" class="level2" data-number="13.10">
+<h2 data-number="13.10" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">13.10</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="13.10.1">
+<h3 data-number="13.10.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">13.10.1</span> Conceptual</h3>
+<p><strong>OPT-C1.</strong> Two traders each commit $4 to a bet on stock XYZ, currently trading at <span class="math inline">\(S_0 = \$40\)</span>. One buys a call with strike <span class="math inline">\(K = \$42\)</span> for a $4 premium; the other uses the $4 as margin to control 100 shares outright. The stock then falls to $30 at expiration. Using the distinction between a <em>right</em> and an <em>obligation</em>, explain why the call holder’s loss is capped at the $4 premium while the leveraged stock holder can lose much more. What feature of the payoff <span class="math inline">\(\max\{S_T - K, 0\} - c\)</span> produces this floor?</p>
+<p><strong>OPT-C2.</strong> Explain why a call and a put with the same strike behave as mirror images with respect to the underlying price and the strike: an increase in <span class="math inline">\(S_0\)</span> raises the call but lowers the put, and an increase in <span class="math inline">\(K\)</span> lowers the call but raises the put. Then explain why volatility is the one factor that raises <em>both</em>. Frame each answer around the chapter’s language of an option becoming “more likely to be in the money.”</p>
+<p><strong>OPT-C3.</strong> A colleague claims that a call and a put on the same stock must respond to the risk-free rate <span class="math inline">\(r\)</span> in the same direction, “since <span class="math inline">\(r\)</span> is just a discount rate.” Using the roles <span class="math inline">\(r\)</span> plays in the payoffs — the present value of the fixed strike owed on exercise — explain why an increase in <span class="math inline">\(r\)</span> <em>raises</em> a call but <em>lowers</em> a put. Connect your answer to the <span class="math inline">\(-Ke^{-rT}\)</span> term that appears in both put-call parity and the Black-Scholes call formula.</p>
+<p><strong>OPT-C4.</strong> A European call and a European put on the same non-dividend-paying stock share strike <span class="math inline">\(K\)</span> and expiration <span class="math inline">\(T\)</span>. The call trades at $6, the put at $1, the stock at <span class="math inline">\(S_0 = \$50\)</span>, and <span class="math inline">\(Ke^{-rT} = \$46\)</span>. Show that the two put-call-parity portfolios are <em>not</em> currently equal in price, and explain in words the riskless trade an arbitrageur would put on: which portfolio she buys, which she sells, and why the position locks in a profit with no exposure at <span class="math inline">\(T\)</span>.</p>
+<p><strong>OPT-C5.</strong> Using put-call parity, explain why it is never optimal to exercise an American call on a non-dividend-paying stock early, but why early exercise <em>can</em> be optimal for an American put. Frame your answer around the inequality <span class="math inline">\(C \ge c \ge S_0 - Ke^{-rT} &gt; S_0 - K\)</span> (comparing the value of selling the option to the value of exercising it) and the bankruptcy example from the chapter.</p>
+<p><strong>OPT-C6.</strong> Explain the economic meaning of put-call parity, <span class="math inline">\(c + Ke^{-rT} = p + S_0\)</span>, as a statement that two <em>different</em> portfolios deliver the <em>same</em> payoff <span class="math inline">\(\max(S_T, K)\)</span> at expiration. Describe the payoff of each of the two chapter portfolios in the states <span class="math inline">\(S_T &lt; K\)</span> and <span class="math inline">\(S_T &gt; K\)</span>, and explain why identical payoffs force identical prices today — the argument that makes parity a no-arbitrage identity rather than an empirical approximation.</p>
+<p><strong>OPT-C7.</strong> In the binomial example, the chapter replicates a call by borrowing cash and buying stock, then notes that “writing 3.33 calls and one share of stock is perfectly hedged.” Explain what “perfectly hedged” means — why the combined position pays the same amount in both the up and the down state — and explain why this forces the option to a single price that does <em>not</em> depend on the 50% probability of an up move.</p>
+<p><strong>OPT-C8.</strong> Two stocks share the same current price, strike, rate, and time to expiration, but stock A can move to $55 or $45 next month while stock B can move to $60 or $40. Using the chapter’s definition of the hedge ratio as “the ratio of the range of possible option payoffs to the range of possible stock prices,” explain how the wider spread of stock B changes the replicating portfolio and the option’s value, and connect this to the general claim that more volatile stocks have more valuable options.</p>
+<p><strong>OPT-C9.</strong> The chapter says that in Black-Scholes “the only unobservable quantity in the formula is volatility.” Explain what <em>implied volatility</em> is, how it is extracted from an observed market price of a call, and why this is the principle behind the CBOE VIX index. What would it mean if two options on the same stock, with different strikes, implied different volatilities?</p>
+<p><strong>OPT-C10.</strong> Interpret the two limiting cases in the chapter: when both <span class="math inline">\(N(d_1)\)</span> and <span class="math inline">\(N(d_2)\)</span> are close to 1, the call is worth about <span class="math inline">\(S_0 - Ke^{-rT}\)</span>, and when both are close to 0 the call is worth nearly nothing. Explain, in economic terms, why each limit is the value it should be, referring to the near-certain (or near-impossible) obligation to buy the stock at <span class="math inline">\(K\)</span> and to the interpretation of <span class="math inline">\(N(d_2)\)</span> as an exercise probability.</p>
+<p><strong>OPT-C11.</strong> A trader believes a biotech stock will make a large move on an upcoming FDA decision but has no view on the direction. Explain why a straddle (buy a put and a call at the same strike) expresses this view, and explain how a strangle differs and why it requires an even larger price move to be profitable. What is the trader implicitly buying a view on, and how does this contrast with a directional bet like a bull spread?</p>
+<p><strong>OPT-C12.</strong> Compare a bull spread (buy a call at <span class="math inline">\(K_1\)</span>, write a call at <span class="math inline">\(K_2 &gt; K_1\)</span>) to simply buying the call at <span class="math inline">\(K_1\)</span> alone. Explain what the investor gives up and what she gains by adding the written call, referencing the chapter’s observation that <span class="math inline">\(c_2 &lt; c_1\)</span>. Why might an investor with a <em>moderately</em> bullish view prefer the spread over the outright call?</p>
+<p><strong>OPT-C13.</strong> The delta of the option in the <span class="math inline">\(\Delta\)</span>-hedging example is <span class="math inline">\(0.4\)</span>, and the chapter notes that “once the price moves, in order to remain <span class="math inline">\(\Delta\)</span>-neutral the stock position must be changed.” Explain why delta is not constant, name the Greek that measures how fast delta changes, and explain why an option that is deeply in the money has <span class="math inline">\(\Delta \approx 1\)</span> while one deeply out of the money has <span class="math inline">\(\Delta \approx 0\)</span>.</p>
+<p><strong>OPT-C14.</strong> A market maker is short many short-dated (0DTE) call options and delta-hedges continuously. Explain what gamma (<span class="math inline">\(\Gamma = N'(d_1)/(S\sigma\sqrt{T})\)</span>) and vega (<span class="math inline">\(\mathcal{V} = S_0\sqrt{T}N'(d_1)\)</span>) each measure. Describe the tension the market maker faces: why large gamma forces frequent, costly rehedging as the underlying moves, and why a spike in volatility hurts her through vega even if the underlying price does not move.</p>
+</section>
+<section id="quantitative" class="level3" data-number="13.10.2">
+<h3 data-number="13.10.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">13.10.2</span> Quantitative</h3>
+<p><strong>OPT-Q1.</strong> A call has strike <span class="math inline">\(K = \$45\)</span> and premium <span class="math inline">\(c = \$3\)</span>; a put on the same stock has strike <span class="math inline">\(K = \$45\)</span> and premium <span class="math inline">\(p = \$2\)</span>. Using the payoffs <span class="math inline">\(\max\{S_T - K, 0\} - c\)</span> and <span class="math inline">\(\max\{K - S_T, 0\} - p\)</span>, compute the payoff to the long call and the long put at each of <span class="math inline">\(S_T = \$38\)</span>, <span class="math inline">\(\$45\)</span>, and <span class="math inline">\(\$52\)</span>. State the breakeven stock price for each position.</p>
+<p><strong>OPT-Q2.</strong> An investor forms a bull spread by buying a call at <span class="math inline">\(K_1 = \$50\)</span> for <span class="math inline">\(c_1 = \$6\)</span> and writing a call at <span class="math inline">\(K_2 = \$55\)</span> for <span class="math inline">\(c_2 = \$3\)</span>. Write the total payoff <span class="math inline">\(\max(S_T - K_1,0) - \max(S_T - K_2,0) - c_1 + c_2\)</span> and evaluate it at <span class="math inline">\(S_T = \$48\)</span>, <span class="math inline">\(\$53\)</span>, and <span class="math inline">\(\$60\)</span>. What are the maximum profit and the maximum loss of the spread?</p>
+<p><strong>OPT-Q3.</strong> A European call and put share strike <span class="math inline">\(K = \$100\)</span> and expiration <span class="math inline">\(T = 0.5\)</span> years. The stock trades at <span class="math inline">\(S_0 = \$98\)</span>, the continuously compounded rate is <span class="math inline">\(r = 0.04\)</span>, and the call trades at <span class="math inline">\(c = \$7.50\)</span>. Use put-call parity <span class="math inline">\(c + Ke^{-rT} = p + S_0\)</span> to solve for the fair price of the put <span class="math inline">\(p\)</span>.</p>
+<p><strong>OPT-Q4.</strong> With <span class="math inline">\(S_0 = \$60\)</span>, <span class="math inline">\(K = \$62\)</span>, <span class="math inline">\(r = 0.03\)</span>, <span class="math inline">\(T = 1\)</span>, a call trades at <span class="math inline">\(c = \$5\)</span> and a put at <span class="math inline">\(p = \$5.50\)</span>. Compute both sides of <span class="math inline">\(c + Ke^{-rT}\)</span> and <span class="math inline">\(p + S_0\)</span>. Do they match? If not, state the size of the mispricing and which side is overpriced relative to parity.</p>
+<p><strong>OPT-Q5.</strong> A stock sells for $50. In one month it will be worth <span class="math inline">\(u \cdot 50\)</span> or <span class="math inline">\(d \cdot 50\)</span> with <span class="math inline">\(u = 1.1\)</span> and <span class="math inline">\(d = 0.9\)</span>. A call has strike <span class="math inline">\(K = \$52\)</span> and the monthly rate is <span class="math inline">\(r = 0.01\)</span>. Using the chapter’s method, (a) compute the option payoffs in the up and down states, (b) compute the hedge ratio as the range of option payoffs divided by the range of stock prices, and (c) find the call price <span class="math inline">\(C\)</span>. Confirm your <span class="math inline">\(C\)</span> against the chapter’s answer.</p>
+<p><strong>OPT-Q6.</strong> Reprice the option in OPT-Q5 but with strike <span class="math inline">\(K = \$48\)</span>. Give the payoffs in the up ($55) and down ($45) states, the hedge ratio, and the replicated call price <span class="math inline">\(C\)</span>. (Hint: build the riskless “write <span class="math inline">\(n\)</span> calls, hold one share” portfolio, discount its guaranteed payoff at 1%, and back out <span class="math inline">\(C\)</span>.)</p>
+<p><strong>OPT-Q7.</strong> Use the Black-Scholes formula with <span class="math inline">\(S_0 = \$100\)</span>, <span class="math inline">\(K = \$100\)</span>, <span class="math inline">\(r = 0.05\)</span>, <span class="math inline">\(T = 0.5\)</span> years, and <span class="math inline">\(\sigma = 0.20\)</span>. Compute <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span>, look up <span class="math inline">\(N(d_1) \approx 0.5977\)</span> and <span class="math inline">\(N(d_2) \approx 0.5422\)</span>, and compute <span class="math inline">\(C_0 = S_0 N(d_1) - Ke^{-rT}N(d_2)\)</span>. (These are standard, self-consistent inputs with <span class="math inline">\(\sigma\sqrt{T} \approx 0.141\)</span>.)</p>
+<p><strong>OPT-Q8.</strong> A stock has <span class="math inline">\(S_0 = \$100\)</span>, <span class="math inline">\(K = \$105\)</span>, <span class="math inline">\(r = 0.05\)</span>, <span class="math inline">\(T = 0.25\)</span> years, and <span class="math inline">\(\sigma = 0.30\)</span>. Compute <span class="math inline">\(d_1\)</span> and <span class="math inline">\(d_2\)</span>, find <span class="math inline">\(N(d_1) \approx 0.4337\)</span> and <span class="math inline">\(N(d_2) \approx 0.3756\)</span>, and compute the Black-Scholes call price <span class="math inline">\(C_0\)</span>. Then use put-call parity to find the corresponding put price.</p>
+<p><strong>OPT-Q9.</strong> For the stock in OPT-Q8 (<span class="math inline">\(S_0 = \$100\)</span>, <span class="math inline">\(K = \$105\)</span>, <span class="math inline">\(r = 0.05\)</span>, <span class="math inline">\(T = 0.25\)</span>, <span class="math inline">\(\sigma = 0.30\)</span>), you are given <span class="math inline">\(N'(d_1) = \tfrac{1}{\sqrt{2\pi}}e^{-d_1^2/2} \approx 0.3934\)</span>. Compute the option’s gamma <span class="math inline">\(\Gamma = N'(d_1)/(S_0\sigma\sqrt{T})\)</span> and vega <span class="math inline">\(\mathcal{V} = S_0\sqrt{T}\,N'(d_1)\)</span>. Interpret vega: approximately how much does the call price change if <span class="math inline">\(\sigma\)</span> rises by one percentage point (from 0.30 to 0.31)?</p>
+<p><strong>OPT-Q10.</strong> An investor holds 20 call contracts (each on 100 shares) on an ETF priced at $50, with <span class="math inline">\(\Delta = N(d_1) = 0.55\)</span>. (a) How many shares must be shorted to make the position delta-neutral? (b) If the ETF falls by $1, approximate the change in the value of the call position and confirm it is offset by the short stock position. (c) If instead the calls were deep in the money with <span class="math inline">\(\Delta \approx 1\)</span>, how would the required hedge change?</p>
+<p><strong>OPT-Q11.</strong> A stock has a Black-Scholes call delta of <span class="math inline">\(\Delta = N(d_1) = 0.62\)</span>. (a) State the call delta and, using <span class="math inline">\(\Delta_{\text{put}} = N(d_1) - 1\)</span>, the put delta. (b) If the stock rises by $2, use these deltas to approximate the dollar change in the value of one long call and one long put. (c) Explain why the put delta is negative and why <span class="math inline">\(\Delta_{\text{call}} - \Delta_{\text{put}} = 1\)</span>, connecting this to differentiating put-call parity in <span class="math inline">\(S_0\)</span>.</p>
+<p><strong>OPT-Q12.</strong> In the <span class="math inline">\(\Delta\)</span>-hedging example an investor holds 10 calls (each on 100 shares) on an ETF priced at $50 with <span class="math inline">\(\Delta = 0.4\)</span> and call price $5.00. (a) How many shares must be shorted to delta-hedge? (b) If the ETF falls to $49, compute the new value of the short stock position and the new value of the call position (using the delta approximation), and verify the two changes offset. (c) Explain why this hedge must be adjusted after the price moves.</p>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/scottcondie\.github\.io\/teaching\/450\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Forwards_and_Futures.html" class="pagination-link" aria-label="Forwards and Futures">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./BlackLitterman.html" class="pagination-link" aria-label="The Black-Litterman model and active portfolio management">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

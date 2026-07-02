@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; The Black-Litterman model and active portfolio management – Asset Prices, Risk, and Information</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Credit_Models.html" rel="next">
+<link href="./Options.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5f0e52f7877e3a078c44e13fc828ca0d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2f8ef6ac35c506a55552e17f1b00ddbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./BlackLitterman.html">Advanced market models</a></li><li class="breadcrumb-item"><a href="./BlackLitterman.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Asset Prices, Risk, and Information</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Asset Prices, Risk, and Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Markets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Individual portfolio selection and market equilibrium</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CAPM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Information, trading and market efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EMH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fixed income securities and pricing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Interest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Yields.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./YieldCurve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FIPortfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Derivatives</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Forwards_and_Futures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced market models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BlackLitterman.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Credit_Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Market_Makers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a></li>
+  <li><a href="#conditional-normal-distributions" id="toc-conditional-normal-distributions" class="nav-link" data-scroll-target="#conditional-normal-distributions"><span class="header-section-number">14.2</span> Conditional Normal Distributions</a></li>
+  <li><a href="#preferences" id="toc-preferences" class="nav-link" data-scroll-target="#preferences"><span class="header-section-number">14.3</span> Preferences</a></li>
+  <li><a href="#non-consensus-beliefs-about-expected-returns" id="toc-non-consensus-beliefs-about-expected-returns" class="nav-link" data-scroll-target="#non-consensus-beliefs-about-expected-returns"><span class="header-section-number">14.4</span> Non-consensus beliefs about expected returns</a></li>
+  <li><a href="#applying-the-black-litterman-model" id="toc-applying-the-black-litterman-model" class="nav-link" data-scroll-target="#applying-the-black-litterman-model"><span class="header-section-number">14.5</span> Applying the Black-Litterman model</a></li>
+  <li><a href="#application-a-cio-sizing-a-view" id="toc-application-a-cio-sizing-a-view" class="nav-link" data-scroll-target="#application-a-cio-sizing-a-view"><span class="header-section-number">14.6</span> Application: A CIO sizing a view</a></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">14.7</span> Homework problems</a>
+  <ul class="collapse">
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">14.7.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">14.7.2</span> Quantitative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./BlackLitterman.html">Advanced market models</a></li><li class="breadcrumb-item"><a href="./BlackLitterman.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">14.1</span> Introduction</h2>
+<p>Three questions motivate this chapter. First, why does standard mean-variance optimization so often produce extreme and unstable portfolio weights in practice, and what structural remedy does the Black-Litterman model offer? Second, how should an investor who holds both a market-derived prior over expected returns and her own subjective views about specific securities or portfolios combine those two sources of information in a formally coherent way? Third, what is the relationship between the investor’s confidence in a view and the magnitude of the resulting deviation from the market portfolio, and how can that relationship be made precise and controllable? These questions sit at the intersection of Bayesian statistics, mean-variance optimization, and the practical challenge of translating investment research into disciplined portfolio positions.</p>
+<p>The first question matters because the failure mode of unconstrained mean-variance optimization is well documented and severe. Small perturbations in estimated expected returns — well within the range of estimation error — can produce wildly different optimal weights, including large short positions and extreme concentrations that no sensible investor would hold. The root cause is that the optimizer treats point estimates of expected returns as if they were known with certainty, fully exploiting any differences between them. The Black-Litterman model corrects this by treating expected returns themselves as random variables with a prior distribution, rather than as fixed parameters. The natural choice of prior is the set of expected returns that, when plugged into the mean-variance first-order conditions, produce the observed market capitalization weights as the optimal portfolio. This “reverse-engineered” equilibrium prior anchors the optimization and prevents it from over-fitting to noisy return estimates.</p>
+<p>The second question — about combining the market prior with subjective views — is where Bayesian statistics enters. Each view takes the form of a belief about the expected return on a specific portfolio of assets, expressed as a linear combination of individual asset returns. The investor also specifies her uncertainty about each view through a variance parameter. Given these inputs, the standard formula for the conditional distribution of a jointly normal random vector delivers a closed-form posterior distribution over expected returns that blends the equilibrium prior and the investor’s views in proportion to their relative precision. Assets about which the investor has no views are unaffected by the updating, ensuring that the model’s output is conservative wherever research coverage is absent.</p>
+<p>The third question — about the connection between conviction and position size — is answered by examining how the posterior expected returns feed back into the mean-variance first-order conditions. Portfolio weights that result from the Black-Litterman posterior deviate from market weights in a direction and by an amount that is mathematically tied to the precision of the investor’s views: a view held with high confidence (low variance) pulls the weights more strongly toward the implied position, while a low-confidence view (high variance) produces only a modest tilt. This feature gives portfolio managers an interpretable, principled dial for scaling positions to match their actual degree of conviction. The chapter develops the full machinery — conditional normal distributions, equilibrium return extraction, Bayesian updating, and portfolio construction — and then applies it to a universe of U.S. sector exchange-traded funds to illustrate how the model functions with real data.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="In the news">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In the news
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Black–Litterman was built for investors who effectively own the whole market and must decide how far to lean away from it. Norway’s sovereign wealth fund — the world’s largest, at roughly $2 trillion — earned a record return in 2025, driven by its huge stakes in technology names like Nvidia, Apple, and Microsoft. A fund that big starts from the market portfolio and tilts only where it has a view; turning those views into portfolio weights is exactly what this chapter formalizes. Read it at <a href="https://www.cnbc.com/2026/01/29/norway-sovereign-wealth-fund-2025-return-nbim-trillion-oil-stocks-tech-ai-banks-silver.html">CNBC</a>.</p>
+</div>
+</div>
+</section>
+<section id="conditional-normal-distributions" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="conditional-normal-distributions"><span class="header-section-number">14.2</span> Conditional Normal Distributions</h2>
+<p>Consider a random vector</p>
+<p><span class="math display">\[\begin{aligned}
+\left(
+\begin{array}{c}
+x \\
+y
+\end{array}
+\right)
+\sim N \left(
+\left(
+\begin{array}{c}
+\mu \\
+Q
+\end{array}
+\right),
+\left(
+\begin{array}{cc}
+\Sigma_{x} &amp; \Sigma_{x y} \\
+\Sigma_{xy} &amp; \Sigma_{y}
+\end{array}
+\right)
+\right)
+\end{aligned}\]</span></p>
+<p>In this setting, the conditional distribution of <span class="math inline">\(x\)</span> given <span class="math inline">\(y\)</span> is</p>
+<p><span class="math display">\[x \mid y \sim N\left(\mu + \Sigma_{xy} \Sigma_{y}^{-1} (y - Q), \Sigma_{x} - \Sigma_{xy} \Sigma_{y}^{-1} \Sigma_{xy}\right)\]</span></p>
+</section>
+<section id="preferences" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="preferences"><span class="header-section-number">14.3</span> Preferences</h2>
+<p>We start with traditional preferences given by the utility function</p>
+<p><span class="math display">\[U = E(r_{p}) - \frac{1}{2} A \sigma_{p}^2\]</span></p>
+<p>where <span class="math inline">\(r_{p}\)</span> is the return on the portfolio, <span class="math inline">\(E(r_{p})\)</span> is the expected return, <span class="math inline">\(\sigma_{p}^2\)</span> is the variance of the return, and <span class="math inline">\(A\)</span> is the risk aversion coefficient. Given portfolio weights <span class="math inline">\(\theta\)</span>, the optimal portfolio weights are given by the first order condition</p>
+<p><span class="math display">\[\mu = A\Sigma \theta\]</span></p>
+<p>Assume that there are <span class="math inline">\(n\)</span> assets in the market.</p>
+</section>
+<section id="non-consensus-beliefs-about-expected-returns" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="non-consensus-beliefs-about-expected-returns"><span class="header-section-number">14.4</span> Non-consensus beliefs about expected returns</h2>
+<p>Suppose that instead of having fixed beliefs about the distribution of returns, the investor believes that the return vector is distributed</p>
+<p><span class="math display">\[r \sim N(\mu, \Sigma)\]</span></p>
+<p>but that the expected returns of the assets are given by the random process <span class="math inline">\(\mu = \Pi + \epsilon^{e}\)</span>, where <span class="math inline">\(\epsilon^{e}\)</span> is distributed normally with zero mean and covariance <span class="math inline">\(\tau \Sigma\)</span>.</p>
+<p>Imagine that the investor has collected some information about stocks <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> and believes that taking an equal long-short position in <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> would lead to a portfolio that has mean <span class="math inline">\(q\)</span> and standard deviation <span class="math inline">\(\omega\)</span>. Define the vector <span class="math inline">\(p = (\cdots 1 \cdots -1 \cdots)\)</span> to represent a position of 1 in stock <span class="math inline">\(i\)</span> and -1 in stock <span class="math inline">\(j\)</span>. The expected return of this portfolio is <span class="math inline">\(p \mu = q + \epsilon^{v}\)</span> where <span class="math inline">\(\epsilon^{v}\)</span> is a random variable that is normally distributed with mean 0 and variance <span class="math inline">\(\omega^{2}\)</span>. Let's assume that <span class="math inline">\(\epsilon^{v}\)</span> is independent of <span class="math inline">\(\epsilon^{e}\)</span>. We interpret this view as conveying information on the expected means of asset payoffs so we try to calculate the value of <span class="math inline">\(E[r|p\mu = q + \epsilon^{v}]\)</span>. This setup implies that the distribution of <span class="math inline">\(\mu\)</span> conditional on this view is</p>
+<p><span class="math display">\[\mu|q + \epsilon^{v} \sim N \left(\left[(\tau \Sigma)^{-1} + p'\frac{1}{\omega^{2}}p\right]^{-1}\left[(\tau\Sigma)^{-1}\Pi + p'\frac{1}{\omega^{2}}q\right],\left[(\tau \Sigma)^{-1} + p'\frac{1}{\omega^{2}}p \right]^{-1} \right).\]</span></p>
+<p>See the appendix of Satchell and Scowcroft (2007)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for a derivation of this result.</p>
+<p>More generally, if the investor has <span class="math inline">\(m\)</span> views that can be represented by the <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(P\)</span>. The expected return of the portfolio is <span class="math inline">\(P \mu = Q + \epsilon^{v}\)</span> where <span class="math inline">\(\epsilon^{v}\)</span> is a random variable that is normally distributed with mean 0 and diagonal covariance matrix <span class="math inline">\(\Omega\)</span>. Let's assume that <span class="math inline">\(\epsilon^{v}\)</span> is independent of <span class="math inline">\(\epsilon^{e}\)</span>. The distribution of <span class="math inline">\(\mu\)</span> conditional on these views is</p>
+<p><span class="math display">\[\mu|Q + \epsilon^{v} \sim N \left(\left[(\tau \Sigma)^{-1} + P'\Omega^{-1}P\right]^{-1}\left[(\tau\Sigma)^{-1}\Pi + P'\Omega^{-1}Q\right],\left[(\tau \Sigma)^{-1} + P'\Omega^{-1}P \right]^{-1} \right).\]</span></p>
+</section>
+<section id="applying-the-black-litterman-model" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="applying-the-black-litterman-model"><span class="header-section-number">14.5</span> Applying the Black-Litterman model</h2>
+<p>Let's collect data on returns to several industry sectors in the U.S. market. To do this, we consider several sector exchange traded funds.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>
+..
+</th>
+<th>
+XLB
+</th>
+<th>
+XLC
+</th>
+<th>
+XLE
+</th>
+<th>
+XLF
+</th>
+<th>
+XLI
+</th>
+<th>
+XLK
+</th>
+<th>
+XLP
+</th>
+<th>
+XLRE
+</th>
+<th>
+XLU
+</th>
+<th>
+XLV
+</th>
+<th>
+XLY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>
+count
+</td>
+<td>
+192.000
+</td>
+<td>
+66.000
+</td>
+<td>
+192.000
+</td>
+<td>
+192.000
+</td>
+<td>
+192.000
+</td>
+<td>
+192.000
+</td>
+<td>
+192.000
+</td>
+<td>
+98.000
+</td>
+<td>
+192.000
+</td>
+<td>
+192.000
+</td>
+<td>
+192.000
+</td>
+</tr>
+<tr class="even">
+<td>
+mean
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.008
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.008
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.006
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.007
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.009
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.013
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.008
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.007
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.006
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.009
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.012
+</p>
+</blockquote>
+</td>
+</tr>
+<tr class="odd">
+<td>
+std
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.062
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.061
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.081
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.068
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.058
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.055
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.037
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.051
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.043
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.042
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.058
+</p>
+</blockquote>
+</td>
+</tr>
+<tr class="even">
+<td>
+min
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.224
+</p>
+</blockquote>
+</td>
+<td>
+-0.141
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.346
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.262
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.187
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.161
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.126
+</p>
+</blockquote>
+</td>
+<td>
+-0.152
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.130
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.124
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.176
+</p>
+</blockquote>
+</td>
+</tr>
+<tr class="odd">
+<td>
+25%
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.029
+</p>
+</blockquote>
+</td>
+<td>
+-0.028
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.035
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.027
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.022
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.016
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.014
+</p>
+</blockquote>
+</td>
+<td>
+-0.023
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.019
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.018
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+-0.018
+</p>
+</blockquote>
+</td>
+</tr>
+<tr class="even">
+<td>
+50%
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.009
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.012
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.014
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.018
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.011
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.018
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.012
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.010
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.012
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.011
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.013
+</p>
+</blockquote>
+</td>
+</tr>
+<tr class="odd">
+<td>
+75%
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.043
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.043
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.046
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.048
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.042
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.048
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.032
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.037
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.036
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.038
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.046
+</p>
+</blockquote>
+</td>
+</tr>
+<tr class="even">
+<td>
+max
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.174
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.148
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.308
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.218
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.181
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.137
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.104
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.125
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.105
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.126
+</p>
+</blockquote>
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.189
+</p>
+</blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The covariance matrix of the returns is</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>
+TICKER
+</th>
+<th>
+XLB
+</th>
+<th>
+XLC
+</th>
+<th>
+XLE
+</th>
+<th>
+XLF
+</th>
+<th>
+XLI
+</th>
+<th>
+XLK
+</th>
+<th>
+XLP
+</th>
+<th>
+XLRE
+</th>
+<th>
+XLU
+</th>
+<th>
+XLV
+</th>
+<th>
+XLY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>
+XLB
+</td>
+<td>
+0.004
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.001
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.002
+</p>
+</blockquote>
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+<td>
+0.003
+</td>
+</tr>
+<tr class="even">
+<td>
+XLC
+</td>
+<td>
+0.003
+</td>
+<td>
+0.004
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.001
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.003
+</p>
+</blockquote>
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+<td>
+0.004
+</td>
+</tr>
+<tr class="odd">
+<td>
+XLE
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.006
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.002
+</td>
+<td>
+0.001
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.002
+</p>
+</blockquote>
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+<td>
+0.003
+</td>
+</tr>
+<tr class="even">
+<td>
+XLF
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.005
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.002
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.002
+</p>
+</blockquote>
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+<td>
+0.003
+</td>
+</tr>
+<tr class="odd">
+<td>
+XLI
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.002
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.002
+</p>
+</blockquote>
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+<td>
+0.003
+</td>
+</tr>
+<tr class="even">
+<td>
+XLK
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.002
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.001
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.002
+</p>
+</blockquote>
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+<td>
+0.003
+</td>
+</tr>
+<tr class="odd">
+<td>
+XLP
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.001
+</p>
+</blockquote>
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+</tr>
+<tr class="even">
+<td>
+XLRE
+</td>
+<td>
+0.002
+</td>
+<td>
+0.003
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+<td>
+0.001
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.003
+</p>
+</blockquote>
+</td>
+<td>
+0.002
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+</tr>
+<tr class="odd">
+<td>
+XLU
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.002
+</p>
+</blockquote>
+</td>
+<td>
+0.002
+</td>
+<td>
+0.001
+</td>
+<td>
+0.001
+</td>
+</tr>
+<tr class="even">
+<td>
+XLV
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+<td>
+0.001
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.001
+</p>
+</blockquote>
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+<td>
+0.002
+</td>
+</tr>
+<tr class="odd">
+<td>
+XLY
+</td>
+<td>
+0.003
+</td>
+<td>
+0.004
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.003
+</td>
+<td>
+0.001
+</td>
+<td>
+<blockquote class="blockquote">
+<p>
+0.002
+</p>
+</blockquote>
+</td>
+<td>
+0.001
+</td>
+<td>
+0.002
+</td>
+<td>
+0.003
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="application-a-cio-sizing-a-view" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="application-a-cio-sizing-a-view"><span class="header-section-number">14.6</span> Application: A CIO sizing a view</h2>
+<p>The chief investment officer of a large pension or sovereign-wealth fund begins from an uncomfortable fact: simply owning the whole market means holding an enormous, concentrated bet on whatever the market happens to favor. The Black–Litterman framework is built for exactly her problem. It lets her start from the returns implied by market equilibrium — the portfolio she would hold if she had no special opinions — and then blend in her house views, such as a belief that one region or sector is overvalued, in proportion to how confident she is. The result is a set of portfolio tilts that are disciplined rather than arbitrary: large where conviction is high, small where it is weak, and always anchored to the market. For an investor managing hundreds of billions, this is the difference between expressing a view and accidentally betting the fund on it.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Further listening
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Odd Lots</em> (Bloomberg) — <a href="https://podcasts.apple.com/us/podcast/cullen-roche-on-the-art-of-building-a-perfect-portfolio/id1056200096?i=1000744780655">“Cullen Roche on the Art of Building a Perfect Portfolio”</a>: how to combine the market portfolio with your own views into a coherent allocation — the problem Black–Litterman formalizes.</p>
+</div>
+</div>
+</section>
+<section id="homework-problems" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">14.7</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="14.7.1">
+<h3 data-number="14.7.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">14.7.1</span> Conceptual</h3>
+<p><strong>BL-C1.</strong> An analyst runs an unconstrained mean-variance optimization on 11 sector ETFs using historical sample means as her estimates of <span class="math inline">\(\mu\)</span>. She reports that XLK receives a weight of <span class="math inline">\(+340\%\)</span> and XLE a weight of <span class="math inline">\(-210\%\)</span>. A colleague re-estimates the sample means using a data window that is only two months longer and now finds XLE receives <span class="math inline">\(+180\%\)</span> and XLK receives <span class="math inline">\(-90\%\)</span>. Using the chapter’s discussion of the failure mode of unconstrained optimization, explain why such a small change in the input estimates can flip the signs and magnitudes of the optimal weights so dramatically. In your answer, refer to how the optimizer treats the point estimates of <span class="math inline">\(\mu\)</span>.</p>
+<p><strong>BL-C2.</strong> The chapter opens by asking why standard mean-variance optimization “so often produces extreme and unstable portfolio weights in practice.” Explain the root cause the chapter identifies, and then explain the structural remedy Black-Litterman offers: how does treating expected returns as random variables with a prior distribution, rather than as fixed parameters, prevent the optimizer from over-fitting noisy return estimates?</p>
+<p><strong>BL-C3.</strong> The chapter builds its prior over expected returns by “reverse-engineering” the returns that make the observed market-cap weights optimal. Explain, in words, the logic of this reverse-optimization step: what equation is being solved, what is treated as known, and what is being backed out. Then explain why anchoring the prior to market weights is a sensible default choice for an investor who begins by effectively owning the whole market.</p>
+<p><strong>BL-C4.</strong> Two portfolio managers each build a mean-variance optimizer. Manager A feeds in raw historical sample means for <span class="math inline">\(\mu\)</span>. Manager B first computes the equilibrium prior <span class="math inline">\(\Pi = A\Sigma\theta_{\text{mkt}}\)</span> and uses that as her baseline, tilting away from it only where she has a view. Explain why Manager B’s portfolios are likely to be more stable and more intuitively reasonable than Manager A’s, even before either manager has expressed any subjective view. What structural feature of the reverse-optimization prior is doing the work here?</p>
+<p><strong>BL-C5.</strong> In the Black-Litterman setup the investor does not treat expected returns as fixed numbers; instead she writes <span class="math inline">\(\mu = \Pi + \epsilon^{e}\)</span> with <span class="math inline">\(\epsilon^{e} \sim N(0, \tau\Sigma)\)</span>. Explain what economic content the parameter <span class="math inline">\(\tau\)</span> carries. What does it mean, in terms of the investor’s confidence in the equilibrium prior, to choose a very small <span class="math inline">\(\tau\)</span> versus a large <span class="math inline">\(\tau\)</span>? Contrast this treatment of <span class="math inline">\(\mu\)</span> with the classical assumption that <span class="math inline">\(\mu\)</span> is a known constant.</p>
+<p><strong>BL-C6.</strong> Explain why the chapter scales the prior uncertainty of expected returns by <span class="math inline">\(\tau\Sigma\)</span> — that is, why the covariance of <span class="math inline">\(\epsilon^{e}\)</span> is taken to be proportional to the return covariance matrix <span class="math inline">\(\Sigma\)</span> rather than, say, an unrelated diagonal matrix. What does this modeling choice say about how the investor believes uncertainty about mean returns is distributed across assets, and why is it convenient when the posterior formula is derived?</p>
+<p><strong>BL-C7.</strong> A manager holds a single view: that XLK will outperform XLE by some amount <span class="math inline">\(q\)</span>. She has collected considerable research supporting this view and is highly confident. A second manager holds the identical directional view but describes it as “a hunch.” Using the Bayesian updating logic of the chapter, explain how the two managers’ posterior expected returns will differ, and identify precisely which input to the model encodes the difference between “highly confident” and “a hunch.”</p>
+<p><strong>BL-C8.</strong> The chapter represents a set of <span class="math inline">\(m\)</span> views through the matrix <span class="math inline">\(P\)</span>, the vector <span class="math inline">\(Q\)</span>, and the diagonal covariance <span class="math inline">\(\Omega\)</span>, writing <span class="math inline">\(P\mu = Q + \epsilon^{v}\)</span>. Explain what a single row of <span class="math inline">\(P\)</span> encodes, what the corresponding entry of <span class="math inline">\(Q\)</span> specifies, and what the corresponding diagonal entry of <span class="math inline">\(\Omega\)</span> controls. Why is a view naturally written as a linear combination of asset returns rather than as a statement about one asset in isolation?</p>
+<p><strong>BL-C9.</strong> In the Black-Litterman model, assets about which the investor expresses no view are described as being “unaffected” (or only mildly affected) by the updating. Explain why the model has this conservative property, referring to the structure of the view matrix <span class="math inline">\(P\)</span>. Contrast this with what happens in a naive optimizer where a single revised estimate of one asset’s expected return can move the weights of many unrelated assets.</p>
+<p><strong>BL-C10.</strong> The posterior mean <span class="math inline">\(\bar\mu = \left[(\tau\Sigma)^{-1} + P'\Omega^{-1}P\right]^{-1}\left[(\tau\Sigma)^{-1}\Pi + P'\Omega^{-1}Q\right]\)</span> is described as a precision-weighted blend of the prior and the views. Explain, in terms of the matrices <span class="math inline">\((\tau\Sigma)^{-1}\)</span> and <span class="math inline">\(P'\Omega^{-1}P\)</span>, why the posterior mean is always a compromise between <span class="math inline">\(\Pi\)</span> and the views, and explain what happens to the blend as <span class="math inline">\(\Omega \to \infty\)</span> (views become worthless) and as <span class="math inline">\(\Omega \to 0\)</span> (views become certain).</p>
+<p><strong>BL-C11.</strong> Explain the relationship the chapter draws between the confidence in a view and the size of the resulting tilt away from the market portfolio. Describe two extreme cases — a view held with near-certainty and a view held with almost no confidence — and state what happens to the posterior expected returns, and hence to the optimal weights, in each case.</p>
+<p><strong>BL-C12.</strong> A CIO says: “I like Black-Litterman because it lets me express opinions without betting the fund.” Interpret this statement in light of the chapter’s material. Explain how starting from the equilibrium prior and scaling tilts by conviction accomplishes exactly this, and describe what would go wrong if she instead simply set the expected returns of her favored sectors to large positive numbers and re-optimized.</p>
+</section>
+<section id="quantitative" class="level3" data-number="14.7.2">
+<h3 data-number="14.7.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">14.7.2</span> Quantitative</h3>
+<p><strong>BL-Q1.</strong> (Reverse optimization / implied equilibrium returns.) An investor has risk aversion <span class="math inline">\(A = 3\)</span>. There are two assets with market-cap weights <span class="math inline">\(\theta = (0.6, 0.4)'\)</span> and covariance matrix <span class="math display">\[\Sigma = \begin{pmatrix} 0.04 &amp; 0.01 \\ 0.01 &amp; 0.02 \end{pmatrix}.\]</span> Using the first order condition <span class="math inline">\(\mu = A\Sigma\theta\)</span>, compute the implied equilibrium expected return vector <span class="math inline">\(\Pi\)</span> (i.e., set <span class="math inline">\(\Pi = A\Sigma\theta\)</span>). Report both components.</p>
+<p><strong>BL-Q2.</strong> (Reverse optimization / implied equilibrium returns.) Using the same <span class="math inline">\(\Sigma\)</span> and <span class="math inline">\(\theta\)</span> as in BL-Q1 but with risk aversion <span class="math inline">\(A = 5\)</span>, recompute <span class="math inline">\(\Pi = A\Sigma\theta\)</span>. Then verify, by plugging your <span class="math inline">\(\Pi\)</span> back into <span class="math inline">\(\mu = A\Sigma\theta\)</span> and solving for <span class="math inline">\(\theta\)</span>, that the market weights <span class="math inline">\((0.6, 0.4)'\)</span> are recovered as the optimal portfolio. Briefly state why they must be recovered.</p>
+<p><strong>BL-Q3.</strong> (Single-view specification <span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span>, <span class="math inline">\(\omega\)</span>.) Consider three assets ordered (XLB, XLK, XLE). An investor believes that a portfolio long XLK and short XLE by equal amounts will have an expected return of <span class="math inline">\(q = 0.015\)</span> per month, and she assigns this view a standard deviation of <span class="math inline">\(\omega = 0.05\)</span>. Write down the view vector <span class="math inline">\(p\)</span>, state the scalar <span class="math inline">\(q\)</span>, and state the variance <span class="math inline">\(\omega^2\)</span> of the view error <span class="math inline">\(\epsilon^{v}\)</span>. Then confirm that <span class="math inline">\(p\mu\)</span> picks out <span class="math inline">\(\mu_{\text{XLK}} - \mu_{\text{XLE}}\)</span> from the mean vector <span class="math inline">\(\mu = (\mu_{\text{XLB}}, \mu_{\text{XLK}}, \mu_{\text{XLE}})'\)</span>.</p>
+<p><strong>BL-Q4.</strong> (General view specification <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, <span class="math inline">\(\Omega\)</span>.) An investor tracking four assets ordered (A, B, C, D) holds two views: (i) A will outperform B by <span class="math inline">\(0.010\)</span>; (ii) C will have an expected return of <span class="math inline">\(0.008\)</span> in absolute terms. She assigns the views error standard deviations <span class="math inline">\(0.04\)</span> and <span class="math inline">\(0.06\)</span> respectively, and treats them as independent. Write down the <span class="math inline">\(2\times 4\)</span> matrix <span class="math inline">\(P\)</span>, the vector <span class="math inline">\(Q\)</span>, and the <span class="math inline">\(2\times 2\)</span> diagonal covariance matrix <span class="math inline">\(\Omega\)</span>.</p>
+<p><strong>BL-Q5.</strong> (Black-Litterman posterior mean, single view, scalar case.) To make the posterior mean formula hand-computable, take a one-asset world so all matrices are scalars. Let <span class="math inline">\(\tau\Sigma = 0.02\)</span>, prior <span class="math inline">\(\Pi = 0.006\)</span>, view <span class="math inline">\(p = 1\)</span>, view value <span class="math inline">\(q = 0.012\)</span>, and view variance <span class="math inline">\(\omega^2 = 0.01\)</span>. Using <span class="math display">\[\bar\mu = \left[(\tau\Sigma)^{-1} + p'\tfrac{1}{\omega^{2}}p\right]^{-1}\left[(\tau\Sigma)^{-1}\Pi + p'\tfrac{1}{\omega^{2}}q\right],\]</span> compute the posterior expected return <span class="math inline">\(\bar\mu\)</span>. Show that it lies between the prior <span class="math inline">\(0.006\)</span> and the view <span class="math inline">\(0.012\)</span>, and state which one it is closer to and why.</p>
+<p><strong>BL-Q6.</strong> (Black-Litterman posterior mean and confidence.) Using all the same numbers as in BL-Q5 (<span class="math inline">\(\tau\Sigma = 0.02\)</span>, <span class="math inline">\(\Pi = 0.006\)</span>, <span class="math inline">\(p = 1\)</span>, <span class="math inline">\(q = 0.012\)</span>), recompute the posterior mean <span class="math inline">\(\bar\mu\)</span> for two different confidence levels: (a) a very confident view with <span class="math inline">\(\omega^2 = 0.001\)</span>, and (b) a very unconfident view with <span class="math inline">\(\omega^2 = 0.2\)</span>. Report both values of <span class="math inline">\(\bar\mu\)</span> and explain how they illustrate the chapter’s point that higher confidence (lower <span class="math inline">\(\omega^2\)</span>) pulls the posterior more strongly toward the view.</p>
+<p><strong>BL-Q7.</strong> (Posterior variance, scalar case.) Using the same scalar inputs as in BL-Q5 (<span class="math inline">\(\tau\Sigma = 0.02\)</span>, <span class="math inline">\(p = 1\)</span>, <span class="math inline">\(\omega^2 = 0.01\)</span>), compute the posterior variance of <span class="math inline">\(\mu\)</span>, <span class="math display">\[\left[(\tau\Sigma)^{-1} + p'\tfrac{1}{\omega^{2}}p\right]^{-1}.\]</span> Compare it to the prior variance <span class="math inline">\(\tau\Sigma = 0.02\)</span> and to the view variance <span class="math inline">\(\omega^2 = 0.01\)</span>, and explain why the posterior variance must be smaller than both. Then recompute it for the very confident case <span class="math inline">\(\omega^2 = 0.001\)</span> and comment on what happens.</p>
+<p><strong>BL-Q8.</strong> (Role of <span class="math inline">\(\tau\)</span> in the posterior weighting.) In the scalar posterior mean of BL-Q5, the relative weight placed on the prior versus the view is governed by <span class="math inline">\((\tau\Sigma)^{-1}\)</span> against <span class="math inline">\(1/\omega^2\)</span>. Fix <span class="math inline">\(\Sigma = 0.02\)</span> (so with <span class="math inline">\(\tau = 1\)</span>, <span class="math inline">\(\tau\Sigma = 0.02\)</span>), <span class="math inline">\(\Pi = 0.006\)</span>, <span class="math inline">\(q = 0.012\)</span>, and <span class="math inline">\(\omega^2 = 0.01\)</span>. Compute the posterior mean <span class="math inline">\(\bar\mu\)</span> for <span class="math inline">\(\tau = 0.1\)</span> and for <span class="math inline">\(\tau = 1.0\)</span>, and explain the direction in which shrinking <span class="math inline">\(\tau\)</span> moves the posterior, in terms of confidence in the equilibrium prior.</p>
+<p><strong>BL-Q9.</strong> (From posterior returns to a tilt.) Continue from BL-Q1, where <span class="math inline">\(A = 3\)</span>, <span class="math inline">\(\Sigma = \begin{pmatrix} 0.04 &amp; 0.01 \\ 0.01 &amp; 0.02 \end{pmatrix}\)</span>, and market weights <span class="math inline">\(\theta_{\text{mkt}} = (0.6, 0.4)'\)</span> give equilibrium returns <span class="math inline">\(\Pi\)</span>. Suppose Bayesian updating raises the posterior expected return of asset 1 above its equilibrium value while leaving asset 2 unchanged, giving posterior mean <span class="math inline">\(\bar\mu = \Pi + (0.006, 0)'\)</span>. Using the FOC <span class="math inline">\(\bar\mu = A\Sigma\theta\)</span>, solve for the new optimal weights <span class="math inline">\(\theta = \tfrac{1}{A}\Sigma^{-1}\bar\mu\)</span> and report the tilt <span class="math inline">\(\theta - \theta_{\text{mkt}}\)</span>. Comment on why raising only asset 1’s expected return nonetheless changes both weights.</p>
+<p><strong>BL-Q10.</strong> (From posterior returns to a tilt, negative view.) Using the same <span class="math inline">\(A = 3\)</span>, <span class="math inline">\(\Sigma\)</span>, and <span class="math inline">\(\theta_{\text{mkt}} = (0.6, 0.4)'\)</span> as in BL-Q9, suppose instead that updating lowers asset 2’s posterior expected return while leaving asset 1 unchanged, giving <span class="math inline">\(\bar\mu = \Pi + (0, -0.007)'\)</span>. Solve for the new optimal weights <span class="math inline">\(\theta = \tfrac{1}{A}\Sigma^{-1}\bar\mu\)</span> and report the tilt <span class="math inline">\(\theta - \theta_{\text{mkt}}\)</span>. Explain the sign of each component of the tilt in light of the positive covariance between the two assets.</p>
+
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Satchell, Stephen, and Alan Scowcroft. "A demystification of the Black-Litterman model: Managing quantitative and traditional portfolio construction." In Forecasting expected returns in the financial markets, pp.&nbsp;39-53. Academic Press, 2007.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/scottcondie\.github\.io\/teaching\/450\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Options.html" class="pagination-link" aria-label="Options">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Credit_Models.html" class="pagination-link" aria-label="Credit Risk Models">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

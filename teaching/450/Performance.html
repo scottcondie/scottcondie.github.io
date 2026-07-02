@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; Portfolio performance evaluation – Asset Prices, Risk, and Information</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./EMH.html" rel="next">
+<link href="./CAPM.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5f0e52f7877e3a078c44e13fc828ca0d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2f8ef6ac35c506a55552e17f1b00ddbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./MV.html">Individual portfolio selection and market equilibrium</a></li><li class="breadcrumb-item"><a href="./Performance.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Asset Prices, Risk, and Information</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Asset Prices, Risk, and Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Markets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Individual portfolio selection and market equilibrium</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MV.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CAPM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Performance.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Information, trading and market efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EMH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fixed income securities and pricing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Interest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Yields.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./YieldCurve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FIPortfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Derivatives</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Forwards_and_Futures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced market models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BlackLitterman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Credit_Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Market_Makers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">6.1</span> Introduction</a></li>
+  <li><a href="#why-returns-alone-mislead" id="toc-why-returns-alone-mislead" class="nav-link" data-scroll-target="#why-returns-alone-mislead"><span class="header-section-number">6.2</span> Why returns alone mislead</a></li>
+  <li><a href="#the-sharpe-ratio" id="toc-the-sharpe-ratio" class="nav-link" data-scroll-target="#the-sharpe-ratio"><span class="header-section-number">6.3</span> The Sharpe ratio</a></li>
+  <li><a href="#the-treynor-measure" id="toc-the-treynor-measure" class="nav-link" data-scroll-target="#the-treynor-measure"><span class="header-section-number">6.4</span> The Treynor measure</a></li>
+  <li><a href="#jensens-alpha" id="toc-jensens-alpha" class="nav-link" data-scroll-target="#jensens-alpha"><span class="header-section-number">6.5</span> Jensen’s alpha</a></li>
+  <li><a href="#tracking-error" id="toc-tracking-error" class="nav-link" data-scroll-target="#tracking-error"><span class="header-section-number">6.6</span> Tracking error</a></li>
+  <li><a href="#the-information-ratio" id="toc-the-information-ratio" class="nav-link" data-scroll-target="#the-information-ratio"><span class="header-section-number">6.7</span> The information ratio</a></li>
+  <li><a href="#which-measure-when" id="toc-which-measure-when" class="nav-link" data-scroll-target="#which-measure-when"><span class="header-section-number">6.8</span> Which measure when?</a></li>
+  <li><a href="#a-worked-example" id="toc-a-worked-example" class="nav-link" data-scroll-target="#a-worked-example"><span class="header-section-number">6.9</span> A worked example</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">6.10</span> Summary</a></li>
+  <li><a href="#application-an-investment-consultant-evaluating-managers" id="toc-application-an-investment-consultant-evaluating-managers" class="nav-link" data-scroll-target="#application-an-investment-consultant-evaluating-managers"><span class="header-section-number">6.11</span> Application: An investment consultant evaluating managers</a></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">6.12</span> Homework problems</a>
+  <ul class="collapse">
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">6.12.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">6.12.2</span> Quantitative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./MV.html">Individual portfolio selection and market equilibrium</a></li><li class="breadcrumb-item"><a href="./Performance.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">6.1</span> Introduction</h2>
+<p>Having just derived the Capital Asset Pricing Model, we turn to a question the model itself appears to rule out: how do we tell a skilled portfolio manager from a lucky one? The tension is worth stating at the outset. The CAPM says that expected return is <em>completely</em> determined by systematic risk, so that every asset and every portfolio plots exactly on the Security Market Line and no manager can earn more than her beta entitles her to. In that world the abnormal return we will call alpha is identically zero, and there is simply nothing for performance evaluation to measure. The enterprise of this chapter therefore presupposes that the CAPM does not hold exactly. Alpha is what appears when one of the model’s assumptions fails — above all the assumption that markets are <em>informationally efficient</em>, so that prices already embed every scrap of available information and no one can systematically profit from gathering or interpreting it better than the crowd. A manager who does process information better than the market can earn a return the model cannot explain, and it is precisely that residual return, invisible in a frictionless efficient market, that the measures below are built to detect. Each performance characteristic we develop — from Jensen’s alpha to the information ratio — earns its keep only in a world where markets are informationally inefficient enough for genuine skill to leave a footprint; informational efficiency itself is the subject we take up in the chapters that follow.</p>
+<p>Three questions organize the evaluation of portfolio performance. First, when a portfolio earns a high return, how much of that return is compensation for bearing risk rather than evidence of skill, and how can we strip the one from the other? Second, <em>which</em> notion of risk is the right one to adjust for, given that a portfolio held in isolation exposes an investor to its total volatility, while the very same portfolio held as one sleeve of a diversified whole contributes only its systematic risk? Third, when a manager is hired to beat a specific benchmark, how do we measure the return she adds relative to the risk she takes <em>away from</em> that benchmark? These questions matter because the raw return on a portfolio — the number that catches an investor’s eye first — is almost useless on its own: it confounds skill with luck, and reward with risk.</p>
+<p>The first question is the problem of risk adjustment, and the answer depends on the role the portfolio plays. If the portfolio is the entirety of an investor’s risky wealth, then the relevant risk is the portfolio’s <em>total</em> standard deviation, because that is the volatility the investor actually experiences. The <strong>Sharpe ratio</strong> measures reward per unit of total risk and is the natural yardstick in this case. If instead the portfolio is one component of a larger, well-diversified holding, then its idiosyncratic risk has already been diversified away, and only its systematic risk — its beta — contributes to the risk the investor bears. The <strong>Treynor measure</strong> and <strong>Jensen’s alpha</strong> adjust for systematic risk and are the appropriate yardsticks in this case. Both build directly on the Capital Asset Pricing Model of the previous chapter: the CAPM supplies the “fair” expected return that a portfolio of given beta ought to earn, and abnormal performance is measured as the gap between the return realized and the return the CAPM predicts.</p>
+<p>The third question arises because most professional portfolios are not managed in a vacuum but against a stated benchmark — an index the manager is paid to outperform. Here the natural object of study is the <em>active return</em>, the difference between the portfolio’s return and the benchmark’s, and the natural measure of risk is the volatility of that difference, called <strong>tracking error</strong>. The <strong>information ratio</strong>, the active return per unit of tracking error, is the reward-to-risk ratio of active management itself, and it is the measure most directly tied to the statistical question of whether a manager has genuine skill or has merely been lucky.</p>
+<p>The chapter takes the five measures in turn — the Sharpe ratio, the Treynor measure, Jensen’s alpha, tracking error, and the information ratio — developing the intuition and the algebra behind each, and is careful throughout to say which measure is appropriate in which situation. It then works a single numerical example through all five, and closes by drawing out the relationships among them: in particular, that the Sharpe and Treynor measures rank fully diversified portfolios identically but diverge precisely to the extent that a portfolio carries diversifiable risk, and that the information ratio is, up to a factor of <span class="math inline">\(\sqrt{T}\)</span>, the <span class="math inline">\(t\)</span>-statistic on a manager’s alpha.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="In the news">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In the news
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The whole point of these measures is to separate reward from risk — and once you do, the case for active management gets harder to make. S&amp;P Dow Jones Indices’ SPIVA scorecard found that even on a <em>risk-adjusted</em> basis, roughly 97% of U.S. domestic active funds underperformed the broad market over the 20 years through 2024 — an even worse showing than on raw returns. Measuring performance correctly, rather than being dazzled by a single year’s headline number, is exactly what this chapter is about. Read it at <a href="https://www.spglobal.com/spdji/en/spiva/article/spiva-us/">S&amp;P Dow Jones Indices</a>.</p>
+</div>
+</div>
+</section>
+<section id="why-returns-alone-mislead" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="why-returns-alone-mislead"><span class="header-section-number">6.2</span> Why returns alone mislead</h2>
+<p>Let <span class="math inline">\(r_P\)</span> denote the (random) return on a portfolio <span class="math inline">\(P\)</span> over an evaluation period, <span class="math inline">\(r_f\)</span> the risk-free rate, <span class="math inline">\(r_M\)</span> the return on the market portfolio, and <span class="math inline">\(r_b\)</span> the return on a benchmark against which <span class="math inline">\(P\)</span> is judged. The <em>excess return</em> of the portfolio is <span class="math inline">\(r_P - r_f\)</span>, and its expected value <span class="math inline">\(Er_P - r_f\)</span> is the risk premium the portfolio is expected to deliver. We will measure total risk by the standard deviation <span class="math inline">\(\sigma_P = \sqrt{Var(r_P)}\)</span> and systematic risk by the beta</p>
+<p><span class="math display">\[\beta_P = \frac{Cov(r_P, r_M)}{\sigma^2_M},\]</span></p>
+<p>exactly as in the preceding chapter. In practice none of these population quantities is observed; they are estimated from a sample of historical returns, so each measure below has an <em>ex ante</em> form written in terms of expectations and an <em>ex post</em> form computed from sample averages and sample standard deviations. We write sample averages with a bar, as in <span class="math inline">\(\bar r_P\)</span>.</p>
+<p>The reason raw return is an inadequate measure of performance is that it answers the wrong question. An investor does not want the portfolio that earned the most last year; she wants the portfolio that delivers the most expected return for the risk she is willing to bear. Two portfolios that earned the same average return are not equally good if one did so with twice the volatility, and a portfolio that earned a spectacular return by taking a spectacular amount of risk may have been a poor choice that happened to pay off. Every measure in this chapter is therefore a ratio or a difference that places return in the numerator and some notion of risk in the denominator or the baseline. What distinguishes the measures from one another is <em>which</em> notion of risk they use, and that choice is dictated by how the portfolio is held.</p>
+</section>
+<section id="the-sharpe-ratio" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="the-sharpe-ratio"><span class="header-section-number">6.3</span> The Sharpe ratio</h2>
+<dl>
+<dt>Sharpe ratio.</dt>
+<dd>
+<p>The ratio of a portfolio’s expected excess return to the standard deviation of its return, <span class="math display">\[S_P = \frac{Er_P - r_f}{\sigma_P}.\]</span></p>
+</dd>
+</dl>
+<p>The Sharpe ratio, introduced by William Sharpe in 1966 as the “reward-to-variability” ratio, measures the expected excess return earned per unit of total risk. Its <em>ex post</em> counterpart replaces the population moments with their sample estimates,</p>
+<p><span class="math display">\[\hat S_P = \frac{\bar r_P - \bar r_f}{s_P},\]</span></p>
+<p>where <span class="math inline">\(\bar r_P - \bar r_f\)</span> is the average realized excess return and <span class="math inline">\(s_P\)</span> is the sample standard deviation of the portfolio’s return.</p>
+<p>The intuition is geometric. Recall that combining a risky portfolio <span class="math inline">\(P\)</span> with the risk-free asset traces out the <em>capital allocation line</em> through <span class="math inline">\(P\)</span>: an investor who places a fraction <span class="math inline">\(y\)</span> of wealth in <span class="math inline">\(P\)</span> and <span class="math inline">\(1-y\)</span> in the risk-free asset earns expected return <span class="math inline">\(r_f + y(Er_P - r_f)\)</span> with standard deviation <span class="math inline">\(y\sigma_P\)</span>. Eliminating <span class="math inline">\(y\)</span> shows that the attainable combinations lie on a straight line in <span class="math inline">\((\sigma, Er)\)</span> space that begins at <span class="math inline">\(r_f\)</span> and passes through <span class="math inline">\(P\)</span>, and the slope of that line is precisely</p>
+<p><span class="math display">\[\text{slope of the CAL} = \frac{Er_P - r_f}{\sigma_P} = S_P.\]</span></p>
+<p>A higher Sharpe ratio is a steeper capital allocation line, which means more expected return at <em>every</em> level of total risk the investor might choose. This is why, among all portfolios that an investor might hold as her entire risky position, the one with the highest Sharpe ratio is unambiguously best: it offers the most favorable trade-off, and any desired risk level is then reached by mixing it with the risk-free asset. It is also why the tangency portfolio of the previous chapters is exactly the maximum-Sharpe-ratio portfolio.</p>
+<p>Because it uses <em>total</em> risk in the denominator, the Sharpe ratio is the right measure when the portfolio under evaluation represents all of the investor’s risky wealth. It charges the portfolio for every source of volatility it carries, diversifiable or not — which is appropriate, because an investor holding nothing else is exposed to all of that volatility.</p>
+</section>
+<section id="the-treynor-measure" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="the-treynor-measure"><span class="header-section-number">6.4</span> The Treynor measure</h2>
+<dl>
+<dt>Treynor measure.</dt>
+<dd>
+<p>The ratio of a portfolio’s expected excess return to its beta, <span class="math display">\[T_P = \frac{Er_P - r_f}{\beta_P}.\]</span></p>
+</dd>
+</dl>
+<p>The Treynor measure, sometimes called the reward-to-volatility ratio, replaces total risk with systematic risk in the denominator. It answers the question: how much excess return did the portfolio earn for each unit of market risk it took on?</p>
+<p>The reason one might prefer beta to standard deviation in the denominator is the central lesson of the CAPM. If the portfolio being evaluated is not held in isolation but as one component of a large, well-diversified portfolio, then its idiosyncratic risk is diversified away by the other holdings and does not contribute to the risk the investor ultimately bears. Only the portfolio’s covariance with the rest of the world — summarized by its beta — survives diversification. For such a component portfolio, reward should be measured per unit of the risk it actually adds, namely its beta, and that is what the Treynor measure does.</p>
+<p>Like the Sharpe ratio, the Treynor measure has a geometric reading: it is the slope of the line in <span class="math inline">\((\beta, Er)\)</span> space that runs from the risk-free asset, plotted at <span class="math inline">\(\beta = 0\)</span>, through the portfolio. The market portfolio has <span class="math inline">\(\beta_M = 1\)</span>, so its Treynor measure is</p>
+<p><span class="math display">\[T_M = \frac{Er_M - r_f}{1} = Er_M - r_f,\]</span></p>
+<p>which is just the slope of the Security Market Line. A portfolio beats the market on a Treynor basis precisely when <span class="math inline">\(T_P &gt; T_M\)</span>, which is the same as saying that the portfolio plots <em>above</em> the Security Market Line. Note that the Treynor measure is denominated in excess return per unit of beta, while the Sharpe ratio is denominated in excess return per unit of standard deviation; the two numbers are not directly comparable, and as we will see they can rank portfolios differently when those portfolios are not fully diversified.</p>
+</section>
+<section id="jensens-alpha" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="jensens-alpha"><span class="header-section-number">6.5</span> Jensen’s alpha</h2>
+<dl>
+<dt>Jensen’s alpha.</dt>
+<dd>
+<p>The difference between a portfolio’s expected return and the return predicted for it by the CAPM, <span class="math display">\[\alpha_P = Er_P - \big[\,r_f + \beta_P(Er_M - r_f)\,\big].\]</span></p>
+</dd>
+</dl>
+<p>Where the Treynor measure rescales excess return by beta, Jensen’s alpha subtracts the CAPM benchmark return outright. The bracketed term is exactly the expected return the Security Market Line assigns to an asset of beta <span class="math inline">\(\beta_P\)</span>; alpha is the vertical distance by which the portfolio sits above (if positive) or below (if negative) that line. Under the CAPM, every asset and every portfolio has <span class="math inline">\(\alpha = 0\)</span>, because the CAPM says that expected return is <em>completely</em> determined by beta. A nonzero alpha is therefore return that the single-factor model cannot account for, and as the introduction stressed, it can arise only when one of the model’s assumptions fails. The economically interesting failure is a breakdown of informational efficiency: if prices do not already embed all available information, a manager who collects or interprets that information better than the market can earn a return beta cannot explain, and alpha is the visible trace of that advantage. A positive alpha is thus putative evidence of skill — though it may equally reflect exposure to a priced risk that the one-factor model omits rather than any informational edge.</p>
+<p>In practice alpha is estimated as the intercept of the time-series regression of the portfolio’s excess return on the market’s excess return,</p>
+<p><span class="math display">\[r_{P,t} - r_{f,t} = \alpha_P + \beta_P\,(r_{M,t} - r_{f,t}) + \varepsilon_{P,t},\]</span></p>
+<p>where the slope <span class="math inline">\(\beta_P\)</span> is the estimated systematic-risk exposure and the residual <span class="math inline">\(\varepsilon_{P,t}\)</span> captures the portion of the portfolio’s return that is uncorrelated with the market. The fitted intercept <span class="math inline">\(\hat\alpha_P\)</span> is the average return the manager delivered over and above what her market exposure alone would have produced.</p>
+<p>Two cautions accompany alpha. First, it is an <em>absolute</em> measure, expressed in units of return, and so it does not by itself reveal how much risk was taken to earn it: a manager who produces 2% of alpha while subjecting investors to wild idiosyncratic swings is not obviously better than one who produces 1% of alpha with a steady hand. Second, an estimated alpha is a noisy statistic, and a positive point estimate is not proof of skill. Whether a measured alpha is distinguishable from luck is a question about its <span class="math inline">\(t\)</span>-statistic, and that question is answered most cleanly by the information ratio developed below.</p>
+</section>
+<section id="tracking-error" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="tracking-error"><span class="header-section-number">6.6</span> Tracking error</h2>
+<dl>
+<dt>Tracking error.</dt>
+<dd>
+<p>The standard deviation of the difference between a portfolio’s return and its benchmark’s return, <span class="math display">\[TE_P = \sigma\!\left(r_P - r_b\right) = \sqrt{Var(r_P - r_b)}.\]</span></p>
+</dd>
+</dl>
+<p>The quantity <span class="math inline">\(r_P - r_b\)</span> is the portfolio’s <em>active return</em>: the amount by which it beats or trails its benchmark over the period. Tracking error is the volatility of that active return, and it measures how tightly the portfolio hugs the benchmark it is managed against. A portfolio that is constructed to replicate an index — a pure index fund — has a tracking error close to zero, because its return moves nearly in lockstep with the benchmark. A high-conviction active fund that takes large positions away from the index has a large tracking error.</p>
+<p>Expanding the variance of the difference shows what drives tracking error,</p>
+<p><span class="math display">\[TE_P^2 = \sigma_P^2 + \sigma_b^2 - 2\,\rho_{Pb}\,\sigma_P\,\sigma_b,\]</span></p>
+<p>where <span class="math inline">\(\rho_{Pb}\)</span> is the correlation between the portfolio and its benchmark. Tracking error is small when the portfolio and benchmark have similar volatilities and are highly correlated, and it grows as the portfolio’s holdings depart from the benchmark’s. It is important to recognize that tracking error is a measure of <em>risk</em>, not of performance: it tells you how far a portfolio is willing to stray from its benchmark, not whether straying paid off. A manager can run a large tracking error and still underperform. What tracking error provides is the denominator for the one measure that does combine active return with active risk.</p>
+</section>
+<section id="the-information-ratio" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="the-information-ratio"><span class="header-section-number">6.7</span> The information ratio</h2>
+<dl>
+<dt>Information ratio.</dt>
+<dd>
+<p>The ratio of a portfolio’s expected active return to its tracking error, <span class="math display">\[IR_P = \frac{Er_P - Er_b}{\sigma(r_P - r_b)} = \frac{\overline{r_P - r_b}}{TE_P}.\]</span></p>
+</dd>
+</dl>
+<p>The information ratio is to active management what the Sharpe ratio is to total investing. The Sharpe ratio measures excess return over the risk-free rate per unit of total risk; the information ratio measures excess return over the <em>benchmark</em> per unit of <em>active</em> risk. It answers the question that matters when judging a manager paid to beat an index: for each unit of benchmark-relative risk she chose to take, how much did she add?</p>
+<p>There is a closely related definition that uses the regression of the previous section rather than a benchmark difference. Writing the active return as the manager’s alpha plus residual noise, the information ratio can be expressed as alpha divided by the standard deviation of the residual,</p>
+<p><span class="math display">\[IR_P = \frac{\alpha_P}{\sigma(\varepsilon_P)},\]</span></p>
+<p>where <span class="math inline">\(\sigma(\varepsilon_P)\)</span> is the <em>residual</em> (non-systematic) risk left over after accounting for market exposure. In this form the information ratio is the reward for skill per unit of the diversifiable risk the manager imposes. The two definitions coincide when the benchmark is the market portfolio and the manager’s only systematic exposure is to the market; in general they differ slightly, and it is worth stating which one is in use.</p>
+<p>The information ratio is the measure most tightly linked to the statistical question of skill versus luck. To see why, recall that <span class="math inline">\(\hat\alpha_P\)</span> is the intercept of the regression above, estimated from <span class="math inline">\(T\)</span> observations of the residual <span class="math inline">\(\varepsilon_{P,t}\)</span>. The standard error of that intercept is approximately the residual volatility divided by the square root of the sample size,</p>
+<p><span class="math display">\[se(\hat\alpha_P) \approx \frac{\sigma(\varepsilon_P)}{\sqrt{T}}.\]</span></p>
+<p>The <span class="math inline">\(t\)</span>-statistic for testing whether alpha is zero is the estimate divided by its standard error, and substituting <span class="math inline">\(IR_P = \alpha_P/\sigma(\varepsilon_P)\)</span> gives</p>
+<p><span class="math display">\[t(\hat\alpha_P) = \frac{\hat\alpha_P}{se(\hat\alpha_P)} \approx \frac{\hat\alpha_P}{\sigma(\varepsilon_P)/\sqrt{T}} = \frac{\hat\alpha_P}{\sigma(\varepsilon_P)}\sqrt{T} = IR_P \cdot \sqrt{T}.\]</span></p>
+<p>So, over an evaluation period of <span class="math inline">\(T\)</span> years, the <span class="math inline">\(t\)</span>-statistic on a manager’s estimated alpha is approximately</p>
+<p><span class="math display">\[t(\hat\alpha_P) \approx IR_P \cdot \sqrt{T}.\]</span></p>
+<p>An information ratio of <span class="math inline">\(0.5\)</span> sustained over sixteen years yields a <span class="math inline">\(t\)</span>-statistic of about <span class="math inline">\(2\)</span>, the conventional threshold for statistical significance — which is a sobering way of seeing how much data it takes to establish skill with any confidence. The information ratio also sits at the center of Grinold’s <em>fundamental law of active management</em>, <span class="math inline">\(IR \approx IC \times \sqrt{\text{breadth}}\)</span>, which decomposes a manager’s skill into the quality of her individual forecasts (the information coefficient <span class="math inline">\(IC\)</span>) and the number of independent bets she makes (the breadth). Both relationships make the same point: a respectable information ratio, consistently achieved, is a far more demanding standard than a single year’s outperformance.</p>
+</section>
+<section id="which-measure-when" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="which-measure-when"><span class="header-section-number">6.8</span> Which measure when?</h2>
+<p>The five measures are not competitors to be ranked from best to worst; each is the correct measure in a particular situation, and using the wrong one gives a misleading answer.</p>
+<ul>
+<li>The <strong>Sharpe ratio</strong> is appropriate when the portfolio under evaluation is the investor’s entire risky position, because then the investor is exposed to the portfolio’s total risk.</li>
+<li>The <strong>Treynor measure</strong> and <strong>Jensen’s alpha</strong> are appropriate when the portfolio is one component of a larger, well-diversified portfolio, because then only its systematic risk matters. Treynor gives a reward-to-risk ratio suited to ranking such components; Jensen’s alpha gives the absolute abnormal return.</li>
+<li><strong>Tracking error</strong> measures how much active risk a benchmarked portfolio takes, and the <strong>information ratio</strong> measures the active return earned per unit of that active risk — the right standard for a manager judged against a benchmark.</li>
+</ul>
+<p>A useful relationship ties the first two together. If a portfolio carries no residual risk — that is, if it is perfectly diversified so that <span class="math inline">\(\varepsilon_P \equiv 0\)</span> — then its total and systematic risk are linked by <span class="math inline">\(\sigma_P = \beta_P\,\sigma_M\)</span>, and the Sharpe and Treynor measures become</p>
+<p><span class="math display">\[S_P = \frac{Er_P - r_f}{\sigma_P} = \frac{Er_P - r_f}{\beta_P \sigma_M} = \frac{T_P}{\sigma_M}.\]</span></p>
+<p>Since <span class="math inline">\(\sigma_M\)</span> is the same for every portfolio, the Sharpe and Treynor measures rank fully diversified portfolios <em>identically</em>. They diverge only to the extent that a portfolio carries diversifiable risk, and the size of the gap between a portfolio’s Sharpe ranking and its Treynor ranking is itself a signal of how much idiosyncratic risk the manager has left on the table. This is the precise sense in which the choice of denominator encodes an assumption about how the portfolio is held.</p>
+</section>
+<section id="a-worked-example" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="a-worked-example"><span class="header-section-number">6.9</span> A worked example</h2>
+<p>Suppose that over an evaluation period the risk-free rate was <span class="math inline">\(r_f = 3\%\)</span> and the market portfolio earned <span class="math inline">\(Er_M = 9\%\)</span> with a standard deviation of <span class="math inline">\(\sigma_M = 16\%\)</span>. An active equity fund <span class="math inline">\(P\)</span> earned <span class="math inline">\(Er_P = 12\%\)</span> with a standard deviation of <span class="math inline">\(\sigma_P = 20\%\)</span> and a beta of <span class="math inline">\(\beta_P = 1.2\)</span>. The fund is managed against a benchmark index with expected return <span class="math inline">\(Er_b = 9.5\%\)</span>, and the standard deviation of the fund’s active return relative to that benchmark was <span class="math inline">\(TE_P = 5\%\)</span>. We compute all five measures.</p>
+<p>The <strong>Sharpe ratio</strong> of the fund and of the market are</p>
+<p><span class="math display">\[S_P = \frac{12 - 3}{20} = 0.45, \qquad S_M = \frac{9 - 3}{16} = 0.375,\]</span></p>
+<p>so the fund delivered more expected return per unit of total risk than the market did. The <strong>Treynor measure</strong> of the fund and of the market are</p>
+<p><span class="math display">\[T_P = \frac{12 - 3}{1.2} = 7.5\%, \qquad T_M = \frac{9 - 3}{1} = 6.0\%,\]</span></p>
+<p>so the fund also beat the market per unit of systematic risk, which is the same as saying it plots above the Security Market Line. The size of that gap is <strong>Jensen’s alpha</strong>,</p>
+<p><span class="math display">\[\alpha_P = 12 - \big[\,3 + 1.2\,(9 - 3)\,\big] = 12 - 10.2 = 1.8\%.\]</span></p>
+<p>The fund earned <span class="math inline">\(1.8\%\)</span> more than its market exposure alone would justify. Relative to its benchmark, the fund’s active return was <span class="math inline">\(Er_P - Er_b = 12 - 9.5 = 2.5\%\)</span>, carried at a <strong>tracking error</strong> of <span class="math inline">\(5\%\)</span>, giving an <strong>information ratio</strong> of</p>
+<p><span class="math display">\[IR_P = \frac{2.5}{5.0} = 0.50.\]</span></p>
+<p>Finally, the fund’s residual risk can be recovered from the identity <span class="math inline">\(\sigma_P^2 = \beta_P^2\,\sigma_M^2 + \sigma^2(\varepsilon_P)\)</span>:</p>
+<p><span class="math display">\[\sigma^2(\varepsilon_P) = 20^2 - 1.2^2 \cdot 16^2 = 400 - 368.64 = 31.36, \qquad \sigma(\varepsilon_P) = 5.6\%,\]</span></p>
+<p>so the residual-risk form of the information ratio is <span class="math inline">\(\alpha_P / \sigma(\varepsilon_P) = 1.8/5.6 \approx 0.32\)</span>, somewhat below the benchmark-relative value of <span class="math inline">\(0.50\)</span> because the two definitions measure active risk differently. Collecting the results:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Fund <span class="math inline">\(P\)</span></th>
+<th>Market / benchmark</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sharpe ratio</td>
+<td>0.45</td>
+<td>0.375</td>
+</tr>
+<tr class="even">
+<td>Treynor measure</td>
+<td>7.5%</td>
+<td>6.0%</td>
+</tr>
+<tr class="odd">
+<td>Jensen’s alpha</td>
+<td>1.8%</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Tracking error</td>
+<td>5.0%</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Information ratio</td>
+<td>0.50</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>By every measure the fund outperformed, which is reassuring but not guaranteed: had the fund earned its <span class="math inline">\(12\%\)</span> with a beta of, say, <span class="math inline">\(1.6\)</span> instead of <span class="math inline">\(1.2\)</span>, its Jensen’s alpha would have been negative even though its raw return was unchanged, because a beta of <span class="math inline">\(1.6\)</span> would entitle it to a CAPM return above <span class="math inline">\(12\%\)</span>. It is exactly this kind of reversal — a high raw return masking poor risk-adjusted performance — that the measures of this chapter are built to expose.</p>
+</section>
+<section id="summary" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">6.10</span> Summary</h2>
+<p>The raw return on a portfolio confounds reward with risk and skill with luck, and the measures of this chapter are devices for separating them. The Sharpe ratio divides expected excess return by total risk and is the slope of the capital allocation line; it is the right measure when the portfolio is all an investor holds. The Treynor measure divides expected excess return by beta and is appropriate when the portfolio is a diversified component, in which case only systematic risk matters. Jensen’s alpha measures the same systematic-risk-adjusted performance as an absolute return — the distance above the Security Market Line — and is estimated as the intercept of a market-model regression. Tracking error measures the volatility of a portfolio’s active return relative to a benchmark, and the information ratio divides active return by tracking error to give the reward-to-risk ratio of active management, a quantity that is essentially the <span class="math inline">\(t\)</span>-statistic of manager skill divided by <span class="math inline">\(\sqrt{T}\)</span>. Fully diversified portfolios are ranked identically by the Sharpe and Treynor measures; the two diverge precisely to the degree that a portfolio carries diversifiable risk. Underlying the whole apparatus is a single premise: because the CAPM assigns zero alpha to every portfolio, any abnormal performance these measures uncover is a symptom of the model’s assumptions failing — most importantly, of markets that are not perfectly informationally efficient. That premise is what makes the question of market efficiency, taken up in the chapters that follow, the natural sequel to performance evaluation.</p>
+</section>
+<section id="application-an-investment-consultant-evaluating-managers" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="application-an-investment-consultant-evaluating-managers"><span class="header-section-number">6.11</span> Application: An investment consultant evaluating managers</h2>
+<p>A consultant advising a pension board must recommend whether to keep or replace an equity manager who beat her benchmark by three points last year. Raw outperformance is exactly the number the consultant must look past. She first asks how the excess return was earned: a Jensen’s alpha regression separates the part attributable to simply running a higher beta from the part the manager actually added, and the <span class="math inline">\(t\)</span>-statistic on that alpha — roughly the information ratio times the square root of the years of data — tells her whether the result is distinguishable from luck. She computes the information ratio to see whether the active return justified the active risk the manager took relative to the mandate, and the Sharpe ratio to confirm that adding the manager improves, rather than merely inflates, the risk-adjusted return of the plan as a whole. Only a manager whose outperformance survives all of these adjustments — not the one with the gaudiest single-year number — is worth the fees. The measures of this chapter are the instruments that turn a board’s hunch about a manager into a defensible decision.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Further listening
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Planet Money</em> (NPR) — <a href="https://www.npr.org/transcripts/469247400">“Episode 688: Brilliant vs.&nbsp;Boring”</a>: a famous $1 million, ten-year bet on whether hedge funds can beat a simple index fund frames the chapter’s central question — how do you tell genuine skill from luck?</p>
+</div>
+</div>
+</section>
+<section id="homework-problems" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">6.12</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="6.12.1">
+<h3 data-number="6.12.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">6.12.1</span> Conceptual</h3>
+<p><strong>PERF-C1.</strong> An investor is deciding how to allocate <em>all</em> of her risky wealth between two mutual funds. Fund A has a higher average return than Fund B, but also a higher standard deviation, and Fund A’s Sharpe ratio is lower than Fund B’s. Explain which fund she should choose and why, appealing to the capital allocation line and the fact that the Sharpe ratio is its slope. In your answer, explain how she could nonetheless end up with a higher expected return than Fund B offers on its own.</p>
+<p><strong>PERF-C2.</strong> Two analysts each compute a Sharpe ratio for the same equity fund over the same period but get different numbers. One used the fund’s <em>total</em> standard deviation <span class="math inline">\(\sigma_P\)</span> in the denominator; the other, believing the fund would be held inside a diversified portfolio, used only its systematic risk. Explain which analyst has applied the Sharpe ratio correctly, and explain what measure the second analyst has effectively (mis)computed and when that alternative measure would actually be the appropriate one.</p>
+<p><strong>PERF-C3.</strong> A pension fund holds forty distinct equity sleeves, each managed by a different manager, and is considering adding a forty-first. A trustee argues the new sleeve should be judged by its Sharpe ratio. Explain why the Treynor measure is the more appropriate yardstick here, and what feature of the CAPM justifies charging the sleeve only for its beta rather than its total volatility.</p>
+<p><strong>PERF-C4.</strong> Two component portfolios have identical Treynor measures, but portfolio X has a much larger standard deviation than portfolio Y. Explain what this tells you about the two portfolios’ idiosyncratic risk, and explain why, despite the difference in total volatility, an investor holding either as one small piece of a well-diversified whole might be nearly indifferent between them.</p>
+<p><strong>PERF-C5.</strong> A manager reports a positive Jensen’s alpha of <span class="math inline">\(2\%\)</span>. Explain precisely what “abnormal” means here in terms of the Security Market Line, and give two distinct reasons why a positive estimated alpha is <em>not</em> by itself convincing evidence that the manager has genuine skill.</p>
+<p><strong>PERF-C6.</strong> Fund G and Fund H earned the same raw return of <span class="math inline">\(11\%\)</span> over the same period, but Fund G had a beta of <span class="math inline">\(0.8\)</span> and Fund H a beta of <span class="math inline">\(1.4\)</span>. Without doing arithmetic, explain which fund almost certainly has the larger Jensen’s alpha and why, and explain the general lesson this illustrates about why raw return can mask poor risk-adjusted performance.</p>
+<p><strong>PERF-C7.</strong> A pure index fund and a high-conviction active fund are both benchmarked to the S&amp;P 500. Explain which one has the larger tracking error and why, using the decomposition <span class="math inline">\(TE_P^2 = \sigma_P^2 + \sigma_b^2 - 2\rho_{Pb}\sigma_P\sigma_b\)</span>. Then explain why a large tracking error is <em>not</em> by itself either good or bad news about the manager.</p>
+<p><strong>PERF-C8.</strong> A consultant says, “Two funds have the same tracking error, so they are equally good.” Explain why this statement is wrong by contrasting tracking error as a measure of <em>risk</em> with the information ratio as a measure of <em>performance</em>, and describe what additional information about active return would be needed to rank the two funds.</p>
+<p><strong>PERF-C9.</strong> The information ratio is often described as “the Sharpe ratio of active management.” Explain the parallel precisely: identify what plays the role of the excess return in the numerator and what plays the role of total risk in the denominator, and explain why the information ratio, rather than Jensen’s alpha, is the natural reward-to-risk measure for a manager judged against a benchmark.</p>
+<p><strong>PERF-C10.</strong> The chapter gives two definitions of the information ratio: active return over tracking error, <span class="math inline">\(\overline{r_P - r_b}/TE_P\)</span>, and alpha over residual risk, <span class="math inline">\(\alpha_P/\sigma(\varepsilon_P)\)</span>. Explain the sense in which these two coincide, the circumstances under which they diverge, and why it matters to state which one is being reported.</p>
+<p><strong>PERF-C11.</strong> A manager has sustained an information ratio of <span class="math inline">\(0.5\)</span>. Using the relationship <span class="math inline">\(t(\hat\alpha_P) \approx IR_P \cdot \sqrt{T}\)</span>, explain what this implies about how many years of data are needed before her alpha would clear the conventional significance threshold, and explain why this makes the information ratio “a far more demanding standard than a single year’s outperformance.”</p>
+<p><strong>PERF-C12.</strong> Explain why the relationship <span class="math inline">\(t(\hat\alpha_P) \approx IR_P \cdot \sqrt{T}\)</span> holds, walking through the two ingredients: that the <span class="math inline">\(t\)</span>-statistic is <span class="math inline">\(\hat\alpha_P / se(\hat\alpha_P)\)</span> and that <span class="math inline">\(se(\hat\alpha_P) \approx \sigma(\varepsilon_P)/\sqrt{T}\)</span>. Then explain what the <span class="math inline">\(\sqrt{T}\)</span> factor implies: why two managers with the <em>same</em> information ratio can have very different <span class="math inline">\(t\)</span>-statistics, and what a manager can and cannot do to raise her <span class="math inline">\(t\)</span>-statistic.</p>
+</section>
+<section id="quantitative" class="level3" data-number="6.12.2">
+<h3 data-number="6.12.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">6.12.2</span> Quantitative</h3>
+<p><strong>PERF-Q1.</strong> Over a five-year evaluation period a balanced fund earned an average return of <span class="math inline">\(\bar r_P = 10\%\)</span> while the risk-free rate averaged <span class="math inline">\(\bar r_f = 2.5\%\)</span>, and the fund’s sample standard deviation was <span class="math inline">\(s_P = 15\%\)</span>. The market earned <span class="math inline">\(\bar r_M = 8\%\)</span> with a standard deviation of <span class="math inline">\(16\%\)</span>. Compute the fund’s <em>ex post</em> Sharpe ratio <span class="math inline">\(\hat S_P\)</span> and the market’s Sharpe ratio <span class="math inline">\(S_M\)</span>, and state which delivered more reward per unit of total risk.</p>
+<p><strong>PERF-Q2.</strong> An investor will hold Fund Z as her entire risky position and mix it with the risk-free asset. Fund Z has <span class="math inline">\(Er_P = 14\%\)</span>, <span class="math inline">\(\sigma_P = 25\%\)</span>, and <span class="math inline">\(r_f = 4\%\)</span>. She wants an expected return of <span class="math inline">\(11\%\)</span>. Using the Sharpe ratio and the capital allocation line, find (a) the Sharpe ratio <span class="math inline">\(S_P\)</span>, (b) the fraction <span class="math inline">\(y\)</span> of wealth she must place in Fund Z, and (c) the standard deviation of her resulting position.</p>
+<p><strong>PERF-Q3.</strong> A portfolio has <span class="math inline">\(Er_P = 13\%\)</span>, a beta of <span class="math inline">\(\beta_P = 1.5\)</span>, and the risk-free rate is <span class="math inline">\(r_f = 3\%\)</span>; the market earned <span class="math inline">\(Er_M = 9\%\)</span>. Compute the Treynor measure of the portfolio <span class="math inline">\(T_P\)</span> and of the market <span class="math inline">\(T_M\)</span>, and state whether the portfolio plots above or below the Security Market Line.</p>
+<p><strong>PERF-Q4.</strong> Two diversified component portfolios are to be compared on a Treynor basis. Portfolio D has <span class="math inline">\(Er_D = 10\%\)</span> and <span class="math inline">\(\beta_D = 0.9\)</span>; portfolio E has <span class="math inline">\(Er_E = 15\%\)</span> and <span class="math inline">\(\beta_E = 1.6\)</span>. The risk-free rate is <span class="math inline">\(r_f = 3\%\)</span>. Compute <span class="math inline">\(T_D\)</span> and <span class="math inline">\(T_E\)</span> and determine which component is the better performer per unit of systematic risk.</p>
+<p><strong>PERF-Q5.</strong> A fund earned <span class="math inline">\(Er_P = 11\%\)</span> with a beta of <span class="math inline">\(\beta_P = 0.7\)</span>. The risk-free rate is <span class="math inline">\(r_f = 2\%\)</span> and the market earned <span class="math inline">\(Er_M = 10\%\)</span>. Compute the CAPM-predicted return for the fund and its Jensen’s alpha <span class="math inline">\(\alpha_P\)</span>, and interpret the sign.</p>
+<p><strong>PERF-Q6.</strong> A fund earned a raw return of <span class="math inline">\(Er_P = 12\%\)</span>. The risk-free rate is <span class="math inline">\(r_f = 3\%\)</span> and the market earned <span class="math inline">\(Er_M = 8\%\)</span>. Find the beta <span class="math inline">\(\beta_P\)</span> at which the fund’s Jensen’s alpha <span class="math inline">\(\alpha_P\)</span> would be exactly zero, and state whether a beta <em>above</em> that value makes the fund’s alpha positive or negative.</p>
+<p><strong>PERF-Q7.</strong> A fund’s active return relative to its benchmark averaged <span class="math inline">\(\overline{r_P - r_b} = 3\%\)</span> over the period, with a tracking error of <span class="math inline">\(TE_P = 6\%\)</span>. Compute the information ratio <span class="math inline">\(IR_P\)</span>. Then explain what the resulting number means as a reward-to-active-risk ratio.</p>
+<p><strong>PERF-Q8.</strong> A benchmarked fund earned an average return of <span class="math inline">\(\bar r_P = 10.5\%\)</span> while its benchmark earned <span class="math inline">\(\bar r_b = 8\%\)</span>. Over the same period the portfolio had a standard deviation of <span class="math inline">\(\sigma_P = 18\%\)</span>, the benchmark had <span class="math inline">\(\sigma_b = 15\%\)</span>, and the two had a correlation of <span class="math inline">\(\rho_{Pb} = 0.9\)</span>. Using <span class="math inline">\(TE_P^2 = \sigma_P^2 + \sigma_b^2 - 2\rho_{Pb}\sigma_P\sigma_b\)</span>, compute the tracking error, and then compute the information ratio <span class="math inline">\(\overline{r_P - r_b}/TE_P\)</span>.</p>
+<p><strong>PERF-Q9.</strong> A fund’s active return relative to its benchmark averaged <span class="math inline">\(3\%\)</span> with a tracking error of <span class="math inline">\(6\%\)</span>, giving an information ratio of <span class="math inline">\(0.5\)</span>. Using <span class="math inline">\(t(\hat\alpha_P) \approx IR_P \cdot \sqrt{T}\)</span>, find the number of years <span class="math inline">\(T\)</span> of data needed for the manager’s alpha to reach a <span class="math inline">\(t\)</span>-statistic of <span class="math inline">\(2\)</span>.</p>
+<p><strong>PERF-Q10.</strong> A manager’s estimated alpha over <span class="math inline">\(T = 25\)</span> years of data is <span class="math inline">\(\hat\alpha_P = 1.5\%\)</span>, with a residual standard deviation of <span class="math inline">\(\sigma(\varepsilon_P) = 6\%\)</span>. Compute her information ratio <span class="math inline">\(IR_P = \alpha_P/\sigma(\varepsilon_P)\)</span> and the approximate <span class="math inline">\(t\)</span>-statistic <span class="math inline">\(t(\hat\alpha_P) \approx IR_P\cdot\sqrt{T}\)</span>, and state whether her alpha is statistically distinguishable from zero at the conventional threshold.</p>
+<p><strong>PERF-Q11.</strong> A manager’s market-model regression yields an estimated alpha of <span class="math inline">\(\alpha_P = 2.4\%\)</span> and a residual standard deviation of <span class="math inline">\(\sigma(\varepsilon_P) = 8\%\)</span>. Separately, her active return relative to a benchmark averaged <span class="math inline">\(\overline{r_P - r_b} = 2.0\%\)</span> with tracking error <span class="math inline">\(TE_P = 5\%\)</span>. Compute the information ratio under both the residual-risk definition and the benchmark-difference definition, and explain in one sentence why they differ.</p>
+<p><strong>PERF-Q12.</strong> A fund has a total standard deviation of <span class="math inline">\(\sigma_P = 22\%\)</span> and a beta of <span class="math inline">\(\beta_P = 1.1\)</span>; the market has a standard deviation of <span class="math inline">\(\sigma_M = 15\%\)</span>. Using the identity <span class="math inline">\(\sigma_P^2 = \beta_P^2\sigma_M^2 + \sigma^2(\varepsilon_P)\)</span>, compute the fund’s residual (idiosyncratic) risk <span class="math inline">\(\sigma(\varepsilon_P)\)</span>. If the fund’s Jensen’s alpha is <span class="math inline">\(\alpha_P = 1.9\%\)</span>, compute the residual-risk form of its information ratio <span class="math inline">\(\alpha_P/\sigma(\varepsilon_P)\)</span>.</p>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/scottcondie\.github\.io\/teaching\/450\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./CAPM.html" class="pagination-link" aria-label="The Capital Asset Pricing Model">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./EMH.html" class="pagination-link" aria-label="The efficient markets hypothesis">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

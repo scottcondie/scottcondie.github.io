@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Mean-Variance Portfolios – Asset Prices, Risk, and Information</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./CAPM.html" rel="next">
+<link href="./Markets.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-5f0e52f7877e3a078c44e13fc828ca0d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2f8ef6ac35c506a55552e17f1b00ddbe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./MV.html">Individual portfolio selection and market equilibrium</a></li><li class="breadcrumb-item"><a href="./MV.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Asset Prices, Risk, and Information</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Asset Prices, Risk, and Information</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Markets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Individual portfolio selection and market equilibrium</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MV.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CAPM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Portfolio performance evaluation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Information, trading and market efficiency</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./EMH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The efficient markets hypothesis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Fixed income securities and pricing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Interest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Interest</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Yields.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fixed Income Yields</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./YieldCurve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Yield Curve</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FIPortfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fixed Income Portfolio Management</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Derivatives</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Forwards_and_Futures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Forwards and Futures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Options.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Options</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced market models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./BlackLitterman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">The Black-Litterman model and active portfolio management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Credit_Models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Credit Risk Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Market_Makers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Market Makers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Solutions to homework problems</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">4.1</span> Introduction</a></li>
+  <li><a href="#preferences" id="toc-preferences" class="nav-link" data-scroll-target="#preferences"><span class="header-section-number">4.2</span> Preferences</a></li>
+  <li><a href="#assets" id="toc-assets" class="nav-link" data-scroll-target="#assets"><span class="header-section-number">4.3</span> Assets</a></li>
+  <li><a href="#the-decision-problem" id="toc-the-decision-problem" class="nav-link" data-scroll-target="#the-decision-problem"><span class="header-section-number">4.4</span> The decision problem</a></li>
+  <li><a href="#diversification" id="toc-diversification" class="nav-link" data-scroll-target="#diversification"><span class="header-section-number">4.5</span> Diversification</a></li>
+  <li><a href="#minimum-variance-portfolios" id="toc-minimum-variance-portfolios" class="nav-link" data-scroll-target="#minimum-variance-portfolios"><span class="header-section-number">4.6</span> Minimum-variance portfolios</a></li>
+  <li><a href="#the-two-asset-case" id="toc-the-two-asset-case" class="nav-link" data-scroll-target="#the-two-asset-case"><span class="header-section-number">4.7</span> The two asset case</a></li>
+  <li><a href="#the-capital-allocation-line-cal" id="toc-the-capital-allocation-line-cal" class="nav-link" data-scroll-target="#the-capital-allocation-line-cal"><span class="header-section-number">4.8</span> The capital allocation line (CAL)</a></li>
+  <li><a href="#application-an-advisor-confronting-concentration" id="toc-application-an-advisor-confronting-concentration" class="nav-link" data-scroll-target="#application-an-advisor-confronting-concentration"><span class="header-section-number">4.9</span> Application: An advisor confronting concentration</a></li>
+  <li><a href="#sec-mv-general" id="toc-sec-mv-general" class="nav-link" data-scroll-target="#sec-mv-general"><span class="header-section-number">4.10</span> Appendix: The general N-asset case</a>
+  <ul class="collapse">
+  <li><a href="#portfolio-variance-on-the-frontier" id="toc-portfolio-variance-on-the-frontier" class="nav-link" data-scroll-target="#portfolio-variance-on-the-frontier"><span class="header-section-number">4.10.1</span> Portfolio variance on the frontier</a></li>
+  <li><a href="#the-global-minimum-variance-portfolio" id="toc-the-global-minimum-variance-portfolio" class="nav-link" data-scroll-target="#the-global-minimum-variance-portfolio"><span class="header-section-number">4.10.2</span> The global minimum-variance portfolio</a></li>
+  </ul></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">4.11</span> Homework problems</a>
+  <ul class="collapse">
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">4.11.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">4.11.2</span> Quantitative</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./MV.html">Individual portfolio selection and market equilibrium</a></li><li class="breadcrumb-item"><a href="./MV.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mean-Variance Portfolios</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">4.1</span> Introduction</h2>
+<p>Three questions motivate the study of mean-variance portfolio theory. First, given a risky asset and a risk-free asset, how should a rational investor divide her wealth between them, and how does the answer depend on her degree of risk aversion? Second, when multiple risky assets are available, how does the correlation structure among their returns shape the risk of the combined portfolio, and what role does diversification play? Third, across all possible ways of combining risky assets, which portfolios minimize risk for each level of expected return — and what does the answer imply about which risky portfolio every investor should hold regardless of her individual risk tolerance?</p>
+<p>These questions are central to finance for both practical and theoretical reasons. Investors do not seek high returns in isolation; they seek high returns relative to the risk they must bear. Without a formal way to describe the feasible set of return-risk combinations and to find the combinations that are not dominated by any other, portfolio construction would rely on intuition rather than optimization. Moreover, the efficient frontier and the separation property derived in this chapter are the direct inputs to the Capital Asset Pricing Model, which translates the logic of optimal diversification into a theory of equilibrium asset prices.</p>
+<p>The first question is addressed through the capital allocation line. When an investor can combine a single risky portfolio with a risk-free asset, the achievable mean-standard deviation combinations form a straight line whose slope — the Sharpe ratio — measures the reward per unit of risk. A mean-variance investor with risk aversion coefficient <span class="math inline">\(A\)</span> optimally allocates a fraction of wealth to the risky asset equal to the risk premium divided by the product of risk aversion and portfolio variance. This formula makes precise the intuition that more risk-averse investors hold less of the risky asset and that assets with higher risk premia or lower variance attract greater demand.</p>
+<p>The second question is answered by working out the variance of a portfolio of two or more risky assets. Portfolio variance depends not only on the individual asset variances and portfolio weights, but crucially on the covariances — or equivalently the correlations — between asset returns. When assets are not perfectly correlated, combining them reduces total portfolio variance below the weighted average of individual variances, a result known as diversification. An asset with negative correlation with the rest of the portfolio — a hedge asset — is especially valuable because it reduces portfolio risk while contributing positively to expected return in proportion to its own expected return. The degree of risk reduction available through diversification is therefore a function of the entire covariance matrix of asset returns.</p>
+<p>The third question leads to the efficient frontier and the separation property. The chapter develops this by solving the variance-minimization problem formally with Lagrangian methods for the two-asset case; the general case of many assets, which uses matrix algebra to characterize the entire set of minimum-variance portfolios, is worked out in an appendix at the end of the chapter. The first-order conditions reveal that at any point on the efficient frontier, the ratio of excess expected return to covariance with the portfolio must be equal across all assets. When a risk-free asset is available, the efficient frontier collapses to a single ray: the capital allocation line constructed from the risk-free rate to the tangency portfolio on the risky-asset frontier. Because this tangency portfolio is the same for every investor regardless of risk aversion, all investors hold the same risky portfolio composition, differing only in how much of their wealth they allocate to it — a result known as the separation property.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="In the news">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>In the news
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Diversification is only as real as the covariances beneath it. By early 2026, the “Magnificent Seven” technology stocks had grown to roughly a third of the S&amp;P 500 — so concentrated that a broad index fund, the textbook diversified portfolio, had quietly become a large bet on a handful of correlated names. Fortune argued there was “nowhere to hide.” This is the mean–variance problem in the headlines: how much true diversification does a portfolio actually provide once its holdings move together? Read it at <a href="https://fortune.com/2026/02/04/how-the-magnificent-7-destroyed-index-funds-alphabet-amazon-apple-meta-microsoft-nvidia-tesla/">Fortune</a>.</p>
+</div>
+</div>
+</section>
+<section id="preferences" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="preferences"><span class="header-section-number">4.2</span> Preferences</h2>
+<p>Consider an investor that has preferences that can be represented by the utility function <span class="math inline">\(U = Er - \frac{1}{2}A\sigma^2\)</span>. Indifference curves for this investor can be plotted with the expected return on the <span class="math inline">\(y\)</span> axis and the <em>standard deviation</em> on the <span class="math inline">\(x\)</span> axis. They slope upward and are convex.</p>
+</section>
+<section id="assets" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="assets"><span class="header-section-number">4.3</span> Assets</h2>
+<p>The investor has available to her one risky and one risk-free asset. Looking forward we view the risky asset as a portfolio of assets that has been selected optimally. We will learn how to select this portfolio later. The (random) rate of return for the risky portfolio is <span class="math inline">\(r_P\)</span>. Its standard deviation is <span class="math inline">\(\sigma_P\)</span>. The rate of return on the risk free asset is <span class="math inline">\(r_f\)</span>. If the investor puts proportion <span class="math inline">\(y\)</span> of her total available capital in the risky asset, after uncertainty has been resolved the investor will have <span class="math inline">\(W_0(1 + r_C) = W_{0}y(1 + r_P) + W_0(1-y)(1 + r_f)\)</span>. In terms of the state-preference model, if the risky asset costs <span class="math inline">\(p\)</span> and the risk free asset costs <span class="math inline">\(p_f\)</span>, then total expenditures initially are <span class="math inline">\(x_P p + x_f p_f\)</span>. The value of the portfolio next period is <span class="math inline">\(x_P v_P + x_f v_f\)</span>. Algebra implies that <span class="math inline">\(r_C = w_P r_p + w_f r_f = y r_P + (1-y) r_f\)</span>. The expected value of this return is <span class="math inline">\(yEr_P + (1-y)r_f\)</span>. The variance of this portfolio is <span class="math inline">\(y^2 \sigma^2_P\)</span> and the standard deviation is <span class="math inline">\(y \sigma_P\)</span>.</p>
+<p>Suppose <span class="math inline">\(y = 0\)</span>. What is the expected return of the portfolio? Standard deviation? Now suppose that <span class="math inline">\(y = 1\)</span>. What are expected return and standard deviation? What about <span class="math inline">\(y = \frac{1}{2}\)</span>?</p>
+<p>One can think about increasing the expected return of the portfolio from <span class="math inline">\(r_f\)</span> to <span class="math inline">\(Er_P\)</span> by moving <span class="math inline">\(y\)</span> from 0 to 1. As one does so, one must trade off increases in expected return with increases in the standard deviation of the complete portfolio.</p>
+<p>Notice that the expected return of the complete portfolio as a function of its standard deviation is a straight line with intercept <span class="math inline">\(r_f\)</span> and slope of</p>
+<p><span class="math display">\[\frac{Er_P - r_f}{\sigma_P}\]</span></p>
+<p>Why? The standard deviation of the portfolio is given by <span class="math inline">\(\sigma_C = y \sigma_P\)</span>. This implies that <span class="math inline">\(y = \frac{\sigma_C}{\sigma_P}\)</span>. Plugging this into the equation <span class="math inline">\(Er_C = y E r_P + (1-y) r_f = r_f + y( Er_P - r_f)\)</span> yields</p>
+<p><span class="math display">\[E r_C = r_f + \frac{\sigma_C}{\sigma_P}(Er_P - r_f)\]</span></p>
+<p>showing that the set of possible complete portfolios implies a trade off between risk and return that has slope <span class="math inline">\(\frac{Er_P - r_f}{\sigma_P}\)</span>. This can be drawn in the <span class="math inline">\(\sigma, Er\)</span> plane as an upward sloping line. The slope of this line represents the trade off that the market presents this investor between risk and return. This slope is also known as the <em>Sharpe ratio</em>. The line is called the <em>capital allocation line</em> (CAL).</p>
+</section>
+<section id="the-decision-problem" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="the-decision-problem"><span class="header-section-number">4.4</span> The decision problem</h2>
+<p>From this the decision problem of the investor can be seen to be</p>
+<p><span class="math display">\[\max Er_C - \frac{1}{2}A\sigma^2_C \mbox{ s.t. } E r_C = r_f + \frac{\sigma_C}{\sigma_P}(Er_P - r_f)\]</span></p>
+<p>This can be solved by setting up the Lagrangian, or simply by substitution. Since <span class="math inline">\(Er_C = r_f + y(Er_P - r_f)\)</span> and <span class="math inline">\(\sigma_C = y\sigma_P\)</span> we can rewrite utility as</p>
+<p><span class="math display">\[U = r_f + y(Er_P - r_f) - \frac{1}{2}Ay^2\sigma^2_P\]</span></p>
+<p>The first order conditions with respect to <span class="math inline">\(y\)</span> are</p>
+<p><span class="math display">\[(Er_P - r_f) - yA\sigma^2_P = 0\]</span></p>
+<p>which implies that the optimal amount to put into the risky asset is</p>
+<p><span class="math display">\[y = \frac{Er_P - r_f}{A\sigma^2_P}\]</span></p>
+<p>Notice that this increases <em>ceteris paribus</em> as the risk premium increases and as risk aversion or the variance of the portfolio decreases. So, investors that are more risk averse, will choose to be further to the left on the CAL whereas less risk averse investors will be more to the right.</p>
+</section>
+<section id="diversification" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="diversification"><span class="header-section-number">4.5</span> Diversification</h2>
+<p>Where does the optimal risky portfolio come from? To understand this, we must understand the return/risk tradeoff for general portfolios. Consider a portfolio of two risky assets labelled <span class="math inline">\(D\)</span> and <span class="math inline">\(E\)</span>. We have already seen that if the weight put on asset <span class="math inline">\(i\)</span> in the portfolio is <span class="math inline">\(w_i\)</span> then, the return to the whole portfolio will be <span class="math inline">\(r_P = w_D r_D + w_E r_E\)</span>. What is the variance of the portfolio?</p>
+<p><span class="math display">\[\sigma^2_P = w^2_D \sigma^2_D + w^2_E \sigma^2_E + 2w_D w_E Cov(r_D,r_E)\]</span></p>
+<p>Why? Write the variance as the expected squared deviation from the mean, <span class="math inline">\(\mu_P = w_D \mu_D + w_E \mu_E\)</span>, and group the deviation asset by asset:</p>
+<p><span class="math display">\[\begin{aligned}
+\sigma^2_P &amp;= E\left[ (w_D r_D + w_E r_E - w_D \mu_D - w_E \mu_E)^2 \right] \\
+&amp;= E\left[ \left( w_D(r_D - \mu_D) + w_E(r_E - \mu_E) \right)^2 \right] \\
+&amp;= E\left[ w^2_D(r_D-\mu_D)^2 + w^2_E(r_E-\mu_E)^2 + 2 w_D w_E (r_D-\mu_D)(r_E-\mu_E) \right] \\
+&amp;= w^2_D \sigma^2_D + w^2_E \sigma^2_E + 2 w_D w_E Cov(r_D,r_E),
+\end{aligned}\]</span></p>
+<p>where the last line uses the definitions <span class="math inline">\(\sigma^2_i = E(r_i-\mu_i)^2\)</span> and <span class="math inline">\(Cov(r_D,r_E) = E(r_D-\mu_D)(r_E-\mu_E)\)</span>. Recall also that if <span class="math inline">\(\rho_{DE}\)</span> is the correlation coefficient of <span class="math inline">\(r_D\)</span> and <span class="math inline">\(r_E\)</span> then</p>
+<p><span class="math display">\[\rho_{DE} = \frac{Cov(r_D,r_E)}{\sigma_D \sigma_E}.\]</span></p>
+<p>This implies that the variance of the portfolio can be rewritten</p>
+<p><span class="math display">\[\sigma^2_P = w^2_D \sigma^2_D + w^2_E \sigma^2_E + 2w_D w_E \sigma_D \sigma_E  \rho_{DE}\]</span></p>
+<p>Think about the case when <span class="math inline">\(\rho_{DE} = 1\)</span>. In that case the rhs of the above equation is a perfect square and simplifies to</p>
+<p><span class="math display">\[\sigma^2_P = (w_D \sigma_D + w_E \sigma_E)^2\]</span></p>
+<p>so the standard deviation is just the sum of the two standard deviations. It can be seen that the portfolio variance is strictly decreasing in the correlation between assets. An asset is called a <em>hedge</em> if it has negative correlation with the other assets in the portfolio. The lowest possible portfolio variance is given by <span class="math inline">\(\rho_{DE} = -1\)</span>. In this case</p>
+<p><span class="math display">\[\sigma^2_P = (w_D \sigma_D - w_E \sigma_E)^2\]</span></p>
+<p>So one can eliminate all risk by taking <span class="math inline">\(w_D\)</span> and <span class="math inline">\(w_E\)</span> to make the above zero.</p>
+<p>One interesting statistic to calculate is the covariance of any particular asset's returns to the return of the whole portfolio. We are interested in finding <span class="math inline">\(Cov(r_D,w_D r_D + w_E r_E )\)</span> for example.</p>
+<p><span class="math display">\[\begin{aligned}
+Cov(r_D, r_P) &amp;= E(r_D - \mu_D)(w_D r_D + w_E r_E  - w_D \mu_D - w_E \mu_E) \\
+&amp;= E(r_D - \mu_D)\left( w_D(r_D - \mu_D) + w_E(r_E - \mu_E) \right) \\
+&amp;= w_D E(r_D - \mu_D)^2 + w_E E(r_D - \mu_D)(r_E - \mu_E) \\
+&amp;= w_D Var(r_D) + w_E Cov(r_D,r_E).
+\end{aligned}\]</span></p>
+<p>The second line simply collects the portfolio’s mean-deviation asset by asset, and the third distributes the factor <span class="math inline">\((r_D-\mu_D)\)</span> across the two terms and takes expectations of each.</p>
+<p>In general, for a portfolio with weights <span class="math inline">\(w_1,\ldots,w_n\)</span> and return <span class="math inline">\(r_P = \sum_{i=1}^n w_i r_i\)</span>, the covariance of the return to asset <span class="math inline">\(j\)</span> with the whole portfolio follows from the linearity of covariance:</p>
+<p><span class="math display">\[Cov(r_j, r_P) = Cov\!\left(r_j, \sum_{i=1}^n w_i r_i\right) = \sum_{i=1}^n w_i\, Cov(r_i,r_j).\]</span></p>
+<p>This is interesting because it means that the variance of the portfolio can be broken up into the covariance of each of the components of the portfolio with the whole portfolio: multiplying by <span class="math inline">\(w_j\)</span> and summing over <span class="math inline">\(j\)</span> gives <span class="math inline">\(\sum_j w_j Cov(r_j,r_P) = Cov(r_P,r_P) = \sigma^2_P\)</span>.</p>
+</section>
+<section id="minimum-variance-portfolios" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="minimum-variance-portfolios"><span class="header-section-number">4.6</span> Minimum-variance portfolios</h2>
+<p>By changing the portfolio weights, one changes the variance and standard deviation of the portfolio. Since preferences depend only on the mean and standard deviation of returns, a natural question is: for each expected return, what is the lowest-variance portfolio one can obtain? This is the problem</p>
+<p><span class="math display">\[\min Var(r_P) \mbox{ s.t. } Er_P \ge \bar r.\]</span></p>
+<p>The set of solutions — one minimum-variance portfolio for each target expected return — traces out the <em>efficient frontier</em>. We solve this problem here for two risky assets; the general case of many assets, which uses matrix algebra, is developed in the appendix at the end of the chapter.</p>
+</section>
+<section id="the-two-asset-case" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="the-two-asset-case"><span class="header-section-number">4.7</span> The two asset case</h2>
+<p>Consider the problem</p>
+<p><span class="math display">\[\min \frac{1}{2} \left (w_D (w_D \sigma^2_D + w_E \sigma_{DE}) + w_E(w_E \sigma^2_E + w_D \sigma_{DE}) \right) \mbox{ s.t. } w'\mu \ge \bar r \mbox{ and } w' \mathbf{1} = 1\]</span></p>
+<p>The first order conditions are</p>
+<p><span class="math display">\[\begin{aligned}
+w_D\sigma^2_D + w_E \sigma_{DE} + \lambda \mu_D - \gamma &amp; = 0 \\
+w_E\sigma^2_E + w_D \sigma_{DE} + \lambda \mu_E - \gamma &amp; = 0 \\
+\end{aligned}\]</span></p>
+<p>Recall that <span class="math inline">\(w_D \sigma^2_D + w_E \sigma_{DE}\)</span> is the covariance of the asset <span class="math inline">\(D\)</span> with the rest of the portfolio, which we have denoted <span class="math inline">\(\sigma_{DP}\)</span>. To interpret these first order conditions, divide the first one by <span class="math inline">\(\sigma_{DP}\)</span> and the second one by <span class="math inline">\(\sigma_{EP}\)</span> to obtain</p>
+<p><span class="math display">\[\begin{aligned}
+1 + \frac{\lambda \mu_D - \gamma}{\sigma_{DP}} &amp; = 0 \\
+1 + \frac{\lambda \mu_E - \gamma}{\sigma_{EP}} &amp; = 0 \\
+\end{aligned}\]</span></p>
+<p>Now define <span class="math inline">\(\theta = \gamma / \lambda\)</span>. Solving each first-order condition for the ratio <span class="math inline">\((\mu_i - \theta)/\sigma_{iP}\)</span> gives <span class="math inline">\(-1/\lambda\)</span> in both cases, so the two equations imply that</p>
+<p><span class="math display">\[\frac{\mu_D -\theta}{Cov(r_D,r_P)} = \frac{\mu_E - \theta}{Cov(r_E,r_P)}.\]</span></p>
+<p>Because this common ratio is the same for asset <span class="math inline">\(D\)</span> and asset <span class="math inline">\(E\)</span>, it is also unchanged if we replace a single asset by any portfolio of the two. In particular, apply it to the risky portfolio <span class="math inline">\(P\)</span> itself. Taking a weighted average of the numerators and denominators with weights <span class="math inline">\(w_D, w_E\)</span> leaves the ratio equal to <span class="math inline">\((Er_P - \theta)/Cov(r_P,r_P)\)</span>, and since <span class="math inline">\(Cov(r_P,r_P) = \sigma^2_P\)</span>,</p>
+<p><span class="math display">\[\frac{Er_i - \theta}{Cov(r_i,r_P)} = \frac{Er_P - \theta}{\sigma^2_P} \mbox{ for all } i.\]</span></p>
+<p>Finally, identify <span class="math inline">\(\theta\)</span>. The quantity <span class="math inline">\(\theta\)</span> is the expected return of an asset that has zero covariance with <span class="math inline">\(P\)</span> (set <span class="math inline">\(Cov(r_i,r_P)=0\)</span> above and the numerator must vanish, giving <span class="math inline">\(Er_i = \theta\)</span>). When a risk-free asset is available it has exactly this property, so <span class="math inline">\(\theta = r_f\)</span>, yielding</p>
+<p><span class="math display">\[\frac{Er_i - r_f}{Cov(r_i,r_P)} = \frac{Er_P - r_f}{\sigma^2_P} \mbox{ for all } i.\]</span></p>
+<p>The same minimization can be carried out for an arbitrary number of risky assets using matrix algebra. That derivation traces out the full minimum-variance frontier, identifies the global minimum-variance portfolio, and establishes the two-fund separation result. Readers who are interested can find it in the <a href="#sec-mv-general">appendix</a> at the end of this chapter.</p>
+</section>
+<section id="the-capital-allocation-line-cal" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="the-capital-allocation-line-cal"><span class="header-section-number">4.8</span> The capital allocation line (CAL)</h2>
+<p>Notice that for a given risk free rate <span class="math inline">\(r_f\)</span>, and a given efficient frontier, one may draw a capital allocation line as the highest line that passes through the risk free rate <span class="math inline">\(r_f\)</span> and the efficient frontier. This will be the same for all investors as long as everyone agrees on the efficient frontier. This implies that the composition of the risky portfolio is independent of the risk aversion of the individual. This property is called <em>separation</em>.</p>
+</section>
+<section id="application-an-advisor-confronting-concentration" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="application-an-advisor-confronting-concentration"><span class="header-section-number">4.9</span> Application: An advisor confronting concentration</h2>
+<p>A financial advisor sits across from a client who is delighted that her low-cost index fund has risen sharply, but who does not realize that a handful of correlated technology names now drive most of that fund’s movements. The advisor’s job is to translate that unease into numbers, and mean-variance analysis is the instrument. By estimating the covariances among the client’s holdings, the advisor can show how much of the portfolio’s risk is genuinely diversified away and how much is concentrated systematic exposure that a few disappointing earnings reports could expose. The efficient frontier then frames the conversation about whether to trim the position: it makes precise the gain in expected return per unit of risk the client is giving up — or buying — by tilting toward or away from the crowded trade.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Further listening
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Odd Lots</em> (Bloomberg) — <a href="https://podcasts.apple.com/us/podcast/meb-faber-on-the-big-bear-market-in-diversification/id1056200096?i=1000673546058">“Meb Faber on the Big Bear Market in Diversification and Tactical Allocation”</a>: a practitioner’s take on why diversification works and how to spread risk across assets — the mean–variance problem in action.</p>
+</div>
+</div>
+</section>
+<section id="sec-mv-general" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="sec-mv-general"><span class="header-section-number">4.10</span> Appendix: The general N-asset case</h2>
+<p>This appendix solves the minimum-variance problem for an arbitrary number of risky assets using matrix algebra.</p>
+<p>Suppose that the assets are labelled <span class="math inline">\(1,\ldots,k\)</span>, all of which have different expected returns and variances. Let <span class="math inline">\(w\)</span> be a vector of portfolio weights for each asset. Let the expected return <em>vector</em> for these assets be <span class="math inline">\(\mu\)</span> and let <span class="math inline">\(\Sigma\)</span> be the variance-covariance matrix of the assets. The expected portfolio return will be given by <span class="math inline">\(w'\mu\)</span> and the variance will be <span class="math inline">\(w' \Sigma w\)</span>. The problem of interest is</p>
+<p><span class="math display">\[\min w'\Sigma w \mbox{ s.t. } w'\mu \ge \bar r \mbox{ and } w' \mathbf{1} = 1\]</span></p>
+<p>It is convenient to minimize <span class="math inline">\(\frac{1}{2} w' \Sigma w\)</span> because it has the same solution, but more convenient expressions. The Lagrangian for this problem is</p>
+<p><span class="math display">\[\mathcal{L} = \frac{1}{2} w'\Sigma w + \lambda(\bar r - w'\mu) + \gamma(1 - w' \textbf{1})\]</span></p>
+<p>You know from 388 that the first order conditions to this problem are</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{1}{2}(\Sigma + \Sigma') w - \lambda \mu - \gamma \textbf{1} = 0 \\
+\Sigma w = \lambda \mu + \gamma \textbf{1}
+\end{aligned}\]</span></p>
+<p>Premultiplying both sides by <span class="math inline">\(\Sigma^{-1}\)</span> gives</p>
+<p><span class="math display">\[w = \lambda \Sigma^{-1}\mu + \gamma \Sigma^{-1} \textbf{1}\]</span></p>
+<p>To eliminate the multipliers, premultiply the previous equation by <span class="math inline">\(\mu'\)</span> and <span class="math inline">\(\textbf{1}\)</span> to get</p>
+<p><span class="math display">\[\begin{aligned}
+\mu' w = \lambda \mu' \Sigma^{-1}\mu + \gamma \mu' \Sigma^{-1} \textbf{1} \\
+\textbf{1}' w = \lambda \textbf{1}' \Sigma^{-1}\mu + \gamma \textbf{1}' \Sigma^{-1} \textbf{1}
+\end{aligned}\]</span></p>
+<p>The left-hand side of the first of these equations is the expected return to the portfolio and the left-hand side of the second is 1. Using the constraints <span class="math inline">\(\mu'w = \bar{r}\)</span> and <span class="math inline">\(\mathbf{1}'w = 1\)</span>, the system becomes</p>
+<p><span class="math display">\[\begin{aligned}
+\bar{r} &amp;= \lambda \mu'\Sigma^{-1}\mu + \gamma \mu'\Sigma^{-1}\mathbf{1} \\
+1       &amp;= \lambda \mathbf{1}'\Sigma^{-1}\mu + \gamma \mathbf{1}'\Sigma^{-1}\mathbf{1}
+\end{aligned}\]</span></p>
+<p>It is convenient to introduce three scalar constants that depend only on the assets (not on the target return <span class="math inline">\(\bar{r}\)</span>):</p>
+<p><span class="math display">\[A = \mu'\Sigma^{-1}\mathbf{1} = \mathbf{1}'\Sigma^{-1}\mu, \qquad B = \mu'\Sigma^{-1}\mu, \qquad C = \mathbf{1}'\Sigma^{-1}\mathbf{1}, \qquad D = BC - A^2.\]</span></p>
+<p>Note that <span class="math inline">\(\Sigma\)</span> is a positive definite matrix (since it is a covariance matrix of non-redundant assets), which implies <span class="math inline">\(B &gt; 0\)</span>, <span class="math inline">\(C &gt; 0\)</span>, and by the Cauchy-Schwarz inequality <span class="math inline">\(D = BC - A^2 &gt; 0\)</span>. The two-equation system can now be written compactly as</p>
+<p><span class="math display">\[\begin{pmatrix} B &amp; A \\ A &amp; C \end{pmatrix} \begin{pmatrix} \lambda \\ \gamma \end{pmatrix} = \begin{pmatrix} \bar{r} \\ 1 \end{pmatrix}.\]</span></p>
+<p>The determinant of the coefficient matrix is <span class="math inline">\(BC - A^2 = D &gt; 0\)</span>, so the system has a unique solution. Applying Cramer’s rule gives</p>
+<p><span class="math display">\[\lambda = \frac{C\bar{r} - A}{D}, \qquad \gamma = \frac{B - A\bar{r}}{D}.\]</span></p>
+<p>Substituting these back into <span class="math inline">\(w = \lambda\Sigma^{-1}\mu + \gamma\Sigma^{-1}\mathbf{1}\)</span> yields the optimal portfolio weights as an explicit function of the target return:</p>
+<p><span class="math display">\[\boxed{w(\bar{r}) = \frac{C\bar{r} - A}{D}\,\Sigma^{-1}\mu + \frac{B - A\bar{r}}{D}\,\Sigma^{-1}\mathbf{1}.}\]</span></p>
+<p>It is instructive to factor this as <span class="math inline">\(w(\bar{r}) = g + \bar{r}\,h\)</span>, where</p>
+<p><span class="math display">\[g = \frac{B\,\Sigma^{-1}\mathbf{1} - A\,\Sigma^{-1}\mu}{D}, \qquad h = \frac{C\,\Sigma^{-1}\mu - A\,\Sigma^{-1}\mathbf{1}}{D}.\]</span></p>
+<p>Both <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are fixed vectors (independent of <span class="math inline">\(\bar{r}\)</span>). This shows that every minimum-variance portfolio is a linear combination of the two fixed portfolios <span class="math inline">\(g\)</span> and <span class="math inline">\(g + h\)</span>, which is the <strong>two-fund separation</strong> result: any point on the efficient frontier can be constructed by mixing two particular portfolios.</p>
+<section id="portfolio-variance-on-the-frontier" class="level3" data-number="4.10.1">
+<h3 data-number="4.10.1" class="anchored" data-anchor-id="portfolio-variance-on-the-frontier"><span class="header-section-number">4.10.1</span> Portfolio variance on the frontier</h3>
+<p>From the first-order condition <span class="math inline">\(\Sigma w = \lambda\mu + \gamma\mathbf{1}\)</span>, premultiplying by <span class="math inline">\(w'\)</span> gives</p>
+<p><span class="math display">\[\sigma^2_P = w'\Sigma w = \lambda\,w'\mu + \gamma\,w'\mathbf{1} = \lambda\bar{r} + \gamma.\]</span></p>
+<p>Substituting the expressions for <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\gamma\)</span>:</p>
+<p><span class="math display">\[\sigma^2_P = \frac{C\bar{r} - A}{D}\,\bar{r} + \frac{B - A\bar{r}}{D} = \frac{C\bar{r}^2 - 2A\bar{r} + B}{D}.\]</span></p>
+<p>This is a <strong>parabola</strong> in the <span class="math inline">\((\bar{r},\,\sigma^2_P)\)</span> plane, and equivalently a <strong>hyperbola</strong> in the <span class="math inline">\((\sigma_P,\,\bar{r})\)</span> plane that is conventionally plotted with <span class="math inline">\(\sigma_P\)</span> on the horizontal axis. The entire minimum-variance frontier is traced out as <span class="math inline">\(\bar{r}\)</span> varies.</p>
+</section>
+<section id="the-global-minimum-variance-portfolio" class="level3" data-number="4.10.2">
+<h3 data-number="4.10.2" class="anchored" data-anchor-id="the-global-minimum-variance-portfolio"><span class="header-section-number">4.10.2</span> The global minimum-variance portfolio</h3>
+<p>The minimum of <span class="math inline">\(\sigma^2_P\)</span> over all target returns is found by differentiating with respect to <span class="math inline">\(\bar{r}\)</span> and setting the result to zero:</p>
+<p><span class="math display">\[\frac{d\sigma^2_P}{d\bar{r}} = \frac{2C\bar{r} - 2A}{D} = 0 \implies \bar{r}^* = \frac{A}{C}.\]</span></p>
+<p>Substituting back gives the minimum achievable variance:</p>
+<p><span class="math display">\[\sigma^2_{min} = \frac{C(A/C)^2 - 2A(A/C) + B}{D} = \frac{B - A^2/C}{D} = \frac{BC - A^2}{CD} = \frac{1}{C}.\]</span></p>
+<p>The weights of the global minimum-variance portfolio are obtained by setting <span class="math inline">\(\bar{r} = A/C\)</span> in <span class="math inline">\(w(\bar{r})\)</span>:</p>
+<p><span class="math display">\[w^* = \frac{C(A/C) - A}{D}\,\Sigma^{-1}\mu + \frac{B - A(A/C)}{D}\,\Sigma^{-1}\mathbf{1} = \frac{B - A^2/C}{D}\,\Sigma^{-1}\mathbf{1} = \frac{1}{C}\,\Sigma^{-1}\mathbf{1}.\]</span></p>
+<p>Since <span class="math inline">\(C = \mathbf{1}'\Sigma^{-1}\mathbf{1}\)</span>, this simplifies to</p>
+<p><span class="math display">\[\boxed{w^* = \frac{\Sigma^{-1}\mathbf{1}}{\mathbf{1}'\Sigma^{-1}\mathbf{1}}.}\]</span></p>
+<p>The global minimum-variance portfolio weights are proportional to <span class="math inline">\(\Sigma^{-1}\mathbf{1}\)</span>, normalized so that they sum to one. The portfolio allocates more weight to assets that have low variance and low covariance with other assets, and is independent of expected returns entirely — it is determined solely by the covariance structure.</p>
+<p>The <strong>efficient frontier</strong> is the upper half of this hyperbola: the set of minimum-variance portfolios with <span class="math inline">\(\bar{r} \ge A/C\)</span>. Portfolios on the lower half offer the same variance as a portfolio on the upper half but with a lower expected return and are therefore dominated.</p>
+</section>
+</section>
+<section id="homework-problems" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">4.11</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="4.11.1">
+<h3 data-number="4.11.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">4.11.1</span> Conceptual</h3>
+<p><strong>MV-C1.</strong> Two investors, Ana and Ben, face the same risky portfolio (with return <span class="math inline">\(r_P\)</span>, standard deviation <span class="math inline">\(\sigma_P\)</span>) and the same risk-free rate <span class="math inline">\(r_f\)</span>. Ana chooses to hold a complete portfolio with <span class="math inline">\(\sigma_C = 0.05\)</span>, while Ben holds one with <span class="math inline">\(\sigma_C = 0.15\)</span>. Using the geometry of the capital allocation line, explain who is more risk averse and why. Would the <em>composition</em> of the risky portion of their portfolios differ? Explain what this reveals about the CAL.</p>
+<p><strong>MV-C2.</strong> A new brokerage advertises that it can offer clients a “steeper” capital allocation line than its competitors while using the very same underlying risky portfolio. Given that the slope of the CAL is <span class="math inline">\(\frac{Er_P - r_f}{\sigma_P}\)</span>, explain what would have to be true for the brokerage’s claim to hold, and why an ordinary broker cannot simply make the CAL steeper at will. What does the slope represent economically?</p>
+<p><strong>MV-C3.</strong> An investor currently holds all her wealth in the risky portfolio (<span class="math inline">\(y = 1\)</span>). The risk premium <span class="math inline">\(Er_P - r_f\)</span> then doubles because the risk-free rate falls, while <span class="math inline">\(\sigma_P\)</span> and her risk aversion <span class="math inline">\(A\)</span> stay the same. Using the optimal allocation rule <span class="math inline">\(y = \frac{Er_P - r_f}{A\sigma^2_P}\)</span>, explain the direction in which she should adjust <span class="math inline">\(y\)</span>, and describe qualitatively how her position on the CAL moves. Would a very risk-averse investor and a nearly risk-neutral investor respond in the same direction?</p>
+<p><strong>MV-C4.</strong> Explain, in words, why the optimal risky fraction <span class="math inline">\(y = \frac{Er_P - r_f}{A\sigma^2_P}\)</span> falls when the coefficient of risk aversion <span class="math inline">\(A\)</span> rises but rises when the variance <span class="math inline">\(\sigma^2_P\)</span> falls. Two investors face identical <span class="math inline">\(Er_P\)</span>, <span class="math inline">\(\sigma_P\)</span>, and <span class="math inline">\(r_f\)</span> but one has twice the risk aversion of the other. Where does each end up on the CAL, and does the difference in <span class="math inline">\(A\)</span> change which risky portfolio they hold?</p>
+<p><strong>MV-C5.</strong> Suppose two risky assets are being considered for a portfolio. Asset <span class="math inline">\(D\)</span> has a slightly higher variance than asset <span class="math inline">\(E\)</span>, but <span class="math inline">\(D\)</span> has strongly <em>negative</em> correlation with <span class="math inline">\(E\)</span>, whereas a third candidate asset <span class="math inline">\(F\)</span> has the same variance as <span class="math inline">\(E\)</span> but is <em>positively</em> correlated with it. Explain, using the role of covariance in portfolio variance, why the investor might prefer to add the higher-variance asset <span class="math inline">\(D\)</span> rather than <span class="math inline">\(F\)</span>. What is the term for an asset like <span class="math inline">\(D\)</span>?</p>
+<p><strong>MV-C6.</strong> Starting from <span class="math inline">\(\sigma^2_P = w^2_D\sigma^2_D + w^2_E\sigma^2_E + 2w_Dw_E\sigma_D\sigma_E\rho_{DE}\)</span>, explain what happens to portfolio variance as <span class="math inline">\(\rho_{DE}\)</span> moves from <span class="math inline">\(+1\)</span> down to <span class="math inline">\(-1\)</span> with the weights and individual standard deviations held fixed. Why does <span class="math inline">\(\rho_{DE} = 1\)</span> give a portfolio standard deviation equal to the weighted average of the individual standard deviations, while <span class="math inline">\(\rho_{DE} &lt; 1\)</span> gives strictly less? What does this reveal about the source of the diversification benefit?</p>
+<p><strong>MV-C7.</strong> A client protests that her index fund “is already diversified across 500 companies,” so correlation should not matter. Referring to the chapter’s decomposition <span class="math inline">\(\sigma^2_P = \sum_j w_j\,Cov(r_j, r_P)\)</span> of portfolio variance into the covariance of each asset with the whole portfolio, explain why the number of holdings is not what determines diversification. Connect your answer to the chapter’s “In the news” observation about the Magnificent Seven.</p>
+<p><strong>MV-C8.</strong> Explain what the statistic <span class="math inline">\(Cov(r_j, r_P)\)</span> measures and why it, rather than an asset’s own variance <span class="math inline">\(\sigma^2_j\)</span>, is the right notion of the “risk that asset <span class="math inline">\(j\)</span> contributes” to a portfolio. Use the identity <span class="math inline">\(\sum_j w_j\,Cov(r_j, r_P) = \sigma^2_P\)</span> to make the argument precise, and describe how an asset with low or negative <span class="math inline">\(Cov(r_j, r_P)\)</span> affects total portfolio risk.</p>
+<p><strong>MV-C9.</strong> Consider the minimum-variance frontier traced by the problem <span class="math inline">\(\min Var(r_P)\)</span> s.t. <span class="math inline">\(Er_P \ge \bar r\)</span>. An analyst identifies a portfolio that lies strictly <em>inside</em> the frontier (i.e., not on it). Explain in what sense this portfolio is “dominated,” and describe the two distinct improvements an investor could make by moving to the frontier. Why does no rational mean-variance investor hold an interior portfolio?</p>
+<p><strong>MV-C10.</strong> Two portfolios on the minimum-variance frontier have the <em>same</em> variance <span class="math inline">\(\sigma^2_P\)</span> but different expected returns. Explain how this is possible given that the frontier is a parabola in the <span class="math inline">\((\bar r, \sigma^2_P)\)</span> plane with vertex at <span class="math inline">\(\bar r^\ast = A/C\)</span>, and state which of the two a mean-variance investor would ever choose. What is the name for the acceptable (upper) half of the frontier?</p>
+<p><strong>MV-C11.</strong> The separation property says every investor holds the same risky portfolio regardless of risk aversion. A skeptic argues, “That can’t be right — surely a cautious retiree and an aggressive 25-year-old hold different things.” Reconcile the skeptic’s intuition with the separation result. Precisely where does the difference between the two investors show up, and where does it <em>not</em>?</p>
+<p><strong>MV-C12.</strong> In the appendix, every frontier portfolio is written as <span class="math inline">\(w(\bar r) = g + \bar r\, h\)</span> for two fixed vectors <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span>. Explain how this algebraic fact establishes the two-fund separation result — that any frontier portfolio can be built by mixing just two fixed portfolios. When a risk-free asset is added, why does the relevant risky portfolio in the separation result become a single one (the tangency portfolio) common to all investors?</p>
+<p><strong>MV-C13.</strong> The global minimum-variance portfolio weights <span class="math inline">\(w^\ast = \frac{\Sigma^{-1}\mathbf{1}}{\mathbf{1}'\Sigma^{-1}\mathbf{1}}\)</span> depend only on the covariance matrix <span class="math inline">\(\Sigma\)</span> and not at all on expected returns <span class="math inline">\(\mu\)</span>. Explain intuitively why this is the case, and describe a practical situation in which an investor might deliberately choose to hold this portfolio despite giving up expected return.</p>
+<p><strong>MV-C14.</strong> Explain, using the structure of <span class="math inline">\(w^\ast = \frac{\Sigma^{-1}\mathbf{1}}{\mathbf{1}'\Sigma^{-1}\mathbf{1}}\)</span>, why the global minimum-variance portfolio tends to place more weight on assets with low variance and low covariance with the others. In practice, estimates of expected returns are far noisier than estimates of covariances; explain why this makes <span class="math inline">\(w^\ast\)</span> attractive to some practitioners relative to a portfolio that also targets a particular expected return.</p>
+</section>
+<section id="quantitative" class="level3" data-number="4.11.2">
+<h3 data-number="4.11.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">4.11.2</span> Quantitative</h3>
+<p><strong>MV-Q1.</strong> A risky portfolio has <span class="math inline">\(Er_P = 0.11\)</span> and <span class="math inline">\(\sigma_P = 0.20\)</span>, and the risk-free rate is <span class="math inline">\(r_f = 0.03\)</span>. (a) Write the equation of the capital allocation line, <span class="math inline">\(Er_C\)</span> as a function of <span class="math inline">\(\sigma_C\)</span>. (b) What is the Sharpe ratio? (c) What expected return corresponds to a complete-portfolio standard deviation of <span class="math inline">\(\sigma_C = 0.08\)</span>?</p>
+<p><strong>MV-Q2.</strong> Using the CAL <span class="math inline">\(Er_C = r_f + \frac{\sigma_C}{\sigma_P}(Er_P - r_f)\)</span> with <span class="math inline">\(r_f = 0.02\)</span>, <span class="math inline">\(Er_P = 0.10\)</span>, and <span class="math inline">\(\sigma_P = 0.25\)</span>: (a) An investor targets an expected complete-portfolio return of <span class="math inline">\(Er_C = 0.06\)</span>. What standard deviation <span class="math inline">\(\sigma_C\)</span> must she accept? (b) What fraction <span class="math inline">\(y\)</span> of wealth is she holding in the risky portfolio? (Recall <span class="math inline">\(\sigma_C = y\sigma_P\)</span>.)</p>
+<p><strong>MV-Q3.</strong> An investor has risk aversion <span class="math inline">\(A = 4\)</span>, faces <span class="math inline">\(Er_P = 0.12\)</span>, <span class="math inline">\(\sigma_P = 0.20\)</span>, and <span class="math inline">\(r_f = 0.04\)</span>. (a) Compute the optimal fraction <span class="math inline">\(y\)</span> in the risky portfolio using <span class="math inline">\(y = \frac{Er_P - r_f}{A\sigma^2_P}\)</span>. (b) What are the expected return and standard deviation of her complete portfolio? (c) If instead <span class="math inline">\(A = 2\)</span>, recompute <span class="math inline">\(y\)</span> and comment on the change.</p>
+<p><strong>MV-Q4.</strong> Using <span class="math inline">\(y = \frac{Er_P - r_f}{A\sigma^2_P}\)</span>: an investor with <span class="math inline">\(A = 3\)</span> currently sets <span class="math inline">\(y = 0.5\)</span> when <span class="math inline">\(\sigma_P = 0.20\)</span> and <span class="math inline">\(r_f = 0.03\)</span>. (a) What risk premium <span class="math inline">\(Er_P - r_f\)</span> is implied? (b) Now suppose <span class="math inline">\(\sigma_P\)</span> rises to <span class="math inline">\(0.25\)</span> with the same risk premium and <span class="math inline">\(A\)</span>. Recompute <span class="math inline">\(y\)</span> and explain the direction of the change.</p>
+<p><strong>MV-Q5.</strong> Two risky assets <span class="math inline">\(D\)</span> and <span class="math inline">\(E\)</span> have <span class="math inline">\(\sigma_D = 0.30\)</span>, <span class="math inline">\(\sigma_E = 0.20\)</span>, and correlation <span class="math inline">\(\rho_{DE} = 0.25\)</span>. The portfolio weights are <span class="math inline">\(w_D = 0.4\)</span> and <span class="math inline">\(w_E = 0.6\)</span>. Using <span class="math inline">\(\sigma^2_P = w^2_D\sigma^2_D + w^2_E\sigma^2_E + 2w_Dw_E\sigma_D\sigma_E\rho_{DE}\)</span>, compute the portfolio variance and standard deviation. Compare the result to the weighted average of the two standard deviations and comment on the diversification benefit.</p>
+<p><strong>MV-Q6.</strong> Take assets <span class="math inline">\(D\)</span> and <span class="math inline">\(E\)</span> with <span class="math inline">\(\sigma_D = 0.40\)</span>, <span class="math inline">\(\sigma_E = 0.10\)</span>, and <span class="math inline">\(\rho_{DE} = -1\)</span>. Using the perfect-negative-correlation form <span class="math inline">\(\sigma^2_P = (w_D\sigma_D - w_E\sigma_E)^2\)</span> together with <span class="math inline">\(w_D + w_E = 1\)</span>, find the weights <span class="math inline">\(w_D, w_E\)</span> that make the portfolio risk-free (<span class="math inline">\(\sigma_P = 0\)</span>). Verify your answer.</p>
+<p><strong>MV-Q7.</strong> For a three-asset problem, the frontier constants are <span class="math inline">\(A = \mu'\Sigma^{-1}\mathbf{1} = 2.0\)</span>, <span class="math inline">\(B = \mu'\Sigma^{-1}\mu = 0.30\)</span>, and <span class="math inline">\(C = \mathbf{1}'\Sigma^{-1}\mathbf{1} = 20\)</span>. (a) Compute <span class="math inline">\(D = BC - A^2\)</span>. (b) Using <span class="math inline">\(\sigma^2_P = \frac{C\bar r^2 - 2A\bar r + B}{D}\)</span>, find the minimum-variance portfolio’s variance at a target return of <span class="math inline">\(\bar r = 0.15\)</span>. (c) What is the expected return <span class="math inline">\(\bar r^\ast = A/C\)</span> of the global minimum-variance portfolio, and what is its variance <span class="math inline">\(\sigma^2_{min} = 1/C\)</span>?</p>
+<p><strong>MV-Q8.</strong> For a set of risky assets the frontier constants are <span class="math inline">\(A = 1.2\)</span>, <span class="math inline">\(B = 0.20\)</span>, and <span class="math inline">\(C = 8\)</span>. (a) Compute <span class="math inline">\(D\)</span>. (b) Using <span class="math inline">\(\sigma^2_P = \frac{C\bar r^2 - 2A\bar r + B}{D}\)</span>, compute the minimum-variance-frontier variance at target returns <span class="math inline">\(\bar r = 0.10\)</span> and <span class="math inline">\(\bar r = 0.20\)</span>. (c) Verify that the smaller variance occurs at the return closer to <span class="math inline">\(\bar r^\ast = A/C\)</span>, and confirm that <span class="math inline">\(\sigma^2_P\)</span> evaluated at <span class="math inline">\(\bar r^\ast\)</span> equals <span class="math inline">\(1/C\)</span>.</p>
+<p><strong>MV-Q9.</strong> Consider two assets with covariance matrix <span class="math inline">\(\Sigma = \begin{pmatrix} 0.04 &amp; 0.01 \\ 0.01 &amp; 0.09 \end{pmatrix}\)</span>. Using the global minimum-variance weights <span class="math inline">\(w^\ast = \frac{\Sigma^{-1}\mathbf{1}}{\mathbf{1}'\Sigma^{-1}\mathbf{1}}\)</span>, compute the weights on the two assets and the resulting minimum variance <span class="math inline">\(1/C\)</span>. Comment on which asset receives more weight and why.</p>
+<p><strong>MV-Q10.</strong> Two uncorrelated assets have variances <span class="math inline">\(\sigma^2_1 = 0.01\)</span> and <span class="math inline">\(\sigma^2_2 = 0.04\)</span>, so <span class="math inline">\(\Sigma = \begin{pmatrix} 0.01 &amp; 0 \\ 0 &amp; 0.04 \end{pmatrix}\)</span>. Using <span class="math inline">\(w^\ast = \frac{\Sigma^{-1}\mathbf{1}}{\mathbf{1}'\Sigma^{-1}\mathbf{1}}\)</span>, find the global minimum-variance weights and the minimum variance <span class="math inline">\(1/C\)</span>. Show that the weights are inversely proportional to the individual variances and explain why that makes sense.</p>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/scottcondie\.github\.io\/teaching\/450\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Markets.html" class="pagination-link" aria-label="Markets">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markets</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./CAPM.html" class="pagination-link" aria-label="The Capital Asset Pricing Model">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The Capital Asset Pricing Model</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
