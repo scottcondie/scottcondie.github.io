@@ -446,6 +446,58 @@ window.Quarto = {
 <section id="the-assets-we-will-study" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="the-assets-we-will-study"><span class="header-section-number">3.4</span> The assets we will study</h2>
 <p>The institutions described so far — brokers, exchanges, clearinghouses — exist to move a handful of broad classes of financial asset between the people who own them and the people who want them. The remainder of these notes studies those classes in turn: <em>equity</em>, which represents ownership of a firm; <em>fixed income</em>, which represents a promise to repay borrowed money; <em>currency</em>, the claims used to settle transactions across national monies; and <em>derivatives</em>, whose payoffs are defined in terms of some other, underlying asset. We begin with the class most investors meet first, U.S. equities, and take up the others in the chapters that follow.</p>
+<p>Before the details, the headline facts. <a href="#tbl-annual-returns" class="quarto-xref">Table&nbsp;<span>3.1</span></a> reports, for the five assets this section studies, the average return and the volatility of returns in the annual units investors actually quote. These are the orders of magnitude worth committing to memory: short Treasury debt has returned about <span class="math inline">\(5\%\)</span> per year with very little volatility; long Treasuries and investment-grade corporate bonds sit in the <span class="math inline">\(5\)</span>–<span class="math inline">\(7\%\)</span> range with moderate volatility; high-yield bonds and equities have earned <span class="math inline">\(8\)</span>–<span class="math inline">\(9\%\)</span> per year, with volatility that rises step for step. Everything in this section — the markets, the figures, and the distributions — is an unpacking of where this table comes from.</p>
+<div id="tbl-annual-returns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-annual-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.1: Average annual returns and volatilities of the five assets studied in this section, annualized from the monthly returns underlying <a href="#tbl-asset-moments" class="quarto-xref">Table&nbsp;<span>3.2</span></a> (mean multiplied by 12, standard deviation by <span class="math inline">\(\sqrt{12}\)</span>).
+</figcaption>
+<div aria-describedby="tbl-annual-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Asset</th>
+<th style="text-align: left;">Sample</th>
+<th style="text-align: right;">Mean return (% per year)</th>
+<th style="text-align: right;">Std. dev. (% per year)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2-year Treasury</td>
+<td style="text-align: left;">1976–2026</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">2.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10-year Treasury</td>
+<td style="text-align: left;">1953–2026</td>
+<td style="text-align: right;">5.4</td>
+<td style="text-align: right;">6.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Investment-grade corporate</td>
+<td style="text-align: left;">1976–2026</td>
+<td style="text-align: right;">7.1</td>
+<td style="text-align: right;">6.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High-yield corporate</td>
+<td style="text-align: left;">1986–2026</td>
+<td style="text-align: right;">7.7</td>
+<td style="text-align: right;">7.9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">U.S. equities (S&amp;P 500)</td>
+<td style="text-align: left;">1950–2026</td>
+<td style="text-align: right;">8.7</td>
+<td style="text-align: right;">12.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 <section id="u.s.-equities" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="u.s.-equities"><span class="header-section-number">3.4.1</span> U.S. equities</h3>
 <p>A share of <em>common stock</em> is a unit of ownership in a corporation. The shareholder is not a lender to the firm but a part-owner of it, and this distinction organizes everything about how equity behaves.</p>
@@ -493,7 +545,221 @@ Figure&nbsp;3.3: Histogram of monthly returns to the S&amp;P 500, 1950–2026, w
 </section>
 <section id="other-asset-classes" class="level3" data-number="3.4.2">
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="other-asset-classes"><span class="header-section-number">3.4.2</span> Other asset classes</h3>
-<p>Fixed income. Currency. Derivative. The types for each.</p>
+<p>Equity is only one of the broad asset classes an investor can hold, and the S&amp;P 500 histogram becomes far more informative once it has company. This section introduces the other markets that will occupy us in later chapters — government debt and corporate debt of high and low quality — and draws for each the same pair of pictures we drew for the S&amp;P 500: the long climb of an index and the histogram of its monthly returns. Reading these histograms side by side is the fastest way to see what makes each asset class distinctive, because the differences between them show up in exactly the four features we highlighted above: where the distribution is centered, how spread out it is, whether it leans left or right, and how heavy its tails are.</p>
+<dl>
+<dt>Fixed income.</dt>
+<dd>
+<p>A security representing a promise to repay borrowed money on a fixed schedule. Its holder is a <em>creditor</em> of the issuer, not an owner: she is entitled to specified coupon and principal payments, paid ahead of any distribution to shareholders, but does not share in the issuer’s success beyond them.</p>
+</dd>
+</dl>
+<p><strong>Treasury securities.</strong> The market for U.S. Treasury debt is the largest and most liquid bond market in the world, and Treasury yields are the benchmark against which nearly every other dollar-denominated asset is priced. Because the securities are backed by the taxing power of the U.S. government, investors treat them as free of default risk — yet <a href="#fig-treasury-2y" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> and <a href="#fig-treasury-10y" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> show that <em>default-free</em> is not <em>risk-free</em>. A Treasury note held for one month must be sold at whatever yield then prevails, so its return varies with interest rates; this is <strong>interest-rate risk</strong>, and it grows with the length of the promise. The two figures are constructed identically — a par note is bought at the prevailing constant-maturity yield and repriced one month later — and differ only in maturity, yet the 10-year note’s monthly returns (standard deviation about <span class="math inline">\(1.8\%\)</span>) are two and a half times as volatile as the 2-year’s (about <span class="math inline">\(0.7\%\)</span>). The sensitivity of a bond’s price to its yield is called <em>duration</em>, and we will measure it carefully in the fixed-income chapters; the comparison here is the phenomenon that concept exists to describe. Note also what neither histogram shows: the violent left tail of the equity distribution. Both are roughly symmetric, and the worst month for the 2-year note in fifty years was a loss of about <span class="math inline">\(2\%\)</span>.</p>
+<div id="fig-treasury-2y" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-treasury-2y-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/treasury_gs2.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-treasury-2y-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: The 2-year Treasury note: total return index (top) and monthly holding-period returns (bottom), 1976–2026. Returns approximate buying a par note at the constant-maturity yield and selling one month later at the new yield. Source: Federal Reserve H.15 (FRED series GS2).
+</figcaption>
+</figure>
+</div>
+<div id="fig-treasury-10y" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-treasury-10y-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/treasury_gs10.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-treasury-10y-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.5: The 10-year Treasury note: total return index (top) and monthly holding-period returns (bottom), 1953–2026, constructed as in <a href="#fig-treasury-2y" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>. The longer maturity makes the same movements in interest rates far more consequential. Source: Federal Reserve H.15 (FRED series GS10).
+</figcaption>
+</figure>
+</div>
+<p><strong>Corporate credit.</strong> Corporations borrow too, but a corporate promise may not be kept, so corporate bonds carry <strong>default risk</strong> on top of interest-rate risk. Rating agencies grade that risk, and the market splits at a bright line: bonds rated BBB−/Baa3 or better are <strong>investment grade</strong>, while those below are <strong>high yield</strong> (less politely, <em>junk bonds</em>). <a href="#fig-corp-ig" class="quarto-xref">Figure&nbsp;<span>3.6</span></a> and <a href="#fig-corp-hy" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> show total return indices and monthly returns for the two halves of the market. Investment-grade credit looks like a slightly riskier cousin of the 10-year Treasury — similar volatility, a modestly higher average return as compensation for bearing default risk, and a nearly symmetric distribution. High yield is a different animal. Its overall standard deviation (about <span class="math inline">\(2.3\%\)</span>) is only modestly higher than investment grade’s, but the <em>shape</em> of its distribution is sharply asymmetric: the skewness is strongly negative and the left tail is long, with the worst month — October 2008 — a loss of more than <span class="math inline">\(16\%\)</span>, roughly seven standard deviations below the mean if the normal fit were taken literally. The economics behind the shape is worth internalizing: a bond’s upside is capped, since the best that can happen is that it is repaid in full, while its downside runs all the way to default. High-yield bonds are therefore sometimes described as bond-like in good times and equity-like in bad times — a character their histogram wears openly.</p>
+<div id="fig-corp-ig" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-corp-ig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/corp_ig.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corp-ig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.6: U.S. investment-grade corporate bonds: the ICE BofA US Corporate index, total return, 1976–2026. Source: ICE Data Indices (BofA Merrill Lynch), via FRED and GuruFocus.
+</figcaption>
+</figure>
+</div>
+<div id="fig-corp-hy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-corp-hy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/corp_hy.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corp-hy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.7: U.S. high-yield corporate bonds: the ICE BofA US High Yield index, total return, 1986–2026. Note the long left tail: the worst month, October 2008, lies off the edge of the chart. Source: ICE Data Indices (BofA Merrill Lynch), via FRED and GuruFocus.
+</figcaption>
+</figure>
+</div>
+<p><strong>Comparing the five distributions.</strong> <a href="#tbl-asset-moments" class="quarto-xref">Table&nbsp;<span>3.2</span></a> collects the summary statistics, and reading down its columns turns the five histograms into a single picture of how risk and return are organized across markets. The samples differ in length, and the equity series is built from monthly averages, which smooths it slightly, so the comparisons are broad-brush — but the patterns are robust. First, <em>dispersion is a ladder</em>: volatility rises from the 2-year Treasury, to the 10-year Treasury and investment-grade credit, to high yield, to equities, and average returns rise broadly along the same ladder. That co-movement of mean and standard deviation — more compensation where there is more risk to compensate — is the central empirical regularity that the pricing theory of the coming chapters is built to explain. Second, the ladder is not a law: the 2-year Treasury’s ratio of mean to standard deviation is the highest in the table, flattered by a sample that begins near the 1981 peak in interest rates and rides yields down for four decades. Averages computed over particular histories are evidence, not guarantees. Third, and most important for what follows, <em>risk is not one number</em>. The 10-year Treasury and investment-grade credit have nearly identical standard deviations, but they are exposed to different underlying forces — interest rates alone for one, interest rates plus default for the other. High yield and the 10-year Treasury also have similar standard deviations, yet one is roughly symmetric while the other loses <span class="math inline">\(16\%\)</span> in its worst month. Standard deviation is where our study of risk begins in the next chapter, but the tails and asymmetries visible in these histograms — and the question of <em>when</em> each asset’s bad months arrive, and whether they arrive together — are where it will lead.</p>
+<div id="tbl-asset-moments" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-asset-moments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.2: Summary statistics of monthly returns, in percent per month. Treasury returns are approximate holding-period returns constructed from constant-maturity yields; equity returns are computed from monthly-average prices; corporate bond returns are from month-end total return index values.
+</figcaption>
+<div aria-describedby="tbl-asset-moments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Asset</th>
+<th style="text-align: left;">Sample</th>
+<th style="text-align: right;"><span class="math inline">\(n\)</span></th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">Std. dev.</th>
+<th style="text-align: right;">Skewness</th>
+<th style="text-align: right;">Excess kurtosis</th>
+<th style="text-align: right;">Worst</th>
+<th style="text-align: right;">Best</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2-year Treasury</td>
+<td style="text-align: left;">1976–2026</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.74</td>
+<td style="text-align: right;">2.3</td>
+<td style="text-align: right;">13.8</td>
+<td style="text-align: right;">−2.2</td>
+<td style="text-align: right;">6.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10-year Treasury</td>
+<td style="text-align: left;">1953–2026</td>
+<td style="text-align: right;">878</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">1.84</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">−8.2</td>
+<td style="text-align: right;">10.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Investment-grade corporate</td>
+<td style="text-align: left;">1976–2026</td>
+<td style="text-align: right;">606</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: right;">−7.5</td>
+<td style="text-align: right;">12.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High-yield corporate</td>
+<td style="text-align: left;">1986–2026</td>
+<td style="text-align: right;">478</td>
+<td style="text-align: right;">0.64</td>
+<td style="text-align: right;">2.29</td>
+<td style="text-align: right;">−1.2</td>
+<td style="text-align: right;">10.0</td>
+<td style="text-align: right;">−16.3</td>
+<td style="text-align: right;">11.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">U.S. equities (S&amp;P 500)</td>
+<td style="text-align: left;">1950–2026</td>
+<td style="text-align: right;">917</td>
+<td style="text-align: right;">0.73</td>
+<td style="text-align: right;">3.47</td>
+<td style="text-align: right;">−0.9</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">−20.4</td>
+<td style="text-align: right;">12.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>One more set of numbers belongs in this first look at the data, because everything in the chapters on portfolio choice depends on it: how these assets move <em>together</em>. <a href="#tbl-correlations" class="quarto-xref">Table&nbsp;<span>3.3</span></a> reports the correlations between the five assets’ monthly returns over the forty years for which all five series overlap. Three of its entries deserve to be remembered. The two Treasuries are strongly correlated (<span class="math inline">\(0.76\)</span>) — no surprise, since a single force, the level of interest rates, drives them both. High-yield bonds co-move far more with equities (<span class="math inline">\(0.64\)</span>) than with the 10-year Treasury (<span class="math inline">\(0.11\)</span>): their histogram looked equity-like in bad times, and their correlation says the same thing — the default risk that dominates high yield is the same business-cycle risk that drives the stock market. And equities have been roughly <em>uncorrelated</em> with Treasuries over this sample (about <span class="math inline">\(-0.1\)</span>), which is precisely why the classic stock-and-bond portfolio works: when assets do not move together, the bad months of one are, on average, ordinary months for the other, and a mix of the two is steadier than either alone. Low correlation is the raw material of diversification, and measuring its consequences precisely is where the mean-variance chapter begins.</p>
+<div id="tbl-correlations" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.3: Correlations of monthly returns, September 1986–June 2026 — the longest period over which all five series overlap (<span class="math inline">\(n = 478\)</span> months).
+</figcaption>
+<div aria-describedby="tbl-correlations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">2-yr Treasury</th>
+<th style="text-align: right;">10-yr Treasury</th>
+<th style="text-align: right;">IG corporate</th>
+<th style="text-align: right;">High yield</th>
+<th style="text-align: right;">Equities</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2-year Treasury</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.76</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">−0.14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10-year Treasury</td>
+<td style="text-align: right;">0.76</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">−0.09</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Investment-grade corporate</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">0.28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">High-yield corporate</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">U.S. equities (S&amp;P 500)</td>
+<td style="text-align: right;">−0.14</td>
+<td style="text-align: right;">−0.09</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.64</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Two classes of asset remain. <strong>Currencies</strong> — claims used to settle transactions across national monies — and <strong>derivatives</strong> — securities such as forwards, futures, and options whose payoffs are defined in terms of some other, underlying asset — have return properties that depend so directly on their contractual structure that they are best studied alongside that structure, and we take them up in the chapters on forwards, futures, and options later in these notes.</p>
 <div id="citations">
 <dl>
 <dt><span id="RegT" class="citation-label">RegT</span></dt>
