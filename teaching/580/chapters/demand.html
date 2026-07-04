@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; The Classical Theory of Demand and Preferences – Advanced Microeconomic Theory Class Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/supply.html" rel="next">
+<link href="../chapters/optimization.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-3f0355521128f6c6007a8285d23fb6b4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+window.MathJax = {
+  tex: {
+    macros: {
+      R: "{\\mathbb{R}}",
+      E: "{\\mathbb{E}}",
+      argmax: "{\\operatorname*{arg\\,max}}",
+      argmin: "{\\operatorname*{arg\\,min}}"
+    }
+  }
+};
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/demand.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Classical Theory of Demand and Preferences</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Advanced Microeconomic Theory Class Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="../Advanced-Microeconomic-Theory-Class-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Optimization</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/demand.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Classical Theory of Demand and Preferences</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/supply.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Theory of Supply</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/uncertainty.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Decision making under uncertainty</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ge-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">General Equilibrium Examples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ge-welfare.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">The Welfare Theorems of General Equilibrium</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ge-existence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The Existence of General Equilibrium</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ge-with-uncertainty.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">General Equilibrium with Uncertainty</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">2.1</span> Introduction</a></li>
+  <li><a href="#preferences" id="toc-preferences" class="nav-link" data-scroll-target="#preferences"><span class="header-section-number">2.2</span> Preferences</a></li>
+  <li><a href="#utility-maximization" id="toc-utility-maximization" class="nav-link" data-scroll-target="#utility-maximization"><span class="header-section-number">2.3</span> Utility Maximization</a>
+  <ul class="collapse">
+  <li><a href="#budget-sets" id="toc-budget-sets" class="nav-link" data-scroll-target="#budget-sets"><span class="header-section-number">2.3.1</span> Budget sets</a></li>
+  </ul></li>
+  <li><a href="#optimal-demand" id="toc-optimal-demand" class="nav-link" data-scroll-target="#optimal-demand"><span class="header-section-number">2.4</span> Optimal Demand</a>
+  <ul class="collapse">
+  <li><a href="#comparative-statics-of-the-ump" id="toc-comparative-statics-of-the-ump" class="nav-link" data-scroll-target="#comparative-statics-of-the-ump"><span class="header-section-number">2.4.1</span> Comparative statics of the UMP</a></li>
+  <li><a href="#indirect-utility" id="toc-indirect-utility" class="nav-link" data-scroll-target="#indirect-utility"><span class="header-section-number">2.4.2</span> Indirect utility</a></li>
+  </ul></li>
+  <li><a href="#expenditure-minization" id="toc-expenditure-minization" class="nav-link" data-scroll-target="#expenditure-minization"><span class="header-section-number">2.5</span> Expenditure Minization</a></li>
+  <li><a href="#analytical-properties-of-demand" id="toc-analytical-properties-of-demand" class="nav-link" data-scroll-target="#analytical-properties-of-demand"><span class="header-section-number">2.6</span> Analytical Properties of Demand</a></li>
+  <li><a href="#integrability" id="toc-integrability" class="nav-link" data-scroll-target="#integrability"><span class="header-section-number">2.7</span> Integrability</a></li>
+  <li><a href="#choice-demand-and-the-weak-axiom" id="toc-choice-demand-and-the-weak-axiom" class="nav-link" data-scroll-target="#choice-demand-and-the-weak-axiom"><span class="header-section-number">2.8</span> Choice, Demand and the Weak Axiom</a></li>
+  <li><a href="#individual-welfare-partial-equilibrium" id="toc-individual-welfare-partial-equilibrium" class="nav-link" data-scroll-target="#individual-welfare-partial-equilibrium"><span class="header-section-number">2.9</span> Individual Welfare (Partial equilibrium)</a></li>
+  <li><a href="#aggregate-demand" id="toc-aggregate-demand" class="nav-link" data-scroll-target="#aggregate-demand"><span class="header-section-number">2.10</span> Aggregate Demand</a></li>
+  <li><a href="#ad-and-aggregate-wealth" id="toc-ad-and-aggregate-wealth" class="nav-link" data-scroll-target="#ad-and-aggregate-wealth"><span class="header-section-number">2.11</span> AD and Aggregate Wealth</a></li>
+  <li><a href="#ad-and-the-weak-axiom" id="toc-ad-and-the-weak-axiom" class="nav-link" data-scroll-target="#ad-and-the-weak-axiom"><span class="header-section-number">2.12</span> AD and the Weak Axiom</a></li>
+  <li><a href="#existence-of-a-representative-consumer" id="toc-existence-of-a-representative-consumer" class="nav-link" data-scroll-target="#existence-of-a-representative-consumer"><span class="header-section-number">2.13</span> Existence of a Representative Consumer</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Classical Theory of Demand and Preferences</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2.1</span> Introduction</h2>
+<p>This section introduces the classical theory of individual preference and the connection between this and the observable choices that individuals make. To do this, we derive the demand that is implied by the preferences of an individual and the budget set available to them.</p>
+<ul>
+<li>Reading material: MWG Ch. 3, Kreps Ch. 2</li>
+<li>Proved results: A Representation Theorem</li>
+</ul>
+</section>
+<section id="preferences" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="preferences"><span class="header-section-number">2.2</span> Preferences</h2>
+<div id="def-1" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.1</strong></span> Let <span class="math inline">\(X\)</span> be a set. The <strong>Cartesian product</strong> of the set <span class="math inline">\(X\)</span> is the set of all pairs <span class="math inline">\((x_{1},x_{2})\)</span> where <span class="math inline">\(x_{i} \in X\)</span> for <span class="math inline">\(i \in \{1,2\}\)</span>. This cartesian product is denoted <span class="math inline">\(X \times X\)</span>.</p>
+</div>
+<div id="def-2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.2</strong></span> Let <span class="math inline">\(X\)</span> be a set. A <strong>preference (or binary) relation</strong> <span class="math inline">\(\succsim\)</span> is a subset of <span class="math inline">\(X \times X\)</span>. We say that for <span class="math inline">\(x,y \in X\)</span>, <span class="math inline">\(x \succsim y\)</span> if <span class="math inline">\((x,y) \in \succsim\)</span>.</p>
+</div>
+<p>The preferences of an individual are represented by a weak preference relation over bundles in a commodity set. Let <span class="math inline">\(X\)</span> denote a set of elements that we will call the <em>consumption set</em>.</p>
+<p>From the definition of a weak preference relation we can define strong preference.</p>
+<div id="def-3" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.3</strong></span> For the weak preference relation <span class="math inline">\(\succsim\)</span>, we define the <strong>strong preference relation</strong> <span class="math inline">\(\succ\)</span> by saying that <span class="math inline">\(x \succ y\)</span> if <span class="math inline">\(x \succsim y\)</span> and not <span class="math inline">\(y \succsim x\)</span>. Likewise we define the <strong>indifference relation</strong> as <span class="math inline">\(x \sim y\)</span> if <span class="math inline">\(x \succsim y\)</span> and <span class="math inline">\(y \succsim x\)</span>.</p>
+</div>
+<p>The following two definitions will be useful for the preference relations used in this class.</p>
+<div id="def-4" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.4</strong></span> A preference relation <span class="math inline">\(\succsim\)</span> is <strong>complete</strong> if for any two <span class="math inline">\(x,y \in X\)</span>, either <span class="math inline">\(x \succsim y\)</span>, <span class="math inline">\(y \succsim x\)</span> or both.</p>
+</div>
+<div id="def-5" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.5</strong></span> A preference relation <span class="math inline">\(\succsim\)</span> is <strong>transitive</strong> if for any three <span class="math inline">\(x,y,z \in X\)</span>, if <span class="math inline">\(x \succsim y\)</span> and <span class="math inline">\(y \succsim z\)</span> then <span class="math inline">\(x \succsim z\)</span>.</p>
+</div>
+<p>These two properties are <em>assumptions</em>. That is, an individual’s preferences need not satisfy them. However, if completeness does not hold for a particular preference relation then there are choice situations where the model assumed about individuals does not say what the person will do. Such situations are interpreted as a problem with the model, as opposed to a problem with the individual. That is, a model’s utility comes from it’s ability to make predictions. If the model doesn’t make predictions in some situations, then it is not useful.</p>
+<p>If a preference relation doesn’t satisfy transitivity, then there where will be sets of choice situations where an individual displays <em>cyclic</em> behavior. If <span class="math inline">\(x \succsim y\)</span> and <span class="math inline">\(y \succsim z\)</span> but <span class="math inline">\(z \succsim x\)</span> then the individual would be unable to choose a weakly preferred element from the set <span class="math inline">\(\{x,y,z\}\)</span> because for every element of the set there is another element that is preferred to it. As we will see, this idea is mathematically analogous to the existance of a maximum of a continuous function over a compact set.</p>
+<p>It will often be useful to make additional assumptions about a preference relation <span class="math inline">\(\succsim\)</span>. Consider a consumption set <span class="math inline">\(X\)</span> where every element <span class="math inline">\(x \in X\)</span> can be characterized by a set of elements <span class="math inline">\(\{x_{i}\}\)</span> for <span class="math inline">\(i\)</span> in some index set <span class="math inline">\(I\)</span>.</p>
+<div id="def-6" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.6</strong></span> A preference relation <span class="math inline">\(\succsim\)</span> is <strong>monotone</strong> if for every <span class="math inline">\(x,y \in X\)</span> for which <span class="math inline">\(y_{i} \ge x_{i}\)</span> for all <span class="math inline">\(i \in I\)</span>, <span class="math inline">\(y \succsim x\)</span>. A relation is <em>strictly monotone</em> if <span class="math inline">\(y_{i} &gt; x_{i}\)</span> for all <span class="math inline">\(i \in I\)</span> implies that <span class="math inline">\(y \succ x\)</span>.</p>
+</div>
+<p>Intuitively, a preference relation is monotonic if having more of each of the elements of consumption results in a choice maker being better off.</p>
+<div id="def-7" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.7 (This requires a vector-space like consumption set.)</strong></span> A preference relation <span class="math inline">\(\succsim\)</span> is <strong>locally nonsatiated</strong> if for every <span class="math inline">\(x \in X\)</span> and every <span class="math inline">\(\epsilon &gt; 0\)</span>, there exists a <span class="math inline">\(y \in X\)</span> such that <span class="math inline">\(||x - y|| &lt; \epsilon\)</span> and <span class="math inline">\(y \succ x\)</span>.</p>
+</div>
+<p>To understand the next potential assumption, we must recall the definition of convexity of a set.</p>
+<div id="def-8" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.8</strong></span> A set <span class="math inline">\(X\)</span> is <strong>convex</strong> if for any two elements <span class="math inline">\(x,y \in X\)</span> and real number <span class="math inline">\(\alpha \in [0,1]\)</span>, the object <span class="math inline">\(\alpha x + (1-\alpha) y \in X\)</span>.</p>
+</div>
+<dl>
+<dt><strong>Note.</strong></dt>
+<dd>
+<p>Notice that the definition of convexity requires that addition and scalar multiplication be defined over the set <span class="math inline">\(X\)</span>. Much (but not all) of the analysis of preference relations occurs in vector spaces (discussed elsewhere) which have these two operations defined.</p>
+</dd>
+</dl>
+<p>Given this definition, we can define the convexity of a preference relation.</p>
+<div id="def-9" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.9</strong></span> A preference relation <span class="math inline">\(\succsim\)</span> is <strong>convex</strong> if for every <span class="math inline">\(x \in X\)</span>, the set <span class="math inline">\(\{y \in X: y \succsim x\}\)</span> is convex (in the set sense).</p>
+</div>
+<p>This set <span class="math inline">\(\{y \in X: y \succsim x\}\)</span> is known as the <strong>upper contour set</strong> of the point <span class="math inline">\(x\)</span>.</p>
+<div id="def-10" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.10</strong></span> A preference relation <span class="math inline">\(\succsim\)</span> is <strong>strictly convex</strong> if for every <span class="math inline">\(x \in X\)</span>, the set <span class="math inline">\(\{y \in X: y \succsim x\}\)</span> is convex (in the set sense).</p>
+</div>
+<div id="def-11" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.11</strong></span> The relation <span class="math inline">\(\succsim\)</span> is <strong>continuous</strong> if for any sequence of pairs <span class="math inline">\(\{(x^n,y^n)\}_{n=1}^{\infty}\)</span> with limit <span class="math inline">\((x,y)\)</span>, <span class="math inline">\(x^n \succsim y^n\)</span> for all <span class="math inline">\(n\)</span> implies that <span class="math inline">\(x \succsim y\)</span>.</p>
+</div>
+<div id="def-12" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.12</strong></span> A subset <span class="math inline">\(Z\)</span> of <span class="math inline">\(X\)</span> is called <span class="math inline">\(\succ\)</span> <strong>-order dense</strong> if for all <span class="math inline">\(x,y \in X\)</span> such that <span class="math inline">\(x \succ y\)</span>, there exists some <span class="math inline">\(z \in Z\)</span> such that either <span class="math inline">\(x \succ z \succsim y\)</span> or <span class="math inline">\(x \succsim z \succ y\)</span>.</p>
+</div>
+<p><strong>Proposition.</strong></p>
+<p>Let <span class="math inline">\(X\)</span> be a choice set. A preference relation <span class="math inline">\(\succsim\)</span> over <span class="math inline">\(X\)</span> is complete, transitive and has a countable <span class="math inline">\(\succsim\)</span>-order dense subset <span class="math inline">\(Z\)</span> if and only if there exists a continuous utility function <span class="math inline">\(u:X \rightarrow \mathbb{R}\)</span> for which <span class="math inline">\(u(x) \ge u(y)\)</span> if and only if <span class="math inline">\(x \succsim y\)</span>.</p>
+<p><strong>Proof.</strong></p>
+<p>First, let’s prove that if there exists a <span class="math inline">\(u(\cdot)\)</span> satisfying the above property then, <span class="math inline">\(\succsim\)</span> is complete, transitive and continuous. Assume that such a <span class="math inline">\(u\)</span> exists. Completeness of <span class="math inline">\(\succsim\)</span> follows from the fact that <span class="math inline">\(&gt;\)</span> is complete. That is, for any two real numbers <span class="math inline">\(u(x)\)</span> and <span class="math inline">\(u(y)\)</span>, either <span class="math inline">\(u(x) \ge u(y)\)</span>, <span class="math inline">\(u(y) \ge u(x)\)</span> or both. Likewise for transitivity. For any three of <span class="math inline">\(u(x), u(y)\)</span> and <span class="math inline">\(u(z)\)</span>, if <span class="math inline">\(u(x) \ge u(y)\)</span> and <span class="math inline">\(u(y) \ge u(z)\)</span>, then <span class="math inline">\(u(x) \ge u(z)\)</span>.</p>
+<p>To go the other way, let <span class="math inline">\(Z = \{z_{1},z_{2}, \ldots\}\)</span>. For each <span class="math inline">\(z_n\)</span>, define the number <span class="math inline">\(r(z_n) = \left(\frac{1}{2}\right)^{n}\)</span>. Now, for each <span class="math inline">\(x \in X\)</span>, let <span class="math inline">\(\overline{Z}(x) = \{z \in Z: z \succsim x\}\)</span> and let <span class="math inline">\(\underline{Z}(x) = \{z \in Z: x \succsim z\}\)</span>. Notice that if <span class="math inline">\(x \succsim y\)</span> then <span class="math inline">\(\overline{Z}(x) \subseteq \overline{Z}(y)\)</span> and <span class="math inline">\(\underline{Z}(x) \supseteq \underline{Z}(y)\)</span>. Moreover, if <span class="math inline">\(x \succ y\)</span> then at least one of these subset relations is strict (by <span class="math inline">\(\succ\)</span>-order density) which implies that there is some <span class="math inline">\(z \in Z\)</span> for which either <span class="math inline">\(x \succ z \succsim y\)</span> or <span class="math inline">\(x \succsim z \succ y\)</span> or both. Define</p>
+<p><span class="math display">\[u(x) = \sum_{z \in \underline{Z}(x)} r(z) - \sum_{z \in \overline{Z}(x)} r(z).\]</span></p>
+<p>Notice that both of these sums are well defined and therefore <span class="math inline">\(u(x)\)</span> is well defined. Since <span class="math inline">\(\underline{Z}(x) \supseteq \underline{Z}(y)\)</span>, <span class="math inline">\(\sum_{z \in \underline{Z}(x)} r(z) &gt; \sum_{z \in \underline{Z}(y)} r(z)\)</span> and since <span class="math inline">\(\overline{Z}(x) \subseteq \overline{Z}(y)\)</span>, <span class="math inline">\(\sum_{z \in \overline{Z}(x)} r(z) &lt; \sum_{z \in \overline{Z}(y)} r(z)\)</span>, where again, at least one of these relationships is strict. Thus, <span class="math inline">\(u(x) \ge u(y)\)</span> and <span class="math inline">\(u(x) &gt; u(y)\)</span> if <span class="math inline">\(x \succ y\)</span>. You are left to prove that this function will be continuous if the preference relation is continuous.</p>
+</section>
+<section id="utility-maximization" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="utility-maximization"><span class="header-section-number">2.3</span> Utility Maximization</h2>
+<p>For the remainder of this section, we will consider preferences that can be represented by a utility function <span class="math inline">\(u(x)\)</span> over a choice set <span class="math inline">\(X\)</span>.</p>
+<section id="budget-sets" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="budget-sets"><span class="header-section-number">2.3.1</span> Budget sets</h3>
+<div id="def-13" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.13</strong></span> A <strong>linear functional</strong> is a function <span class="math inline">\(f: X \rightarrow \mathbb{R}\)</span> that has the property that <span class="math inline">\(f(\alpha x + \beta y) = \alpha f(x) + \beta f(y)\)</span> for all <span class="math inline">\(x,y \in X\)</span> and <span class="math inline">\(\alpha,\beta \in \mathbb{R}\)</span>. The space of all linear functionals of the set <span class="math inline">\(X\)</span> is denote <span class="math inline">\(X^{*}\)</span> and is known as the <strong>dual space of</strong> <span class="math inline">\(X\)</span> or sometimes just the "dual of <span class="math inline">\(X\)</span>".</p>
+</div>
+<p>In the arena of consumer demand, linear functionals play the role of producing the cost of any particular consumption bundle. That is, if I want to consume the bundle <span class="math inline">\(x \in X\)</span>, then the cost of consuming such a bundle is <span class="math inline">\(f(x)\)</span>.</p>
+<div id="exm-1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2.1</strong></span> In the space <span class="math inline">\(\mathbb{R}^n\)</span>, the set of linear functionals is the set of inner products formed with elements of <span class="math inline">\(\mathbb{R}^n\)</span>. Specifically, if my consumption space is the set of all possible bundles of apples and oranges then (assuming we allow for fractional consumption of fruit) the choice set is <span class="math inline">\(X = \mathbb{R}^{2}_{+}\)</span>. The set of linear functionals over this set is the space of functions <span class="math inline">\(\{f: f(x) = a'x for a \in \mathbb{R}^2\}\)</span>.</p>
+</div>
+<div id="exm-2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2.2</strong></span> Let <span class="math inline">\(X = \ell\)</span> (the space of all countably infinite sequences of real numbers). A natural first place to look for the dual <span class="math inline">\(X^{*}\)</span> is the set of all functionals of the form <span class="math inline">\(\\{f: f(x) = \sum_{i=0}^{\infty}a_{i}x_{i} \mbox{ for } a_{i} \in \mathbb{R}}\)</span>. This however, is not the set of linear functionals over this set. Can you see why?</p>
+</div>
+<p>This is a first example of a recurrent theme in economic (and mathematical) analysis: infinite dimensional spaces require extra thought. However, as we will see, it is both possible and quite useful to conduct economic analysis over these infinite dimensional spaces.</p>
+<div id="def-14" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.14</strong></span> <strong>Prices</strong> over a commodity space <span class="math inline">\(X\)</span> is an element of the set of linear functionals</p>
+</div>
+<div id="prp-1" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.1 (Heine-Borel)</strong></span> A subset <span class="math inline">\(S\)</span> of <span class="math inline">\(\mathbb{R}^{n}\)</span> is compact if and only if it is closed and bounded.</p>
+</div>
+</section>
+</section>
+<section id="optimal-demand" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="optimal-demand"><span class="header-section-number">2.4</span> Optimal Demand</h2>
+<div id="def-15" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.15</strong></span> A function <span class="math inline">\(f:X \rightarrow \mathbb{R}\)</span> is quasiconcave if its upper contour sets are convex.</p>
+</div>
+<div id="thm-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.1 (Weierstrass)</strong></span> A continuous function over a compact set attains a maximum.</p>
+</div>
+<div id="prp-2" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.2</strong></span> If <span class="math inline">\(p \in \mathbb{R}^{n}_{++}\)</span>, <span class="math inline">\(x \ge 0\)</span> and <span class="math inline">\(u(\cdot)\)</span> is continuous then the utility maximization problem has a solution.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>If <span class="math inline">\(p \in \mathbb{R}^{n}_{++}\)</span> then <span class="math inline">\(B(p,w)\)</span> is compact. [Can you provide a counter example from <span class="math inline">\(\mathbb{R}^{n}_{+}\)</span>?]. Since <span class="math inline">\(u(\cdot)\)</span> is continuous, it has a solution.</p>
+</div>
+<div id="prp-3" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.3</strong></span> If <span class="math inline">\(p \in \mathbb{R}^{n}_{++}\)</span> and <span class="math inline">\(u(\cdot)\)</span> is continuous and locally non-satiated, then the demand correspondence <span class="math inline">\(x(p,w)\)</span> has the following properties:</p>
+<blockquote class="blockquote">
+<ul>
+<li><span class="math inline">\(x(\alpha p, \alpha w) = x(p,w)\)</span> (homogeneity of degree 0)</li>
+<li><span class="math inline">\(px = w\)</span> for all <span class="math inline">\(x \in x(p,w)\)</span>.</li>
+<li>If <span class="math inline">\(\succsim\)</span> is convex, so that <span class="math inline">\(u(\cdot)\)</span> is quasiconcave, then <span class="math inline">\(x(p,w)\)</span> is a convex set. Moreover, if <span class="math inline">\(\succsim\)</span> is strictly convex, so that <span class="math inline">\(u(\cdot)\)</span> is strictly quasiconcave, then <span class="math inline">\(x(p,w)\)</span> is a single element.</li>
+</ul>
+</blockquote>
+</div>
+<p>Proof.</p>
+<section id="comparative-statics-of-the-ump" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="comparative-statics-of-the-ump"><span class="header-section-number">2.4.1</span> Comparative statics of the UMP</h3>
+<p>Consider the first order conditions from the UMP.</p>
+<p><span class="math display">\[\begin{aligned}
+\begin{aligned}
+    \bigtriangledown u(x) \le \lambda p \\
+    x'[\bigtriangledown u(x) - \lambda p] = 0
+\end{aligned}
+\end{aligned}\]</span></p>
+<div id="thm-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2.2 (Implicit Function Theorem)</strong></span> Consider the system of equations <span class="math inline">\(f(x;q) = 0\)</span>. Let <span class="math inline">\(D_{x}f(x_{0};q_{0})\)</span> be non-singular. Then there exists a function <span class="math inline">\(\hat x(q)\)</span> defined at a neighborhood of solution <span class="math inline">\((x_{0},q_{0})\)</span> such that <span class="math inline">\(f(\hat x(q),q) = 0\)</span> and further more</p>
+<p><span class="math display">\[D_{q}\hat x(q) = -D_{x}f(x;q)^{-1}D_{q}f(x;q)\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em> (sketch). </span>Consider <span class="math inline">\(D_{x}f(x;q)D_{q}\hat{x}(q) - D_{q}f(x;q) = 0\)</span>.</p>
+</div>
+</section>
+<section id="indirect-utility" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="indirect-utility"><span class="header-section-number">2.4.2</span> Indirect utility</h3>
+<p>The indirect utility function <span class="math inline">\(v(p,w)\)</span> is</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>Homogenous of degree zero</li>
+<li>Strictly increasing in <span class="math inline">\(w\)</span> and nonincreasing in <span class="math inline">\(p_{l}\)</span> for an <span class="math inline">\(l\)</span>.</li>
+<li>Quasiconvex (the set <span class="math inline">\(\{(p,w): v(p,w) \le \overline{v}\}\)</span> is convex for any <span class="math inline">\(\overline{v}\)</span>.</li>
+<li>Continuous in <span class="math inline">\(p\)</span> and <span class="math inline">\(w\)</span>.</li>
+</ol>
+</blockquote>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We prove number 4. Let <span class="math inline">\(v(p,w) = u(x(p,w))\)</span>. If <span class="math inline">\(x(p,w)\)</span> is continuous, then <span class="math inline">\(v(p,w)\)</span> is continuous, but we can’t guarantee that <span class="math inline">\(x(p,w)\)</span> is single-valued. However, we can prove that for some sequence of <span class="math inline">\((p^{n},w^{n})\)</span> that converges to <span class="math inline">\((p,w)\)</span> and <span class="math inline">\(x^{n} \in x(p^{n},w^{n})\)</span> where <span class="math inline">\(x^{n} \rightarrow \hat{x}\)</span>, that <span class="math inline">\(\hat{x} \in x(p,w)\)</span>. To see this, consider the sequence <span class="math inline">\(x^{n} \in x(p^{n},w^{n})\)</span> with <span class="math inline">\(x^{n} \rightarrow \hat{x}\)</span>, but <span class="math inline">\(\hat{x} \notin x(p,w)\)</span>. We know that <span class="math inline">\(p^{n}\cdot x^{n} \le w^{n}\)</span> for all <span class="math inline">\(n\)</span> and that both sides of this inequality are continuous, so <span class="math inline">\(p\cdot \hat{x} \le w\)</span>. So <span class="math inline">\(\hat{x}\)</span> is feasible under <span class="math inline">\(p,w\)</span>. Since it is not optimal there must be <span class="math inline">\(\overline{x} \in x(p,w)\)</span> for which <span class="math inline">\(u(\overline{x}) &gt; u(\hat{x})\)</span>. Now, since <span class="math inline">\(u(\cdot)\)</span> is continuous, there is another bundle <span class="math inline">\(y\)</span>, arbitrarily close to <span class="math inline">\(\overline{x}\)</span> such that <span class="math inline">\(p\cdot y &lt; w\)</span> and <span class="math inline">\(u(y) &gt; u(\hat{x})\)</span>. If <span class="math inline">\(n\)</span> is large enough, by continuity of the linear functional, it must be that <span class="math inline">\(p^{n}\cdot y &lt; w^{n}\)</span>. Since <span class="math inline">\(y\)</span> is feasible we must have that <span class="math inline">\(u(x^{n}) &gt; u(y)\)</span>. By the contintuity of <span class="math inline">\(u(\cdot)\)</span> and taking limits we have that <span class="math inline">\(u(\hat{x}) \ge u(y)\)</span> which is a contradiction.</p>
+<p>We can use this result to show that <span class="math inline">\(v(p,w)\)</span> is continuous in <span class="math inline">\(p\)</span> and <span class="math inline">\(w\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="expenditure-minization" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="expenditure-minization"><span class="header-section-number">2.5</span> Expenditure Minization</h2>
+<p>The problem <span class="math inline">\(\min_{x} p\cdot x\)</span> s.t. <span class="math inline">\(u(x) \ge \overline{u}\)</span> is called the expenditure minimization problem (EMP). The minimized expenditure is denoted <span class="math inline">\(e(p,u)\)</span> and called the expenditure function and the solution to this problem is <span class="math inline">\(h(p,u)\)</span> and is called <em>Hicksian demand</em>.</p>
+<div id="prp-4" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.4</strong></span> The expenditure function <span class="math inline">\(e(p,u)\)</span> is</p>
+<blockquote class="blockquote">
+<ul>
+<li>Homogenous of degree one in p</li>
+<li>Strictly increasing in u and non-decreasing in <span class="math inline">\(p_l\)</span></li>
+<li>Concave in <span class="math inline">\(p\)</span></li>
+<li>Continuous in <span class="math inline">\(p\)</span> and <span class="math inline">\(u\)</span></li>
+</ul>
+</blockquote>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For concavity, let <span class="math inline">\(\overline{u}\)</span> be the required utility level. Define <span class="math inline">\(p'' = \alpha p + (1-\alpha)p'\)</span>. If <span class="math inline">\(x''\)</span> is optimal under <span class="math inline">\(p''\)</span>, then</p>
+<p><span class="math display">\[\begin{aligned}
+\begin{aligned}
+    e(p'',\overline{u}) = p'' \cdot x'' \\
+    = \alpha p \cdot x'' + (1-\alpha) p' \cdot x'' \\
+    \ge \alpha e(p,\overline{u}) + (1-\alpha)e(p',\overline{u})
+\end{aligned}
+\end{aligned}\]</span></p>
+</div>
+<div id="prp-5" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.5</strong></span> Let <span class="math inline">\(h(p,u)\)</span> be a solution to the EMP for a continuous, locally non-satiated preference relation. We call this Hicksian demand. Hicksian demand has the following properties:</p>
+<blockquote class="blockquote">
+<ul>
+<li>Homogeneity of degree zero in <span class="math inline">\(p\)</span>. That is, <span class="math inline">\(h(\alpha p, u) = h(p,u)\)</span>.</li>
+<li>No excess utility. For any <span class="math inline">\(x \in h(p,u), u(x) = u\)</span>.</li>
+<li>Convexity/uniqueness. If <span class="math inline">\(\succsim\)</span> is convex, then <span class="math inline">\(h(p,u)\)</span> is a convex set. If <span class="math inline">\(\succsim\)</span> is strictly convex, so <span class="math inline">\(u(\cdot)\)</span> is strictly quasiconcave, then there is a unique element in <span class="math inline">\(h(p,u)\)</span>.</li>
+</ul>
+</blockquote>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>See book. These methods are similar to those of marshallian demand.</p>
+</div>
+</section>
+<section id="analytical-properties-of-demand" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="analytical-properties-of-demand"><span class="header-section-number">2.6</span> Analytical Properties of Demand</h2>
+<div id="prp-6" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.6 (Compensated Law of demand)</strong></span> Suppose that <span class="math inline">\(u(\cdot)\)</span> is continuous and represents a locally non-satiated preference relation. Assume that <span class="math inline">\(h(p,u)\)</span> is single valued for all <span class="math inline">\(p  \in \mathbb{R}^{n}_{++}\)</span>. Then Hicksian Demand satisfies</p>
+<p><span class="math display">\[(p' - p)\cdot[h(p',u) - h(p,u)] \le 0\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Note that</p>
+<p><span class="math display">\[\begin{aligned}
+\begin{aligned}
+    p'\cdot h(p',u) &amp; \le p'\cdot h(p,u) \\
+    p\cdot h(p,u) &amp; \le p\cdot h(p',u)
+\end{aligned}
+\end{aligned}\]</span></p>
+<p>Now subtract right from left and then add the top and bottom (or vice versa).</p>
+</div>
+<div id="prp-7" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.7</strong></span> Suppose that <span class="math inline">\(u(\cdot)\)</span> is a continuous utility function representing a locally nonsatiated and strictly convex preference relation <span class="math inline">\(\succsim\)</span> (note that this implies uniqueness). For all <span class="math inline">\(p\)</span> and <span class="math inline">\(u\)</span>, <span class="math inline">\(h(p,u)\)</span> is the derivative vector of the expenditure function with respect to prices:</p>
+<p><span class="math display">\[h(p,u) = D_{p}e(p,u)\]</span></p>
+<p>That is, <span class="math inline">\(h_{l}(p,u) = \partial e(p,u)/\partial p_{l}\)</span> for all <span class="math inline">\(l\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em> (First order condition.). </span>Assume that <span class="math inline">\(h(p,u)\)</span> is strictly positive for all goods <span class="math inline">\(l\)</span> and that <span class="math inline">\(h(p,u)\)</span> is differentiable. Then,</p>
+<p><span class="math display">\[\begin{aligned}
+\begin{aligned}
+D_{p}e(p,u) &amp; = D_{p}[p\cdot h(p,u)] \\
+&amp; = h(p,u) + [p\cdot D_{p}h(p,u)]'
+\end{aligned}
+\end{aligned}\]</span></p>
+<p>From the first order conditions of the EMP, <span class="math inline">\(p = \lambda D_{x} u(h(p,u))\)</span>, so plugging this into the second term gives</p>
+<p><span class="math display">\[D_{p}e(p,u) = h(p,u) + \lambda[ D_{x}u(h(p,u)) \cdot D_{p}h(p,u)]'\]</span></p>
+<p>Since <span class="math inline">\(u(h(p,u)) = u\)</span> for all <span class="math inline">\(p\)</span>, <span class="math inline">\(D_{x}u(h(p,u)) = 0\)</span>.</p>
+</div>
+<div id="prp-8" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.8</strong></span> Suppose <span class="math inline">\(u(\cdot)\)</span> is a continuous utility function representing a locally nonsatiated and strictly convex preference relation <span class="math inline">\(\succsim\)</span>. Suppose that <span class="math inline">\(h(\cdot, u)\)</span> is continuously differentiable at <span class="math inline">\((p,u)\)</span>. Then</p>
+<ol type="1">
+<li><span class="math inline">\(D_{p}h(p,u) = D^{2}_{p}e(p,u)\)</span></li>
+<li><span class="math inline">\(D_{p}h(p,u)\)</span> is a negative semidefinite matrix (<span class="math inline">\(x'Mx \le 0\)</span>, all eigenvalues are weakly negative, follows from the concavity of <span class="math inline">\(h\)</span>)</li>
+<li><span class="math inline">\(D_{p}h(p,u)\)</span> is a symmetric matrix</li>
+<li><span class="math inline">\(D_{p}h(p,u)p = 0\)</span> (follows from homogeneity of degree zero of <span class="math inline">\(h(p,u)\)</span> in <span class="math inline">\(p\)</span>. Since <span class="math inline">\(h(\alpha p,u) - h(p,u) = 0\)</span> one can differentiate with respect to <span class="math inline">\(\alpha\)</span> to get the result. )</li>
+</ol>
+</div>
+<div id="def-16" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.16</strong></span> Two goods <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are substitutes if <span class="math inline">\(\partial h_{i}(p,u)/\partial p_{j} \ge 0\)</span> and complements otherwise.</p>
+</div>
+<dl>
+<dt>Note.</dt>
+<dd>
+<p>Property 4 above implies that each good must have at least 1 substitute.</p>
+</dd>
+</dl>
+<div id="prp-9" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.9 (Relationship between x and h)</strong></span> Let <span class="math inline">\(u(\cdot)\)</span> be continuous and represent a LNS preference relation <span class="math inline">\(\succsim\)</span>. Let <span class="math inline">\(p \in \mathbb{R}^{n}_{++}\)</span>. Let <span class="math inline">\(w &gt; 0\)</span>.</p>
+<ol type="1">
+<li>If <span class="math inline">\(x\)</span> solves the UMP then <span class="math inline">\(x\)</span> solves the EMP with <span class="math inline">\(u = u(x)\)</span>. Furthermove, <span class="math inline">\(p \cdot x\)</span> from the EMP is exactly <span class="math inline">\(w\)</span>.</li>
+<li>If <span class="math inline">\(x\)</span> solves the EMP with utility level <span class="math inline">\(u\)</span>, then <span class="math inline">\(x\)</span> solves the UMP when <span class="math inline">\(w = p\cdot x\)</span>. Furthermore, u(x) = u.</li>
+</ol>
+</div>
+<p>Beyond the law of demand, what do we know about the matrix <span class="math inline">\(D_{p}h\)</span>?</p>
+<div id="prp-10" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.10 (Slutsky)</strong></span> Suppose <span class="math inline">\(u(\cdot)\)</span> is a continuous utility function representing a locally nonsatiated preference relation <span class="math inline">\(\succsim\)</span>. Then for all <span class="math inline">\((p,w)\)</span>, and <span class="math inline">\(u = v(p,w)\)</span>,</p>
+<p><span class="math display">\[D_{p}h(p,u) = D_{p}x(p,w) + D_{w}x(p,w)x(p,w)'\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><span class="math inline">\(h(p,u) = x(p,e(p,u))\)</span>. Now differentiate this with respect to <span class="math inline">\(p\)</span> and substitute the fact that <span class="math inline">\(h(p,u) = x(p,e(p,u)) = x(p,w)\)</span> to get the result.</p>
+</div>
+<p><span class="math inline">\(So D_{p}h = S(p,w)\)</span> is negative semidefinite and relates to the marshallian demand function <span class="math inline">\(x\)</span>.</p>
+<div id="prp-11" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.11 (Roy’s identity)</strong></span> Suppose that <span class="math inline">\(u(\cdot)\)</span> is continuous and represents a lns pref. <span class="math inline">\(\succsim\)</span>. Assume that <span class="math inline">\(v(p,w)\)</span> is differentiable everywhere. Then</p>
+<p><span class="math display">\[x(p,w) = -\frac{1}{D_{w}v(p,w)} D_{p}v(p,w)\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Differentiate <span class="math inline">\(v(p,e(p,u))\)</span> with respect to <span class="math inline">\(p\)</span>. Then subsitute <span class="math inline">\(x\)</span> for <span class="math inline">\(h\)</span> and rearrange.</p>
+</div>
+</section>
+<section id="integrability" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="integrability"><span class="header-section-number">2.7</span> Integrability</h2>
+</section>
+<section id="choice-demand-and-the-weak-axiom" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="choice-demand-and-the-weak-axiom"><span class="header-section-number">2.8</span> Choice, Demand and the Weak Axiom</h2>
+<div id="def-17" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.17</strong></span> Demand satisfies the WA of revealed preference if for any two price-wealth combo <span class="math inline">\((p,w)\)</span> and <span class="math inline">\((p',w')\)</span>, if <span class="math inline">\(px(p',w') \le w\)</span> and <span class="math inline">\(x(p',w') \ne x(p,w)\)</span> then <span class="math inline">\(p'x(p,w) &gt; w'\)</span>.</p>
+</div>
+<div id="prp-12" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.12</strong></span> Demand <span class="math inline">\(x(p,w)\)</span> satisfies WARP if for any compensated price change we have <span class="math inline">\((p'-p)[x(p',w')-x(p,w)] \le 0\)</span>.</p>
+</div>
+</section>
+<section id="individual-welfare-partial-equilibrium" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="individual-welfare-partial-equilibrium"><span class="header-section-number">2.9</span> Individual Welfare (Partial equilibrium)</h2>
+<p>Indirect utility measures the change in utility that arises from changes in the economic environment. However, since any monotonic function of utility also represents preferences, think about the following monotonic transformation. Recall that the expenditure function for continuous, LNS preferences is increasing in <span class="math inline">\(u\)</span>. So for the indirect utility function <span class="math inline">\(v(p,w)\)</span>, the function <span class="math inline">\(e(p,v(p,w))\)</span> is a monotonic transformation of utility and so also represents preferences. It does so in a way that is measured in dollars. Two ways to use this to measure welfare changes in individuals are</p>
+<div id="def-18" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.18</strong></span> Compensating variation is</p>
+<p><span class="math display">\[CV(p^{0},p^{1},w) = e(p^{1},u^{1}) - e(p^{1},u^{0}) = w - e(p^{1},u^{0})\]</span></p>
+</div>
+<p>This can be interpreted as the net revenue of a planner who is required to compensate a person for the change in prices after they have occurred.</p>
+<div id="def-19" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.19</strong></span> Equivalent variation is</p>
+<p><span class="math display">\[EV(p^{0},p^{1},w) = e(p^{0},u^{1}) - e(p^{0},u^{0}) = e(p^{0},u^{1}) - w\]</span></p>
+</div>
+<p>This can be interpreted as the amount that a person has to be compensated in order to accept a price change.</p>
+<div id="lem-1" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 2.1</strong></span> With normal goods, EV &gt; CV.</p>
+</div>
+<p>Lemma.</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[EV = \int_{p_{1}^{1}}^{p^{0}_{1}}h_{1}(p_{1},\overline{p}_{-1},u^{1})dp_{1}\]</span></p>
+</blockquote>
+<p>Lemma.</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[CV = \int_{p_{1}^{1}}^{p^{0}_{1}}h_{1}(p_{1},\overline{p}_{-1},u^{0})dp_{1}\]</span></p>
+</blockquote>
+<p>What if we can’t observe the expenditure function? Can we say anything about welfare changes?</p>
+<div id="lem-2" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 2.2 (Revealed Preference)</strong></span> If a consumer has a locally non-satiated rational preference relation and <span class="math inline">\((p^{1} - p^{0})x^{0} &lt; 0\)</span> then the price change is strictly welfare improving.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Revealed preference. <span class="math inline">\(x^{0}\)</span> is still affordable under <span class="math inline">\(p^{1}\)</span> and is in the interior of the budget set. Therefore, local non-satiation implies that the consumer can do strictly better.</p>
+</div>
+</section>
+<section id="aggregate-demand" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="aggregate-demand"><span class="header-section-number">2.10</span> Aggregate Demand</h2>
+<p>Aggregate demand is the aggregation of individual demands. However, aggregate demand does not analytically necessarily behave like individual demands. Three questions one could ask about aggregate demand are: 1) In what circumstances do the wealth effects in aggregate demand look like the wealth effects of individual demand?, 2) does aggregate demand satisfy the weak axiom of revealed preference? and more specifically 3) Can aggregate demand be represented by the preferences of a single consumer?</p>
+</section>
+<section id="ad-and-aggregate-wealth" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="ad-and-aggregate-wealth"><span class="header-section-number">2.11</span> AD and Aggregate Wealth</h2>
+<p>Aggregate demand is</p>
+<p><span class="math display">\[x(p,w_{1}, w_{1}, \ldots, w_{I}) = \sum_{i=1}^{I}x_{i}(p,w_{i})\]</span></p>
+<p>If <span class="math inline">\(\overline{w} = \sum_{i=1}^{I}\)</span>, when is it okay to write <span class="math inline">\(x(p,w_{1},w_{2}, \ldots, w_{I}) = x(p,\overline{w})\)</span>? If this is to be true, then for any two wealth allocations <span class="math inline">\(w = (w_{1}, \ldots, w_{n} )\)</span> and <span class="math inline">\(w' = (w_{1}', \ldots, w_{I}')\)</span> for which <span class="math inline">\(\sum w_i = \sum w_{i}'\)</span> demand must be equal.</p>
+<p>To understand what needs to be true in order for this to hold, consider a small change <span class="math inline">\(\Delta w\)</span> in the wealth distribution that leaves aggregate wealth unchanged. The first order change in aggregate demand from this change in wealth is</p>
+<p><span class="math display">\[\sum_{i}\frac{\partial x_{li}(p,w_i)}{\partial w_{i}}\Delta w_{i}\]</span></p>
+<p>and this must be equal to zero if demand is not going to change. This needs to be zero for all redistributions <span class="math inline">\(\Delta w\)</span> and initial wealth levels <span class="math inline">\(w\)</span>. This will only be true if</p>
+<p><span class="math display">\[\frac{\partial x_{li}(p,w_i)}{\partial w_i} = \frac{\partial x_{lj}(p,w_j)}{\partial w_j}\]</span></p>
+<p>for all <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>. This means that wealth expansion paths must be parallel straight lines.</p>
+<div id="prp-13" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2.13</strong></span> Consumers will exhibit parallel and straight wealth expansion paths if and only if their preferences all admit indirect utility of the formed</p>
+<p><span class="math display">\[v_{i}(p,w_{i}) = a_{i}(p) + b(p)w_{i}.\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>To see that this is sufficient, assume that all consumers have indirect utility of the form above. Then by Roy’s identity</p>
+<p><span class="math display">\[x(p,w) = -\frac{D_{p}a_{i}(p)}{b(p)} - \frac{D_{p}b(p)}{b(p)}w_{i}\]</span></p>
+<p>Notice now that the coefficient on <span class="math inline">\(w_i\)</span> does not vary with individuals, so <span class="math inline">\(\partial x_{il}(p,w)/\partial w = \partial x_{jl}(p,w)/\partial w\)</span> for all <span class="math inline">\(i,j\)</span> and any <span class="math inline">\(l\)</span></p>
+</div>
+</section>
+<section id="ad-and-the-weak-axiom" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="ad-and-the-weak-axiom"><span class="header-section-number">2.12</span> AD and the Weak Axiom</h2>
+<p>The weak axiom of revealed preference says the following. For any set <span class="math inline">\(B\)</span> of potential choices (think a budget set), let <span class="math inline">\(C(B)\)</span> be the choice that is made from <span class="math inline">\(B\)</span>. Let <span class="math inline">\((\mathcal{B},C(\cdot))\)</span> be a choice structure.</p>
+<div id="def-20" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.20</strong></span> A choice <span class="math inline">\((\mathcal{B},C)\)</span>, satisfies the weak axiom of revealed preference if for some <span class="math inline">\(B \in \mathcal{B}\)</span> with <span class="math inline">\(x,y \in B\)</span>, we have <span class="math inline">\(x \in C(B)\)</span>, then for any <span class="math inline">\(B' \in \mathcal{B}\)</span> with <span class="math inline">\(x,y \in B'\)</span> and <span class="math inline">\(y \in C(B')\)</span>, we must also have <span class="math inline">\(x \in C(B')\)</span>.</p>
+</div>
+<p>Now that we understand the properties of demand itself, (continuity, homogeneity of degree zero and Walras’ law). We note that a desirable property of demand would be that it satisfies the weak axiom of revealed preference. This is because revealed preference is observationally very useful.</p>
+<dl>
+<dt>Counterexample.</dt>
+<dd>
+<p>Do example 4.C.1 from the book.</p>
+</dd>
+</dl>
+<p>Therefore, aggregate preferences may not satisfy WARP even if individual preferences do.</p>
+<div id="exm-3" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2.3</strong></span> Consider a question of whether an ad valorem tax should be levied on consumption of good 2 and returned in a lump sum to all consumers. Will consumption of good 2 be reduced? Without further assumptions this cannot be assurred.</p>
+</div>
+<p>What conditions are necessary to prove that a reduction of aggregate consumption of good 1 occurs? Basically, assuming the result.</p>
+<div id="lem-3" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 2.3</strong></span> If every consumer’s demand function satisfies the uncompensated law of demand <span class="math inline">\((p' - p)(x(p',w) - x(p,w)) \le 0\)</span>, then the aggregate demand function satisfies the uncompensted law of demand and hence WARP.</p>
+</div>
+</section>
+<section id="existence-of-a-representative-consumer" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="existence-of-a-representative-consumer"><span class="header-section-number">2.13</span> Existence of a Representative Consumer</h2>
+<p>Gorman form stuff.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/optimization.html" class="pagination-link" aria-label="Optimization">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Optimization</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/supply.html" class="pagination-link" aria-label="The Theory of Supply">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Theory of Supply</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
