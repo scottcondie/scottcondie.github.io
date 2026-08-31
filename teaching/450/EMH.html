@@ -317,6 +317,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">7.8.1</span> Conceptual</a></li>
   <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">7.8.2</span> Quantitative</a></li>
+  <li><a href="#data-exercises" id="toc-data-exercises" class="nav-link" data-scroll-target="#data-exercises"><span class="header-section-number">7.8.3</span> Data exercises</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -361,6 +362,20 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>The efficient-markets hypothesis makes a testable prediction: most professional managers should not be able to beat the market after fees. CNBC reported that <em>fewer</em> active managers beat their index benchmarks again last year — part of a long pattern that has pushed trillions of dollars from active funds into low-cost index funds. Whether that pattern reflects truly efficient prices, and what the exceptions tell us, is the question this chapter takes up. Read it at <a href="https://www.cnbc.com/2026/02/25/active-managers-vs-index-funds.html">CNBC</a>.</p>
+</div>
+</div>
+<div class="market-insight">
+<p><strong>Market Insight</strong></p>
+<p>The news item above has a remarkably stable statistical shadow. Twice a year, S&amp;P’s SPIVA scorecard counts the fraction of actively managed U.S. funds that failed to beat their benchmark, and <a href="#fig-spiva" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> shows the latest tally by horizon. Two features deserve attention. First, even over a single year, active large-cap funds underperform far more often than a coin flip would suggest — 79% in the most recent year. Second, and more telling, the failure rate <em>rises</em> with the horizon: 89% of large-cap funds trail the S&amp;P 500 over five years and 93% over twenty. That pattern is exactly what the efficient markets hypothesis predicts. If prices already impound public information, a manager’s gross return is approximately the market’s plus noise, and fees subtract from it every single year; over long horizons the noise washes out while the fee drag compounds, so ever fewer funds stay ahead. Note the one wrinkle: small-cap managers fare noticeably better at short horizons — 41% underperforming over one year — which is just where one would expect prices to be furthest from fully efficient. Even there, however, nine in ten trail their benchmark once the horizon stretches to fifteen years.</p>
+<div id="fig-spiva" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-spiva-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/spiva_horizons.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spiva-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Share of actively managed U.S. equity funds underperforming their benchmark, by fund category and horizon, for periods ending December 31, 2025. Source: S&amp;P Dow Jones Indices, SPIVA U.S. Scorecard, Year-End 2025.
+</figcaption>
+</figure>
 </div>
 </div>
 </section>
@@ -524,6 +539,12 @@ window.Quarto = {
 <li><p>Which portfolio has the larger alpha? Does the portfolio with the higher <em>raw</em> expected return also have the higher alpha? Explain what this shows about comparing investments on raw return versus risk-adjusted return.</p></li>
 <li><p>If both alphas are in fact zero in the true population and your estimates are nonzero, name the reason from the chapter that would explain the discrepancy.</p></li>
 </ol>
+</section>
+<section id="data-exercises" class="level3" data-number="7.8.3">
+<h3 data-number="7.8.3" class="anchored" data-anchor-id="data-exercises"><span class="header-section-number">7.8.3</span> Data exercises</h3>
+<p>These problems use the live-data figure in this chapter.</p>
+<p><strong>EMH-D1.</strong> Suppose the index earns <span class="math inline">\(8\%\)</span> per year and an active fund holds essentially the market portfolio but charges a <span class="math inline">\(1\%\)</span> annual fee, netting <span class="math inline">\(7\%\)</span>. (a) Compute the ratio of the active investor’s wealth to the index investor’s wealth after 1 year, 5 years, and 20 years. (b) Explain how this simple fee arithmetic accounts for the pattern in <a href="#fig-spiva" class="quarto-xref">Figure&nbsp;<span>7.1</span></a>, where the share of large-cap funds underperforming rises from <span class="math inline">\(79\%\)</span> at one year to <span class="math inline">\(93\%\)</span> at twenty years.</p>
+<p><strong>EMH-D2.</strong> In <a href="#fig-spiva" class="quarto-xref">Figure&nbsp;<span>7.1</span></a>, only <span class="math inline">\(41\%\)</span> of active small-cap funds underperformed their benchmark over one year — better than a coin flip — yet roughly <span class="math inline">\(90\%\)</span> underperform over fifteen years. Does the one-year number refute the efficient markets hypothesis? Discuss with reference to (i) where prices are most plausibly far from fully efficient, (ii) the role of luck in short samples, and (iii) what the long-horizon number implies about whether any short-horizon edge survives fees.</p>
 
 
 

@@ -314,12 +314,11 @@ window.Quarto = {
   <li><a href="#continuous-compounding" id="toc-continuous-compounding" class="nav-link" data-scroll-target="#continuous-compounding"><span class="header-section-number">8.4.1</span> Continuous compounding</a></li>
   </ul></li>
   <li><a href="#pricing-securities" id="toc-pricing-securities" class="nav-link" data-scroll-target="#pricing-securities"><span class="header-section-number">8.5</span> Pricing Securities</a></li>
-  <li><a href="#answers" id="toc-answers" class="nav-link" data-scroll-target="#answers"><span class="header-section-number">8.6</span> Answers</a></li>
-  <li><a href="#application-a-retiree-weighing-a-cd" id="toc-application-a-retiree-weighing-a-cd" class="nav-link" data-scroll-target="#application-a-retiree-weighing-a-cd"><span class="header-section-number">8.7</span> Application: A retiree weighing a CD</a></li>
-  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">8.8</span> Homework problems</a>
+  <li><a href="#application-a-retiree-weighing-a-cd" id="toc-application-a-retiree-weighing-a-cd" class="nav-link" data-scroll-target="#application-a-retiree-weighing-a-cd"><span class="header-section-number">8.6</span> Application: A retiree weighing a CD</a></li>
+  <li><a href="#homework-problems" id="toc-homework-problems" class="nav-link" data-scroll-target="#homework-problems"><span class="header-section-number">8.7</span> Homework problems</a>
   <ul class="collapse">
-  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">8.8.1</span> Conceptual</a></li>
-  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">8.8.2</span> Quantitative</a></li>
+  <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">8.7.1</span> Conceptual</a></li>
+  <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">8.7.2</span> Quantitative</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -374,12 +373,7 @@ window.Quarto = {
 <p><span class="math display">\[PV_2(1+r)^2 = x.\]</span></p>
 <p>Solving this implies that <span class="math inline">\(PV_2 = (1+r)^{-2}  x\)</span>. In other words, the present value (or present discounted value) of the payment <span class="math inline">\(x\)</span> received in two periods is <span class="math inline">\((1+r)^{-2} x\)</span>.</p>
 <p>Suppose that one were to receive the payment <span class="math inline">\(x\)</span> in <span class="math inline">\(T\)</span> years. The required amount of investment capital to generate the payment <span class="math inline">\(x\)</span> in <span class="math inline">\(T\)</span> years satisfies <span class="math inline">\(PV_T(1+r)^T = x\)</span> and so the present value of the payment <span class="math inline">\(x\)</span> to be received in <span class="math inline">\(T\)</span> years is <span class="math inline">\(PV_T = (1+r)^{-T} x\)</span>.</p>
-<dl>
-<dt>Problem 1.</dt>
-<dd>
-<p>If the interest rate is <span class="math inline">\(r = 0.10\)</span> what is the present discounted value of $1000 received in one year? What is the PV of $1000 received in two years? In seven years? (See <a href="#answers">Answers</a>.)</p>
-</dd>
-</dl>
+<p>Notice that <span class="math inline">\(PV_T\)</span> falls as the horizon <span class="math inline">\(T\)</span> lengthens and as the interest rate <span class="math inline">\(r\)</span> rises. Both effects follow from the same replication logic: the longer the wait, or the higher the rate, the less you must set aside today to reach a given future sum. (Problem INT-Q11 asks you to put numbers on this.)</p>
 <p>Now imagine that you own the right to receive the amount <span class="math inline">\(Y_1\)</span> one period from now and the amount <span class="math inline">\(Y_2\)</span> two periods from now? What is the present value of this asset? <span class="math inline">\(PV = Y_1/(1+r) + Y_2/(1+r)^2\)</span>. Why? How much would you have to save in order to earn this payoff? You start by saving <span class="math inline">\(PV\)</span>. At the end of the first period you now have <span class="math inline">\(PV(1+r)\)</span>. From that, you remove the payment <span class="math inline">\(Y_1\)</span> that you are to receive and save <span class="math inline">\(PV(1+r) - Y_1\)</span> at interest. At the end of the second period you have <span class="math inline">\((PV(1+r) - Y_1)(1+r)\)</span>. By the arbitrage principle it must be that <span class="math inline">\((PV(1+r) - Y_1)(1+r) = Y_2\)</span>. Solving this equation for <span class="math inline">\(PV\)</span> gives <span class="math inline">\(PV = Y_1/(1+r) + Y_2/(1+r)^2\)</span>.</p>
 <p>In general, suppose that one owned the right to receive the sequence of payments <span class="math inline">\(Y_1,Y_2,\ldots,Y_T\)</span>. In a manner analogous to the above, it can be shown that the present value of this sequence of payments is</p>
 <p><span class="math display">\[PV(Y) = \sum_{t=1}^{T} \frac{Y_t}{(1+r)^t}\]</span></p>
@@ -499,11 +493,8 @@ B_{12} &amp; = B_{6} +  B_{6} \left ( \frac{r}{2} \right) \\
 </dd>
 </dl>
 </dd>
-<dt>Problem 1.</dt>
-<dd>
-<p>Consider a certificate of deposit that pays an annual interest rate of 1.99%. If interest is compounded monthly what is the compound period? What is the periodic interest rate? What is the effective annual interest rate?</p>
-</dd>
 </dl>
+<p>The effective annual rate always exceeds the stated annual rate whenever <span class="math inline">\(n &gt; 1\)</span>, and the gap widens with <span class="math inline">\(n\)</span>. A certificate of deposit quoting an annual rate of 1.99% compounded monthly, for instance, has a compound period of one month, a periodic rate of <span class="math inline">\(0.0199/12 = 0.16583\%\)</span>, and an effective annual rate of <span class="math inline">\((1 + 0.0199/12)^{12} - 1 = 2.008\%\)</span>.</p>
 <p>If an asset with initial value <span class="math inline">\(x\)</span> is to be held for <span class="math inline">\(t\)</span> years at the annual interest rate <span class="math inline">\(r\)</span> and compounding occurs <span class="math inline">\(n\)</span> times a year, the balance on the account at the end of the <span class="math inline">\(t\)</span> years will be</p>
 <p><span class="math display">\[B_t = x \left ( 1 + \frac{r}{n} \right ) ^{nt}\]</span></p>
 <section id="continuous-compounding" class="level3" data-number="8.4.1">
@@ -544,77 +535,35 @@ B_{12} &amp; = B_{6} +  B_{6} \left ( \frac{r}{2} \right) \\
 \end{aligned}\]</span></p>
 <p>By L'Hôpital's rule this implies that <span class="math inline">\(\lim_{n \rightarrow \infty} \log \left ( 1 + \frac{r}{n} \right ) ^{n} = r\)</span> which implies (by rule 1) that</p>
 <p><span class="math display">\[\lim_{n \rightarrow \infty} \left ( 1 + \frac{r}{n} \right ) ^{n} = e^r.\]</span></p>
-<p>Thus the value of assets that are compounded continously is easy to calculate.</p>
-<dl>
-<dt>Problem 2.</dt>
-<dd>
-<p>Suppose that a savings account pays annual interest rate <span class="math inline">\(r = 0.05\)</span> (5%) compounded continuously. If you deposit $1000 into the account today, how much will you have in one year? What will your effective annual rate have been? What would you have had in the account after 1 year if interest had been compounded daily? monthly? semiannually?</p>
-</dd>
-</dl>
+<p>Thus the value of assets that are compounded continously is easy to calculate. An initial deposit of <span class="math inline">\(x\)</span> held for <span class="math inline">\(t\)</span> years at the continuously compounded annual rate <span class="math inline">\(r\)</span> grows to</p>
+<p><span class="math display">\[B_t = xe^{rt},\]</span></p>
+<p>and the effective annual rate is <span class="math inline">\(r^* = e^{r} - 1\)</span>. Because <span class="math inline">\(e^r\)</span> is the <em>supremum</em> of <span class="math inline">\((1 + r/n)^n\)</span> over <span class="math inline">\(n\)</span>, continuous compounding places an upper bound on how much more frequent compounding can be worth: at <span class="math inline">\(r = 5\%\)</span>, annual compounding returns 5.000%, semiannual 5.0625%, monthly 5.1162%, daily 5.1267%, and continuous 5.1271%. The gains shrink rapidly once compounding is more frequent than monthly.</p>
 </section>
 </section>
 <section id="pricing-securities" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="pricing-securities"><span class="header-section-number">8.5</span> Pricing Securities</h2>
+<p>It turns out that for a lot of risk-free securities (like U.S. government issued bills, notes and bonds) one can calculate the correct price of the security using exactly the methods just discussed. Three canonical instruments illustrate the point.</p>
 <dl>
-<dt>Problem 2 (Zero-coupon bonds).</dt>
+<dt>Zero-coupon bonds.</dt>
 <dd>
-<p>The U.S. government issues short term debt (usually 28 days, 61 days or 182 days to maturity) that are referred to as T-Bills (Treasury Bills). These generally have face value of $1000 and do not pay any coupon payments. That is, the issuer of the bond agrees to pay the holder the face value of the bond ($1000 in this case) at maturity. If the government issues a six month T-Bill and the six month interest rate is <span class="math inline">\(r\)</span>, what should be the price of a $1000 face value Bill?</p>
+<p>The U.S. government issues short-term debt (usually 28, 91, or 182 days to maturity) referred to as T-Bills (Treasury Bills). These generally have a face value of $1000 and pay no coupons: the issuer agrees only to pay the holder the face value at maturity. A zero-coupon security is therefore a single future cash flow, so its price is just the present value of that one payment. A six-month bill of face value <span class="math inline">\(F\)</span>, when the six-month interest rate is <span class="math inline">\(r\)</span>, must sell for</p>
+<p><span class="math display">\[P = \frac{F}{1+r}.\]</span></p>
+<p>Since <span class="math inline">\(r &gt; 0\)</span> the bill trades at a <em>discount</em> to face value, and the discount deepens as <span class="math inline">\(r\)</span> rises. The bill’s return is earned entirely through the gap between purchase price and face value rather than through interim payments.</p>
 </dd>
-<dt>Problem 3 (British Consol Bonds and perpetuities).</dt>
+<dt>Perpetuities and the British consol.</dt>
 <dd>
-<p>The British government has at times issued what is referred to as a consol bond (for consolidated fund stock--these were first issued in the 1750s). These securities pay the interest rate <span class="math inline">\(r\)</span> forever.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Consols pay dividends quarterly on the face value of the bond. What should be the price of a consol bond with face value <span class="math inline">\(M\)</span> paying quarterly interest payments with periodic rate <span class="math inline">\(\frac{r}{4}\)</span> if it is purchased immediately before an interest payment is made? What about if it is purchased immediately after an interest payment is made?</p>
+<p>The British government has at times issued what is referred to as a consol bond (for <em>consolidated fund stock</em> — these were first issued in the 1750s). These securities pay interest forever and never repay principal.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> A consol with face value <span class="math inline">\(M\)</span> paying quarterly at the periodic rate <span class="math inline">\(r/4\)</span> delivers a coupon of <span class="math inline">\(rM/4\)</span> every quarter in perpetuity, so by the perpetuity formula its price immediately <em>after</em> a coupon has been paid is</p>
+<p><span class="math display">\[P = \sum_{t=1}^{\infty} \frac{rM/4}{\left(1 + \frac{r}{4}\right)^{t}} = \frac{rM}{4}\cdot\frac{4}{r} = M.\]</span></p>
+<p>A consol whose coupon rate equals the market rate is thus worth exactly its face value — it trades at par. Purchased immediately <em>before</em> a coupon payment, the buyer also collects the imminent <span class="math inline">\(rM/4\)</span>, so the price is <span class="math inline">\(M + rM/4\)</span>. The general lesson is that a perpetual security’s price is pinned down entirely by the ratio of its coupon to the market rate, which is why consol prices moved so sharply with interest rates.</p>
 </dd>
-<dt>Problem 4 (Annuities).</dt>
+<dt>Annuities.</dt>
 <dd>
-<p>An annuity is a security that pays a constant payment for a fixed period of time. Consider an</p>
-</dd>
-<dt>Problem 2 (The iPhone).</dt>
-<dd>
-<p>The original iPhone had an upfront cost of $399 plus a required monthly data cost of $20/month. This cost was on top of the monthly cost of the voice plan. The iPhone 3G introduced this year has an upfront cost of $199 and a required monthly data cost of $30. At a constant monthly interest rate of 0.407% (which is 0.004074 or about 5% annual interest with compounding) what is the cost (PV of all future payments) of owning the original iPhone for two years? What is the cost of owning the iPhone 3G for two years?. What if the monthly interest rate were 1%? 2%?</p>
+<p>An annuity pays a constant amount for a fixed number of periods rather than forever, so its price is the perpetuity value net of the value of the payments given up after date <span class="math inline">\(T\)</span> — the annuity factor derived above. Annuities are ubiquitous outside the bond market as well: a mortgage, a car lease, a level pension payout, and a monthly service contract attached to a piece of hardware are all annuities, and the present-value machinery prices each of them the same way. Problem INT-Q14 works through one such case in which two purchase plans with different up-front costs and different monthly fees are compared, and in which the ranking of the two plans reverses once the discount rate is high enough.</p>
 </dd>
 </dl>
-<p>Problem 4 (</p>
-<p>It turns out that for a lot of risk-free securities (like U.S. government issued bills, notes and bonds) one can calculate the correct price of the security using the methods just discussed.</p>
-<blockquote class="blockquote">
-<ol type="1">
-<li>Consider</li>
-</ol>
-</blockquote>
 </section>
-<section id="answers" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="answers"><span class="header-section-number">8.6</span> Answers</h2>
-<ol type="1">
-<li><p>The compound period is 1 month. The periodic interest rate is <span class="math inline">\(r_p = 0.0199/12 = 0.0016583\)</span>. The effective annual rate is <span class="math inline">\(r^* = (1 + \frac{0.0199}{12})^{12} - 1 = 0.02008\)</span> or <span class="math inline">\(2.008\%\)</span>.</p></li>
-<li><p>The amount in the account in 1 year will be <span class="math inline">\(B = \$1000e^{0.05} = \$1051.271\)</span>. The effective annual rate is <span class="math inline">\((1051.271 - 1000)/1000 = 0.051271\)</span> or <span class="math inline">\(5.1271\%\)</span>.</p>
-<blockquote class="blockquote">
-<ul>
-<li>Daily: <span class="math inline">\(1000(1 + \frac{0.05}{365})^{365} = 1051.267\)</span></li>
-<li>Monthly: <span class="math inline">\(1000(1 + \frac{0.05}{12})^{12} = 1051.162\)</span></li>
-<li>Semiannually: <span class="math inline">\(1000(1 + \frac{0.05}{2})^{2} = 1050.625\)</span>.</li>
-</ul>
-</blockquote></li>
-<li><p>- <span class="math inline">\(PV_1 = \$1000/(1.10) = \$909.09\)</span>, - <span class="math inline">\(PV_2 = \$1000/(1.10)^2 = \$826.45\)</span>, - <span class="math inline">\(PV_7 = \$1000/(1.10)^7 = \$513.16\)</span>.</p></li>
-<li><p>These calculations show that owning the iPhone 3G is more expensive than owning the original iPhone.</p>
-<blockquote class="blockquote">
-<p><span class="math display">\[\begin{aligned}
-PV(Old) &amp; = \$399 + \sum_{t=1}^{24}(1.004074)^{-t}(\$20) \\
-&amp; = \$399 + (1 - (1/1.004074)^{25})/(1/1.004074)(\$20) = \$399 + \$456.40  \\
-&amp; = \$855.40.
-\end{aligned}\]</span></p>
-<p><span class="math display">\[\begin{aligned}
-PV(New) &amp; = \$199 + (1 - (1/1.004074)^{25})/(1/1.004074)(\$30)  \\
-&amp; = \$199 + \$684.59  \\
-&amp; = \$883.59
-\end{aligned}\]</span></p>
-</blockquote></li>
-<li><p>The payment <span class="math inline">\(\frac{rM}{4}\)</span> is received 4 times a year. The price is given by</p>
-<blockquote class="blockquote">
-<p><span class="math display">\[P = \sum_{t=1}^{\infty} \frac{\frac{rM}{4}}{(1 + \frac{r}{4})^{t}} = \frac{rM}{4} \left ( \frac{1}{1 - \frac{1}{1 + \frac{r}{4}}} - 1 \right ) = \frac{rM}{4}\]</span></p>
-</blockquote></li>
-</ol>
-</section>
-<section id="application-a-retiree-weighing-a-cd" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="application-a-retiree-weighing-a-cd"><span class="header-section-number">8.7</span> Application: A retiree weighing a CD</h2>
+<section id="application-a-retiree-weighing-a-cd" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="application-a-retiree-weighing-a-cd"><span class="header-section-number">8.6</span> Application: A retiree weighing a CD</h2>
 <p>A saver approaching retirement is deciding whether to lock a year of living expenses into a certificate of deposit advertising an attractive rate. The tools of this chapter tell her what that rate actually means. Compounding determines how the quoted annual rate translates into the sum she will hold at maturity, and the Fisher relation — real return equals nominal return minus expected inflation — reveals the figure that truly matters: with inflation running above the rate the CD pays, her money is guaranteed to grow in dollars while quietly shrinking in purchasing power. Distinguishing nominal from real returns, and understanding how the time value of money links payments across dates, is what separates a decision that feels safe from one that actually preserves what she has earned.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Further listening">
 <div class="callout-header d-flex align-content-center">
@@ -630,10 +579,10 @@ PV(New) &amp; = \$199 + (1 - (1/1.004074)^{25})/(1/1.004074)(\$30)  \\
 </div>
 </div>
 </section>
-<section id="homework-problems" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">8.8</span> Homework problems</h2>
-<section id="conceptual" class="level3" data-number="8.8.1">
-<h3 data-number="8.8.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">8.8.1</span> Conceptual</h3>
+<section id="homework-problems" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="homework-problems"><span class="header-section-number">8.7</span> Homework problems</h2>
+<section id="conceptual" class="level3" data-number="8.7.1">
+<h3 data-number="8.7.1" class="anchored" data-anchor-id="conceptual"><span class="header-section-number">8.7.1</span> Conceptual</h3>
 <p><strong>INT-C1.</strong> A friend offers you a choice: receive $1000 today, or receive $1000 exactly one year from now. Using the idea of the <em>time value of money</em>, explain why most individuals strictly prefer the payment today even when they are certain the future payment will actually arrive. In your answer, connect the preference to the risk-free interest rate <span class="math inline">\(r\)</span> and to what the arbitrage principle says about the present value of the delayed payment.</p>
 <p><strong>INT-C2.</strong> Two risk-free assets, A and B, each promise a single payment of $5000. Asset A pays in 3 years and asset B pays in 8 years. Without doing any arithmetic, explain which asset has the larger present value and why. Then explain what happens to <em>each</em> asset’s present value, and to the gap between them, as the interest rate <span class="math inline">\(r\)</span> rises. Relate your reasoning to the present-value formula <span class="math inline">\(PV_T = (1+r)^{-T}x\)</span>.</p>
 <p><strong>INT-C3.</strong> The chapter values a perpetuity paying <span class="math inline">\(M\)</span> forever as <span class="math inline">\(V = M/r\)</span> using the rule on infinite geometric series. Explain, without algebra, why the value is <em>decreasing</em> in <span class="math inline">\(r\)</span> and why a small perpetual payment can nonetheless be worth a large lump sum today. What feature of the arbitrage/replication argument guarantees that <span class="math inline">\(M/r\)</span> is exactly the amount you would need to invest today, at rate <span class="math inline">\(r\)</span>, to reproduce the payment stream <span class="math inline">\(M\)</span> forever?</p>
@@ -647,8 +596,8 @@ PV(New) &amp; = \$199 + (1 - (1/1.004074)^{25})/(1/1.004074)(\$30)  \\
 <p><strong>INT-C11.</strong> A retiree can take her pension as a single lump sum today or as a level lifelong monthly payment. Explain how the Fisher relation and the annuity/perpetuity valuation of this chapter together shape the comparison: which quantity should she discount the payment stream at, and why does inflation erode a <em>fixed</em> nominal annuity in a way it does not erode a payment that is indexed to prices? Keep the discussion conceptual — no arithmetic required.</p>
 <p><strong>INT-C12.</strong> A T-Bill is a zero-coupon security: the issuer pays only the face value at maturity, with no intermediate coupons. Explain why the price of such a bill must be <em>below</em> its face value in a world with a positive interest rate, and describe how the bill’s price would move if the six-month interest rate <span class="math inline">\(r\)</span> suddenly rose. Relate your answer to the single-payment present value formula <span class="math inline">\(PV_T = (1+r)^{-T}x\)</span>.</p>
 </section>
-<section id="quantitative" class="level3" data-number="8.8.2">
-<h3 data-number="8.8.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">8.8.2</span> Quantitative</h3>
+<section id="quantitative" class="level3" data-number="8.7.2">
+<h3 data-number="8.7.2" class="anchored" data-anchor-id="quantitative"><span class="header-section-number">8.7.2</span> Quantitative</h3>
 <p><strong>INT-Q1.</strong> An investor is entitled to a stream of risk-free payments: $400 one year from now, $600 two years from now, and $1000 three years from now. The risk-free rate is <span class="math inline">\(r = 0.08\)</span> every period. Using <span class="math inline">\(PV(Y) = \sum_{t=1}^{T} \frac{Y_t}{(1+r)^t}\)</span>, compute the present value of this stream.</p>
 <p><strong>INT-Q2.</strong> You own the right to receive $2500 exactly <span class="math inline">\(T = 4\)</span> years from now, and the risk-free interest rate is <span class="math inline">\(r = 0.07\)</span>. Using <span class="math inline">\(PV_T = (1+r)^{-T}x\)</span>, find the present value. Then find the present value if the horizon is instead <span class="math inline">\(T = 9\)</span> years, holding <span class="math inline">\(r\)</span> fixed.</p>
 <p><strong>INT-Q3.</strong> A perpetuity pays a constant $750 at the end of each year, forever, with the first payment one year from today. The interest rate is <span class="math inline">\(r = 0.05\)</span> forever. Using <span class="math inline">\(V = M/r\)</span>, compute the present value of the perpetuity. Then recompute it if the interest rate falls to <span class="math inline">\(r = 0.04\)</span>, and comment on the direction of the change.</p>
@@ -659,6 +608,10 @@ PV(New) &amp; = \$199 + (1 - (1/1.004074)^{25})/(1/1.004074)(\$30)  \\
 <p><strong>INT-Q8.</strong> A credit card quotes an annual rate of <span class="math inline">\(r = 0.18\)</span> compounded monthly (<span class="math inline">\(n = 12\)</span>). Using <span class="math inline">\(r^* = \left(1 + \frac{r}{n}\right)^n - 1\)</span>, compute the effective annual rate. Then compute the effective annual rate if the same 18% annual rate were compounded daily (<span class="math inline">\(n = 365\)</span>).</p>
 <p><strong>INT-Q9.</strong> You deposit $3000 at an annual rate of <span class="math inline">\(r = 0.05\)</span> compounded <em>continuously</em>. Using <span class="math inline">\(B_t = x e^{rt}\)</span> (the continuous-compounding limit <span class="math inline">\(\lim_{n\to\infty}(1+r/n)^n = e^r\)</span>), compute the balance after <span class="math inline">\(t = 4\)</span> years, and compute the effective annual rate <span class="math inline">\(r^* = e^{r} - 1\)</span> for this account.</p>
 <p><strong>INT-Q10.</strong> You deposit $10{,}000 at an annual rate of <span class="math inline">\(r = 0.03\)</span> compounded <em>continuously</em> and leave it for <span class="math inline">\(t = 10\)</span> years. Using <span class="math inline">\(B_t = x e^{rt}\)</span>, compute the ending balance, and compute the effective annual rate <span class="math inline">\(r^* = e^{r} - 1\)</span>.</p>
+<p><strong>INT-Q11.</strong> The interest rate is <span class="math inline">\(r = 0.10\)</span> in every period. Using <span class="math inline">\(PV_T = (1+r)^{-T}x\)</span>, compute the present discounted value of $1000 received in one year, in two years, and in seven years. By what percentage does the present value fall between year 1 and year 7, and explain why the decline is not simply seven times the one-year discount.</p>
+<p><strong>INT-Q12.</strong> The U.S. Treasury issues a six-month T-Bill with face value <span class="math inline">\(F = \$1000\)</span> and no coupon payments. (a) Derive the price of the bill as a function of the six-month interest rate <span class="math inline">\(r\)</span>. (b) Compute the price when <span class="math inline">\(r = 0.021\)</span> (2.1% over six months). (c) What annual effective rate does that six-month rate correspond to, assuming the rate can be rolled over at the same terms? (d) If the six-month rate rises to <span class="math inline">\(r = 0.025\)</span>, recompute the price and state the direction and dollar size of the price change.</p>
+<p><strong>INT-Q13.</strong> A savings account pays an annual interest rate of <span class="math inline">\(r = 0.05\)</span> compounded <em>continuously</em>. You deposit $1000 today. (a) How much will you have in one year, and what effective annual rate does that imply? (b) Recompute the one-year balance if interest were instead compounded semiannually, monthly, and daily. (c) Order the four balances and comment on how much of the total gain from more frequent compounding is already captured by moving from semiannual to monthly compounding.</p>
+<p><strong>INT-Q14.</strong> The original iPhone had an up-front cost of $399 plus a required data plan of $20 per month; a later model had an up-front cost of $199 plus a required data plan of $30 per month. Treat each as a two-year commitment: an immediate payment plus 24 month-end payments. (a) At a monthly interest rate of 0.4074% (roughly 5% annually with monthly compounding), compute the present value of the total cost of each phone using the annuity factor <span class="math inline">\(\frac{1}{r}\left(1 - (1+r)^{-T}\right)\)</span>, and say which is cheaper. (b) Repeat at monthly rates of 1% and 2%. (c) At which of these rates does the ranking reverse, and explain intuitively why a higher discount rate favors the phone with the larger up-front cost.</p>
 
 
 

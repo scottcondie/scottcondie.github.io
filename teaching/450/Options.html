@@ -319,6 +319,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">13.10.1</span> Conceptual</a></li>
   <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">13.10.2</span> Quantitative</a></li>
+  <li><a href="#data-exercises" id="toc-data-exercises" class="nav-link" data-scroll-target="#data-exercises"><span class="header-section-number">13.10.3</span> Data exercises</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -443,6 +444,17 @@ window.Quarto = {
 <p>Similar to a straddle except the call has a strike price that is higher than the put. Thus, prices must move even more than under a straddle for the strangle to be profitable.</p>
 </dd>
 </dl>
+<p>These strategies are not textbook artifacts; every one of them can be priced from a public quote screen in seconds. <a href="#fig-payoffs" class="quarto-xref">Figure&nbsp;<span>13.1</span></a> draws the profit diagrams for a straddle and a bull spread on SPY, the S&amp;P 500 ETF, using actual quoted premiums. The prices themselves are instructive. The at-the-money straddle costs about 3.6% of the index level, which means the market is charging exactly that much for the right to profit from a large move in <em>either</em> direction over roughly five weeks — buy it, and the index must move more than 3.6% for you to come out ahead. The bull spread shows the other signature property of option strategies: by giving up the upside beyond the higher strike, the investor cuts the cost of the position by roughly a dollar for every dollar of maximum payoff surrendered, capping both the loss and the gain at amounts known in advance.</p>
+<div id="fig-payoffs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-payoffs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/option_payoffs_live.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-payoffs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13.1: Profit at expiration for a straddle and a bull spread on SPY, constructed from quoted mid prices (July 2026, expiry about five weeks out). Breakeven prices and the current index level are marked. Source: CBOE delayed quotes.
+</figcaption>
+</figure>
+</div>
 <p>Interestingly, it can be shown that if there were options at every possible strike price then any possible payoff profile could be constructed.</p>
 </section>
 <section id="binomial-option-pricing-models" class="level2" data-number="13.6">
@@ -472,22 +484,23 @@ d_2 &amp; = d_1 - \sigma \sqrt{T}
 <dl>
 <dt>Example.</dt>
 <dd>
-<p>Consider a stock that has current price <span class="math inline">\(S_0 = \$50\)</span>, with a one month risk free rate of <span class="math inline">\(0.01\)</span> a standard deviation of 0.08. What is the price of an option with strike price <span class="math inline">\(\$53\)</span>? Plugging into the Black-Scholes formula we get that</p>
+<p>Consider a stock that has current price <span class="math inline">\(S_0 = \$50\)</span>, with a one-month risk-free rate of <span class="math inline">\(0.01\)</span> and a monthly standard deviation of <span class="math inline">\(\sigma = 0.08\)</span> (time is measured in months, so <span class="math inline">\(T = 1\)</span>). What is the price of an option with strike price <span class="math inline">\(\$53\)</span>? Plugging into the Black-Scholes formula we get that</p>
 <p><span class="math display">\[\begin{aligned}
-d_1 &amp; = \frac{\ln \left ( \frac{50}{53} \right ) + \left (0.01 + \frac{0.006 }{2} \right ) 1}{0.01} = -4.52689 \\
-d_2 &amp; = -4.60689 \\
-N(d_1) &amp; = 2.9929 \cdot 10^{-6} \\
-N(d_2) &amp; = 2.04368 \cdot 10^{-6} \\
-C &amp; = 50*2.9929 \cdot 10^{-6}  - 53e^{-0.01}2.04368 \cdot 10^{-6} = 4.241 \cdot 10^{-5} \approx 0
+d_1 &amp; = \frac{\ln \left ( \frac{50}{53} \right ) + \left (0.01 + \frac{0.08^2}{2} \right ) 1}{0.08\sqrt{1}} = -0.5634 \\
+d_2 &amp; = d_1 - 0.08 = -0.6434 \\
+N(d_1) &amp; = 0.28659 \\
+N(d_2) &amp; = 0.25999 \\
+C &amp; = 50(0.28659)  - 53e^{-0.01}(0.25999) = \$0.687
 \end{aligned}\]</span></p>
-<p>Now suppose that the strike price is 50, then the price of the call would be</p>
+<p>Now suppose that the strike price is 50, so the option is at the money. Then the price of the call would be</p>
 <p><span class="math display">\[\begin{aligned}
-d_1 &amp; = \frac{\ln \left ( \frac{50}{50} \right ) + \left (0.01 + \frac{0.006 }{2} \right ) 1}{0.01} = 1.22 \\
-d_2 &amp; = 1.14 \\
-N(d_1) &amp; = 0.88877 \\
-N(d_2) &amp; = 0.87286 \\
-C &amp; = 50\cdot0.88877  - 50e^{-0.01}0.87286 = \$ 1.2298
+d_1 &amp; = \frac{\ln \left ( \frac{50}{50} \right ) + \left (0.01 + \frac{0.08^2}{2} \right ) 1}{0.08\sqrt{1}} = 0.165 \\
+d_2 &amp; = d_1 - 0.08 = 0.085 \\
+N(d_1) &amp; = 0.56553 \\
+N(d_2) &amp; = 0.53387 \\
+C &amp; = 50\cdot0.56553  - 50e^{-0.01}0.53387 = \$ 1.8485
 \end{aligned}\]</span></p>
+<p>Moving the strike just 6% out of the money cuts the call’s value by nearly two-thirds — an option’s value is concentrated near the money.</p>
 </dd>
 </dl>
 <p>Puts can be priced by using Black-Scholes and put-call parity. Notice that the only unobservable quantity in the formula is volatility. Hence, by observing option prices one may backout the implied volatility of the stock. This is the principle behind the CBOE Vix index (volatility index.)</p>
@@ -593,6 +606,12 @@ C &amp; = 50\cdot0.88877  - 50e^{-0.01}0.87286 = \$ 1.2298
 <p><strong>OPT-Q10.</strong> An investor holds 20 call contracts (each on 100 shares) on an ETF priced at $50, with <span class="math inline">\(\Delta = N(d_1) = 0.55\)</span>. (a) How many shares must be shorted to make the position delta-neutral? (b) If the ETF falls by $1, approximate the change in the value of the call position and confirm it is offset by the short stock position. (c) If instead the calls were deep in the money with <span class="math inline">\(\Delta \approx 1\)</span>, how would the required hedge change?</p>
 <p><strong>OPT-Q11.</strong> A stock has a Black-Scholes call delta of <span class="math inline">\(\Delta = N(d_1) = 0.62\)</span>. (a) State the call delta and, using <span class="math inline">\(\Delta_{\text{put}} = N(d_1) - 1\)</span>, the put delta. (b) If the stock rises by $2, use these deltas to approximate the dollar change in the value of one long call and one long put. (c) Explain why the put delta is negative and why <span class="math inline">\(\Delta_{\text{call}} - \Delta_{\text{put}} = 1\)</span>, connecting this to differentiating put-call parity in <span class="math inline">\(S_0\)</span>.</p>
 <p><strong>OPT-Q12.</strong> In the <span class="math inline">\(\Delta\)</span>-hedging example an investor holds 10 calls (each on 100 shares) on an ETF priced at $50 with <span class="math inline">\(\Delta = 0.4\)</span> and call price $5.00. (a) How many shares must be shorted to delta-hedge? (b) If the ETF falls to $49, compute the new value of the short stock position and the new value of the call position (using the delta approximation), and verify the two changes offset. (c) Explain why this hedge must be adjusted after the price moves.</p>
+</section>
+<section id="data-exercises" class="level3" data-number="13.10.3">
+<h3 data-number="13.10.3" class="anchored" data-anchor-id="data-exercises"><span class="header-section-number">13.10.3</span> Data exercises</h3>
+<p>These problems use the live-data figure in this chapter.</p>
+<p><strong>OPT-D1.</strong> In <a href="#fig-payoffs" class="quarto-xref">Figure&nbsp;<span>13.1</span></a>, SPY trades at <span class="math inline">\(S_0 = 751.21\)</span> and the five-week 751-strike straddle costs <span class="math inline">\(c + p = 15.21 + 11.88 = \$27.09\)</span>. (a) Compute the two breakeven prices at expiration and express the required move as a percentage of <span class="math inline">\(S_0\)</span>. (b) Compute the profit per share if SPY finishes at <span class="math inline">\(700\)</span>. (c) In one sentence, interpret the straddle’s cost as the market’s price of volatility over the five weeks.</p>
+<p><strong>OPT-D2.</strong> The bull spread in <a href="#fig-payoffs" class="quarto-xref">Figure&nbsp;<span>13.1</span></a> buys the 751 call at <span class="math inline">\(\$15.21\)</span> and writes the 789 call at <span class="math inline">\(\$1.27\)</span>. (a) Compute the net cost, the maximum profit, and the breakeven price. (b) Compute the profit if SPY finishes at <span class="math inline">\(800\)</span> and at <span class="math inline">\(740\)</span>. (c) The chapter’s definition of a bull spread requires <span class="math inline">\(c_2 &lt; c_1\)</span>; explain economically why the 789 call must be cheaper than the 751 call.</p>
 
 
 

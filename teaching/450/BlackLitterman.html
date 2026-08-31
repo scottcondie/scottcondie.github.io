@@ -316,6 +316,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">14.7.1</span> Conceptual</a></li>
   <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">14.7.2</span> Quantitative</a></li>
+  <li><a href="#data-exercises" id="toc-data-exercises" class="nav-link" data-scroll-target="#data-exercises"><span class="header-section-number">14.7.3</span> Data exercises</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1559,6 +1560,28 @@ XLY
 </tr>
 </tbody>
 </table>
+<p>A covariance matrix printed as a table is hard to read; the same information is far more legible as the correlation heatmap in <a href="#fig-sector-corr" class="quarto-xref">Figure&nbsp;<span>14.1</span></a>, computed from the most recent eight years of monthly returns on the eleven sector ETFs. Two features matter for what follows. Every entry is positive — there is no true hedge among equity sectors, because all of them load on the market factor — but the entries range widely, from 0.29 between energy and technology to above 0.85 among the industrial-financial-materials cluster. This matrix is the <span class="math inline">\(\Sigma\)</span> that every formula in this chapter consumes.</p>
+<div id="fig-sector-corr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sector-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/sector_correlations.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sector-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.1: Correlations of monthly returns for the eleven SPDR sector ETFs over the most recent common sample. This is the <span class="math inline">\(\Sigma\)</span> input to the Black-Litterman application, displayed as correlations. Source: Yahoo Finance.
+</figcaption>
+</figure>
+</div>
+<p>With <span class="math inline">\(\Sigma\)</span> in hand, the reverse-optimization step <span class="math inline">\(\Pi = A\Sigma\theta_{mkt}\)</span> needs only the market weights, and those can be read off the actual composition of the S&amp;P 500: aggregating the current SPY holdings by sector gives technology a weight of about 37%, financials 12%, and utilities barely 2%. <a href="#fig-bl-pi" class="quarto-xref">Figure&nbsp;<span>14.2</span></a> shows the result next to the raw historical mean returns of the same sectors, and the contrast is the whole argument for the Black-Litterman prior in one picture. The equilibrium returns <span class="math inline">\(\Pi\)</span> line up smoothly between about 3% and 9%, ordered by covariance with the market portfolio, exactly as the first-order condition requires. The sample means, by contrast, are scattered from 9% to 24% with no visible economic logic — technology’s enormous mean reflects one extraordinary decade, not an expectation anyone should carry forward. Feeding those means into an unconstrained optimizer produces the extreme portfolios described in the introduction; starting from <span class="math inline">\(\Pi\)</span> produces the market portfolio, which is why equilibrium returns, not sample means, are the model’s point of departure.</p>
+<div id="fig-bl-pi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bl-pi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/bl_equilibrium_returns.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bl-pi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.2: Reverse-optimized equilibrium expected returns <span class="math inline">\(\Pi = A\Sigma\theta_{mkt}\)</span> (with <span class="math inline">\(A = 2.5\)</span> and market weights from current SPY holdings aggregated by sector) next to raw historical mean returns. The equilibrium returns are smooth and economically ordered; the sample means are noise. Sources: Yahoo Finance; SSGA.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="application-a-cio-sizing-a-view" class="level2" data-number="14.6">
 <h2 data-number="14.6" class="anchored" data-anchor-id="application-a-cio-sizing-a-view"><span class="header-section-number">14.6</span> Application: A CIO sizing a view</h2>
@@ -1606,6 +1629,12 @@ XLY
 <p><strong>BL-Q8.</strong> (Role of <span class="math inline">\(\tau\)</span> in the posterior weighting.) In the scalar posterior mean of BL-Q5, the relative weight placed on the prior versus the view is governed by <span class="math inline">\((\tau\Sigma)^{-1}\)</span> against <span class="math inline">\(1/\omega^2\)</span>. Fix <span class="math inline">\(\Sigma = 0.02\)</span> (so with <span class="math inline">\(\tau = 1\)</span>, <span class="math inline">\(\tau\Sigma = 0.02\)</span>), <span class="math inline">\(\Pi = 0.006\)</span>, <span class="math inline">\(q = 0.012\)</span>, and <span class="math inline">\(\omega^2 = 0.01\)</span>. Compute the posterior mean <span class="math inline">\(\bar\mu\)</span> for <span class="math inline">\(\tau = 0.1\)</span> and for <span class="math inline">\(\tau = 1.0\)</span>, and explain the direction in which shrinking <span class="math inline">\(\tau\)</span> moves the posterior, in terms of confidence in the equilibrium prior.</p>
 <p><strong>BL-Q9.</strong> (From posterior returns to a tilt.) Continue from BL-Q1, where <span class="math inline">\(A = 3\)</span>, <span class="math inline">\(\Sigma = \begin{pmatrix} 0.04 &amp; 0.01 \\ 0.01 &amp; 0.02 \end{pmatrix}\)</span>, and market weights <span class="math inline">\(\theta_{\text{mkt}} = (0.6, 0.4)'\)</span> give equilibrium returns <span class="math inline">\(\Pi\)</span>. Suppose Bayesian updating raises the posterior expected return of asset 1 above its equilibrium value while leaving asset 2 unchanged, giving posterior mean <span class="math inline">\(\bar\mu = \Pi + (0.006, 0)'\)</span>. Using the FOC <span class="math inline">\(\bar\mu = A\Sigma\theta\)</span>, solve for the new optimal weights <span class="math inline">\(\theta = \tfrac{1}{A}\Sigma^{-1}\bar\mu\)</span> and report the tilt <span class="math inline">\(\theta - \theta_{\text{mkt}}\)</span>. Comment on why raising only asset 1’s expected return nonetheless changes both weights.</p>
 <p><strong>BL-Q10.</strong> (From posterior returns to a tilt, negative view.) Using the same <span class="math inline">\(A = 3\)</span>, <span class="math inline">\(\Sigma\)</span>, and <span class="math inline">\(\theta_{\text{mkt}} = (0.6, 0.4)'\)</span> as in BL-Q9, suppose instead that updating lowers asset 2’s posterior expected return while leaving asset 1 unchanged, giving <span class="math inline">\(\bar\mu = \Pi + (0, -0.007)'\)</span>. Solve for the new optimal weights <span class="math inline">\(\theta = \tfrac{1}{A}\Sigma^{-1}\bar\mu\)</span> and report the tilt <span class="math inline">\(\theta - \theta_{\text{mkt}}\)</span>. Explain the sign of each component of the tilt in light of the positive covariance between the two assets.</p>
+</section>
+<section id="data-exercises" class="level3" data-number="14.7.3">
+<h3 data-number="14.7.3" class="anchored" data-anchor-id="data-exercises"><span class="header-section-number">14.7.3</span> Data exercises</h3>
+<p>These problems use the live-data figures in this chapter.</p>
+<p><strong>BL-D1.</strong> A two-sector version of <a href="#fig-bl-pi" class="quarto-xref">Figure&nbsp;<span>14.2</span></a>: let <span class="math inline">\(A = 2.5\)</span>, market weights <span class="math inline">\(\theta_{mkt} = (0.7, 0.3)'\)</span>, and <span class="math inline">\(\Sigma = \begin{pmatrix} 0.04 &amp; 0.01 \\ 0.01 &amp; 0.02 \end{pmatrix}\)</span> (annualized). (a) Compute the implied equilibrium excess returns <span class="math inline">\(\Pi = A\Sigma\theta_{mkt}\)</span>. (b) Explain why the first sector’s <span class="math inline">\(\Pi\)</span> is higher, and relate this to the figure, where technology (weight <span class="math inline">\(37\%\)</span>, high covariance with the market) has the highest equilibrium return and utilities (weight <span class="math inline">\(2\%\)</span>, low covariance) the lowest.</p>
+<p><strong>BL-D2.</strong> In <a href="#fig-bl-pi" class="quarto-xref">Figure&nbsp;<span>14.2</span></a> the raw historical mean for technology is about <span class="math inline">\(24\%\)</span> per year, while its equilibrium return <span class="math inline">\(\Pi\)</span> is about <span class="math inline">\(9\%\)</span>. (a) Describe what an unconstrained mean-variance optimizer would do if fed the historical means, and why (cite the correlations in <a href="#fig-sector-corr" class="quarto-xref">Figure&nbsp;<span>14.1</span></a> in your answer). (b) Explain why the Black-Litterman model instead anchors on <span class="math inline">\(\Pi\)</span> and lets the investor’s <em>views</em> — not sample means — move the portfolio away from market weights.</p>
 
 
 

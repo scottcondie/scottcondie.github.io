@@ -324,6 +324,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">4.11.1</span> Conceptual</a></li>
   <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">4.11.2</span> Quantitative</a></li>
+  <li><a href="#data-exercises" id="toc-data-exercises" class="nav-link" data-scroll-target="#data-exercises"><span class="header-section-number">4.11.3</span> Data exercises</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -415,9 +416,20 @@ window.Quarto = {
 <p><span class="math display">\[\sigma^2_P = w^2_D \sigma^2_D + w^2_E \sigma^2_E + 2w_D w_E \sigma_D \sigma_E  \rho_{DE}\]</span></p>
 <p>Think about the case when <span class="math inline">\(\rho_{DE} = 1\)</span>. In that case the rhs of the above equation is a perfect square and simplifies to</p>
 <p><span class="math display">\[\sigma^2_P = (w_D \sigma_D + w_E \sigma_E)^2\]</span></p>
-<p>so the standard deviation is just the sum of the two standard deviations. It can be seen that the portfolio variance is strictly decreasing in the correlation between assets. An asset is called a <em>hedge</em> if it has negative correlation with the other assets in the portfolio. The lowest possible portfolio variance is given by <span class="math inline">\(\rho_{DE} = -1\)</span>. In this case</p>
+<p>so the portfolio standard deviation is the weighted average of the two standard deviations, <span class="math inline">\(\sigma_P = w_D \sigma_D + w_E \sigma_E\)</span> — diversification buys nothing. It can be seen that the portfolio variance is strictly decreasing in the correlation between assets. An asset is called a <em>hedge</em> if it has negative correlation with the other assets in the portfolio. The lowest possible portfolio variance is given by <span class="math inline">\(\rho_{DE} = -1\)</span>. In this case</p>
 <p><span class="math display">\[\sigma^2_P = (w_D \sigma_D - w_E \sigma_E)^2\]</span></p>
 <p>So one can eliminate all risk by taking <span class="math inline">\(w_D\)</span> and <span class="math inline">\(w_E\)</span> to make the above zero.</p>
+<p>All of this algebra becomes a single picture when drawn with real assets. <a href="#fig-frontier" class="quarto-xref">Figure&nbsp;<span>4.1</span></a> traces the mean and standard deviation of every portfolio of the U.S. stock market and a 10-year Treasury, using the last fifteen years of monthly returns. Over this sample the two assets are essentially uncorrelated (<span class="math inline">\(\rho = -0.03\)</span>), and the dashed line shows the counterfactual just derived: if <span class="math inline">\(\rho\)</span> were <span class="math inline">\(+1\)</span>, the frontier would collapse to the straight chord and portfolio risk would be the weighted average of the two standard deviations. The bow of the solid curve to the left of that chord <em>is</em> the diversification benefit, in units of standard deviation avoided. Note the point marked on the curve: the minimum-variance mix holds only about a fifth of the portfolio in stocks, yet carries less risk than a portfolio of bonds alone — an impossibility if risks simply added.</p>
+<div id="fig-frontier" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-frontier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/two_asset_frontier.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-frontier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Every attainable mix of the U.S. stock market (Ken French market factor, including dividends) and a 10-year Treasury, from the last fifteen years of monthly data. The dashed chord is what the frontier would be if the correlation were <span class="math inline">\(+1\)</span>; the shaded gap is the diversification benefit. Sources: Ken French Data Library; U.S. Department of the Treasury.
+</figcaption>
+</figure>
+</div>
 <p>One interesting statistic to calculate is the covariance of any particular asset's returns to the return of the whole portfolio. We are interested in finding <span class="math inline">\(Cov(r_D,w_D r_D + w_E r_E )\)</span> for example.</p>
 <p><span class="math display">\[\begin{aligned}
 Cov(r_D, r_P) &amp;= E(r_D - \mu_D)(w_D r_D + w_E r_E  - w_D \mu_D - w_E \mu_E) \\
@@ -567,6 +579,12 @@ w_E\sigma^2_E + w_D \sigma_{DE} + \lambda \mu_E - \gamma &amp; = 0 \\
 <p><strong>MV-Q8.</strong> For a set of risky assets the frontier constants are <span class="math inline">\(A = 1.2\)</span>, <span class="math inline">\(B = 0.20\)</span>, and <span class="math inline">\(C = 8\)</span>. (a) Compute <span class="math inline">\(D\)</span>. (b) Using <span class="math inline">\(\sigma^2_P = \frac{C\bar r^2 - 2A\bar r + B}{D}\)</span>, compute the minimum-variance-frontier variance at target returns <span class="math inline">\(\bar r = 0.10\)</span> and <span class="math inline">\(\bar r = 0.20\)</span>. (c) Verify that the smaller variance occurs at the return closer to <span class="math inline">\(\bar r^\ast = A/C\)</span>, and confirm that <span class="math inline">\(\sigma^2_P\)</span> evaluated at <span class="math inline">\(\bar r^\ast\)</span> equals <span class="math inline">\(1/C\)</span>.</p>
 <p><strong>MV-Q9.</strong> Consider two assets with covariance matrix <span class="math inline">\(\Sigma = \begin{pmatrix} 0.04 &amp; 0.01 \\ 0.01 &amp; 0.09 \end{pmatrix}\)</span>. Using the global minimum-variance weights <span class="math inline">\(w^\ast = \frac{\Sigma^{-1}\mathbf{1}}{\mathbf{1}'\Sigma^{-1}\mathbf{1}}\)</span>, compute the weights on the two assets and the resulting minimum variance <span class="math inline">\(1/C\)</span>. Comment on which asset receives more weight and why.</p>
 <p><strong>MV-Q10.</strong> Two uncorrelated assets have variances <span class="math inline">\(\sigma^2_1 = 0.01\)</span> and <span class="math inline">\(\sigma^2_2 = 0.04\)</span>, so <span class="math inline">\(\Sigma = \begin{pmatrix} 0.01 &amp; 0 \\ 0 &amp; 0.04 \end{pmatrix}\)</span>. Using <span class="math inline">\(w^\ast = \frac{\Sigma^{-1}\mathbf{1}}{\mathbf{1}'\Sigma^{-1}\mathbf{1}}\)</span>, find the global minimum-variance weights and the minimum variance <span class="math inline">\(1/C\)</span>. Show that the weights are inversely proportional to the individual variances and explain why that makes sense.</p>
+</section>
+<section id="data-exercises" class="level3" data-number="4.11.3">
+<h3 data-number="4.11.3" class="anchored" data-anchor-id="data-exercises"><span class="header-section-number">4.11.3</span> Data exercises</h3>
+<p>These problems use the live-data figure in this chapter.</p>
+<p><strong>MV-D1.</strong> <a href="#fig-frontier" class="quarto-xref">Figure&nbsp;<span>4.1</span></a> reports, for the last fifteen years of monthly data: stocks <span class="math inline">\(\mu_D = 14.3\%\)</span>, <span class="math inline">\(\sigma_D = 14.9\%\)</span>; 10-year Treasury <span class="math inline">\(\mu_E = 1.95\%\)</span>, <span class="math inline">\(\sigma_E = 7.0\%\)</span>; correlation <span class="math inline">\(\rho_{DE} = -0.03\)</span> (all annualized). (a) Compute the mean and standard deviation of the 50/50 portfolio. (b) Compute what the 50/50 standard deviation would be if <span class="math inline">\(\rho_{DE}\)</span> were <span class="math inline">\(+1\)</span>, and interpret the difference as the diversification benefit shown by the shaded region in the figure.</p>
+<p><strong>MV-D2.</strong> Using the same inputs as MV-D1 and the two-asset minimum-variance weight <span class="math inline">\(w_D^{*} = \dfrac{\sigma_E^2 - \sigma_D\sigma_E\rho_{DE}}{\sigma_D^2 + \sigma_E^2 - 2\sigma_D\sigma_E\rho_{DE}}\)</span>, compute the minimum-variance share in stocks and verify that it matches the mix marked in <a href="#fig-frontier" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>. Then explain why the minimum-variance portfolio holds <em>any</em> stocks at all, given that stocks are twice as volatile as the bond.</p>
 
 
 

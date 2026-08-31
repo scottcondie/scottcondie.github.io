@@ -327,6 +327,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">5.8.1</span> Conceptual</a></li>
   <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">5.8.2</span> Quantitative</a></li>
+  <li><a href="#data-exercises" id="toc-data-exercises" class="nav-link" data-scroll-target="#data-exercises"><span class="header-section-number">5.8.3</span> Data exercises</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -429,6 +430,17 @@ window.Quarto = {
 <p>Taking the variance of both sides and using <span class="math inline">\(Cov(\epsilon_i, r_M) = 0\)</span> gives the <strong>variance decomposition</strong></p>
 <p><span class="math display">\[\sigma^2_i = \underbrace{\beta_i^2 \sigma^2_M}_{\text{systematic}} + \underbrace{\sigma^2_{\epsilon_i}}_{\text{idiosyncratic}}.\]</span></p>
 <p>The first term, <span class="math inline">\(\beta_i^2\sigma^2_M\)</span>, is the <strong>systematic</strong> (or market) risk of the asset: it comes from the asset’s exposure to economy-wide movements and is governed entirely by beta. The second term, <span class="math inline">\(\sigma^2_{\epsilon_i}\)</span>, is the <strong>idiosyncratic</strong> (or firm-specific) risk: it reflects events that affect this asset alone — a product recall, a lawsuit, a management shake-up — and is uncorrelated with what happens to the rest of the market.</p>
+<p>The decomposition is something you can estimate in one regression, and <a href="#fig-betas" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> shows it for two familiar stocks over the last five years of monthly data. NVIDIA’s fitted line is steep (<span class="math inline">\(\hat\beta = 2.15\)</span>): when the market moves a percentage point, NVIDIA moves more than two on average, the signature of a high-beta stock. Coca-Cola’s line is nearly flat (<span class="math inline">\(\hat\beta = 0.37\)</span>). The vertical scatter of points around each line is the residual <span class="math inline">\(\epsilon_i\)</span> made visible, and the <span class="math inline">\(R^2\)</span> of each regression is exactly the systematic share of variance from the decomposition above, <span class="math inline">\(\beta_i^2\sigma^2_M/\sigma^2_i\)</span> — about 45% for NVIDIA and only 12% for Coca-Cola. Both stocks, in other words, carry most of their risk as idiosyncratic risk, which is precisely the part the next subsection shows a diversified investor can shed for free.</p>
+<div id="fig-betas" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-betas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/beta_regressions.png" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-betas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Monthly excess returns of NVIDIA and Coca-Cola against the market’s excess return, with fitted regression lines, over the most recent five years. The slope of each line is the stock’s beta; the scatter around the line is its idiosyncratic risk. Sources: Yahoo Finance; Ken French Data Library.
+</figcaption>
+</figure>
+</div>
 <section id="diversification-eliminates-idiosyncratic-risk" class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="diversification-eliminates-idiosyncratic-risk"><span class="header-section-number">5.5.1</span> Diversification eliminates idiosyncratic risk</h3>
 <p>Idiosyncratic risk is special because it can be removed at essentially no cost simply by holding many assets. Consider an equally weighted portfolio of <span class="math inline">\(n\)</span> assets, <span class="math inline">\(r_P = \frac{1}{n}\sum_{i=1}^n r_i\)</span>. Substituting the decomposition,</p>
@@ -550,6 +562,12 @@ window.Quarto = {
 <p><strong>CAPM-Q8.</strong> Using the demand rule <span class="math inline">\(y = (Er_M - r_f)/(A\sigma^2_M)\)</span> with a market risk premium of <span class="math inline">\(Er_M - r_f = 0.05\)</span> and market variance <span class="math inline">\(\sigma^2_M = 0.025\)</span>, find the risk-aversion coefficient <span class="math inline">\(A\)</span> of an investor who chooses to hold exactly <span class="math inline">\(y = 1\)</span> (all wealth in the market and nothing in the risk-free asset). Interpret how this value relates to the average risk aversion <span class="math inline">\(\bar A\)</span> in equilibrium.</p>
 <p><strong>CAPM-Q9.</strong> An asset has <span class="math inline">\(\beta_i = 1.2\)</span>, and the market has variance <span class="math inline">\(\sigma^2_M = 0.05\)</span>. The idiosyncratic variance of the asset is <span class="math inline">\(\sigma^2_{\epsilon_i} = 0.02\)</span>. Using the decomposition <span class="math inline">\(\sigma^2_i = \beta_i^2 \sigma^2_M + \sigma^2_{\epsilon_i}\)</span>, compute the asset’s total variance <span class="math inline">\(\sigma^2_i\)</span> and its total standard deviation <span class="math inline">\(\sigma_i\)</span>. What fraction of the total variance is systematic?</p>
 <p><strong>CAPM-Q10.</strong> A stock has total variance <span class="math inline">\(\sigma^2_i = 0.10\)</span> and beta <span class="math inline">\(\beta_i = 0.8\)</span>. The market variance is <span class="math inline">\(\sigma^2_M = 0.045\)</span>. Using the variance decomposition <span class="math inline">\(\sigma^2_i = \beta_i^2 \sigma^2_M + \sigma^2_{\epsilon_i}\)</span>, solve for the stock’s idiosyncratic variance <span class="math inline">\(\sigma^2_{\epsilon_i}\)</span>, and compute the systematic share of total variance.</p>
+</section>
+<section id="data-exercises" class="level3" data-number="5.8.3">
+<h3 data-number="5.8.3" class="anchored" data-anchor-id="data-exercises"><span class="header-section-number">5.8.3</span> Data exercises</h3>
+<p>These problems use the live-data figure in this chapter.</p>
+<p><strong>CAPM-D1.</strong> In <a href="#fig-betas" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>, NVIDIA’s regression has <span class="math inline">\(\hat\beta = 2.15\)</span> and <span class="math inline">\(R^2 = 0.45\)</span>; the market’s monthly standard deviation over the sample was about <span class="math inline">\(4.4\%\)</span>. (a) Using the variance decomposition, compute NVIDIA’s systematic monthly variance <span class="math inline">\(\hat\beta^2\sigma^2_M\)</span>. (b) Using <span class="math inline">\(R^2 = \beta^2\sigma^2_M / \sigma^2_i\)</span>, compute NVIDIA’s total monthly standard deviation and its idiosyncratic monthly standard deviation. (c) What fraction of NVIDIA’s risk would a diversified investor actually be compensated for bearing?</p>
+<p><strong>CAPM-D2.</strong> Take <span class="math inline">\(r_f = 4\%\)</span> and an expected market premium of <span class="math inline">\(6\%\)</span> per year. (a) Using the SML and the betas in <a href="#fig-betas" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>, compute the CAPM-required expected returns for NVIDIA (<span class="math inline">\(\beta = 2.15\)</span>) and Coca-Cola (<span class="math inline">\(\beta = 0.37\)</span>). (b) The figure reports NVIDIA’s estimated <span class="math inline">\(\hat\alpha \approx 34.5\%\)</span> per year over 2021–2026. Give two reasons this is <em>not</em> decisive evidence against the CAPM, drawing on the chapter’s discussion of estimation and the next chapter’s joint-hypothesis problem.</p>
 
 
 

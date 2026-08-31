@@ -316,6 +316,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">11.7.1</span> Conceptual</a></li>
   <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">11.7.2</span> Quantitative</a></li>
+  <li><a href="#data-exercises" id="toc-data-exercises" class="nav-link" data-scroll-target="#data-exercises"><span class="header-section-number">11.7.3</span> Data exercises</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -403,6 +404,17 @@ window.Quarto = {
 <p>This can be interpreted as a "summary statistic of the effective average maturity of the portfolio."<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </dd>
 </dl>
+<p>The economic content of modified duration is easiest to see in a picture. The pricing equation makes price a convex, decreasing function of yield, and the duration approximation <span class="math inline">\(\Delta P/P \approx -D^{*} \Delta y\)</span> is precisely the <em>tangent line</em> to that curve at the current yield. <a href="#fig-tangent" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> draws both for a ten-year Treasury carrying today’s par coupon. Near the current yield the tangent hugs the curve and the approximation is excellent; far from it, the true price curve bends away above the tangent on both sides. That gap is no accident — the price curve is convex — and measuring it is the subject of the convexity section later in this chapter.</p>
+<div id="fig-tangent" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tangent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/price_yield_tangent.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tangent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: The exact price of a 10-year Treasury as a function of its yield (green) and the duration approximation — the tangent line at the current yield (dashed). The bond carries the current 10-year par coupon, so it is priced at par today. The shaded region is the gap the convexity correction will close. Source: U.S. Department of the Treasury.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="durations-properties" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="durations-properties"><span class="header-section-number">11.3</span> Duration's properties</h2>
@@ -412,6 +424,20 @@ window.Quarto = {
 <li><p><em>Duration decreases in the coupon rate</em>. Increasing the coupon rate moves more of the payments from the bond forward in time. As such it also makes the price of the bond less susceptible to changes in yield.</p></li>
 <li><p><em>Duration often increases with the maturity of bonds</em>. For most bonds, increasing the maturity means spreading payments out over a longer period. However, this may not be true for some bonds selling at a very deep discount.</p></li>
 </ol>
+<div class="market-insight">
+<p><strong>Market Insight</strong></p>
+<p>The duration arithmetic above is exactly what destroyed Silicon Valley Bank, and the numbers are worth working through. In March 2020 the 20-year Treasury yield touched 0.87%. A 20-year bond issued at par on that day has, by the formulas of this chapter, a modified duration of about eighteen. Between then and late 2023 long yields rose by roughly four percentage points, and the approximation <span class="math inline">\(\Delta P/P \approx -D^{*}\Delta y\)</span> predicts a decline in value on the order of <span class="math inline">\(-18 \times 0.04 \approx -70\%\)</span> — an overstatement, because for a move this large the convex price curve bends well above its tangent line, but the exact repricing in <a href="#fig-svb" class="quarto-xref">Figure&nbsp;<span>11.2</span></a> still shows a collapse of 48% at the trough. That is the mark-to-market hole that sat on SVB’s balance sheet in the spring of 2023: the bank held tens of billions of dollars of long-duration bonds bought when yields were near their lows, funded by deposits that could leave overnight. When depositors ran on March 9–10, 2023, the unrealized duration loss became a realized one. Note also what the figure does <em>not</em> show: no default, no credit event, no missed coupon. Every one of those Treasury payments will be made in full. Duration risk is a pure price-of-time risk, and it is entirely capable of sinking a bank on its own.</p>
+<div id="fig-svb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-svb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/svb_long_bond.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-svb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.2: A 20-year Treasury bought at par at the March 2020 low in yields, repriced daily at the prevailing 20-year par yield using the pricing formula of this chapter. The bond lost nearly half its market value by October 2023 without any risk of default. Source: U.S. Department of the Treasury.
+</figcaption>
+</figure>
+</div>
+</div>
 </section>
 <section id="portfolio-immunization" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="portfolio-immunization"><span class="header-section-number">11.4</span> Portfolio Immunization</h2>
@@ -577,6 +603,12 @@ Convexity &amp; = \frac{1}{1000(1.1)^2}  \\
 <p><strong>FIP-Q10.</strong> A zero coupon bond has maturity <span class="math inline">\(T = 3\)</span> years and YTM <span class="math inline">\(y = 0.05\)</span>. Using the chapter’s closed form for the convexity of a zero, <span class="math inline">\(Convexity = \frac{T(T+1)}{(1+y)^2}\)</span>, compute its convexity. (Confirm you get the same answer as evaluating the general convexity formula on a single cash flow at <span class="math inline">\(t = 3\)</span>.)</p>
 <p><strong>FIP-Q11.</strong> Using the bond from FIP-Q9 (<span class="math inline">\(P = 1000\)</span>, <span class="math inline">\(D^* = D/(1+y)\)</span> with <span class="math inline">\(D\)</span> its Macaulay duration, and convexity <span class="math inline">\(C\)</span> from FIP-Q9), estimate the change in price for a large yield increase of <span class="math inline">\(\Delta y = 0.02\)</span> using the second-order approximation <span class="math inline">\(\Delta P \approx -D^* P \,\Delta y + \tfrac{1}{2} C P (\Delta y)^2\)</span>. (Take <span class="math inline">\(D = 1.9524\)</span> for this bond.)</p>
 <p><strong>FIP-Q12.</strong> For the same bond as FIP-Q11 (<span class="math inline">\(P = 1000\)</span>, <span class="math inline">\(D = 1.9524\)</span>, <span class="math inline">\(y = 0.05\)</span>, convexity <span class="math inline">\(C = 5.2694\)</span>), estimate the change in price for a large yield <em>decrease</em> of <span class="math inline">\(\Delta y = -0.03\)</span> using <span class="math inline">\(\Delta P \approx -D^* P \,\Delta y + \tfrac{1}{2} C P (\Delta y)^2\)</span>. Comment on how the convexity term affects the estimate relative to the duration-only prediction.</p>
+</section>
+<section id="data-exercises" class="level3" data-number="11.7.3">
+<h3 data-number="11.7.3" class="anchored" data-anchor-id="data-exercises"><span class="header-section-number">11.7.3</span> Data exercises</h3>
+<p>These problems use the live-data figures in this chapter.</p>
+<p><strong>FIP-D1.</strong> <a href="#fig-tangent" class="quarto-xref">Figure&nbsp;<span>11.1</span></a> shows a 10-year Treasury carrying the par coupon <span class="math inline">\(4.62\%\)</span> (semiannual payments, <span class="math inline">\(\$1{,}000\)</span> face), so it is priced at par with modified duration <span class="math inline">\(D^{*} \approx 7.9\)</span>. (a) Use the duration approximation to estimate the percentage price change if the yield rises by 100 basis points to <span class="math inline">\(5.62\%\)</span>. (b) Compute the exact new price from the pricing equation and the exact percentage change. (c) The two answers differ; state which is more negative, and connect the sign of the difference to the shaded region in the figure.</p>
+<p><strong>FIP-D2.</strong> In <a href="#fig-svb" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>, a 20-year Treasury issued at par in March 2020 with a <span class="math inline">\(0.87\%\)</span> coupon had modified duration of roughly <span class="math inline">\(17\)</span> at issue. Between March 2020 and October 2023 the 20-year yield rose by about <span class="math inline">\(4.2\)</span> percentage points. (a) What loss does the first-order approximation <span class="math inline">\(\Delta P/P \approx -D^{*} \Delta y\)</span> predict? (b) The figure shows the realized loss was about <span class="math inline">\(-48\%\)</span>. Give two reasons the linear prediction overstates the loss for a move this large. (c) Explain why this loss required no default by the U.S. Treasury.</p>
 
 
 

@@ -321,6 +321,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">6.12.1</span> Conceptual</a></li>
   <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">6.12.2</span> Quantitative</a></li>
+  <li><a href="#data-exercises" id="toc-data-exercises" class="nav-link" data-scroll-target="#data-exercises"><span class="header-section-number">6.12.3</span> Data exercises</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -365,6 +366,20 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>The whole point of these measures is to separate reward from risk — and once you do, the case for active management gets harder to make. S&amp;P Dow Jones Indices’ SPIVA scorecard found that even on a <em>risk-adjusted</em> basis, roughly 97% of U.S. domestic active funds underperformed the broad market over the 20 years through 2024 — an even worse showing than on raw returns. Measuring performance correctly, rather than being dazzled by a single year’s headline number, is exactly what this chapter is about. Read it at <a href="https://www.spglobal.com/spdji/en/spiva/article/spiva-us/">S&amp;P Dow Jones Indices</a>.</p>
+</div>
+</div>
+<div class="market-insight">
+<p><strong>Market Insight</strong></p>
+<p>A natural hope for active management is that raw return comparisons are unfair — perhaps active funds earn their keep by delivering smoother rides, so that adjusting for risk would flatter them. The data say the opposite. <a href="#fig-spiva-adj" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> compares, for large-cap funds and the horizons S&amp;P reports, the share of funds underperforming on raw returns with the share underperforming after the returns of every fund and the benchmark are put on an equal-risk footing using Sharpe ratios — the first measure this chapter develops. At every horizon the risk-adjusted bar is <em>higher</em>: over fifteen years, 90% of large-cap funds trail the S&amp;P 500 on raw returns but 99% trail it after risk adjustment. The economic reading is that active funds have tended to take <em>more</em> total risk than their benchmarks, not less, so adjusting for risk removes what looked like a partial offset to their fee drag. Keep this figure in mind as the chapter proceeds: it is a preview of why every serious performance evaluation begins by asking not “what did it return?” but “what did it return per unit of risk?”</p>
+<div id="fig-spiva-adj" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-spiva-adj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/spiva_risk_adjusted.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spiva-adj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Share of actively managed U.S. large-cap funds underperforming the S&amp;P 500 on raw returns and on a risk-adjusted (Sharpe ratio) basis, periods ending December 31, 2025. Source: S&amp;P Dow Jones Indices, SPIVA U.S. Scorecard and Risk-Adjusted Scorecard, Year-End 2025.
+</figcaption>
+</figure>
 </div>
 </div>
 </section>
@@ -568,6 +583,12 @@ window.Quarto = {
 <p><strong>PERF-Q10.</strong> A manager’s estimated alpha over <span class="math inline">\(T = 25\)</span> years of data is <span class="math inline">\(\hat\alpha_P = 1.5\%\)</span>, with a residual standard deviation of <span class="math inline">\(\sigma(\varepsilon_P) = 6\%\)</span>. Compute her information ratio <span class="math inline">\(IR_P = \alpha_P/\sigma(\varepsilon_P)\)</span> and the approximate <span class="math inline">\(t\)</span>-statistic <span class="math inline">\(t(\hat\alpha_P) \approx IR_P\cdot\sqrt{T}\)</span>, and state whether her alpha is statistically distinguishable from zero at the conventional threshold.</p>
 <p><strong>PERF-Q11.</strong> A manager’s market-model regression yields an estimated alpha of <span class="math inline">\(\alpha_P = 2.4\%\)</span> and a residual standard deviation of <span class="math inline">\(\sigma(\varepsilon_P) = 8\%\)</span>. Separately, her active return relative to a benchmark averaged <span class="math inline">\(\overline{r_P - r_b} = 2.0\%\)</span> with tracking error <span class="math inline">\(TE_P = 5\%\)</span>. Compute the information ratio under both the residual-risk definition and the benchmark-difference definition, and explain in one sentence why they differ.</p>
 <p><strong>PERF-Q12.</strong> A fund has a total standard deviation of <span class="math inline">\(\sigma_P = 22\%\)</span> and a beta of <span class="math inline">\(\beta_P = 1.1\)</span>; the market has a standard deviation of <span class="math inline">\(\sigma_M = 15\%\)</span>. Using the identity <span class="math inline">\(\sigma_P^2 = \beta_P^2\sigma_M^2 + \sigma^2(\varepsilon_P)\)</span>, compute the fund’s residual (idiosyncratic) risk <span class="math inline">\(\sigma(\varepsilon_P)\)</span>. If the fund’s Jensen’s alpha is <span class="math inline">\(\alpha_P = 1.9\%\)</span>, compute the residual-risk form of its information ratio <span class="math inline">\(\alpha_P/\sigma(\varepsilon_P)\)</span>.</p>
+</section>
+<section id="data-exercises" class="level3" data-number="6.12.3">
+<h3 data-number="6.12.3" class="anchored" data-anchor-id="data-exercises"><span class="header-section-number">6.12.3</span> Data exercises</h3>
+<p>These problems use the live-data figure in this chapter.</p>
+<p><strong>PERF-D1.</strong> A fund earned a mean excess return of <span class="math inline">\(6.8\%\)</span> per year with volatility <span class="math inline">\(22\%\)</span>; the index earned a mean excess return of <span class="math inline">\(6.5\%\)</span> with volatility <span class="math inline">\(17\%\)</span>. (a) On raw returns, which performed better? (b) Compute both Sharpe ratios. Which performed better per unit of risk? (c) Explain how this example illustrates why the risk-adjusted bars in <a href="#fig-spiva-adj" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> are <em>higher</em> than the raw-return bars at every horizon.</p>
+<p><strong>PERF-D2.</strong> <a href="#fig-spiva-adj" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> reports that over fifteen years <span class="math inline">\(90\%\)</span> of large-cap active funds underperform the S&amp;P 500 on raw returns but <span class="math inline">\(99\%\)</span> underperform after Sharpe-ratio adjustment. What does the direction of this gap reveal about the <em>total risk</em> active funds have taken relative to their benchmark? Connect your answer to the chapter’s claim that every performance measure places return relative to a notion of risk.</p>
 
 
 

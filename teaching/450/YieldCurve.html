@@ -317,6 +317,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"><span class="header-section-number">10.8.1</span> Conceptual</a></li>
   <li><a href="#quantitative" id="toc-quantitative" class="nav-link" data-scroll-target="#quantitative"><span class="header-section-number">10.8.2</span> Quantitative</a></li>
+  <li><a href="#data-exercises" id="toc-data-exercises" class="nav-link" data-scroll-target="#data-exercises"><span class="header-section-number">10.8.3</span> Data exercises</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -388,6 +389,17 @@ window.Quarto = {
 <p>The interest rate for a particular interval of time (often a short interval like 1 year). For example, "the 1 year short rate three years from now will be 5%" or "the current short rate is 10% which by definition is the current 1-year spot rate."</p>
 </dd>
 </dl>
+<p>The spot rates just defined are not abstractions: the U.S. Treasury publishes a full curve of them every business day. <a href="#fig-curve-regimes" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> plots that curve on four dates chosen to span the shapes the curve actually takes. In June 2021 the curve was steep — short rates pinned near zero and long rates about two percentage points higher. Two years later the same curve was <em>inverted</em>: the three-month rate exceeded the ten-year rate by more than a percentage point, the configuration behind the recession-indicator headlines in the news box above. Today’s curve is different again, upward sloping from around 3.7% at the short end to above 5% at twenty years. Every calculation in this chapter — stripping, spot rates, forward rates — can be carried out on the green line in this figure, and the worked examples below invite you to do exactly that.</p>
+<div id="fig-curve-regimes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-curve-regimes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/yield_curve_regimes.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-curve-regimes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: The U.S. Treasury par yield curve on four dates: the current curve, the curve one year earlier, the steep curve of June 2021, and the inverted curve of June 2023. Source: U.S. Department of the Treasury, daily par yield curve rates.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="bond-pricing" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="bond-pricing"><span class="header-section-number">10.3</span> Bond pricing</h2>
@@ -534,6 +546,12 @@ f_3 = \frac{(1+y_3)^3}{(1 + y_2)^2} - 1 = \frac{1.0198^3}{1.0174^2} =  0.024617
 <p><strong>YC-Q10.</strong> Suppose <span class="math inline">\(y_1 = 0.03\)</span>, and the market’s expected future one-year short rate is <span class="math inline">\(Er_2 = 0.05\)</span>. (a) Under the expectations hypothesis (<span class="math inline">\(f_2 = Er_2\)</span>), determine the two-year spot rate <span class="math inline">\(y_2\)</span> consistent with this expectation, using <span class="math inline">\((1 + y_2)^2 = (1 + y_1)(1 + f_2)\)</span>. (b) Now suppose instead that a liquidity premium <span class="math inline">\(LP = 0.01\)</span> raises the forward rate to <span class="math inline">\(f_2 = Er_2 + LP\)</span>; recompute <span class="math inline">\(y_2\)</span> and comment on how the premium steepens the curve.</p>
 <p><strong>YC-Q11.</strong> You want to raise $2M from the capital markets to be received in one year and repaid one year later. One-year and two-year zeros have face value <span class="math inline">\(M = \$1000\)</span>. The current yield curve is <span class="math inline">\((y_1, y_2) = (0.020, 0.025)\)</span>. Compute (a) the price of each zero, (b) how many one-year zeros you must buy to receive $2M in one year, (c) how many two-year zeros <span class="math inline">\(q\)</span> you must short to fund the purchase, and (d) the total amount you must repay in two years. Verify that the effective interest paid corresponds to the forward rate <span class="math inline">\(f_2\)</span>.</p>
 <p><strong>YC-Q12.</strong> Using the general result that a loan of <span class="math inline">\(x\)</span> received at time <span class="math inline">\(n\)</span> and repaid at time <span class="math inline">\(n+1\)</span> carries effective rate <span class="math inline">\(f_{n+1}\)</span>, suppose the yield curve is <span class="math inline">\((y_1, y_2, y_3) = (0.030, 0.035, 0.040)\)</span> and you wish to lock in a loan of <span class="math inline">\(x = \$500{,}000\)</span> to be received at time 2 and repaid at time 3. Compute the forward rate <span class="math inline">\(f_3\)</span>, the number of zeros involved via <span class="math inline">\(q = (1 + f_3)\frac{x}{M}\)</span> with <span class="math inline">\(M = \$1000\)</span>, and the amount <span class="math inline">\((1 + f_3)x\)</span> you must repay at time 3.</p>
+</section>
+<section id="data-exercises" class="level3" data-number="10.8.3">
+<h3 data-number="10.8.3" class="anchored" data-anchor-id="data-exercises"><span class="header-section-number">10.8.3</span> Data exercises</h3>
+<p>These problems use the live-data figures in this chapter.</p>
+<p><strong>YC-D1.</strong> Reading from the current (green) curve in <a href="#fig-curve-regimes" class="quarto-xref">Figure&nbsp;<span>10.1</span></a>, the one-, two-, and three-year par yields are approximately <span class="math inline">\((y_1, y_2, y_3) = (0.0412, 0.0426, 0.0430)\)</span>. Compute the implied forward rates <span class="math inline">\(f_2\)</span> and <span class="math inline">\(f_3\)</span>. Then compare your answers with the forward rates computed in the chapter from the September 2008 curve, and explain in one sentence why today’s forwards sit so close to today’s spots while the 2008 curve implied sharply rising short rates.</p>
+<p><strong>YC-D2.</strong> In June 2023 (<a href="#fig-curve-regimes" class="quarto-xref">Figure&nbsp;<span>10.1</span></a>, dashed black line) the three-month yield was near <span class="math inline">\(5.4\%\)</span> while the ten-year yield was near <span class="math inline">\(3.8\%\)</span>. State what this inversion implies about expected future short rates under the expectations hypothesis. Then explain how the liquidity preference theory changes the reading: is the market’s implied expected decline in short rates <em>larger</em> or <em>smaller</em> than the raw forward rates suggest? Justify using <span class="math inline">\(f_n = Er_n + LP\)</span> with <span class="math inline">\(LP &gt; 0\)</span>.</p>
 
 
 
