@@ -204,12 +204,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/ge-with-uncertainty.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">General Equilibrium with Uncertainty</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -278,7 +272,7 @@ window.Quarto = {
 <section id="properties-of-a-vector-space" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="properties-of-a-vector-space"><span class="header-section-number">1.2</span> Properties of a vector space</h2>
 <p>One of the principle spaces on which we develop optimization problems is a <strong>vector space</strong>. The next definition defines the properties of a vector space.</p>
-<div id="def-1" class="theorem definition">
+<div id="def-opt-1" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.1</strong></span> A set <span class="math inline">\(X\)</span> over which addition and scalar multiplication are defined in such a way that <span class="math inline">\(x + y \in X\)</span> for <span class="math inline">\(x,y \in X\)</span> and <span class="math inline">\(\alpha \cdot x \in X\)</span> for <span class="math inline">\(\alpha \in \mathbb{R}\)</span> is a <em>vector space</em> if for any <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> and <span class="math inline">\(z \in X\)</span> and <span class="math inline">\(\alpha, \beta \in \mathbb{R}\)</span>,</p>
 <blockquote class="blockquote">
 <ul>
@@ -293,14 +287,14 @@ window.Quarto = {
 </ul>
 </blockquote>
 </div>
-<div id="exm-1" class="theorem example">
+<div id="exm-opt-1" class="theorem example">
 <p><span class="theorem-title"><strong>Example 1.1</strong></span> Consider the set of all infinite sequences of real numbers. Prove that there exist definitions of addition and scalar multiplication for which this set is a vector space. What is the 0 element?</p>
 </div>
-<div id="exm-2" class="theorem example">
+<div id="exm-opt-2" class="theorem example">
 <p><span class="theorem-title"><strong>Example 1.2</strong></span> Consider the set of all functions from <span class="math inline">\([0,1]\)</span> into <span class="math inline">\(\mathbb{R}\)</span>. Prove that there exist definitions of addition and scalar multiplication for which this set is a vector space. What is the zero element? Does this hold true for the set of all continuous functions from <span class="math inline">\([0,1]\)</span> into <span class="math inline">\(\mathbb{R}\)</span>? The set of all differentiable functions? The set of all differentiable functions with derivatives bounded above by 2?</p>
 </div>
 <p>The leading example of a vector space used in economic analysis is <span class="math inline">\(\mathbb{R}^n\)</span>, sometimes called "n-dimensional Euclidean space." For many of the problems used in economics this space has been found to be a reasonable approximation to reality. For examples like household consumption choice, some savings and investment problems this set and firm behavior this set is often used.</p>
-<div id="exr-1" class="theorem exercise">
+<div id="exr-opt-1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.1</strong></span> Let <span class="math inline">\(X\)</span> be a vector space. Prove that:</p>
 <blockquote class="blockquote">
 <ul>
@@ -310,7 +304,7 @@ window.Quarto = {
 </blockquote>
 </div>
 <p>Defining a general concept of distance is helpful in many optimization problems. A <em>norm</em> does this.</p>
-<div id="def-2" class="theorem definition">
+<div id="def-opt-2" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.2</strong></span> A <strong>norm</strong> on a vector space <span class="math inline">\(X\)</span> is a function <span class="math inline">\(||\cdot||:X \rightarrow \mathbb{R}\)</span> having the following properties:</p>
 <blockquote class="blockquote">
 <ul>
@@ -320,7 +314,7 @@ window.Quarto = {
 </ul>
 </blockquote>
 </div>
-<div id="exm-3" class="theorem example">
+<div id="exm-opt-3" class="theorem example">
 <p><span class="theorem-title"><strong>Example 1.3</strong></span> Consider the following functions. Determine whether these are norms or not.</p>
 <blockquote class="blockquote">
 <ol type="1">
@@ -332,13 +326,13 @@ window.Quarto = {
 </ol>
 </blockquote>
 </div>
-<div id="def-3" class="theorem definition">
+<div id="def-opt-3" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.3</strong></span> A <strong>normed vector space</strong> is a pair <span class="math inline">\((X,||\cdot||)\)</span> where <span class="math inline">\(X\)</span> is a vector space and <span class="math inline">\(||\cdot||\)</span> is a norm.</p>
 </div>
-<div id="exr-2" class="theorem exercise">
+<div id="exr-opt-2" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.2</strong></span> Prove that if <span class="math inline">\(||\cdot||\)</span> is a norm on a vector space <span class="math inline">\(X\)</span> then <span class="math inline">\(||x|| - ||y|| \le ||x - y||\)</span> for any two vectors <span class="math inline">\(x,y \in X\)</span>.</p>
 </div>
-<div id="def-4" class="theorem definition">
+<div id="def-opt-4" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.4</strong></span> An <strong>inner product</strong> over a space <span class="math inline">\(X\)</span> is a function <span class="math inline">\(\langle \cdot,\cdot \rangle : X \times X \rightarrow \mathbb{R}\)</span> that satisfies the following properties:</p>
 <blockquote class="blockquote">
 <ul>
@@ -351,23 +345,20 @@ window.Quarto = {
 </blockquote>
 </div>
 <p>For any space over which an inner product is defined, there is a natural (i.e.&nbsp;often convenient) norm that can be defined.</p>
-<div id="lem-1" class="theorem lemma">
+<div id="lem-opt-1" class="theorem lemma">
 <p><span class="theorem-title"><strong>Lemma 1.1</strong></span> Let <span class="math inline">\(X\)</span> be a space and <span class="math inline">\(\langle \cdot, \cdot \rangle\)</span> be an inner product defined on <span class="math inline">\(X\)</span>. Then <span class="math inline">\(\sqrt{\langle \cdot, \cdot \rangle}\)</span> is a norm on the space <span class="math inline">\(X\)</span>.</p>
 </div>
-<dl>
-<dt>Excercise.</dt>
-<dd>
-<p>Prove the previous lemma.</p>
-</dd>
-</dl>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Write <span class="math inline">\(\|x\| = \sqrt{\langle x, x\rangle}\)</span>. Positivity and homogeneity are immediate from the inner-product axioms (<a href="#def-opt-4" class="quarto-xref">Definition&nbsp;<span>1.4</span></a>): <span class="math inline">\(\|x\| \ge 0\)</span> with <span class="math inline">\(\|x\| = 0\)</span> only if <span class="math inline">\(x = 0\)</span>, and <span class="math inline">\(\|\alpha x\| = \sqrt{\langle \alpha x, \alpha x\rangle} = \sqrt{\alpha^{2}\langle x,x\rangle} = |\alpha|\,\|x\|\)</span>. Only the triangle inequality requires work, and it rests on the <strong>Cauchy–Schwarz inequality</strong> <span class="math display">\[|\langle x, y\rangle| \le \|x\|\,\|y\|.\]</span> To prove Cauchy–Schwarz, assume <span class="math inline">\(y \ne 0\)</span> (the case <span class="math inline">\(y = 0\)</span> is trivial). For every <span class="math inline">\(t \in \mathbb{R}\)</span>, <span class="math display">\[0 \le \langle x - ty,\, x - ty\rangle = \|x\|^{2} - 2t\langle x, y\rangle + t^{2}\|y\|^{2}.\]</span> This quadratic in <span class="math inline">\(t\)</span> is nonnegative for all <span class="math inline">\(t\)</span>, so its discriminant is nonpositive: <span class="math inline">\(4\langle x,y\rangle^{2} - 4\|x\|^{2}\|y\|^{2} \le 0\)</span>, which is exactly <span class="math inline">\(|\langle x,y\rangle| \le \|x\|\,\|y\|\)</span>. Now <span class="math display">\[\|x + y\|^{2} = \|x\|^{2} + 2\langle x, y\rangle + \|y\|^{2} \le \|x\|^{2} + 2\|x\|\,\|y\| + \|y\|^{2} = \big(\|x\| + \|y\|\big)^{2},\]</span> and taking square roots gives <span class="math inline">\(\|x + y\| \le \|x\| + \|y\|\)</span>. Hence <span class="math inline">\(\sqrt{\langle\cdot,\cdot\rangle}\)</span> satisfies all three norm axioms.</p>
+</div>
 <p>However, not all norms need be generated by an inner product.</p>
 </section>
 <section id="linear-functionals-hyperplanes-and-convex-sets" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="linear-functionals-hyperplanes-and-convex-sets"><span class="header-section-number">1.3</span> Linear functionals, hyperplanes and convex sets</h2>
-<div id="def-5" class="theorem definition">
+<div id="def-opt-5" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.5</strong></span> Let <span class="math inline">\(X\)</span> be a vector space. A function <span class="math inline">\(f:X \rightarrow \mathbb{R}\)</span> is linear if for any two <span class="math inline">\(\alpha, \beta \in \mathbb{R}\)</span>, <span class="math inline">\(f(\alpha x + \beta y) = \alpha f(x) + \beta f(y)\)</span>. We call such a function a <strong>linear functional</strong>.</p>
 </div>
-<div id="def-6" class="theorem definition">
+<div id="def-opt-6" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.6</strong></span> The set of all bounded linear functionals over the normed vector space <span class="math inline">\(X\)</span> is called the <strong>dual space</strong> of <span class="math inline">\(X\)</span> and is denoted <span class="math inline">\(X^{*}\)</span>.</p>
 </div>
 <dl>
@@ -378,7 +369,7 @@ window.Quarto = {
 <ol type="1">
 <li>The dual of <span class="math inline">\(\mathbb{R}^n\)</span> is the set of all functions of the form <span class="math inline">\(f(x) = a\cdot x\)</span> for <span class="math inline">\(a \in \mathbb{R}^n\)</span>.</li>
 <li>Let <span class="math inline">\(\ell_p\)</span> be the space of infinite sequences of real numbers for which <span class="math inline">\(\sum_{i=0}^{\infty}|x_{i}|^{p} &lt; \infty\)</span>. The typical norm defined over this space is <span class="math inline">\(||x||_{p} = \left ( \sum_{i=0}^{\infty}|x_{i}|^{p}  \right )^{1/p}\)</span>. If <span class="math inline">\(q\)</span> is such that <span class="math inline">\(1/p + 1/q = 1\)</span>, then the dual of <span class="math inline">\(\ell_{p}\)</span> is <span class="math inline">\(\ell_{q}\)</span>.</li>
-<li>Let <span class="math inline">\(C_p[a,b]\)</span> be the space of continuous functions over the interval <span class="math inline">\([a,b]\)</span> for which <span class="math inline">\(\int_{a}^{b}|x(t)|^{p}dt &lt; \infty\)</span>. The typical norm defined over this space is <span class="math inline">\(||x||_{p} = \left ( \int_{t=a}^{b}|x(t)|^{p}dt  \right )^{1/p}\)</span>. If <span class="math inline">\(q\)</span> is such that <span class="math inline">\(1/p + 1/q = 1\)</span>, then the dual of <span class="math inline">\(C_{p}[a,b]\)</span> is <span class="math inline">\(C_{q}[a,b]\)</span>.</li>
+<li>Let <span class="math inline">\(C_p[a,b]\)</span> be the space of continuous functions over the interval <span class="math inline">\([a,b]\)</span> for which <span class="math inline">\(\int_{a}^{b}|x(t)|^{p}dt &lt; \infty\)</span>. The typical norm defined over this space is <span class="math inline">\(||x||_{p} = \left ( \int_{t=a}^{b}|x(t)|^{p}dt  \right )^{1/p}\)</span>. If <span class="math inline">\(q\)</span> is such that <span class="math inline">\(1/p + 1/q = 1\)</span>, then every <span class="math inline">\(a \in C_{q}[a,b]\)</span> defines a bounded linear functional on <span class="math inline">\(C_{p}[a,b]\)</span> via <span class="math inline">\(f(x) = \int_{a}^{b}a(t)x(t)dt\)</span>. (Strictly speaking, the full dual of this space is the larger space <span class="math inline">\(L^{q}[a,b]\)</span>; the continuous functions give a natural family of examples.)</li>
 </ol>
 </blockquote>
 </dd>
@@ -387,12 +378,12 @@ window.Quarto = {
 <ol type="1">
 <li>Check that for a vector <span class="math inline">\(a \in \mathbb{R}^n\)</span>, the functional <span class="math inline">\(f(x) = a'\cdot x\)</span> is a linear functional.</li>
 <li>Let <span class="math inline">\(a = (a_{0},a_{1},a_{2},\ldots) \in \ell_{q}\)</span>. Check that for any <span class="math inline">\(x \in \ell_{p}\)</span>, <span class="math inline">\(\sum_{t=0}^{\infty}a(t)x(t)\)</span> is a linear functional. Why must <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> satisfy the equation in example 2 above?</li>
-<li>Let <span class="math inline">\(a:[0,1] \rightarrow \mathbb{R}\)</span> be in <span class="math inline">\(C_{q}[0,1]\)</span>. Show that for any <span class="math inline">\(x \in \ell_{p}\)</span>, <span class="math inline">\(\int_{0}^{1}a(t)x(t)\)</span> is a linear functional. Why must <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> satisfy the equation in example 3 above?</li>
+<li>Let <span class="math inline">\(a:[0,1] \rightarrow \mathbb{R}\)</span> be in <span class="math inline">\(C_{q}[0,1]\)</span>. Show that for any <span class="math inline">\(x \in C_{p}[0,1]\)</span>, <span class="math inline">\(\int_{0}^{1}a(t)x(t)dt\)</span> is a linear functional. Why must <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> satisfy the equation in example 3 above?</li>
 </ol>
 </dd>
 </dl>
 <p>A linear functional can also be used to describe particular subsets of a vector space <span class="math inline">\(X\)</span> called <em>hyperplanes</em>.</p>
-<div id="def-7" class="theorem definition">
+<div id="def-opt-7" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.7</strong></span> Let <span class="math inline">\(f \in X^{*}\)</span> be a linear functional over the set <span class="math inline">\(X\)</span>. Consider the set <span class="math inline">\(\{x: f(x) = c \}\)</span> for some <span class="math inline">\(c \in \mathbb{R}\)</span>. We call this set the <strong>hyperplane</strong> in <span class="math inline">\(X\)</span> defined by the pair <span class="math inline">\((f,c)\)</span>.</p>
 </div>
 <dl>
@@ -408,55 +399,65 @@ window.Quarto = {
 <p>First, think about a closed convex and compact set <span class="math inline">\(K \subseteq X\)</span> (where <span class="math inline">\(X\)</span> is a metric space), a linear functional <span class="math inline">\(f \in X^{*}\)</span> and the function <span class="math inline">\(h(f,K): X^{*} \rightarrow \mathbb{R}\)</span> defined by</p>
 <p><span class="math display">\[h(f,K) = \min_{x \in K} f(x)\]</span></p>
 <p>Since <span class="math inline">\(K\)</span> is compact, the minimum always exists and this function is well defined. Furthermore, the following theorem shows that every half-space defined by <span class="math inline">\(H(f) = \{x: f(x) = h(f,K)\}\)</span> either contains all of <span class="math inline">\(K\)</span> or only things on the boundary of <span class="math inline">\(K\)</span>.</p>
-<div id="prp-1" class="theorem proposition">
+<div id="prp-opt-1" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 1.1</strong></span> If <span class="math inline">\(K\)</span> is a closed convex set and <span class="math inline">\(x \notin K\)</span>, there is a closed half-space that contains <span class="math inline">\(K\)</span> but does not contain <span class="math inline">\(x\)</span>.</p>
 </div>
-<dl>
-<dt>Idea behind proof.</dt>
-<dd>
-<p>Draw circle and dot.</p>
-</dd>
-</dl>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Work in <span class="math inline">\(\mathbb{R}^{n}\)</span> (or any inner-product space) and let <span class="math inline">\(x \notin K\)</span>. Because <span class="math inline">\(K\)</span> is closed and convex, it has a unique point <span class="math inline">\(p \in K\)</span> nearest to <span class="math inline">\(x\)</span> in the norm <span class="math inline">\(\|\cdot\| = \sqrt{\langle\cdot,\cdot\rangle}\)</span>. (<em>Existence</em>: minimizing the continuous function <span class="math inline">\(z \mapsto \|x - z\|\)</span> over the intersection of <span class="math inline">\(K\)</span> with a large closed ball around <span class="math inline">\(x\)</span> — a compact set — yields a minimizer. <em>Uniqueness</em>: if <span class="math inline">\(p_{1}, p_{2} \in K\)</span> were both nearest, their midpoint lies in <span class="math inline">\(K\)</span> by convexity and, by the parallelogram law, is strictly closer to <span class="math inline">\(x\)</span> unless <span class="math inline">\(p_{1} = p_{2}\)</span>.)</p>
+<p>Let <span class="math inline">\(a = x - p \ne 0\)</span>. We first establish the <em>variational inequality</em> <span class="math inline">\(\langle a, z - p\rangle \le 0\)</span> for every <span class="math inline">\(z \in K\)</span>. Fix <span class="math inline">\(z \in K\)</span>; by convexity <span class="math inline">\(p + t(z - p) \in K\)</span> for <span class="math inline">\(t \in [0,1]\)</span>, so <span class="math inline">\(\phi(t) = \|x - p - t(z - p)\|^{2}\)</span> is minimized over <span class="math inline">\([0,1]\)</span> at <span class="math inline">\(t = 0\)</span>. Since <span class="math inline">\(\phi'(0) = -2\langle a, z - p\rangle \ge 0\)</span>, we obtain <span class="math inline">\(\langle a, z - p\rangle \le 0\)</span>.</p>
+<p>Thus <span class="math inline">\(\langle a, z\rangle \le \langle a, p\rangle\)</span> for all <span class="math inline">\(z \in K\)</span>. Put <span class="math inline">\(f(z) = \langle a, z\rangle\)</span> and <span class="math inline">\(c = \langle a, p\rangle + \tfrac{1}{2}\|a\|^{2}\)</span>. Every <span class="math inline">\(z \in K\)</span> then satisfies <span class="math inline">\(f(z) \le \langle a, p\rangle &lt; c\)</span>, so <span class="math inline">\(K \subset \{z : f(z) \le c\}\)</span>, while <span class="math inline">\(f(x) = \langle a, p + a\rangle = \langle a, p\rangle + \|a\|^{2} &gt; c\)</span>. The closed half-space <span class="math inline">\(\{z : f(z) \le c\}\)</span> therefore contains <span class="math inline">\(K\)</span> but not <span class="math inline">\(x\)</span>.</p>
+</div>
 <p>Thus, the linear functional <span class="math inline">\(f\)</span> defines a hyperplane that <em>separates</em> or <em>supports</em> the space <span class="math inline">\(K\)</span> from the rest of the space <span class="math inline">\(X\)</span>. So we call this a <em>separating hyperplane</em>. A slightly more surprising result is that for a convex set, the intersection of all half-spaces defined by separating hyperplanes uniquely defines any convex set <span class="math inline">\(K\)</span>.</p>
-<div id="prp-2" class="theorem proposition">
+<div id="prp-opt-2" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 1.2 (Dual characterization)</strong></span> If <span class="math inline">\(K\)</span> is a closed convex set in a normed space, then <span class="math inline">\(K\)</span> is equal to the intersection of all of the closed half-spaces that contain it.</p>
 </div>
-<dl>
-<dt>Idea behind proof.</dt>
-<dd>
-<p>Draw picture of circle.</p>
-</dd>
-</dl>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(K'\)</span> be the intersection of all closed half-spaces that contain <span class="math inline">\(K\)</span>. Every such half-space contains <span class="math inline">\(K\)</span>, so <span class="math inline">\(K \subseteq K'\)</span>. For the reverse inclusion, take any <span class="math inline">\(x \notin K\)</span>. By <a href="#prp-opt-1" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a> there is a closed half-space <span class="math inline">\(H\)</span> with <span class="math inline">\(K \subseteq H\)</span> and <span class="math inline">\(x \notin H\)</span>. Since <span class="math inline">\(H\)</span> is one of the half-spaces defining <span class="math inline">\(K'\)</span>, we have <span class="math inline">\(K' \subseteq H\)</span>, and therefore <span class="math inline">\(x \notin K'\)</span>. Thus every point outside <span class="math inline">\(K\)</span> is outside <span class="math inline">\(K'\)</span>, i.e.&nbsp;<span class="math inline">\(K' \subseteq K\)</span>. Combining the inclusions, <span class="math inline">\(K = K'\)</span>.</p>
+</div>
 <p>This idea of defining convex sets through separating hyperplanes has found significant use in economic theory. You used it when you first defined budget constraints. We will see it several times this year.</p>
-<div id="def-8" class="theorem definition">
+<div id="def-opt-8" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.8</strong></span> A closed hyperplane <span class="math inline">\(H\)</span> in a normed space <span class="math inline">\(X\)</span> is said to be a <strong>support</strong> (or supporting hyperplane) for the convex set <span class="math inline">\(K\)</span> if <span class="math inline">\(K\)</span> is contained in one of the closed half-spaces determined by <span class="math inline">\(H\)</span> and <span class="math inline">\(H\)</span> contains a point of <span class="math inline">\(\overline{K}\)</span>.</p>
 </div>
 </section>
 <section id="differentials-or-derivatives-in-general-vector-spaces" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="differentials-or-derivatives-in-general-vector-spaces"><span class="header-section-number">1.4</span> Differentials (or derivatives) in general vector spaces</h2>
 <p>For the next two definitions, let <span class="math inline">\(X\)</span> be a vector space and <span class="math inline">\(Y\)</span> a normed vector space.</p>
-<div id="def-9" class="theorem definition">
+<div id="def-opt-9" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.9</strong></span> Let <span class="math inline">\(x \in D \subset X\)</span>, <span class="math inline">\(h \in X\)</span> and <span class="math inline">\(f:X \rightarrow Y\)</span>. If the limit</p>
 <p><span class="math display">\[\delta f(x,h) = \lim_{\alpha \rightarrow 0}\frac{1}{\alpha}\left [ f(x + \alpha h) - f(x)\right]\]</span></p>
 <p>exists, it is called the <strong>Gateaux differential</strong> of <span class="math inline">\(f\)</span> in the direction <span class="math inline">\(h\)</span>. If this differential exists for all <span class="math inline">\(h \in X\)</span> then <span class="math inline">\(f\)</span> is said to be <strong>Gateaux differentiable</strong> at <span class="math inline">\(x\)</span>.</p>
 </div>
-<div id="exr-3" class="theorem exercise">
+<div id="exr-opt-3" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.3</strong></span> Let <span class="math inline">\(X = \mathbb{R}^2\)</span> and let <span class="math inline">\(f(x) = Ax_{1}^{\alpha}x_{2}^{1-\alpha}\)</span>. What is <span class="math inline">\(\delta f(x,(a,b))\)</span>?</p>
 </div>
-<p>The Gateaux differential is useful, but if we are willing to assume that the space <span class="math inline">\(X\)</span> has a metric then we can use a more specific definition</p>
-<div id="def-10" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.10</strong></span> Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be normed vector spaces and let <span class="math inline">\(D \subseteq X\)</span> be an open subset of <span class="math inline">\(X\)</span>. If for some <span class="math inline">\(x \in D\)</span> and every <span class="math inline">\(h \in X\)</span> there exists</p>
-<p><span class="math display">\[\lim_{||h|| \rightarrow 0} \frac{||f(x + h) - f(x) - \partial f(x;h)||}{||h||} = 0\]</span></p>
-<p>then <span class="math inline">\(f\)</span> is Frechet differentiable at <span class="math inline">\(x\)</span> and <span class="math inline">\(\partial f(x;h)\)</span> is the <em>Frechet differential</em> of <span class="math inline">\(f\)</span> at <span class="math inline">\(x\)</span> with increment <span class="math inline">\(h\)</span>.</p>
+<p>The definition asks us to do only one-dimensional calculus: perturb <span class="math inline">\(x\)</span> in a fixed direction <span class="math inline">\(h\)</span>, differentiate with respect to the scalar <span class="math inline">\(\alpha\)</span>, and evaluate at <span class="math inline">\(\alpha = 0\)</span>. The following examples work this recipe out in detail, moving from Euclidean space to spaces of functions.</p>
+<div id="exm-gateaux-quadratic" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.4 (A quadratic form on <span class="math inline">\(\mathbb{R}^{n}\)</span>)</strong></span> Let <span class="math inline">\(X = \mathbb{R}^{n}\)</span> and <span class="math inline">\(f(x) = x^{\top}Qx\)</span> where <span class="math inline">\(Q\)</span> is a symmetric <span class="math inline">\(n \times n\)</span> matrix. Fix a direction <span class="math inline">\(h \in \mathbb{R}^{n}\)</span>. Expanding,</p>
+<p><span class="math display">\[f(x + \alpha h) = (x + \alpha h)^{\top}Q(x + \alpha h) = x^{\top}Qx + 2\alpha\, x^{\top}Qh + \alpha^{2}\, h^{\top}Qh,\]</span></p>
+<p>where we used the symmetry of <span class="math inline">\(Q\)</span> to combine the cross terms (<span class="math inline">\(h^{\top}Qx = x^{\top}Qh\)</span>). Therefore</p>
+<p><span class="math display">\[\frac{1}{\alpha}\left[ f(x + \alpha h) - f(x) \right] = 2 x^{\top}Qh + \alpha\, h^{\top}Qh \xrightarrow{\alpha \to 0} 2x^{\top}Qh.\]</span></p>
+<p>So <span class="math inline">\(\delta f(x,h) = 2x^{\top}Qh\)</span>. Notice that this is exactly <span class="math inline">\(\nabla f(x) \cdot h\)</span>: in Euclidean space the Gateaux differential is the familiar directional derivative, and it is linear in the direction <span class="math inline">\(h\)</span>.</p>
 </div>
-<div id="prp-3" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1.3</strong></span> If the Frechet differential of <span class="math inline">\(f\)</span> exists at <span class="math inline">\(x\)</span> then the Gateaux differential exists at <span class="math inline">\(x\)</span> and they are equal.</p>
+<div id="exm-gateaux-integral" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.5 (An integral functional on a space of continuous functions)</strong></span> Now let <span class="math inline">\(X = C[a,b]\)</span>, the space of continuous functions on <span class="math inline">\([a,b]\)</span>, and consider <span class="math inline">\(F: X \rightarrow \mathbb{R}\)</span> given by</p>
+<p><span class="math display">\[F(x) = \int_{a}^{b} x(t)^{2}\, dt.\]</span></p>
+<p>Here a “point” <span class="math inline">\(x\)</span> is an entire function and a “direction” <span class="math inline">\(h\)</span> is also a function. For <span class="math inline">\(h \in C[a,b]\)</span>,</p>
+<p><span class="math display">\[F(x + \alpha h) = \int_{a}^{b} \left( x(t) + \alpha h(t) \right)^{2} dt = \int_{a}^{b} x(t)^{2}\, dt + 2\alpha \int_{a}^{b} x(t)h(t)\, dt + \alpha^{2}\int_{a}^{b} h(t)^{2}\, dt.\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[\frac{1}{\alpha}\left[ F(x + \alpha h) - F(x) \right] = 2\int_{a}^{b} x(t)h(t)\, dt + \alpha \int_{a}^{b} h(t)^{2}\, dt \xrightarrow{\alpha \to 0} 2\int_{a}^{b} x(t)h(t)\, dt.\]</span></p>
+<p>So <span class="math inline">\(\delta F(x,h) = 2\int_{a}^{b} x(t)h(t)\, dt\)</span>. Compare with the previous example: the sum <span class="math inline">\(2x^{\top}Qh = 2\sum_{i,j} x_{i}Q_{ij}h_{j}\)</span> has become an integral, but the structure — a linear functional pairing the “gradient” <span class="math inline">\(2x(t)\)</span> with the direction <span class="math inline">\(h(t)\)</span> — is identical.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Luenberger, page 173.</p>
+<div id="exm-gateaux-utility" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.6 (A discounted utility functional)</strong></span> Let <span class="math inline">\(X = C[0,T]\)</span> and consider the lifetime utility functional</p>
+<p><span class="math display">\[U(c) = \int_{0}^{T} e^{-\beta t}\, u(c(t))\, dt,\]</span></p>
+<p>where <span class="math inline">\(u\)</span> is continuously differentiable. Here the direction <span class="math inline">\(h\)</span> is a perturbation of the entire consumption path. Define <span class="math inline">\(g(\alpha) = U(c + \alpha h)\)</span> and differentiate under the integral sign:</p>
+<p><span class="math display">\[g'(\alpha) = \frac{d}{d\alpha}\int_{0}^{T} e^{-\beta t}\, u\left(c(t) + \alpha h(t)\right) dt = \int_{0}^{T} e^{-\beta t}\, u'\left(c(t) + \alpha h(t)\right) h(t)\, dt.\]</span></p>
+<p>Evaluating at <span class="math inline">\(\alpha = 0\)</span> gives</p>
+<p><span class="math display">\[\delta U(c,h) = \int_{0}^{T} e^{-\beta t}\, u'(c(t))\, h(t)\, dt.\]</span></p>
+<p>The economic content: <span class="math inline">\(e^{-\beta t}u'(c(t))\)</span> is the discounted marginal utility of consumption at time <span class="math inline">\(t\)</span>, and the Gateaux differential aggregates the utility consequences of the perturbation <span class="math inline">\(h\)</span> across the whole horizon. Setting <span class="math inline">\(\delta U(c,h) = 0\)</span> for all admissible <span class="math inline">\(h\)</span> is precisely the first-order condition we will exploit in the calculus of variations below.</p>
 </div>
 <p>Now, how can we use these generalized derivatives? As with traditional derivatives defined over Euclidean space, we have the following result.</p>
-<div id="thm-1" class="theorem">
+<div id="thm-opt-1" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.1</strong></span> Let <span class="math inline">\(f: X \rightarrow \mathbb{R}\)</span> have a Gateaux differential on a vector space <span class="math inline">\(X\)</span>. Then if <span class="math inline">\(f\)</span> has an extremum at <span class="math inline">\(x_{0} \in X\)</span> then <span class="math inline">\(\delta f(x_{0};h) = 0\)</span> for all <span class="math inline">\(h \in X\)</span>.</p>
 </div>
 <div class="proof">
@@ -474,23 +475,23 @@ window.Quarto = {
 <p>Application of the chain rule shows that this implies the necessary condition</p>
 <p><span class="math display">\[\partial U(x;h) = \int_{a}^{b} u_{x}(x, \dot{x}, t)h(t)dt + \int_{a}^{b} u_{\dot{x}}(x, \dot{x}, t)\dot{h}(t)dt = 0\]</span></p>
 <p>Remember that integration by parts says that <span class="math inline">\(\int_{a}^{b} u dv = \left . uv \right \vert_{a}^{b} - \int_{a}^{b} v du\)</span>. Applying this to the second of the two terms above gives</p>
-<p><span class="math display">\[\int_{a}^{b} u_{x}(x, \dot{x}, t)h(t)dt +\left . u_{\dot{x}}(x,\dot{x},t)h(t) \right \vert_{a}^{b}  - \int_{a}^{b} \frac{d}{dt}u_{\dot{x}}(x,\dot{x},t)h(t) = 0\]</span></p>
-<p>The last of these terms must be zero [EXPLAIN]. Combining terms gives</p>
+<p><span class="math display">\[\int_{a}^{b} u_{x}(x, \dot{x}, t)h(t)dt +\left . u_{\dot{x}}(x,\dot{x},t)h(t) \right \vert_{a}^{b}  - \int_{a}^{b} \frac{d}{dt}u_{\dot{x}}(x,\dot{x},t)h(t)dt = 0\]</span></p>
+<p>The boundary term <span class="math inline">\(\left. u_{\dot{x}}(x,\dot{x},t)h(t) \right\vert_{a}^{b}\)</span> must be zero: admissible variations hold the endpoints fixed, so <span class="math inline">\(h(a) = h(b) = 0\)</span> — a competing path <span class="math inline">\(x + \alpha h\)</span> must still hit the prescribed boundary values <span class="math inline">\(x(a)\)</span> and <span class="math inline">\(x(b)\)</span> — and hence <span class="math inline">\(u_{\dot{x}}h\)</span> vanishes at both <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Combining terms gives</p>
 <p><span class="math display">\[\int_{a}^{b} \left ( u_{x}(x, \dot{x}, t) - \frac{d}{dt}u_{\dot{x}}(x,\dot{x},t) \right) h(t)dt = 0\]</span></p>
-<p>Since <span class="math inline">\(h\)</span> is continuous, the integrand above must be zero everywhere [EXPLAIN WHY]. Therefore, a solution <span class="math inline">\(x(t)\)</span> is optimal only if</p>
+<p>Since this holds for <em>every</em> admissible variation <span class="math inline">\(h\)</span>, the term in parentheses must be zero everywhere — this is the <strong>fundamental lemma of the calculus of variations</strong>. (If the continuous factor <span class="math inline">\(u_{x} - \frac{d}{dt}u_{\dot{x}}\)</span> were nonzero, say positive, at some interior <span class="math inline">\(t_{0}\)</span>, then by continuity it would stay positive on an interval around <span class="math inline">\(t_{0}\)</span>; choosing a continuous <span class="math inline">\(h\)</span> that is positive on that interval and zero outside it — and zero at the endpoints — would make the integral strictly positive, contradicting that it vanishes for all <span class="math inline">\(h\)</span>.) Therefore, a solution <span class="math inline">\(x(t)\)</span> is optimal only if</p>
 <p><span class="math display">\[u_{x}(x, \dot{x}, t) - \frac{d}{dt}u_{\dot{x}}(x,\dot{x},t) = 0\]</span></p>
-<p>This is a partial differential equation that must be solved. We are looking for a function <span class="math inline">\(x\)</span> that solves this equation. The best method of solving this equation will vary based on <span class="math inline">\(u\)</span>. Let’s consider a particular example from economics.</p>
-<div id="exm-4" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1.4</strong></span> Suppose that at every instant in time <span class="math inline">\(t\)</span> you must choose your <span class="math inline">\(c(t)\)</span>. Savings receives a rate of return of <span class="math inline">\(r\)</span>. Then wealth <span class="math inline">\(x(t)\)</span> evolves according to <span class="math inline">\(\dot{x}(t) = rx(t) - c(t)\)</span>. Given the vN-M utility function <span class="math inline">\(u(c)\)</span> (which satisfies <span class="math inline">\(u'(c)&gt; 0\)</span> and <span class="math inline">\(u''(c) &lt; 0\)</span>) the individual has preferences</p>
+<p>This is an ordinary differential equation (in general of second order, since <span class="math inline">\(\frac{d}{dt}u_{\dot{x}}\)</span> involves <span class="math inline">\(\ddot{x}\)</span>) that must be solved. We are looking for a function <span class="math inline">\(x\)</span> that solves this equation. The best method of solving this equation will vary based on <span class="math inline">\(u\)</span>. Let’s consider a particular example from economics.</p>
+<div id="exm-opt-4" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.7</strong></span> Suppose that at every instant in time <span class="math inline">\(t\)</span> you must choose your <span class="math inline">\(c(t)\)</span>. Savings receives a rate of return of <span class="math inline">\(r\)</span>. Then wealth <span class="math inline">\(x(t)\)</span> evolves according to <span class="math inline">\(\dot{x}(t) = rx(t) - c(t)\)</span>. Given the vN-M utility function <span class="math inline">\(u(c)\)</span> (which satisfies <span class="math inline">\(u'(c)&gt; 0\)</span> and <span class="math inline">\(u''(c) &lt; 0\)</span>) the individual has preferences</p>
 <p><span class="math display">\[U(c) = \int_{0}^{T}e^{-\beta t}u(c(t))dt\]</span></p>
-<p>subject to the constraints that <span class="math inline">\(c(0) = S\)</span> and <span class="math inline">\(c(T) = 0\)</span>. From the equation above we have that</p>
+<p>subject to the boundary conditions on wealth <span class="math inline">\(x(0) = S\)</span> and <span class="math inline">\(x(T) = 0\)</span> (the individual starts with wealth <span class="math inline">\(S\)</span> and exhausts it by time <span class="math inline">\(T\)</span>). From the equation above we have that</p>
 <p><span class="math display">\[re^{-\beta t}u'(c(t)) + \frac{d}{dt}e^{-\beta t}u'(c(t)) = 0\]</span></p>
 <p>which implies that</p>
 <p><span class="math display">\[\frac{d}{dt} u'(c(t)) = (\beta - r)u'(c(t))\]</span></p>
 <p>Solving this o.d.e. gives</p>
-<p><span class="math display">\[u'(c(t)) = u'(c(0))e^{\beta - r}t\]</span></p>
-<p>[INTERPRET]</p>
-<p>Now, let’s plug in a utility function for this. Consider <span class="math inline">\(u(c) = \frac{1}{1-\gamma}c^{1-\gamma}\)</span>. Then the condition above becomes</p>
+<p><span class="math display">\[u'(c(t)) = u'(c(0))e^{(\beta - r)t}\]</span></p>
+<p>This is a <em>Keynes–Ramsey</em> condition. Because <span class="math inline">\(u'' &lt; 0\)</span>, marginal utility <span class="math inline">\(u'(c(t))\)</span> and consumption <span class="math inline">\(c(t)\)</span> move in opposite directions, so the sign of <span class="math inline">\(\beta - r\)</span> determines the tilt of the optimal consumption path: if the individual is impatient relative to the market (<span class="math inline">\(\beta &gt; r\)</span>), marginal utility rises over time and consumption <em>falls</em>; if <span class="math inline">\(\beta &lt; r\)</span> consumption <em>rises</em>; and if <span class="math inline">\(\beta = r\)</span> consumption is <em>constant</em>. Impatience and the return on saving pull consumption in opposite directions.</p>
+<p>Now, let’s plug in a utility function for this. Consider <span class="math inline">\(u(c) = \frac{1}{1-\gamma}c^{1-\gamma}\)</span>, so that <span class="math inline">\(u'(c) = c^{-\gamma}\)</span>. Then the condition above becomes <span class="math display">\[c(t)^{-\gamma} = c(0)^{-\gamma}e^{(\beta - r)t}.\]</span> Solving for <span class="math inline">\(c(t)\)</span> gives the optimal consumption path <span class="math display">\[c(t) = c(0)\,e^{\frac{r - \beta}{\gamma}t},\]</span> so consumption grows (or shrinks) at the constant rate <span class="math inline">\(\frac{r - \beta}{\gamma}\)</span>. The parameter <span class="math inline">\(1/\gamma\)</span> — the elasticity of intertemporal substitution — scales how strongly the consumer responds to the gap between the return <span class="math inline">\(r\)</span> and the discount rate <span class="math inline">\(\beta\)</span>: a lower <span class="math inline">\(\gamma\)</span> (greater willingness to substitute across time) produces a steeper path. The level <span class="math inline">\(c(0)\)</span> is pinned down by the budget and boundary conditions of the problem (integrating <span class="math inline">\(\dot{x} = rx - c\)</span> against the prescribed initial and terminal wealth).</p>
 </div>
 </section>
 <section id="euler-equations-and-another-intertemporal-savings-and-consumption-problem" class="level3" data-number="1.4.2">
@@ -499,17 +500,17 @@ window.Quarto = {
 <p><span class="math display">\[U(c) = \sum_{t = 0}^{\infty}\beta^{t}u(c(t))\]</span></p>
 <p>where <span class="math inline">\(c(t)\)</span> is the consumption at time <span class="math inline">\(t\)</span>. Plugging in the budget constraint above, we have the unconstrained optimization problem</p>
 <p><span class="math display">\[U(c) = \sum_{t = 0}^{\infty}\beta^{t}u\left( w(t) - s(t) \right)\]</span></p>
-<p>In this case, one will choose an infinite sequence of savings amounts <span class="math inline">\(s(t)\)</span> to maximize this function. Now, consider the Frechet differential in a particular direction. Specifically, consider a path <span class="math inline">\(\{s(t)\}\)</span> and imagine increasing savings by one unit at time <span class="math inline">\(t\)</span>. Notice that this will decrease consumption slightly at time <span class="math inline">\(t\)</span> and increase wealth at time <span class="math inline">\(t+1\)</span>. In this case, the Frechet derivative is</p>
-<p><span class="math display">\[U(s + \alpha h) = u(c(0)) + \cdots + \beta^{t}u\left(w(t) - \alpha s\right) + \beta^{t+1}u\left((s(t) + \alpha)(1+r)\right)\]</span></p>
+<p>In this case, one will choose an infinite sequence of savings amounts <span class="math inline">\(s(t)\)</span> to maximize this function. Now, consider the Gateaux differential in a particular direction. Specifically, consider a path <span class="math inline">\(\{s(t)\}\)</span> and the direction <span class="math inline">\(h = e_{t}\)</span>, the sequence that is one at time <span class="math inline">\(t\)</span> and zero elsewhere — that is, imagine increasing savings by <span class="math inline">\(\alpha\)</span> at time <span class="math inline">\(t\)</span> only. Notice that this decreases consumption at time <span class="math inline">\(t\)</span> and increases wealth (and hence consumption) at time <span class="math inline">\(t+1\)</span>, leaving all other periods unchanged. In this case, the perturbed objective is</p>
+<p><span class="math display">\[U(s + \alpha h) = u(c(0)) + \cdots + \beta^{t}u\left(w(t) - s(t) - \alpha\right) + \beta^{t+1}u\left((s(t) + \alpha)(1+r) - s(t+1)\right) + \cdots\]</span></p>
 <p>Taking the derivative of this with respect to <span class="math inline">\(\alpha\)</span> yields the first order condition</p>
 <p><span class="math display">\[0  = -\beta^{t}u'(c_{t}) + \beta^{t+1}u'(c_{t+1})(1+r)\]</span></p>
-<p>rearranging this FOC yields the equation</p>
-<p><span class="math display">\[u'(c_{t})  = \beta u'(c_{t+1}) - \frac{1}{1+r}u'(c_{t})\]</span></p>
+<p>Dividing through by <span class="math inline">\(\beta^{t}\)</span> and rearranging this FOC yields the equation</p>
+<p><span class="math display">\[u'(c_{t})  = \beta (1+r) u'(c_{t+1})\]</span></p>
 <p>or</p>
 <p><span class="math display">\[\frac{\beta u'(c_{t+1})}{u'(c_{t})} = \frac{1}{1+r}\]</span></p>
 <p>which has the familiar interpretation of the LHS being the the individual’s internal tradeoff between consumption today and consumption tomorrow and the RHS is the market tradeoff between consumption today and consumption tomorrow.</p>
-<p>Now, suppose that <span class="math inline">\(u(c) = -e^{-\gamma c}\)</span>. In this case, this first order equation becomes</p>
-<p><span class="math display">\[\beta\frac{-e^{-\gamma c_{t+1}}}{-e^{-\gamma c_{t}}} = \beta e^{-\gamma(c_{t+1}-c_{t})} =  \frac{1}{1+r}\]</span></p>
+<p>Now, suppose that <span class="math inline">\(u(c) = -e^{-\gamma c}\)</span>, so that <span class="math inline">\(u'(c) = \gamma e^{-\gamma c}\)</span>. In this case, this first order equation becomes</p>
+<p><span class="math display">\[\beta\frac{\gamma e^{-\gamma c_{t+1}}}{\gamma e^{-\gamma c_{t}}} = \beta e^{-\gamma(c_{t+1}-c_{t})} =  \frac{1}{1+r}\]</span></p>
 <p>which implies that <span class="math inline">\(c_{t+1} = c_{t} + \frac{1}{\gamma}\log \beta(1+r)\)</span> at an interior optimum.</p>
 <dl>
 <dt>Excercise.</dt>
@@ -523,32 +524,30 @@ window.Quarto = {
 <h2 data-number="1.5" class="anchored" data-anchor-id="constrained-optimization"><span class="header-section-number">1.5</span> Constrained optimization</h2>
 <p>Consider now a set of constraints written implicitly in the vector space <span class="math inline">\(X\)</span> of the form</p>
 <p><span class="math display">\[\begin{aligned}
-\begin{aligned}
 g_{1}(x) &amp; = 0 \\
 g_{2}(x) &amp; = 0 \\
 \vdots \\
 g_{n}(x) &amp; = 0
-\end{aligned}
 \end{aligned}\]</span></p>
 <p>For now, let us consider strictly concave/convex objective functions (so as to ignore second order conditions for now).</p>
-<div id="def-11" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.11</strong></span> A function <span class="math inline">\(f\)</span> is <strong>convex</strong> if <span class="math inline">\(f(\alpha x_{1} + (1-\alpha)x_{2}) \le \alpha f(x_{1}) + (1-\alpha) f(x_{2})\)</span></p>
+<div id="def-opt-11" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.10</strong></span> A function <span class="math inline">\(f\)</span> is <strong>convex</strong> if <span class="math inline">\(f(\alpha x_{1} + (1-\alpha)x_{2}) \le \alpha f(x_{1}) + (1-\alpha) f(x_{2})\)</span></p>
 </div>
-<div id="def-12" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.12</strong></span> A function <span class="math inline">\(f\)</span> is <strong>concave</strong> if <span class="math inline">\(f(\alpha x_{1} + (1-\alpha)x_{2}) \ge \alpha f(x_{1}) + (1-\alpha) f(x_{2})\)</span></p>
+<div id="def-opt-12" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.11</strong></span> A function <span class="math inline">\(f\)</span> is <strong>concave</strong> if <span class="math inline">\(f(\alpha x_{1} + (1-\alpha)x_{2}) \ge \alpha f(x_{1}) + (1-\alpha) f(x_{2})\)</span></p>
 </div>
 <p>What is the relationship between a convex function and convex sets? Here is one.</p>
-<div id="def-13" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.13</strong></span> The <strong>upper contour set</strong> of the function <span class="math inline">\(f\)</span> at <span class="math inline">\(c\)</span> is the set <span class="math inline">\(\{x \in X: f(x) \ge c\}\)</span>. The <strong>lower contour</strong> set if the set <span class="math inline">\(\{x \in X: f(x) \le c\}\)</span>.</p>
+<div id="def-opt-13" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.12</strong></span> The <strong>upper contour set</strong> of the function <span class="math inline">\(f\)</span> at <span class="math inline">\(c\)</span> is the set <span class="math inline">\(\{x \in X: f(x) \ge c\}\)</span>. The <strong>lower contour</strong> set if the set <span class="math inline">\(\{x \in X: f(x) \le c\}\)</span>.</p>
 </div>
-<div id="prp-4" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1.4</strong></span> Let <span class="math inline">\(f\)</span> be a convex function. Then the set <span class="math inline">\(\{x: f(x) \le c\}\)</span> is convex. Likewise, if <span class="math inline">\(f\)</span> is concave then the set <span class="math inline">\(\{x:f(x) \ge c\}\)</span> is convex.</p>
+<div id="prp-opt-4" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1.3</strong></span> Let <span class="math inline">\(f\)</span> be a convex function. Then the set <span class="math inline">\(\{x: f(x) \le c\}\)</span> is convex. Likewise, if <span class="math inline">\(f\)</span> is concave then the set <span class="math inline">\(\{x:f(x) \ge c\}\)</span> is convex.</p>
 </div>
 <p>This implication, that concave functions have convex upper contour sets has led to the question of whether only concave functions have convex upper contour sets. The answer is no. Since convex upper contour sets are an important part of both the theory of demand and general equilibrium theory, the following generalization of concavity is often used in economics.</p>
-<div id="def-14" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.14</strong></span> A function is said to be <strong>quasiconcave</strong> if all of its upper contour sets are convex. Specifically, for all <span class="math inline">\(f(x) \ge c\)</span> and <span class="math inline">\(f(x') \ge c\)</span> it is the case that <span class="math inline">\(f(\alpha x + (1-\alpha x')) ge c\)</span>. The function is strictly quasiconcave is the last inequality is strict.</p>
+<div id="def-opt-14" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.13</strong></span> A function is said to be <strong>quasiconcave</strong> if all of its upper contour sets are convex. Specifically, for all <span class="math inline">\(x, x'\)</span> with <span class="math inline">\(f(x) \ge c\)</span> and <span class="math inline">\(f(x') \ge c\)</span> and all <span class="math inline">\(\alpha \in [0,1]\)</span>, it is the case that <span class="math inline">\(f(\alpha x + (1-\alpha)x') \ge c\)</span>. The function is <strong>strictly quasiconcave</strong> if the last inequality is strict whenever <span class="math inline">\(x \ne x'\)</span> and <span class="math inline">\(\alpha \in (0,1)\)</span>.</p>
 </div>
-<div id="lem-2" class="theorem lemma">
+<div id="lem-opt-2" class="theorem lemma">
 <p><span class="theorem-title"><strong>Lemma 1.2</strong></span> A function <span class="math inline">\(f\)</span> is quasiconcave if and only if <span class="math inline">\(f(\alpha x + (1-\alpha)x') \ge \mbox{min }\{f(x),f(x')\}\)</span>.</p>
 </div>
 <p>One nice property of quasiconcavity is that it is always preserved under increasing transformations. On the other hand, concavity is not necessarily preserved under increasing transformations. Properties that are not preserved under increasing transformations are called <strong>cardinal</strong> properties.</p>
@@ -557,46 +556,62 @@ g_{n}(x) &amp; = 0
 <p>From 380, we have all become intimately familiar with Lagrangians. To get intuition for the role of a Lagrangian, consider maximizing the function <span class="math inline">\(f(x) = \ln x\)</span> subject to the constraint <span class="math inline">\(x \le 10\)</span>. The answer to this problem is obviously <span class="math inline">\(x = 10\)</span> but it is useful to analyze it anyway.</p>
 <p>Consider this problem’s Lagrangian:</p>
 <p><span class="math display">\[L(x,\lambda) = \ln x + \lambda ( 10 - x)\]</span></p>
-<p>Notice that if <span class="math inline">\(\lambda &gt; 0\)</span> then whenever <span class="math inline">\(x &gt; 10\)</span> then this function is decreases when it move beyond 10. Therefore, the role of the Lagrangian is to great an alternative objective function for which the solution to the unconstrained maximization problem associated with the Lagrangian is equal to the constrained maximization problem of the original objective.</p>
+<p>Notice that <span class="math inline">\(\frac{\partial L}{\partial x} = \frac{1}{x} - \lambda\)</span>, so if <span class="math inline">\(\lambda\)</span> is large enough (here <span class="math inline">\(\lambda \ge 1/10\)</span>), the Lagrangian is decreasing in <span class="math inline">\(x\)</span> everywhere beyond <span class="math inline">\(x = 10\)</span> — moving past the constraint is penalized more than it helps the objective. Therefore, the role of the Lagrangian is to create an alternative objective function for which, given the right choice of <span class="math inline">\(\lambda\)</span>, the solution to the unconstrained maximization problem associated with the Lagrangian coincides with the solution to the constrained maximization problem of the original objective.</p>
 <p>In general spaces like that described above, we note that we can describe the problem to be solved as</p>
 <p><span class="math display">\[\mbox{maximize } f(x) \mbox{ subject to } H(x) = \mathbf{0}\]</span></p>
 <p>where <span class="math inline">\(H(x) = [g_{1}(x),g_{2}(x),\ldots,g_{n}(x)]\)</span> and <span class="math inline">\(\mathbf{0}\)</span> is the <span class="math inline">\(n\)</span>-dimensional zero vector. In this situation, we can write the Lagrangian as</p>
-<p><span class="math display">\[L(x,\mathbf{\lambda}) = f(x) + \langle H(x), \mathbf{\lambda} \rangle\]</span></p>
-<p>where <span class="math inline">\(\langle \cdot,\cdot \rangle\)</span> is the usual inner product on <span class="math inline">\(\mathbb{R}^{n}\)</span> and <span class="math inline">\(\mathbf{\lambda}\)</span> is a vector of Lagrange multipliers.</p>
+<p><span class="math display">\[L(x,\mathbf{\lambda}) = f(x) - \langle H(x), \mathbf{\lambda} \rangle\]</span></p>
+<p>where <span class="math inline">\(\langle \cdot,\cdot \rangle\)</span> is the usual inner product on <span class="math inline">\(\mathbb{R}^{n}\)</span> and <span class="math inline">\(\mathbf{\lambda}\)</span> is a vector of Lagrange multipliers. (The sign in front of the multiplier term is a convention; we adopt the minus sign here so that it matches the example above, where <span class="math inline">\(\lambda(10 - x) = -\lambda(x - 10)\)</span>, and the Kuhn-Tucker conditions below.)</p>
 <p>As can be seen, the Lagrange multiplier <span class="math inline">\(\lambda\)</span> is a linear functional. As such, it maps the extent to which a particular <span class="math inline">\(x\)</span> satisfies (or violates) the constraints <span class="math inline">\(H(x)\)</span> into values that are comparable to the objective function <span class="math inline">\(f\)</span>.</p>
 </section>
 <section id="kuhn-tucker-conditions" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="kuhn-tucker-conditions"><span class="header-section-number">1.5.2</span> Kuhn-Tucker Conditions</h3>
 <p>In the case of <span class="math inline">\(\mathbb{R}^{n}\)</span>, the Lagrangian takes a particularly useful form.</p>
 <p>First, we define the constraint qualification. Let <span class="math inline">\(G(x) = [g_{1}(x),g_{2}(x),\ldots,g_{M}(x)] = \mathbf{0}'\)</span> be a set of constraints. We say that the constraint qualification holds for this set at a point <span class="math inline">\(x_{0}\)</span> if the partial derivative matrix <span class="math inline">\(D_{x}G(x)\)</span> has rank <span class="math inline">\(M\)</span>. Recall that <span class="math inline">\(D_{x}G(x)\)</span> is the <span class="math inline">\(M \times N\)</span> matrix of partial derivatives of <span class="math inline">\(G(x)\)</span>.</p>
-<div id="exm-5" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1.5</strong></span> Let <span class="math inline">\(f(x,y) = -(x-2)^2 - (y-2)^2\)</span>. Consider the problem <span class="math inline">\(\max_{x,y}f(x,y)\)</span> subject to the constraints <span class="math inline">\(x - 3y = 0, 3x - 2y = 0, 4x + y = 0\)</span>. In this case, the derivative matrix is</p>
-<p><span class="math display">\[\begin{aligned}
-D_{x}G(x) =  \left (
-\begin{aligned}
+<div id="exm-opt-5" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.8</strong></span> Let <span class="math inline">\(f(x,y) = -(x-2)^2 - (y-2)^2\)</span>. Consider the problem <span class="math inline">\(\max_{x,y}f(x,y)\)</span> subject to the constraints <span class="math inline">\(x - 3y = 0, 3x - 2y = 0, 4x + y = 0\)</span>. In this case, the derivative matrix is</p>
+<p><span class="math display">\[D_{x}G(x) = \begin{pmatrix}
     1 &amp; -3 \\
     3 &amp; -2 \\
-    4 &amp; 1 \\
-\end{aligned}
-\right )
-\end{aligned}\]</span></p>
-<p>We notice that this has rank 2 <span class="math inline">\(\ne 3\)</span> and as such, the constraint qualification does not hold. That is, there is no <span class="math inline">\((x,y)\)</span> that can satisfy these equations and as such, there can be no solution to the problem that satisfies these constraints.</p>
+    4 &amp; 1
+\end{pmatrix}\]</span></p>
+<p>We notice that this has rank 2 <span class="math inline">\(\ne 3\)</span> and as such, the constraint qualification does not hold. (With two variables the rank can never reach 3, so it fails at every point.) Note that the problem is still feasible: the three lines all pass through the origin, so the feasible set is <span class="math inline">\(\{(0,0)\}\)</span> and the solution is trivially <span class="math inline">\((x,y) = (0,0)\)</span>. The lesson is that because the constraint qualification fails there, the Lagrange/Kuhn-Tucker conditions need not hold at this solution — the failure is of the first-order characterization, not of feasibility.</p>
 </div>
-<div id="thm-2" class="theorem">
+<p>Before stating the theorem we record its key tool. Farkas’ lemma is a <em>theorem of the alternative</em>: it converts the geometric statement “no direction simultaneously improves the objective and respects the constraints” into the algebraic statement “the objective gradient is a nonnegative combination of the constraint gradients.”</p>
+<div id="lem-farkas" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1.3 (Farkas’ lemma)</strong></span> Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(m \times n\)</span> matrix and <span class="math inline">\(b \in \mathbb{R}^{n}\)</span>. Exactly one of the following holds:</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>there exists <span class="math inline">\(y \in \mathbb{R}^{m}\)</span> with <span class="math inline">\(y \ge \mathbf{0}\)</span> and <span class="math inline">\(A'y = b\)</span>; or</li>
+<li>there exists <span class="math inline">\(v \in \mathbb{R}^{n}\)</span> with <span class="math inline">\(Av \le \mathbf{0}\)</span> and <span class="math inline">\(\langle b, v\rangle &gt; 0\)</span>.</li>
+</ol>
+</blockquote>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>The two alternatives cannot hold at once: if <span class="math inline">\(y \ge \mathbf{0}\)</span> solves <span class="math inline">\(A'y = b\)</span> and <span class="math inline">\(Av \le \mathbf{0}\)</span>, then <span class="math inline">\(\langle b, v\rangle = \langle A'y, v\rangle = \langle y, Av\rangle = \sum_{i} y_{i}(Av)_{i} \le 0\)</span>, contradicting <span class="math inline">\(\langle b, v\rangle &gt; 0\)</span>.</p>
+<p>It remains to show at least one holds. Let <span class="math inline">\(C = \{A'y : y \ge \mathbf{0}\}\)</span> be the cone generated by the rows of <span class="math inline">\(A\)</span>. As the conical hull of finitely many vectors it is a closed convex cone, and <span class="math inline">\(\mathbf{0} \in C\)</span>. If <span class="math inline">\(b \in C\)</span>, alternative 1 holds. If <span class="math inline">\(b \notin C\)</span>, then by the separating-hyperplane theorem (<a href="#prp-opt-1" class="quarto-xref">Proposition&nbsp;<span>1.1</span></a>) there are a vector <span class="math inline">\(v\)</span> and a scalar <span class="math inline">\(c\)</span> with <span class="math display">\[\langle v, z\rangle \le c \ \text{ for all } z \in C, \qquad \langle v, b\rangle &gt; c.\]</span> Since <span class="math inline">\(\mathbf{0} \in C\)</span>, taking <span class="math inline">\(z = \mathbf{0}\)</span> gives <span class="math inline">\(c \ge 0\)</span>. Since <span class="math inline">\(C\)</span> is a cone, for any <span class="math inline">\(z \in C\)</span> and <span class="math inline">\(t &gt; 0\)</span> we have <span class="math inline">\(tz \in C\)</span>, so <span class="math inline">\(t\langle v, z\rangle \le c\)</span> for all <span class="math inline">\(t &gt; 0\)</span>; letting <span class="math inline">\(t \to \infty\)</span> forces <span class="math inline">\(\langle v, z\rangle \le 0\)</span> for every <span class="math inline">\(z \in C\)</span>. Applying this to the generators <span class="math inline">\(z = A'e_{i}\)</span> (the <span class="math inline">\(i\)</span>-th row of <span class="math inline">\(A\)</span>) gives <span class="math inline">\((Av)_{i} = \langle v, A'e_{i}\rangle \le 0\)</span> for each <span class="math inline">\(i\)</span>, i.e.&nbsp;<span class="math inline">\(Av \le \mathbf{0}\)</span>; and <span class="math inline">\(\langle b, v\rangle &gt; c \ge 0\)</span>. So <span class="math inline">\(v\)</span> satisfies alternative 2.</p>
+</div>
+<p>An equality constraint <span class="math inline">\(a'v = 0\)</span> is the pair of inequalities <span class="math inline">\(a'v \le 0\)</span> and <span class="math inline">\(-a'v \le 0\)</span>. Applying the lemma to such a stacked system therefore produces a <em>free-sign</em> multiplier for each equality (the difference of the two associated nonnegative multipliers) and a <em>nonnegative</em> multiplier for each genuine inequality — exactly the multiplier structure of the Kuhn–Tucker conditions below.</p>
+<div id="thm-opt-2" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1.2</strong></span> Consider the problem <span class="math inline">\(\max f(x)\)</span> subject to the constraints <span class="math inline">\(G(x) = \mathbf{0}\)</span> and <span class="math inline">\(H(x) \le \mathbf{0}\)</span>. Then, let <span class="math inline">\(\lambda\)</span> be the Lagrange multipliers for <span class="math inline">\(G(x)\)</span> and <span class="math inline">\(\gamma\)</span> be those for <span class="math inline">\(H(x)\)</span>. If the solution <span class="math inline">\(x_{0}\)</span> of this problem satisfies the constraint qualification then it also satisfies</p>
 <p><span class="math display">\[\begin{aligned}
-\begin{aligned}
     D_{x}f(x) - \lambda' D_{x}G(x) - \gamma' D_{x}H(x) &amp; = \mathbf{0} \\
     G(x) &amp; = \mathbf{0} \\
+    H(x) &amp; \le \mathbf{0} \\
+    \gamma &amp; \ge \mathbf{0} \\
     \gamma_{i} H_{i}(x) &amp; = 0 \mbox{ for all } i
-\end{aligned}
 \end{aligned}\]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>See Mas-Colell</p>
+<p><span class="proof-title"><em>Proof</em>. </span>We give the argument; the constraint qualification is exactly what makes it work.</p>
+<p><em>Equality constraints only.</em> Suppose first there are no inequality constraints, so the problem is <span class="math inline">\(\max f(x)\)</span> subject to <span class="math inline">\(G(x) = \mathbf{0}\)</span>. Because <span class="math inline">\(D_{x}G(x_{0})\)</span> has full rank <span class="math inline">\(M\)</span> (the constraint qualification), the implicit function theorem implies that near <span class="math inline">\(x_{0}\)</span> the constraint set <span class="math inline">\(\{x : G(x) = \mathbf{0}\}\)</span> is a smooth <span class="math inline">\((N - M)\)</span>-dimensional surface whose tangent space at <span class="math inline">\(x_{0}\)</span> is exactly <span class="math inline">\(\ker D_{x}G(x_{0}) = \{v : D_{x}G(x_{0})v = \mathbf{0}\}\)</span>. If <span class="math inline">\(x_{0}\)</span> maximizes <span class="math inline">\(f\)</span> on this surface, then along any curve in the surface through <span class="math inline">\(x_{0}\)</span> the derivative of <span class="math inline">\(f\)</span> vanishes, so <span class="math inline">\(D_{x}f(x_{0})v = 0\)</span> for every <span class="math inline">\(v \in \ker D_{x}G(x_{0})\)</span>. A linear functional that vanishes on <span class="math inline">\(\ker D_{x}G(x_{0})\)</span> lies in the row space of <span class="math inline">\(D_{x}G(x_{0})\)</span>; that is, there is a vector <span class="math inline">\(\lambda\)</span> with <span class="math inline">\(D_{x}f(x_{0}) = \lambda' D_{x}G(x_{0})\)</span>.</p>
+<p><em>Adding inequality constraints.</em> Now include <span class="math inline">\(H(x) \le \mathbf{0}\)</span>. Call constraint <span class="math inline">\(i\)</span> <strong>active</strong> at <span class="math inline">\(x_{0}\)</span> if <span class="math inline">\(H_{i}(x_{0}) = 0\)</span> and <strong>inactive</strong> if <span class="math inline">\(H_{i}(x_{0}) &lt; 0\)</span>. An inactive constraint holds with strict slack throughout a neighborhood of <span class="math inline">\(x_{0}\)</span>, so it imposes no first-order restriction; we set <span class="math inline">\(\gamma_{i} = 0\)</span> for such <span class="math inline">\(i\)</span>, which is precisely complementary slackness <span class="math inline">\(\gamma_{i}H_{i}(x_{0}) = 0\)</span>. A first-order feasible variation <span class="math inline">\(v\)</span> must satisfy <span class="math inline">\(D_{x}G(x_{0})v = \mathbf{0}\)</span> and <span class="math inline">\(D_{x}H_{i}(x_{0})v \le 0\)</span> for each active <span class="math inline">\(i\)</span>. Optimality of <span class="math inline">\(x_{0}\)</span> means no feasible variation increases <span class="math inline">\(f\)</span>: there is <strong>no</strong> <span class="math inline">\(v\)</span> with <span class="math display">\[D_{x}G(x_{0})v = \mathbf{0}, \quad D_{x}H_{i}(x_{0})v \le 0 \ (\text{active } i), \quad D_{x}f(x_{0})v &gt; 0.\]</span> By <strong>Farkas’ lemma</strong> (<a href="#lem-farkas" class="quarto-xref">Lemma&nbsp;<span>1.3</span></a>) — writing each equality <span class="math inline">\(D_{x}G(x_{0})v = \mathbf{0}\)</span> as the pair <span class="math inline">\(D_{x}G(x_{0})v \le \mathbf{0}\)</span> and <span class="math inline">\(-D_{x}G(x_{0})v \le \mathbf{0}\)</span> — the unsolvability of this system is equivalent to the existence of multipliers <span class="math inline">\(\lambda\)</span> (unrestricted, for the equalities) and <span class="math inline">\(\gamma_{i} \ge 0\)</span> (for the active inequalities) with <span class="math display">\[D_{x}f(x_{0}) = \lambda' D_{x}G(x_{0}) + \sum_{i \text{ active}} \gamma_{i}\, D_{x}H_{i}(x_{0}).\]</span> Extending the sum over all <span class="math inline">\(i\)</span> by setting <span class="math inline">\(\gamma_{i} = 0\)</span> for the inactive constraints gives <span class="math display">\[D_{x}f(x_{0}) - \lambda' D_{x}G(x_{0}) - \gamma' D_{x}H(x_{0}) = \mathbf{0},\]</span> together with <span class="math inline">\(G(x_{0}) = \mathbf{0}\)</span> and <span class="math inline">\(\gamma_{i}H_{i}(x_{0}) = 0\)</span> (with <span class="math inline">\(\gamma_{i} \ge 0\)</span>) for all <span class="math inline">\(i\)</span>. These are the stated Kuhn–Tucker conditions.</p>
 </div>
-<p>Example.</p>
 <dl>
+<dt>Example.</dt>
+<dd>
+<p>Maximize <span class="math inline">\(f(x) = -(x-2)^{2}\)</span> subject to <span class="math inline">\(H(x) = x - 1 \le 0\)</span>. The Kuhn–Tucker conditions are <span class="math inline">\(f'(x) - \gamma H'(x) = 0\)</span> with <span class="math inline">\(\gamma \ge 0\)</span> and complementary slackness <span class="math inline">\(\gamma H(x) = 0\)</span>; here <span class="math inline">\(-2(x - 2) - \gamma = 0\)</span>. If the constraint is slack (<span class="math inline">\(\gamma = 0\)</span>) then <span class="math inline">\(x = 2\)</span>, which violates <span class="math inline">\(x \le 1\)</span>, so this case is infeasible. Hence the constraint binds: <span class="math inline">\(x = 1\)</span>, giving <span class="math inline">\(\gamma = -2(1 - 2) = 2 \ge 0\)</span>. The optimum is <span class="math inline">\(x = 1\)</span> with multiplier <span class="math inline">\(\gamma = 2\)</span>; the unconstrained maximizer <span class="math inline">\(x = 2\)</span> is cut off by the constraint, and the positive multiplier measures the rate at which the objective would improve if the constraint were relaxed.</p>
+</dd>
 <dt>Excercises.</dt>
 <dd>
 <p>Write down the Kuhn-Tucker conditions for the following problems. Solve if possible.</p>

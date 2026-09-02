@@ -204,12 +204,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/ge-with-uncertainty.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">General Equilibrium with Uncertainty</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -227,7 +221,7 @@ window.Quarto = {
   <li><a href="#set-theory-and-algebras" id="toc-set-theory-and-algebras" class="nav-link active" data-scroll-target="#set-theory-and-algebras"><span class="header-section-number">4.1</span> Set theory and algebras</a></li>
   <li><a href="#probability-measures" id="toc-probability-measures" class="nav-link" data-scroll-target="#probability-measures"><span class="header-section-number">4.2</span> Probability measures</a></li>
   <li><a href="#von-neumann-morgenstern-representation" id="toc-von-neumann-morgenstern-representation" class="nav-link" data-scroll-target="#von-neumann-morgenstern-representation"><span class="header-section-number">4.3</span> von Neumann-Morgenstern representation</a></li>
-  <li><a href="#preferences-over-lotteries" id="toc-preferences-over-lotteries" class="nav-link" data-scroll-target="#preferences-over-lotteries"><span class="header-section-number">4.4</span> Preferences over lotteries</a></li>
+  <li><a href="#subjective-uncertainty-preferences-over-acts" id="toc-subjective-uncertainty-preferences-over-acts" class="nav-link" data-scroll-target="#subjective-uncertainty-preferences-over-acts"><span class="header-section-number">4.4</span> Subjective uncertainty: preferences over acts</a></li>
   </ul>
 </nav>
     </div>
@@ -259,48 +253,87 @@ window.Quarto = {
 <ol type="1">
 <li><span class="math inline">\(S \in \Sigma\)</span></li>
 <li>If <span class="math inline">\(A \in \Sigma\)</span>, then <span class="math inline">\(A^{c} \in \Sigma\)</span>.</li>
-<li>For any sequence <span class="math inline">\(\{A\}_{n}\)</span> of elements of <span class="math inline">\(\Sigma\)</span>, <span class="math inline">\(\cap A_{n} \in \Sigma\)</span></li>
+<li>For any sequence <span class="math inline">\(\{A_{n}\}\)</span> of elements of <span class="math inline">\(\Sigma\)</span>, <span class="math inline">\(\cup_{n} A_{n} \in \Sigma\)</span>. (By property 2 and De Morgan’s laws, <span class="math inline">\(\Sigma\)</span> is then also closed under countable intersections.)</li>
 </ol>
 <p>Examples of why a <span class="math inline">\(\sigma\)</span>-algebra is a useful set of things to consider.</p>
 </section>
 <section id="probability-measures" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="probability-measures"><span class="header-section-number">4.2</span> Probability measures</h2>
-<p>A set <span class="math inline">\(S\)</span> and a <span class="math inline">\(\sigma\)</span>-algebra <span class="math inline">\(Sigma\)</span> represent a probability space. A measure is a function <span class="math inline">\(\mu:\Sigma \rightarrow \mathbb{R}\)</span> with the following properties</p>
+<p>A set <span class="math inline">\(S\)</span> together with a <span class="math inline">\(\sigma\)</span>-algebra <span class="math inline">\(\Sigma\)</span> over <span class="math inline">\(S\)</span> is called a <em>measurable space</em>. A probability measure on <span class="math inline">\((S,\Sigma)\)</span> is a function <span class="math inline">\(\mu:\Sigma \rightarrow \mathbb{R}\)</span> with the following properties</p>
 <ol type="1">
-<li><span class="math inline">\(\mu(\sigma) \in [0,1]\)</span> for all <span class="math inline">\(\sigma \in \Sigma\)</span></li>
-<li><span class="math inline">\(\mu(\cap \sigma_{i}) = \sum_{i}\mu(\sigma_{i})\)</span> if all <span class="math inline">\(\sigma_{i}\)</span> are disjoint.</li>
+<li><span class="math inline">\(\mu(\sigma) \ge 0\)</span> for all <span class="math inline">\(\sigma \in \Sigma\)</span></li>
+<li><span class="math inline">\(\mu(S) = 1\)</span></li>
+<li><span class="math inline">\(\mu(\cup_{i} \sigma_{i}) = \sum_{i}\mu(\sigma_{i})\)</span> for any countable collection <span class="math inline">\(\{\sigma_{i}\}\)</span> of pairwise disjoint elements of <span class="math inline">\(\Sigma\)</span>.</li>
 </ol>
+<p>The triple <span class="math inline">\((S, \Sigma, \mu)\)</span> is called a <em>probability space</em>.</p>
 </section>
 <section id="von-neumann-morgenstern-representation" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="von-neumann-morgenstern-representation"><span class="header-section-number">4.3</span> von Neumann-Morgenstern representation</h2>
 <p>Let <span class="math inline">\(Z\)</span> be a finite set of prizes. Let <span class="math inline">\(P\)</span> be the set of all lotteries over <span class="math inline">\(Z\)</span>. One has preference relations over <span class="math inline">\(P\)</span>. Assume that these preference relations satisfy:</p>
 <ol type="1">
-<li><span class="math inline">\(succsum\)</span> is complete and transitive.</li>
-<li>For all <span class="math inline">\(p,q,r \in P\)</span>, and <span class="math inline">\(\alpha \in (0,1]\)</span>, <span class="math inline">\(p \succsim q\)</span> implies that <span class="math inline">\(\alpha p + (1-\alpha) r \succsim \alpha q + (1-\alpha) r\)</span>. (Independence or substitution)</li>
+<li><span class="math inline">\(\succsim\)</span> is complete and transitive.</li>
+<li>For all <span class="math inline">\(p,q,r \in P\)</span>, and <span class="math inline">\(\alpha \in (0,1]\)</span>, <span class="math inline">\(p \succsim q\)</span> <em>if and only if</em> <span class="math inline">\(\alpha p + (1-\alpha) r \succsim \alpha q + (1-\alpha) r\)</span>. (Independence or substitution)</li>
 <li>For all <span class="math inline">\(p,q,r \in P\)</span>, if <span class="math inline">\(p \succ q \succ r\)</span> then there exist <span class="math inline">\(a,b \in (0,1)\)</span> such that <span class="math inline">\(a p + (1-a)r \succ q \succ bp + (1-b)r\)</span> (continuity)</li>
-<li>There exists an element <span class="math inline">\(z^{0}\)</span> such that <span class="math inline">\(z^{0} \succsim p\)</span> for all <span class="math inline">\(p \in P\)</span> and another element <span class="math inline">\(z_{0}\)</span> such that <span class="math inline">\(p \succsim z_{0}\)</span> for all <span class="math inline">\(p \in P\)</span>.</li>
+<li>There exist prizes <span class="math inline">\(z^{0}\)</span> and <span class="math inline">\(z_{0}\)</span> such that <span class="math inline">\(\delta_{z^{0}} \succsim p \succsim \delta_{z_{0}}\)</span> for all <span class="math inline">\(p \in P\)</span>, where <span class="math inline">\(\delta_{z}\)</span> denotes the degenerate lottery that pays <span class="math inline">\(z\)</span> with probability one.</li>
 </ol>
-<div id="thm-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4.1</strong></span> A binary preference relation <span class="math inline">\(\succsim\)</span> satisfies the previous three axioms if and only if there exists a function <span class="math inline">\(u(\cdot)\)</span> such that <span class="math inline">\(p \succsim q\)</span> if and only if <span class="math inline">\(\sum p(z)u(z) \ge \sum q(z)u(z)\)</span>.</p>
+<p>Note that the independence axiom is stated as a biconditional (this is the standard formulation; see, e.g., Mas-Colell, Whinston, and Green, Definition 6.B.4). The “only if” direction is what allows mixing to preserve strict preference and indifference, which the proof below uses repeatedly.</p>
+<div id="thm-vnm" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.1</strong></span> A binary preference relation <span class="math inline">\(\succsim\)</span> on <span class="math inline">\(P\)</span> satisfies the four axioms above if and only if there exists a function <span class="math inline">\(u: Z \rightarrow \mathbb{R}\)</span> such that <span class="math inline">\(p \succsim q\)</span> if and only if <span class="math inline">\(\sum_{z} p(z)u(z) \ge \sum_{z} q(z)u(z)\)</span>.</p>
 </div>
-<p>Proof.</p>
-<blockquote class="blockquote">
-<p>Let <span class="math inline">\(f(p) = a: a\delta_{z^{0}} + (1-a)\delta_{z_{0}} \sim p\)</span>. How would you prove that this satisfied the necessary properties?</p>
-<p>First we note the following three facts:</p>
-<ol type="1">
-<li><span class="math inline">\(p \succsim q\)</span> and <span class="math inline">\(0 \le a &lt; b \le 1\)</span> imply <span class="math inline">\(bp + (1-b)p \succsim ap + (1-a)q\)</span>.</li>
-<li><span class="math inline">\(p \succsim q \succsim r\)</span> and <span class="math inline">\(p \succ r\)</span> imply there exists a unique <span class="math inline">\(a^{*} \in [0,1]\)</span> such that <span class="math inline">\(q \sim a^{*}p + (1-a^{*})r\)</span></li>
-<li><span class="math inline">\(p \sim q\)</span> and <span class="math inline">\(a \in [0,1]\)</span> imply <span class="math inline">\(ap + (1-a)r \sim aq + (1-a)r\)</span> for all <span class="math inline">\(r \in P\)</span>.</li>
-</ol>
-</blockquote>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We first show that the axioms imply the representation. The strategy: calibrate every lottery <span class="math inline">\(p\)</span> against mixtures of the best and worst lotteries, i.e.&nbsp;find the unique weight <span class="math inline">\(f(p)\)</span> such that</p>
+<p><span class="math display">\[p \sim f(p)\,\delta_{z^{0}} + (1 - f(p))\,\delta_{z_{0}},\]</span></p>
+<p>and then show that <span class="math inline">\(f\)</span> represents <span class="math inline">\(\succsim\)</span> and is affine in probabilities, so that <span class="math inline">\(f(p) = \sum_{z} p(z)u(z)\)</span> with <span class="math inline">\(u(z) = f(\delta_{z})\)</span>.</p>
+<p><em>Preliminaries.</em> Two consequences of independence (axiom 2). First, if <span class="math inline">\(p \sim q\)</span> then for all <span class="math inline">\(\alpha \in (0,1]\)</span> and <span class="math inline">\(r \in P\)</span>,</p>
+<p><span class="math display">\[\alpha p + (1-\alpha)r \sim \alpha q + (1-\alpha)r,\]</span></p>
+<p>by applying the axiom to <span class="math inline">\(p \succsim q\)</span> and to <span class="math inline">\(q \succsim p\)</span>. Second, if <span class="math inline">\(p \succ q\)</span> then</p>
+<p><span class="math display">\[\alpha p + (1-\alpha)r \succ \alpha q + (1-\alpha)r.\]</span></p>
+<p>Indeed the “if” direction gives <span class="math inline">\(\alpha p + (1-\alpha)r \succsim \alpha q + (1-\alpha)r\)</span>; and if the two mixtures were indifferent, then <span class="math inline">\(\alpha q + (1-\alpha)r \succsim \alpha p + (1-\alpha)r\)</span> together with the “only if” direction would give <span class="math inline">\(q \succsim p\)</span>, a contradiction. So mixing preserves <span class="math inline">\(\succsim\)</span>, <span class="math inline">\(\succ\)</span>, and <span class="math inline">\(\sim\)</span> alike.</p>
+<p>We now establish three facts.</p>
+<p><strong>Fact 1 (mixture monotonicity).</strong> <em>If <span class="math inline">\(p \succ q\)</span> and <span class="math inline">\(0 \le a &lt; b \le 1\)</span>, then <span class="math inline">\(bp + (1-b)q \succ ap + (1-a)q\)</span>.</em></p>
+<p>Write <span class="math inline">\(m_{c} = cp + (1-c)q\)</span>. Since <span class="math inline">\(b &gt; 0\)</span>, strict independence (mixing <span class="math inline">\(p \succ q\)</span> with <span class="math inline">\(r = q\)</span> and weight <span class="math inline">\(b\)</span>) gives</p>
+<p><span class="math display">\[m_{b} = bp + (1-b)q \succ bq + (1-b)q = q.\]</span></p>
+<p>If <span class="math inline">\(a = 0\)</span> we are done. If <span class="math inline">\(a &gt; 0\)</span>, let <span class="math inline">\(\lambda = a/b \in (0,1)\)</span> and check the algebra <span class="math inline">\(m_{a} = \lambda m_{b} + (1-\lambda)q\)</span>. Applying strict independence to <span class="math inline">\(m_{b} \succ q\)</span> with weight <span class="math inline">\(1 - \lambda\)</span> and third lottery <span class="math inline">\(m_{b}\)</span>,</p>
+<p><span class="math display">\[m_{b} = \lambda m_{b} + (1-\lambda)m_{b} \succ \lambda m_{b} + (1-\lambda) q = m_{a}.\]</span></p>
+<p><strong>Fact 2 (unique calibration).</strong> <em>If <span class="math inline">\(p \succsim q \succsim r\)</span> and <span class="math inline">\(p \succ r\)</span>, then there exists a unique <span class="math inline">\(a^{*} \in [0,1]\)</span> such that <span class="math inline">\(q \sim a^{*}p + (1-a^{*})r\)</span>.</em></p>
+<p>Write <span class="math inline">\(m_{a} = ap + (1-a)r\)</span>. Uniqueness is immediate from Fact 1: since <span class="math inline">\(p \succ r\)</span>, <span class="math inline">\(a \ne a'\)</span> implies <span class="math inline">\(m_{a} \not\sim m_{a'}\)</span>, so at most one weight can work. For existence, if <span class="math inline">\(q \sim p\)</span> take <span class="math inline">\(a^{*} = 1\)</span>; if <span class="math inline">\(q \sim r\)</span> take <span class="math inline">\(a^{*} = 0\)</span>. Otherwise <span class="math inline">\(p \succ q \succ r\)</span>. Let</p>
+<p><span class="math display">\[S = \{a \in [0,1] : q \succsim m_{a}\}, \qquad a^{*} = \sup S,\]</span></p>
+<p>which is well defined since <span class="math inline">\(0 \in S\)</span>. By completeness, exactly one of <span class="math inline">\(m_{a^{*}} \succ q\)</span>, <span class="math inline">\(q \succ m_{a^{*}}\)</span>, or <span class="math inline">\(q \sim m_{a^{*}}\)</span> holds. We rule out the first two.</p>
+<p>Suppose <span class="math inline">\(m_{a^{*}} \succ q\)</span>. Note <span class="math inline">\(a^{*} &gt; 0\)</span> (if <span class="math inline">\(a^{*} = 0\)</span> then <span class="math inline">\(m_{a^{*}} = r\)</span>, contradicting <span class="math inline">\(q \succ r\)</span>). By continuity (axiom 3) applied to <span class="math inline">\(m_{a^{*}} \succ q \succ r\)</span>, there exists <span class="math inline">\(b \in (0,1)\)</span> with</p>
+<p><span class="math display">\[b\,m_{a^{*}} + (1-b)r \succ q, \qquad \text{i.e.} \qquad m_{ba^{*}} \succ q,\]</span></p>
+<p>where <span class="math inline">\(ba^{*} &lt; a^{*}\)</span>. But by definition of the supremum there exists <span class="math inline">\(a \in S\)</span> with <span class="math inline">\(ba^{*} &lt; a \le a^{*}\)</span>, and Fact 1 gives <span class="math inline">\(m_{a} \succsim m_{ba^{*}} \succ q\)</span>, contradicting <span class="math inline">\(q \succsim m_{a}\)</span>.</p>
+<p>Suppose instead <span class="math inline">\(q \succ m_{a^{*}}\)</span>. Note <span class="math inline">\(a^{*} &lt; 1\)</span> (if <span class="math inline">\(a^{*} = 1\)</span> then <span class="math inline">\(m_{a^{*}} = p\)</span>, contradicting <span class="math inline">\(p \succ q\)</span>). By continuity applied to <span class="math inline">\(p \succ q \succ m_{a^{*}}\)</span>, there exists <span class="math inline">\(b \in (0,1)\)</span> with</p>
+<p><span class="math display">\[q \succ b\,p + (1-b)m_{a^{*}} = m_{b + (1-b)a^{*}}.\]</span></p>
+<p>But then <span class="math inline">\(a' = b + (1-b)a^{*} &gt; a^{*}\)</span> belongs to <span class="math inline">\(S\)</span>, contradicting <span class="math inline">\(a^{*} = \sup S\)</span>. Hence <span class="math inline">\(q \sim m_{a^{*}}\)</span>.</p>
+<p><strong>Fact 3 (substitution of indifferent lotteries).</strong> <em>If <span class="math inline">\(p \sim q\)</span> and <span class="math inline">\(a \in [0,1]\)</span>, then <span class="math inline">\(ap + (1-a)r \sim aq + (1-a)r\)</span> for all <span class="math inline">\(r \in P\)</span>.</em> This is the indifference version of independence established in the preliminaries (the case <span class="math inline">\(a = 0\)</span> is trivial).</p>
+<p><em>The degenerate case.</em> If <span class="math inline">\(\delta_{z^{0}} \sim \delta_{z_{0}}\)</span>, then for every <span class="math inline">\(p\)</span> we have <span class="math inline">\(\delta_{z^{0}} \succsim p \succsim \delta_{z_{0}} \sim \delta_{z^{0}}\)</span>, so all lotteries are indifferent and any constant function <span class="math inline">\(u\)</span> delivers the representation. Assume henceforth <span class="math inline">\(\delta_{z^{0}} \succ \delta_{z_{0}}\)</span>.</p>
+<p><em>Construction of <span class="math inline">\(f\)</span>.</em> For any <span class="math inline">\(p \in P\)</span>, axiom 4 gives <span class="math inline">\(\delta_{z^{0}} \succsim p \succsim \delta_{z_{0}}\)</span> with <span class="math inline">\(\delta_{z^{0}} \succ \delta_{z_{0}}\)</span>, so Fact 2 yields a unique <span class="math inline">\(f(p) \in [0,1]\)</span> such that</p>
+<p><span class="math display">\[p \sim m_{f(p)}, \qquad \text{where } m_{a} = a\,\delta_{z^{0}} + (1-a)\,\delta_{z_{0}}.\]</span></p>
+<p><em><span class="math inline">\(f\)</span> represents <span class="math inline">\(\succsim\)</span>.</em> We claim <span class="math inline">\(p \succsim q\)</span> if and only if <span class="math inline">\(f(p) \ge f(q)\)</span>. If <span class="math inline">\(f(p) = f(q)\)</span> then <span class="math inline">\(p \sim m_{f(p)} = m_{f(q)} \sim q\)</span>. If <span class="math inline">\(f(p) &gt; f(q)\)</span> then Fact 1 (applied to <span class="math inline">\(\delta_{z^{0}} \succ \delta_{z_{0}}\)</span>) gives <span class="math inline">\(m_{f(p)} \succ m_{f(q)}\)</span>, so</p>
+<p><span class="math display">\[p \sim m_{f(p)} \succ m_{f(q)} \sim q.\]</span></p>
+<p>Together these give the “if” direction, and the “only if” direction follows by contraposition: <span class="math inline">\(f(p) &lt; f(q)\)</span> implies <span class="math inline">\(q \succ p\)</span>.</p>
+<p><em><span class="math inline">\(f\)</span> is affine.</em> We claim that for all <span class="math inline">\(p, q \in P\)</span> and <span class="math inline">\(\alpha \in [0,1]\)</span>,</p>
+<p><span class="math display">\[f\left(\alpha p + (1-\alpha)q\right) = \alpha f(p) + (1-\alpha)f(q).\]</span></p>
+<p>Using Fact 3 twice — first substituting <span class="math inline">\(m_{f(p)}\)</span> for <span class="math inline">\(p\)</span>, then <span class="math inline">\(m_{f(q)}\)</span> for <span class="math inline">\(q\)</span> —</p>
+<p><span class="math display">\[\alpha p + (1-\alpha)q \;\sim\; \alpha\, m_{f(p)} + (1-\alpha)q \;\sim\; \alpha\, m_{f(p)} + (1-\alpha)m_{f(q)}.\]</span></p>
+<p>The right-hand side is itself a mixture of <span class="math inline">\(\delta_{z^{0}}\)</span> and <span class="math inline">\(\delta_{z_{0}}\)</span>: collecting probabilities,</p>
+<p><span class="math display">\[\alpha\, m_{f(p)} + (1-\alpha)m_{f(q)} = \left[\alpha f(p) + (1-\alpha)f(q)\right]\delta_{z^{0}} + \left[1 - \alpha f(p) - (1-\alpha)f(q)\right]\delta_{z_{0}} = m_{\alpha f(p) + (1-\alpha)f(q)}.\]</span></p>
+<p>So <span class="math inline">\(\alpha p + (1-\alpha)q \sim m_{\alpha f(p) + (1-\alpha)f(q)}\)</span>, and the uniqueness in Fact 2 forces <span class="math inline">\(f(\alpha p + (1-\alpha)q) = \alpha f(p) + (1-\alpha)f(q)\)</span>.</p>
+<p><em>Expected utility form.</em> Define <span class="math inline">\(u(z) = f(\delta_{z})\)</span> for each <span class="math inline">\(z \in Z\)</span>. Since <span class="math inline">\(Z\)</span> is finite, any <span class="math inline">\(p \in P\)</span> can be written <span class="math inline">\(p = \sum_{z} p(z)\,\delta_{z}\)</span>, a finite mixture of degenerate lotteries. Iterating the affinity property (formally, by induction on the number of prizes in the support of <span class="math inline">\(p\)</span>),</p>
+<p><span class="math display">\[f(p) = \sum_{z} p(z) f(\delta_{z}) = \sum_{z} p(z)u(z).\]</span></p>
+<p>Combining with the representation step, <span class="math inline">\(p \succsim q\)</span> if and only if <span class="math inline">\(\sum_{z} p(z)u(z) \ge \sum_{z} q(z)u(z)\)</span>, which completes the sufficiency direction.</p>
+<p><em>Necessity.</em> Conversely, suppose <span class="math inline">\(p \succsim q\)</span> if and only if <span class="math inline">\(U(p) \ge U(q)\)</span>, where <span class="math inline">\(U(p) = \sum_{z} p(z)u(z)\)</span>. Completeness and transitivity of <span class="math inline">\(\succsim\)</span> are inherited from those of <span class="math inline">\(\ge\)</span> on <span class="math inline">\(\mathbb{R}\)</span>. For independence, note that <span class="math inline">\(U\)</span> is affine: <span class="math inline">\(U(\alpha p + (1-\alpha)r) = \alpha U(p) + (1-\alpha)U(r)\)</span>. Hence for <span class="math inline">\(\alpha \in (0,1]\)</span>,</p>
+<p><span class="math display">\[U(\alpha p + (1-\alpha)r) \ge U(\alpha q + (1-\alpha)r) \iff \alpha U(p) \ge \alpha U(q) \iff U(p) \ge U(q),\]</span></p>
+<p>which is precisely the biconditional in axiom 2. For continuity, if <span class="math inline">\(p \succ q \succ r\)</span> then <span class="math inline">\(g(a) = U(ap + (1-a)r) = aU(p) + (1-a)U(r)\)</span> is continuous in <span class="math inline">\(a\)</span> with <span class="math inline">\(g(1) = U(p) &gt; U(q) &gt; U(r) = g(0)\)</span>, so choosing <span class="math inline">\(a\)</span> close enough to <span class="math inline">\(1\)</span> gives <span class="math inline">\(g(a) &gt; U(q)\)</span> and choosing <span class="math inline">\(b\)</span> close enough to <span class="math inline">\(0\)</span> gives <span class="math inline">\(U(q) &gt; g(b)\)</span>. Finally, since <span class="math inline">\(Z\)</span> is finite, let <span class="math inline">\(z^{0}\)</span> maximize and <span class="math inline">\(z_{0}\)</span> minimize <span class="math inline">\(u\)</span> over <span class="math inline">\(Z\)</span>; then for any <span class="math inline">\(p\)</span>, <span class="math inline">\(U(\delta_{z_{0}}) = \min_{z} u(z) \le U(p) \le \max_{z} u(z) = U(\delta_{z^{0}})\)</span>, delivering axiom 4.</p>
+</div>
 </section>
-<section id="preferences-over-lotteries" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="preferences-over-lotteries"><span class="header-section-number">4.4</span> Preferences over lotteries</h2>
-<p>Consider two potential ways to establish preferences over consumption over sets.</p>
+<section id="subjective-uncertainty-preferences-over-acts" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="subjective-uncertainty-preferences-over-acts"><span class="header-section-number">4.4</span> Subjective uncertainty: preferences over acts</h2>
+<p>Consider two potential ways to establish preferences when the probabilities themselves are not given.</p>
 <dl>
 <dt>Anscombe-Aumann:</dt>
 <dd>
-<p>An act is a mapping from states of the world to measures over <span class="math inline">\((S,\Sigma)\)</span>. These are called <em>horse-race</em> lotteries.</p>
+<p>An act is a mapping from states of the world <span class="math inline">\(s \in S\)</span> to lotteries over the prize space <span class="math inline">\(Z\)</span>. These are called <em>horse-race</em> lotteries: the state determines which (objective) lottery you face.</p>
 </dd>
 <dt>Savage:</dt>
 <dd>

@@ -204,12 +204,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/ge-with-uncertainty.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">General Equilibrium with Uncertainty</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -272,7 +266,7 @@ window.Quarto = {
 <ol type="1">
 <li><span class="math inline">\(Y\)</span> is nonempty</li>
 <li><span class="math inline">\(Y\)</span> is closed.</li>
-<li>No free lunch. If <span class="math inline">\(y \ge 0\)</span> then <span class="math inline">\(y = 0\)</span>.</li>
+<li>No free lunch. If <span class="math inline">\(y \in Y\)</span> and <span class="math inline">\(y \ge 0\)</span> then <span class="math inline">\(y = 0\)</span>.</li>
 <li><span class="math inline">\(0 \in Y\)</span>. (This might not hold if there are sunk costs.)</li>
 <li>Free disposal. For <span class="math inline">\(y \in Y\)</span>, <span class="math inline">\(y' \in Y\)</span> if <span class="math inline">\(y' \le y\)</span>.</li>
 <li>Irreversibility. <span class="math inline">\(y \in Y\)</span> implies that <span class="math inline">\(-y \notin Y\)</span> for <span class="math inline">\(y \ne 0\)</span>.</li>
@@ -283,8 +277,11 @@ window.Quarto = {
 </ol>
 </dd>
 </dl>
-<div id="prp-1" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 3.1</strong></span> Let <span class="math inline">\(\pi(\cdot)\)</span> be a profit function of a production set <span class="math inline">\(Y\)</span> and <span class="math inline">\(y\)</span> be the supply correspondence. If <span class="math inline">\(Y\)</span> is closed and satisfies free disposal then</p>
+<p>Given a production set <span class="math inline">\(Y\)</span> and a price vector <span class="math inline">\(p \gg 0\)</span>, the firm’s problem is</p>
+<p><span class="math display">\[\pi(p) = \max_{y \in Y} \; p \cdot y\]</span></p>
+<p>The value function <span class="math inline">\(\pi(\cdot)\)</span> is called the <strong>profit function</strong> and the set of maximizers <span class="math inline">\(y(p) = \{y \in Y : p\cdot y = \pi(p)\}\)</span> is the <strong>supply correspondence</strong>.</p>
+<div id="prp-sup-1" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3.1 (5.C.1)</strong></span> Let <span class="math inline">\(\pi(\cdot)\)</span> be the profit function of a production set <span class="math inline">\(Y\)</span> and <span class="math inline">\(y(\cdot)\)</span> be the supply correspondence. If <span class="math inline">\(Y\)</span> is closed and satisfies free disposal then</p>
 <ol type="1">
 <li><span class="math inline">\(\pi\)</span> is homogeneous of degree one.</li>
 <li><span class="math inline">\(\pi\)</span> is convex.</li>
@@ -292,10 +289,13 @@ window.Quarto = {
 <li><span class="math inline">\(y\)</span> is homogeneous of degree zero</li>
 <li>If <span class="math inline">\(Y\)</span> is convex, then <span class="math inline">\(y(p)\)</span> is a convex set for all <span class="math inline">\(p\)</span>. Moreover, if <span class="math inline">\(Y\)</span> is strictly convex, then <span class="math inline">\(y(p)\)</span> is single valued.</li>
 <li>(Hotelling’s lemma) If <span class="math inline">\(y(\overline p)\)</span> consists of a single point, then <span class="math inline">\(\pi(\cdot)\)</span> is differentiable at <span class="math inline">\(\overline p\)</span> and <span class="math inline">\(D_{p} \pi(\overline p) = y(\overline p)\)</span></li>
-<li>If <span class="math inline">\(y(\cdot)\)</span> is a function differentiable at <span class="math inline">\(\overline{p}\)</span>, the <span class="math inline">\(Dy(\overline{p}) = D^{2}\pi(\overline{p})\)</span> is a symmetric and positive semidefinite matrix with <span class="math inline">\(Dy(\overline{p})\overline{p} = 0\)</span>.</li>
+<li>If <span class="math inline">\(y(\cdot)\)</span> is a function differentiable at <span class="math inline">\(\overline{p}\)</span>, then <span class="math inline">\(Dy(\overline{p}) = D^{2}\pi(\overline{p})\)</span> is a symmetric and positive semidefinite matrix with <span class="math inline">\(Dy(\overline{p})\overline{p} = 0\)</span>.</li>
 </ol>
 </div>
-<div id="prp-2" class="theorem proposition">
+<p>For a single-output technology with production function <span class="math inline">\(f\)</span>, the firm’s cost-minimization problem given factor prices <span class="math inline">\(w \gg 0\)</span> and output level <span class="math inline">\(q\)</span> is</p>
+<p><span class="math display">\[c(w,q) = \min_{z \ge 0} \; w \cdot z \quad \text{subject to} \quad f(z) \ge q\]</span></p>
+<p>The value function <span class="math inline">\(c(\cdot)\)</span> is called the <strong>cost function</strong> and the set of minimizers <span class="math inline">\(z(w,q)\)</span> is the <strong>conditional factor demand correspondence</strong>.</p>
+<div id="prp-sup-2" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 3.2 (5.C.2)</strong></span> Let <span class="math inline">\(c(w,q)\)</span> be the cost function of single output technology <span class="math inline">\(Y\)</span> with production function <span class="math inline">\(f\)</span> and <span class="math inline">\(z(w,q)\)</span> be the conditional factor demand correspondence. Assume also that <span class="math inline">\(Y\)</span> is closed and satisfies free disposal.</p>
 <ol type="1">
 <li><span class="math inline">\(c(\cdot)\)</span> is homogeneous of degree one in <span class="math inline">\(w\)</span> and non-decreasing in <span class="math inline">\(q\)</span>.</li>

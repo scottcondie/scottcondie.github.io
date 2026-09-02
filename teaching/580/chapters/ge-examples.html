@@ -204,12 +204,6 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/ge-with-uncertainty.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">General Equilibrium with Uncertainty</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -229,7 +223,12 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#calculate-the-relative-market-shares" id="toc-calculate-the-relative-market-shares" class="nav-link" data-scroll-target="#calculate-the-relative-market-shares"><span class="header-section-number">5.2.1</span> Calculate the relative market shares</a></li>
   </ul></li>
-  <li><a href="#endowment-economies-and-asset-pricing" id="toc-endowment-economies-and-asset-pricing" class="nav-link" data-scroll-target="#endowment-economies-and-asset-pricing"><span class="header-section-number">5.3</span> Endowment economies and asset pricing</a></li>
+  <li><a href="#endowment-economies-and-asset-pricing" id="toc-endowment-economies-and-asset-pricing" class="nav-link" data-scroll-target="#endowment-economies-and-asset-pricing"><span class="header-section-number">5.3</span> Endowment economies and asset pricing</a>
+  <ul class="collapse">
+  <li><a href="#contingent-claims-equilibrium" id="toc-contingent-claims-equilibrium" class="nav-link" data-scroll-target="#contingent-claims-equilibrium"><span class="header-section-number">5.3.1</span> Contingent-claims equilibrium</a></li>
+  <li><a href="#the-fundamental-asset-pricing-equation" id="toc-the-fundamental-asset-pricing-equation" class="nav-link" data-scroll-target="#the-fundamental-asset-pricing-equation"><span class="header-section-number">5.3.2</span> The fundamental asset-pricing equation</a></li>
+  <li><a href="#complete-markets" id="toc-complete-markets" class="nav-link" data-scroll-target="#complete-markets"><span class="header-section-number">5.3.3</span> Complete markets</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -257,81 +256,118 @@ window.Quarto = {
 
 <section id="introduction" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1</span> Introduction</h2>
-<p>This section introduces the classical theory of individual preference and the connection between this and the observable choices that individuals make. To do this, we derive the demand that is implied by the preferences of an individual and the budget set available to them.</p>
+<p>This section works through two extended examples of general equilibrium. The first solves for equilibrium factor prices in a production economy with two competitive industries, showing how output prices and factor supplies together determine the wage and the rental rate of capital. The second studies a pure-exchange economy under uncertainty and uses it to derive the fundamental equation of asset pricing: every asset’s price is the expectation of its payoff weighted by a stochastic discount factor equal to agents’ marginal rate of substitution across states.</p>
+<p>The two examples play different roles. The first is deliberately <em>partial</em> in one respect: output prices are exogenous and consumers are absent, so that the interaction between zero profits and factor-market clearing can be studied on its own. The second is a full general-equilibrium analysis of the exchange side of an economy: the state prices that end up pricing every asset are determined entirely within the model by preferences, probabilities, and endowments.</p>
 <ul>
 <li>Reading material: MWG Ch. 15</li>
 </ul>
 </section>
 <section id="equilibrium-and-factor-prices" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="equilibrium-and-factor-prices"><span class="header-section-number">5.2</span> Equilibrium and factor prices</h2>
-<p>Consider two types of firms, one produces good 1 and the other produces good 2. Each firm uses capital and labor to produce their good. The production function for firm <span class="math inline">\(i\)</span> is <span class="math inline">\(f_{i}(k,l) = A_{i}k^{\alpha_{i}}l_{1-\alpha_{i}}\)</span>. The rental rate of capital is <span class="math inline">\(r\)</span> and the wage rate is <span class="math inline">\(w\)</span>. The market price of good <span class="math inline">\(i\)</span> is <span class="math inline">\(p_{i}\)</span> and is assumed to be exogenous. Notice that in order to simplify the problem we have abstracted away the utility maximization part of the general equilibrium example.</p>
+<p>Consider two types of firms, one produces good 1 and the other produces good 2. Each firm uses capital and labor to produce their good. The production function for firm <span class="math inline">\(i\)</span> is <span class="math inline">\(f_{i}(k,l) = A_{i}k^{\alpha_{i}}l^{1-\alpha_{i}}\)</span>. The rental rate of capital is <span class="math inline">\(r\)</span> and the wage rate is <span class="math inline">\(w\)</span>. The market price of good <span class="math inline">\(i\)</span> is <span class="math inline">\(p_{i}\)</span> and is assumed to be exogenous. Notice that in order to simplify the problem we have abstracted away the utility maximization part of the general equilibrium example.</p>
 <p>Firm <span class="math inline">\(i\)</span>’s profit is <span class="math inline">\(\pi_{i} = p_{i}A_{i}k^{\alpha_{i}}l^{1-\alpha_{i}} - wl_{i} - rk_{i}\)</span>.</p>
+<p>Before doing any algebra, it is worth being explicit about what an equilibrium of this economy is.</p>
+<div id="def-fpeq" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5.1 (Equilibrium with exogenous output prices)</strong></span> Given output prices <span class="math inline">\((p_{1},p_{2})\)</span> and aggregate factor supplies <span class="math inline">\((K,L)\)</span>, an <strong>equilibrium</strong> of this economy is a pair of factor prices <span class="math inline">\((w,r)\)</span> and output levels <span class="math inline">\((q_{1},q_{2})\)</span> such that</p>
+<ol type="1">
+<li><em>Optimization.</em> Each firm’s factor demands <span class="math inline">\((l_{i},k_{i})\)</span> minimize the cost of producing its output <span class="math inline">\(q_{i}\)</span> at the factor prices <span class="math inline">\((w,r)\)</span>.</li>
+<li><em>Zero profits.</em> Free entry under constant returns to scale drives profits to zero: <span class="math inline">\(p_{i}q_{i} = wl_{i} + rk_{i}\)</span> for each sector that produces.</li>
+<li><em>Market clearing.</em> Factor demands sum to factor supplies: <span class="math inline">\(l_{1}+l_{2} = L\)</span> and <span class="math inline">\(k_{1}+k_{2} = K\)</span>.</li>
+</ol>
+</div>
+<p>Conditions 2 and 3 supply four equations in the four unknowns <span class="math inline">\((w,r,q_{1},q_{2})\)</span>; the factor demands that appear in them are pinned down by condition 1. The next subsections work through these pieces in order.</p>
 <section id="calculate-the-relative-market-shares" class="level3" data-number="5.2.1">
 <h3 data-number="5.2.1" class="anchored" data-anchor-id="calculate-the-relative-market-shares"><span class="header-section-number">5.2.1</span> Calculate the relative market shares</h3>
-<p>Setting up the Lagrangian for firm <span class="math inline">\(i\)</span>’s cost minimization problem yields first order conditions</p>
+<p>Firm <span class="math inline">\(i\)</span>’s cost-minimization problem is to choose <span class="math inline">\((l_{i},k_{i})\)</span> to minimize expenditure <span class="math inline">\(wl_{i} + rk_{i}\)</span> subject to producing its output: <span class="math inline">\(A_{i}k_{i}^{\alpha_{i}}l_{i}^{1-\alpha_{i}} = q_{i}\)</span>. The Lagrangian is</p>
+<p><span class="math display">\[\mathcal{L} = wl_{i} + rk_{i} + \lambda\left(q_{i} - A_{i}k_{i}^{\alpha_{i}}l_{i}^{1-\alpha_{i}}\right),\]</span></p>
+<p>where the multiplier <span class="math inline">\(\lambda\)</span> on the output constraint is the marginal cost of output. Because the technology is Cobb–Douglas, marginal products take the convenient form</p>
+<p><span class="math display">\[\frac{\partial f_{i}}{\partial l} = (1-\alpha_{i})\,\frac{f_{i}(k,l)}{l}, \qquad \frac{\partial f_{i}}{\partial k} = \alpha_{i}\,\frac{f_{i}(k,l)}{k},\]</span></p>
+<p>so, evaluating <span class="math inline">\(f_{i} = q_{i}\)</span> at the constraint, the first order conditions are</p>
 <p><span class="math display">\[\begin{aligned}
-\begin{aligned}
     w - \lambda(1-\alpha_{i})\frac{q_{i}}{l_{i}} &amp; = 0 \\
     r - \lambda \alpha_{i} \frac{q_{i}}{k_{i}} &amp; = 0 \\
-    A_{i}k_{i}^{\alpha_{i}}l_{i}^{1-\alpha_{i}} &amp; = q
-\end{aligned}
+    A_{i}k_{i}^{\alpha_{i}}l_{i}^{1-\alpha_{i}} &amp; = q_{i}
 \end{aligned}\]</span></p>
-<p>Firm <span class="math inline">\(i\)</span> has conditional factor demands given by</p>
+<p>Dividing the first condition by the second eliminates <span class="math inline">\(\lambda\)</span> and gives the cost-minimizing factor mix,</p>
+<p><span class="math display">\[\frac{w}{r} = \frac{1-\alpha_{i}}{\alpha_{i}}\cdot\frac{k_{i}}{l_{i}}, \qquad\text{equivalently}\qquad \frac{k_{i}}{l_{i}} = B_{i}\,\frac{w}{r}, \qquad\text{where } B_{i} = \frac{\alpha_{i}}{1-\alpha_{i}}.\]</span></p>
+<p>Note that the factor mix depends only on relative factor prices, not on the scale of production. Substituting <span class="math inline">\(k_{i} = B_{i}(w/r)\,l_{i}\)</span> into the production constraint and solving for <span class="math inline">\(l_{i}\)</span>, then recovering <span class="math inline">\(k_{i}\)</span>, yields the conditional factor demands</p>
 <p><span class="math display">\[\begin{aligned}
-\begin{aligned}
-    l_{i}(w,r,q) &amp; = \frac{q_{i}}{A}\left(\frac{r}{w}B_{i}^{-1}\right)^{\alpha}  \\
-    k_{i}(w,r,q) &amp; = \frac{q_{i}}{A_{i}}\left(\frac{w}{r}B_{i} \right)^{1-\alpha}
-\end{aligned}
+    l_{i}(w,r,q_{i}) &amp; = \frac{q_{i}}{A_{i}}\left(\frac{r}{w}B_{i}^{-1}\right)^{\alpha_{i}}  \\
+    k_{i}(w,r,q_{i}) &amp; = \frac{q_{i}}{A_{i}}\left(\frac{w}{r}B_{i} \right)^{1-\alpha_{i}}
 \end{aligned}\]</span></p>
-<p>where <span class="math inline">\(B_{i} = \frac{\alpha_{i}}{1-\alpha_{i}}\)</span>. This implies a cost function of</p>
-<p><span class="math display">\[c_{i}(w,r,q_{i}) = \frac{q_{i}}{A_{i}}\left(\frac{r}{\alpha}\right)^{\alpha}\left(\frac{w}{1-\alpha}\right)^{1-\alpha}.\]</span></p>
-<p>If we assume that all firms operate in a competitive framework and so have zero profits, then it must be true that</p>
+<p>Substituting these demands into <span class="math inline">\(wl_{i} + rk_{i}\)</span> and simplifying gives the cost function</p>
+<p><span class="math display">\[c_{i}(w,r,q_{i}) = \frac{q_{i}}{A_{i}}\left(\frac{r}{\alpha_{i}}\right)^{\alpha_{i}}\left(\frac{w}{1-\alpha_{i}}\right)^{1-\alpha_{i}}.\]</span></p>
+<p>Now impose the zero-profit condition — and note why it must hold. Under constant returns, cost is linear in output, so firm <span class="math inline">\(i\)</span>’s profit is <span class="math inline">\(\pi_{i} = \left(p_{i} - c_{i}(w,r,1)\right)q_{i}\)</span>, where <span class="math inline">\(c_{i}(w,r,1)\)</span> is unit cost. If price exceeded unit cost, profit could be made arbitrarily large by scaling production up, which is incompatible with equilibrium; if price fell short of unit cost, any positive output would generate losses and the firm would produce nothing. Hence in any equilibrium in which good <span class="math inline">\(i\)</span> is produced, price equals unit cost:</p>
+<p><span class="math display">\[p_{i} = \frac{c_{i}(w,r,q_{i})}{q_{i}} = \frac{1}{A_{i}}\left(\frac{r}{\alpha_{i}}\right)^{\alpha_{i}}\left(\frac{w}{1-\alpha_{i}}\right)^{1-\alpha_{i}}.\]</span></p>
+<p>Notice that because the technology has constant returns, unit cost does not depend on <span class="math inline">\(q_{i}\)</span>; the zero-profit condition therefore restricts the factor prices <span class="math inline">\((w,r)\)</span> but leaves each firm’s scale undetermined at the firm level.</p>
+<p>Because the technology is Cobb–Douglas, the cost-minimizing factor payments are constant shares of total cost: capital receives the share <span class="math inline">\(\alpha_{i}\)</span> and labor the share <span class="math inline">\(1-\alpha_{i}\)</span>, so <span class="math inline">\(r k_{i} = \alpha_{i}\, c_{i}(w,r,q_{i})\)</span> and <span class="math inline">\(w l_{i} = (1-\alpha_{i})\, c_{i}(w,r,q_{i})\)</span>. Using zero profit to replace cost by revenue, <span class="math inline">\(c_{i} = p_{i}q_{i}\)</span>, the equilibrium factor demands are</p>
 <p><span class="math display">\[\begin{aligned}
-\begin{aligned}
-    p_{i}q_{i} &amp; = c_{i}(w,r,q_{i}) \\
-    p_{i}q_{i} &amp; = \frac{q_{i}}{A_{i}}\left(\frac{r}{\alpha}\right)^{\alpha}\left(\frac{w}{1-\alpha}\right)^{1-\alpha}
-\end{aligned}
+    l_{i} &amp;= \frac{(1-\alpha_{i})\, p_{i} q_{i}}{w}, \\
+    k_{i} &amp;= \frac{\alpha_{i}\, p_{i} q_{i}}{r}.
 \end{aligned}\]</span></p>
-<p>which implies that</p>
-<p><span class="math display">\[q_{i} = p_{i}A_{i}\left(\frac{\alpha}{r}\right)^{\alpha}\left(\frac{1-\alpha}{w}\right)^{1-\alpha}\]</span></p>
-<p>Given these quantities of output, we can now figure out the prices of the inputs used in production. To do this, start by plugging in the equilibrium quantities into each firm’s factor demands to get</p>
+<p>Writing <span class="math inline">\(Y_{i} = p_{i} q_{i}\)</span> for the value of sector <span class="math inline">\(i\)</span>’s output, factor-market clearing <span class="math inline">\(l_{1} + l_{2} = L\)</span> and <span class="math inline">\(k_{1} + k_{2} = K\)</span> gives the equilibrium factor prices</p>
 <p><span class="math display">\[\begin{aligned}
-\begin{aligned}
-    l_{i}(w,r) =(1-\alpha_{i})\frac{p_{i}}{w} \\
-    k_{i}(w,r) = \alpha_{i}\frac{p_{i}}{r}
-\end{aligned}
+    w &amp; = \frac{(1-\alpha_{1})Y_{1} + (1-\alpha_{2})Y_{2}}{L}, \\
+    r &amp; = \frac{\alpha_{1}Y_{1} + \alpha_{2}Y_{2}}{K}.
 \end{aligned}\]</span></p>
-<p>Plugging these factor demands into the market clearing equation gives</p>
-<p><span class="math display">\[\begin{aligned}
-\begin{aligned}
-    l_{1} + l_{2} = (1-\alpha_{1})\frac{p_{1}}{w} + (1-\alpha_{2})\frac{p_{2}}{w} = L \\
-    k_{1} + k_{2} = \alpha_{1}\frac{p_{1}}{r} + \alpha_{2}\frac{p_{2}}{r} = K
-\end{aligned}
-\end{aligned}\]</span></p>
-<p>which implies the equilibrium factor prices</p>
-<p><span class="math display">\[\begin{aligned}
-\begin{aligned}
-    r &amp; = \frac{\alpha_{1}p_{1} + \alpha_{2}p_{2}}{K}\\
-    w &amp; = \frac{(1-\alpha_{1})p_{1} + (1-\alpha_{2})p_{2}}{L}\\
-\end{aligned}
-\end{aligned}\]</span></p>
-<p>Assignment: Calculate the equilibrium factor demands for each type of firm.</p>
+<p>Each factor’s price is the cost-share-weighted total value of the output it helps produce, divided by its aggregate supply. The output values <span class="math inline">\(Y_{i} = p_{i} q_{i}\)</span> are pinned down by closing the model: the two zero-profit conditions are two equations in <span class="math inline">\((w,r)\)</span>, which together with the two market-clearing conditions determine the four unknowns <span class="math inline">\((w, r, q_{1}, q_{2})\)</span>.</p>
+<div id="exr-gefactor" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.1</strong></span> Take <span class="math inline">\(A_{1} = A_{2} = 1\)</span>, <span class="math inline">\(\alpha_{1} = \tfrac{1}{3}\)</span>, <span class="math inline">\(\alpha_{2} = \tfrac{2}{3}\)</span>, output prices <span class="math inline">\(p_{1} = p_{2} = 1\)</span>, and factor supplies <span class="math inline">\(K = L = 1\)</span>. Solve the four equilibrium conditions for <span class="math inline">\((w, r, q_{1}, q_{2})\)</span>, and report the resulting factor demands <span class="math inline">\(l_{i}, k_{i}\)</span> for each type of firm. (You should find a symmetric solution.)</p>
+</div>
 </section>
 </section>
 <section id="endowment-economies-and-asset-pricing" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="endowment-economies-and-asset-pricing"><span class="header-section-number">5.3</span> Endowment economies and asset pricing</h2>
-<dl>
-<dt>Assumptions.</dt>
-<dd>
+<p>We now turn to a pure-exchange economy under uncertainty and use it to derive the central equation of asset pricing. There are two dates, <span class="math inline">\(t = 0\)</span> (today) and <span class="math inline">\(t = 1\)</span> (tomorrow); at date <span class="math inline">\(1\)</span> exactly one of <span class="math inline">\(S\)</span> states <span class="math inline">\(s \in \{1,\ldots,S\}\)</span> occurs, with commonly-held probabilities <span class="math inline">\(\pi_{s} &gt; 0\)</span>. There is a single consumption good at each date–state.</p>
+<p>There are <span class="math inline">\(I\)</span> individuals. Each is a price taker. Individual <span class="math inline">\(i\)</span> has an initial endowment <span class="math inline">\(e^{i} = (e^{i}_{0}, e^{i}_{1}, \ldots, e^{i}_{S})\)</span> — a quantity of the good today and one contingent on each state tomorrow — and preferences of the expected-utility form</p>
+<p><span class="math display">\[U^{i}(c) = u^{i}(c_{0}) + \beta_{i}\sum_{s=1}^{S}\pi_{s}\, u^{i}(c_{s}),\]</span></p>
+<p>with each <span class="math inline">\(u^{i}\)</span> strictly increasing and strictly concave, and <span class="math inline">\(\beta_{i} \in (0,1]\)</span> individual <span class="math inline">\(i\)</span>’s time-discount factor. Preferences of this form are exactly those delivered by the von Neumann–Morgenstern theorem (<a href="uncertainty.html#thm-vnm" class="quarto-xref">Theorem&nbsp;<span>4.1</span></a>) applied to lotteries over date–state consumption, with the state probabilities <span class="math inline">\(\pi_{s}\)</span> — here objective and commonly held — playing the role of the lottery probabilities.</p>
+<section id="contingent-claims-equilibrium" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="contingent-claims-equilibrium"><span class="header-section-number">5.3.1</span> Contingent-claims equilibrium</h3>
+<p>Suppose individuals can trade, at date <span class="math inline">\(0\)</span>, claims to the good in each date–state. Normalize the price of date-<span class="math inline">\(0\)</span> consumption to <span class="math inline">\(1\)</span>, and let <span class="math inline">\(q_{s}\)</span> be the date-<span class="math inline">\(0\)</span> price of one unit of the good delivered if and only if state <span class="math inline">\(s\)</span> occurs. Individual <span class="math inline">\(i\)</span> solves</p>
+<p><span class="math display">\[\max_{c \ge 0}\ u^{i}(c_{0}) + \beta_{i}\sum_{s}\pi_{s}u^{i}(c_{s}) \quad \text{subject to} \quad c_{0} + \sum_{s} q_{s} c_{s} \le e^{i}_{0} + \sum_{s} q_{s} e^{i}_{s}.\]</span></p>
+<div id="def-cce" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5.2</strong></span> A <strong>contingent-claims (Arrow–Debreu) equilibrium</strong> is a price vector <span class="math inline">\((q_{1},\ldots,q_{S})\)</span> and an allocation <span class="math inline">\(\{c^{i}\}_{i=1}^{I}\)</span> such that: (i) for each <span class="math inline">\(i\)</span>, <span class="math inline">\(c^{i}\)</span> solves individual <span class="math inline">\(i\)</span>’s problem at those prices; and (ii) all markets clear, <span class="math inline">\(\sum_{i} c^{i}_{0} = \sum_{i} e^{i}_{0}\)</span> and <span class="math inline">\(\sum_{i} c^{i}_{s} = \sum_{i} e^{i}_{s}\)</span> for every state <span class="math inline">\(s\)</span>.</p>
+</div>
+<p>Letting <span class="math inline">\(\lambda_{i}\)</span> be the multiplier on individual <span class="math inline">\(i\)</span>’s budget constraint, the first-order conditions are <span class="math inline">\(u^{i\prime}(c^{i}_{0}) = \lambda_{i}\)</span> and <span class="math inline">\(\beta_{i}\pi_{s} u^{i\prime}(c^{i}_{s}) = \lambda_{i} q_{s}\)</span>. Eliminating <span class="math inline">\(\lambda_{i}\)</span>,</p>
+<p><span class="math display">\[q_{s} = \beta_{i}\,\pi_{s}\,\frac{u^{i\prime}(c^{i}_{s})}{u^{i\prime}(c^{i}_{0})} \qquad \text{for every individual } i.\]</span></p>
+<p>The state price <span class="math inline">\(q_{s}\)</span> equals each individual’s (probability-weighted) marginal rate of substitution between consumption in state <span class="math inline">\(s\)</span> tomorrow and consumption today. In particular, in equilibrium <em>every individual has the same MRS in every state</em> — and this is precisely the first-order condition for Pareto optimality, which we can verify directly. Fix positive welfare weights <span class="math inline">\(\mu_{1},\ldots,\mu_{I}\)</span> and consider the planner’s problem</p>
+<p><span class="math display">\[\max_{\{c^{i} \ge 0\}}\ \sum_{i}\mu_{i}\left[u^{i}(c^{i}_{0}) + \beta_{i}\sum_{s}\pi_{s}u^{i}(c^{i}_{s})\right] \quad\text{subject to}\quad \sum_{i}c^{i}_{0} \le \sum_{i}e^{i}_{0}, \quad \sum_{i}c^{i}_{s} \le \sum_{i}e^{i}_{s} \ \text{ for all } s.\]</span></p>
+<p>Any solution to this problem is Pareto optimal: an allocation that made someone better off and no one worse off would raise the planner’s objective. Letting <span class="math inline">\(\eta_{0}\)</span> and <span class="math inline">\(\eta_{s}\)</span> denote the multipliers on the resource constraints, the first-order conditions are <span class="math inline">\(\mu_{i}\,u^{i\prime}(c^{i}_{0}) = \eta_{0}\)</span> and <span class="math inline">\(\mu_{i}\,\beta_{i}\,\pi_{s}\,u^{i\prime}(c^{i}_{s}) = \eta_{s}\)</span>. Eliminating the welfare weight <span class="math inline">\(\mu_{i}\)</span>,</p>
+<p><span class="math display">\[\beta_{i}\,\pi_{s}\,\frac{u^{i\prime}(c^{i}_{s})}{u^{i\prime}(c^{i}_{0})} = \frac{\eta_{s}}{\eta_{0}} \qquad \text{for every individual } i.\]</span></p>
+<p>At a Pareto optimum, all individuals share a common MRS in every state, with the multiplier ratio <span class="math inline">\(\eta_{s}/\eta_{0}\)</span> playing exactly the role that the state price <span class="math inline">\(q_{s}\)</span> plays in equilibrium; since each <span class="math inline">\(u^{i}\)</span> is strictly concave, these first-order conditions are also sufficient. The equilibrium allocation therefore satisfies the conditions for Pareto optimality — a first glimpse of the welfare theorems, which we take up in general form in the next chapter.</p>
+</section>
+<section id="the-fundamental-asset-pricing-equation" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="the-fundamental-asset-pricing-equation"><span class="header-section-number">5.3.2</span> The fundamental asset-pricing equation</h3>
+<p>Now introduce assets. Asset <span class="math inline">\(j\)</span> is a claim to a state-contingent payoff <span class="math inline">\(d_{j} = (d_{j1},\ldots,d_{jS})\)</span> tomorrow, with price <span class="math inline">\(P_{j}\)</span> today. An <strong>arbitrage</strong> is a trading strategy that costs nothing today (or less than nothing), requires no net payment in any state tomorrow, and yields a strictly positive amount either today or in some state. Equilibrium prices must admit no arbitrage: any individual with strictly increasing utility would demand such a trade without bound, and markets could not clear. The payoff of asset <span class="math inline">\(j\)</span> can be replicated by buying <span class="math inline">\(d_{js}\)</span> units of the state-<span class="math inline">\(s\)</span> contingent claim for each <span class="math inline">\(s\)</span>, at a total cost of <span class="math inline">\(\sum_{s} q_{s} d_{js}\)</span>. If <span class="math inline">\(P_{j}\)</span> exceeded this, selling the asset and buying the replicating portfolio would pocket the difference today while covering every future obligation exactly; if <span class="math inline">\(P_{j}\)</span> fell short, the reverse trade would do the same. Ruling out both, the asset’s price must equal the value of its payoff,</p>
+<p><span class="math display">\[P_{j} = \sum_{s=1}^{S} q_{s}\, d_{js}.\]</span></p>
+<p>Define the <strong>stochastic discount factor</strong> (or pricing kernel) <span class="math inline">\(m_{s} = q_{s}/\pi_{s}\)</span> — the state price per unit of probability. Then</p>
+<p><span class="math display">\[\boxed{\,P_{j} = \sum_{s}\pi_{s}\, m_{s}\, d_{js} = \mathbb{E}[m\, d_{j}].\,}\]</span></p>
+<p>From the first-order conditions, <span class="math inline">\(m_{s} = \beta_{i}\,u^{i\prime}(c^{i}_{s})/u^{i\prime}(c^{i}_{0})\)</span>: the discount factor is any individual’s discounted marginal-utility ratio. This one equation prices every asset.</p>
+<p>Two special cases make it concrete. A <strong>risk-free</strong> asset pays <span class="math inline">\(1\)</span> in every state, so its price is <span class="math inline">\(P_{f} = \sum_{s}\pi_{s} m_{s} = \mathbb{E}[m]\)</span> and the gross risk-free return is <span class="math inline">\(R_{f} = 1/\mathbb{E}[m]\)</span>. For a <strong>risky</strong> asset with gross return <span class="math inline">\(R_{j} = d_{j}/P_{j}\)</span>, the pricing equation reads <span class="math inline">\(1 = \mathbb{E}[m R_{j}]\)</span>; combining this with <span class="math inline">\(R_{f} = 1/\mathbb{E}[m]\)</span> and <span class="math inline">\(\mathbb{E}[m R_{j}] = \mathbb{E}[m]\,\mathbb{E}[R_{j}] + \operatorname{Cov}(m, R_{j})\)</span> gives</p>
+<p><span class="math display">\[\mathbb{E}[R_{j}] - R_{f} = -R_{f}\,\operatorname{Cov}(m, R_{j}).\]</span></p>
+<p>An asset commands a <em>positive</em> risk premium precisely when its return covaries <em>negatively</em> with the discount factor — that is, when it pays off poorly in the “expensive” states, those with high marginal utility (typically, low aggregate consumption). This is the consumption-based account of why risky assets earn more than the risk-free rate.</p>
+<div id="exm-twostate" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.1 (A two-state economy)</strong></span> Let <span class="math inline">\(S = 2\)</span> with <span class="math inline">\(\pi_{1} = \pi_{2} = \tfrac{1}{2}\)</span>, and consider a representative individual — equivalently, <span class="math inline">\(I\)</span> identical individuals each owning the share <span class="math inline">\(1/I\)</span> of the aggregate endowment, who then have no reason to trade with one another — with <span class="math inline">\(u(c) = \ln c\)</span> and <span class="math inline">\(\beta = 0.96\)</span>. The endowment is <span class="math inline">\(e_{0} = 1\)</span> today; tomorrow it is <span class="math inline">\(e_{1} = 0.8\)</span> in state <span class="math inline">\(1\)</span> (a recession) and <span class="math inline">\(e_{2} = 1.2\)</span> in state <span class="math inline">\(2\)</span> (a boom). In equilibrium consumption equals the endowment, so the state prices are</p>
+<p><span class="math display">\[q_{s} = \beta\,\pi_{s}\,\frac{u^{\prime}(e_{s})}{u^{\prime}(e_{0})} = \beta\,\pi_{s}\,\frac{e_{0}}{e_{s}}, \qquad\text{so}\qquad q_{1} = \frac{0.48}{0.8} = 0.6, \qquad q_{2} = \frac{0.48}{1.2} = 0.4,\]</span></p>
+<p>and the stochastic discount factor is <span class="math inline">\(m_{1} = q_{1}/\pi_{1} = 1.2\)</span> and <span class="math inline">\(m_{2} = q_{2}/\pi_{2} = 0.8\)</span>: consumption claims are expensive in the recession state, where marginal utility is high, and cheap in the boom state.</p>
+<p>The risk-free asset costs <span class="math inline">\(P_{f} = \mathbb{E}[m] = q_{1} + q_{2} = 1\)</span>, so <span class="math inline">\(R_{f} = 1\)</span>. Next price “equity,” the claim to the aggregate endowment <span class="math inline">\(d = (0.8,\, 1.2)\)</span>: its price is <span class="math inline">\(P = q_{1}(0.8) + q_{2}(1.2) = 0.96\)</span>, its state-contingent returns are <span class="math inline">\(R_{1} = 0.8/0.96 \approx 0.833\)</span> and <span class="math inline">\(R_{2} = 1.2/0.96 = 1.25\)</span>, so <span class="math inline">\(\mathbb{E}[R] \approx 1.042\)</span> and the risk premium is <span class="math inline">\(\mathbb{E}[R] - R_{f} \approx 4.2\%\)</span>. The covariance formula confirms this: <span class="math inline">\(\operatorname{Cov}(m,R) = \mathbb{E}[mR] - \mathbb{E}[m]\,\mathbb{E}[R] = 1 - 1.042 \approx -0.042\)</span>, so <span class="math inline">\(-R_{f}\operatorname{Cov}(m,R) \approx 4.2\%\)</span>. Equity pays off poorly exactly when consumption is scarce, so it must offer a premium over the risk-free rate to be willingly held.</p>
+</div>
+<div id="exr-sdf" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.2</strong></span> In the economy of <a href="#exm-twostate" class="quarto-xref">Example&nbsp;<span>5.1</span></a>, replace log utility with the CRRA utility <span class="math inline">\(u(c) = c^{1-\gamma}/(1-\gamma)\)</span> with <span class="math inline">\(\gamma = 2\)</span>, keeping <span class="math inline">\(\beta = 0.96\)</span> and the same endowments and probabilities.</p>
 <ol type="1">
-<li>Each individual is a price taker.</li>
-<li>Each individual has an initial endowment <span class="math inline">\(e\)</span>.</li>
-<li>Equilibrium definition.</li>
+<li>Compute the state prices, the stochastic discount factor, and the gross risk-free return.</li>
+<li>Compute the price, expected return, and risk premium of the claim to the aggregate endowment. Compare with the log-utility case (which is <span class="math inline">\(\gamma = 1\)</span>): does higher risk aversion raise or lower the premium? Why?</li>
+<li>Price the <em>counter-cyclical</em> asset with payoff <span class="math inline">\(d = (1.2,\, 0.8)\)</span> and explain the sign of its risk premium.</li>
 </ol>
-</dd>
-</dl>
+</div>
+</section>
+<section id="complete-markets" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="complete-markets"><span class="header-section-number">5.3.3</span> Complete markets</h3>
+<p>If the traded assets span <span class="math inline">\(\mathbb{R}^{S}\)</span> — equivalently, if the <span class="math inline">\(S\)</span> Arrow securities (asset <span class="math inline">\(s\)</span> paying one unit in state <span class="math inline">\(s\)</span> and zero otherwise) can be replicated — then the asset-market (Radner) equilibrium implements the contingent-claims equilibrium: the state prices <span class="math inline">\(q_{s}\)</span> are uniquely determined and, by the argument above, every individual’s MRS is equalized, so the equilibrium allocation is Pareto optimal. When markets are incomplete, individuals’ marginal rates of substitution need not coincide, the discount factor is no longer unique, and the allocation is generally not Pareto optimal.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
